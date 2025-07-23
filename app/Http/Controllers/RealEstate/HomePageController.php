@@ -21,6 +21,9 @@ class HomePageController extends DefaultWebController {
     $meta = parent::getMeatByCatId('home');
     self::printSeoMeta($meta, 'web.index');
 
+//    dd($this->webConfig);
+
+
 
     return view('makkah.index')->with([
 //      'latestBlog' => $latestBlog,

@@ -11,31 +11,42 @@
     </div>
   </div>
 </div>
-<footer class="ltn__footer-area  ">
+
+
+<footer class="ltn__footer-area">
   <div class="footer-top-area  section-bg-2 plr--5">
     <div class="container">
       <div class="row">
         <div class="col-xl-4 col-md-6 col-sm-6 col-12">
           <div class="footer-widget footer-about-widget">
             <div class="footer-logo">
-              <div class="site-logo"><img src="img/logo-2.png" alt="Logo"></div>
+              <div class="site-logo">
+                <img src="{{defImagesDir('logo_light','photo')}}" class="img-fluid"/>
+              </div>
             </div>
-            <p>Lorem Ipsum is simply dummy text of the and typesetting industry. Lorem Ipsum is dummy text of the printing.</p></div>
+            <p>{{$webConfig->footer_text}}</p>
+          </div>
         </div>
         <div class="col-xl-4 col-md-6 col-sm-6 col-12">
           <div class="footer-widget footer-about-widget">
             <div class="footer-address">
               <ul>
                 <li>
-                  <div class="footer-address-icon"><i class="icon-placeholder"></i></div>
-                  <div class="footer-address-info"><p>Brooklyn, New York, United States</p></div>
+                  <div class="footer-address-icon"><i class="fa-solid fa-location-dot"></i></div>
+                  <div class="footer-address-info"><p>{{$webConfig->schema_address}} <br>{{$webConfig->schema_city}}</p></div>
+                </li>
+
+                <li>
+                  <div class="footer-address-icon"><i class="fa-solid fa-square-phone"></i></div>
+                  <div class="footer-address-info"><p><a href="tel:+0123-456789">{{$webConfig->phone_num}}</a></p></div>
+                </li>
+
+                <li>
+                  <div class="footer-address-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                  <div class="footer-address-info"><p><a href="tel:+0123-456789">{{$webConfig->whatsapp_num}}</a></p></div>
                 </li>
                 <li>
-                  <div class="footer-address-icon"><i class="icon-call"></i></div>
-                  <div class="footer-address-info"><p><a href="tel:+0123-456789">+0123-456789</a></p></div>
-                </li>
-                <li>
-                  <div class="footer-address-icon"><i class="icon-mail"></i></div>
+                  <div class="footer-address-icon"><i class="fa-solid fa-at"></i></div>
                   <div class="footer-address-info"><p><a href="mailto:example@example.com">example@example.com</a></p></div>
                 </li>
               </ul>
