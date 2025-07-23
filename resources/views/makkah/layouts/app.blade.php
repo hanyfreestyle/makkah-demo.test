@@ -14,7 +14,7 @@
   @else
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
   @endif
-  {!! $minifyTools->setDir('makkah/')->MinifyCss('css/font-icons.css',$cssMinifyType,$cssReBuild) !!}
+  {!! $minifyTools->setDir('makkah/')->MinifyCss('css/font-icons.css',"Web",$cssReBuild) !!}
   {!! $minifyTools->setDir('makkah/')->MinifyCss('css/plugins.css',$cssMinifyType,$cssReBuild) !!}
   {!! $minifyTools->setDir('makkah/')->MinifyCss('css/style.css',$cssMinifyType,$cssReBuild) !!}
   {!! $minifyTools->setDir('makkah/')->MinifyCss('css/edit.css',$cssMinifyType,$cssReBuild) !!}
@@ -24,12 +24,12 @@
 <body>
 
 <div class="body-wrapper">
+  @include('makkah.layouts.inc.header_menu_home')
 
-{{--  require_once 'inc_menu_home.php';--}}
-{{--  require_once 'inc_slider.php';--}}
-{{--  require_once 'def_home.php';--}}
-{{--  require_once 'inc_footer.php';--}}
+
+
   @yield('content')
+  @include('makkah.layouts.inc.footer')
 
 </div>
 
