@@ -81,3 +81,10 @@
     color: #ffffff !important;
 }
 
+.updateFont {
+    font-family: "Inter", sans-serif !important;
+}
+
+html[lang="ar"] .updateFont {
+    font-family: "Tajawal", sans-serif !important;
+}

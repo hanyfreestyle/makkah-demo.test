@@ -4,10 +4,10 @@
       <div class="col-lg-12">
         <div class="call-to-action-inner call-to-action-inner-6 ltn__secondary-bg position-relative text-center---">
           <div class="coll-to-info text-color-white">
-            <h1>{{__('web/def.footer.cta_h1')}}</h1>
+            <h1 class="updateFont">{{__('web/def.footer.cta_h1')}}</h1>
             <p>{{__('web/def.footer.cta_p')}}</p>
           </div>
-          <div class="btn-wrapper"><a class="btn btn-effect-3 btn-white" href="#our-project">{{__('web/def.footer.cta_btn')}}</a></div>
+          <div class="btn-wrapper"><a class="btn btn-effect-3 btn-white updateFont" href="#our-project">{{__('web/def.footer.cta_btn')}}</a></div>
         </div>
       </div>
     </div>
@@ -40,27 +40,22 @@
 
                 <li>
                   <div class="footer-address-icon"><i class="fa-solid fa-square-phone"></i></div>
-                  <div class="footer-address-info footer_number"><p><a href="tel:+0123-456789">{{$webConfig->phone_num}}</a></p></div>
+                  <div class="footer-address-info footer_number"><p><a href="tel:{{$webConfig->phone_call}}">{{$webConfig->phone_num}}</a></p></div>
                 </li>
 
                 <li>
                   <div class="footer-address-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                  <div class="footer-address-info footer_number"><p><a href="tel:+0123-456789">{{$webConfig->whatsapp_num}}</a></p></div>
+                  <div class="footer-address-info footer_number"><p><a href="#">{{$webConfig->whatsapp_num}}</a></p></div>
                 </li>
                 <li>
                   <div class="footer-address-icon"><i class="fa-solid fa-at"></i></div>
-                  <div class="footer-address-info footer_number"><p><a href="mailto:example@example.com">{{$webConfig->email}}</a></p></div>
+                  <div class="footer-address-info footer_number"><p><a href="mailto:{{$webConfig->email}}">{{$webConfig->email}}</a></p></div>
                 </li>
               </ul>
             </div>
-            <div class="social_media_footer mt-20">
-              <ul>
-                <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                <li><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>
-              </ul>
-            </div>
+
+            <x-makkah.def.social-media :web-config="$webConfig"/>
+
           </div>
         </div>
         <div class="col-xl-2 col-md-6 col-sm-6 col-12">
