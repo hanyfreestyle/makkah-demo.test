@@ -65,7 +65,7 @@
           <div class="footer-widget footer-menu-widget clearfix"><h4 class="footer-title">Main Menu</h4>
             <div class="footer-menu">
               <ul>
-                <li><a href="index.php">Home</a></li>
+                <li><a href="{{route('web.index')}}">Home</a></li>
                 <li><a href="about.php">About Us</a></li>
                 <li><a href="#">Leatest News</a></li>
                 <li><a href="contact.php">Contact Us</a></li>

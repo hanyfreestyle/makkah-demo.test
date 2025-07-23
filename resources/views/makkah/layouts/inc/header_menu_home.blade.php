@@ -47,7 +47,7 @@
       <div class="row">
         <div class="col">
           <div class="site-logo-wrap">
-            <div class="site-logo edit_logo"><a href="index.php">
+            <div class="site-logo edit_logo"><a href="{{route('web.index')}}">
                 <img src="{{defImagesDir('logo_light','photo')}}" class="img-fluid"/>
               </a>
             </div>
@@ -62,7 +62,7 @@
             <nav>
               <div class="ltn__main-menu">
                 <ul>
-                  <li><a href="index.php">Home</a></li>
+                  <li><a href="{{route('web.index')}}">Home</a></li>
                   <li><a href="about.php">About Us</a></li>
                   <li><a href="#">Our Project</a>
                     <ul>
@@ -98,7 +98,7 @@
   <div class="ltn__utilize-menu-inner ltn__scrollbar">
     <div class="ltn__utilize-menu-head">
       <div class="site-logo">
-        <a href="index.php">
+        <a href="{{route('web.index')}}">
           <img src="{{defImagesDir('logo_dark','photo')}}" class="img-fluid"/>
         </a>
       </div>
@@ -106,7 +106,7 @@
     </div>
     <div class="ltn__utilize-menu">
       <ul>
-        <li><a href="index.php">Home</a></li>
+        <li><a href="{{route('web.index')}}">Home</a></li>
         <li><a href="about.php">About Us</a></li>
         <li><a href="#">Our Project</a>
           <ul class="sub-menu">
