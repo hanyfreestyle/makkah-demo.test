@@ -1,0 +1,18 @@
+.info_list{
+    /*background-color: red!important;*/
+    margin-bottom: 0!important;
+
+}
+.info_list_label{
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    font-size: 16px!important;
+}
+
+.info_list_label .fi-ta-text-item-icon{
+    display: inline;
+
+}

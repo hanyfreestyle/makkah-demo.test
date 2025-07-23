@@ -1,0 +1,211 @@
+/* Custom Resources Page Styles with Prefix */
+.crp-resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 10px 0;
+    max-width: 100%;
+}
+
+/* Grid variations for different card counts */
+.crp-resources-grid.crp-grid-4 {
+    grid-template-columns: repeat(auto-fit, minmax(calc(25% - 15px), 1fr));
+}
+
+.crp-resources-grid.crp-grid-5 {
+    grid-template-columns: repeat(auto-fit, minmax(calc(20% - 16px), 1fr));
+}
+
+.crp-resource-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 22px 20px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.crp-resource-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    border-color: #d1d5db;
+}
+
+.crp-card-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.crp-card-icon {
+    width: 35px;
+    height: 35px;
+    color: #4b5563;
+    margin-bottom: 10px;
+}
+
+.crp-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.crp-card-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: auto;
+}
+
+.crp-btn {
+    padding: 5px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    cursor: pointer;
+    min-width: 70px;
+    text-align: center;
+}
+
+.crp-btn-primary {
+    background-color: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+}
+
+.crp-btn-primary:hover {
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+.crp-btn-secondary {
+    background-color: #f9fafb;
+    color: #374151;
+    border-color: #d1d5db;
+}
+
+.crp-btn-secondary:hover {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+/* Dark mode styles */
+.dark .crp-resource-card {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+.dark .crp-resource-card:hover {
+    border-color: #4b5563;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .crp-card-icon {
+    color: #9ca3af;
+}
+
+.dark .crp-card-title {
+    color: #f9fafb;
+}
+
+.dark .crp-btn-primary {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.dark .crp-btn-primary:hover {
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+.dark .crp-btn-secondary {
+    background-color: #374151;
+    color: #f9fafb;
+    border-color: #4b5563;
+}
+
+.dark .crp-btn-secondary:hover {
+    background-color: #4b5563;
+    border-color: #6b7280;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .crp-resources-grid.crp-grid-5 {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 1024px) {
+    .crp-resources-grid.crp-grid-4,
+    .crp-resources-grid.crp-grid-5 {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .crp-resources-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+        padding: 16px 0;
+    }
+
+    .crp-resource-card {
+        padding: 20px 16px;
+        min-height: 180px;
+    }
+
+    .crp-card-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 12px;
+    }
+
+    .crp-card-title {
+        font-size: 15px;
+        margin-bottom: 16px;
+    }
+
+    .crp-card-actions {
+        gap: 8px;
+    }
+
+    .crp-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+        min-width: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .crp-resources-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .crp-card-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .crp-btn {
+        width: 100%;
+    }
+}
+
+
+.inventoryTableSpan{
+    color: grey;
+    font-size: 13px!important;
+}

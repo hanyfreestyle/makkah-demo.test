@@ -1,0 +1,46 @@
+<?php
+namespace {{ namespace }};
+
+use Illuminate\Database\Eloquent\Model;
+use App\Traits\Admin\Model\ClearsCacheOnChange;
+use App\Traits\Admin\Model\HasUuid;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+class {{ class }} extends Model {
+    use ClearsCacheOnChange;
+    use HasUuid;
+
+    protected $table = "{{ table }}";
+    protected $primaryKey = 'id';
+    public $timestamps = false;
+    {{ fillableLine }}
+
+    public function delete() {
+        throw new \Exception('الحذف غير مسموح.');
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    protected static function booted() {
+        self::bootClearsCacheOnChange();
+    }
+
+    public function cacheKeys(): array {
+        return [
+            '{{ class }}_CashList_all_',
+            '{{ class }}_CashList_only_active_',
+        ];
+    }
+
+    protected $casts = [
+        'name' => 'array',
+        'des' => 'array',
+    ];
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    {{ parentRelations }}
+
+}
