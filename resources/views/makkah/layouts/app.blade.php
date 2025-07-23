@@ -25,12 +25,8 @@
 
 <div class="body-wrapper">
   @include('makkah.layouts.inc.header_menu_home')
-
-
-
   @yield('content')
   @include('makkah.layouts.inc.footer')
-
 </div>
 
 <div class="preloader d-none" id="preloader">
