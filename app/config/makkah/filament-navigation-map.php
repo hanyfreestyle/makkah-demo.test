@@ -3,36 +3,10 @@
 
 return [
 
-    "ProjectResource" => [
-        \App\Filament\Admin\Resources\RealEstate\ProjectResource::class,
-    ],
 
-    "ProjectUnitsResource" => [
-        \App\Filament\Admin\Resources\RealEstate\ProjectUnitsResource::class,
-    ],
-    "ForSaleResource" => [
-        \App\Filament\Admin\Resources\RealEstate\ForSaleResource::class,
-    ],
-    "UnitPages" => [
-        \App\Filament\Admin\Resources\RealEstate\UnitPagesResource::class,
-    ],
-
-    "developer" => [
-        \App\Filament\Admin\Resources\RealEstate\DeveloperResource::class,
-    ],
-
-    "blogPost" => [
-        \App\Filament\Admin\Resources\RealEstate\BlogPostResource::class,
-    ],
 
     "manageData" => [
-        \App\Filament\Admin\Resources\RealEstate\LocationResource::class,
-        \App\Filament\Admin\Resources\RealEstate\AmenityResource::class,
-        \App\Filament\Admin\Resources\RealEstate\DataProjectTypeResource::class,
-        \App\Filament\Admin\Resources\RealEstate\DataProjectStatusResource::class,
-        \App\Filament\Admin\Resources\RealEstate\DataUnitTypeResource::class,
-        \App\Filament\Admin\Resources\RealEstate\DataUnitViewResource::class,
-        \App\Filament\Admin\Resources\Data\DataCountryResource::class,
+
     ],
 
     "webSettings" => [
@@ -40,7 +14,7 @@ return [
         \App\Filament\Admin\Pages\WebSetting\ModelsSettings::class,
         \App\Filament\Admin\Resources\WebSetting\DefPhotoResource::class,
         \App\Filament\Admin\Resources\WebSetting\MetaTagResource::class,
-        \App\Filament\Admin\Resources\WebSetting\UploadFilterResource::class,
+//        \App\Filament\Admin\Resources\WebSetting\UploadFilterResource::class,
         \App\Filament\Admin\Resources\WebSetting\WebPrivacyResource::class,
     ],
 
