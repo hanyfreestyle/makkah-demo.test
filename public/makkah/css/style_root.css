@@ -287,7 +287,7 @@
 html {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
-    font-family: var(--ltn__body-font);
+    font-family: "Inter", sans-serif;
 }
 
 * {
@@ -305,9 +305,14 @@ body {
     font-weight: 400;
     font-style: normal;
     font-size: 16px;
-    font-family: var(--ltn__body-font);
+    font-family: "Inter", sans-serif;
     line-height: 1.8;
     margin: 0 auto;
+}
+
+
+html[lang="ar"] body {
+    font-family: "Tajawal", sans-serif;
 }
 
 h1, .h1 {
