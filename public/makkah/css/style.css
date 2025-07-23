@@ -5149,7 +5149,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 }
 
 .ltn__language-menu .dropdown-toggle::before {
-    content: "\e911";
+    content: "";
     font-size: 14px;
     position: absolute;
     top: 50%;

@@ -10,18 +10,25 @@ class SocialMedia extends Component {
 
   public $type;
   public $webConfig;
-  public $option_3;
+  public $cssStyle;
   public $option_4;
 
   public function __construct(
     $type = "footer",
     $webConfig = [],
-    $option_3 = null,
+    $cssStyle = null,
     $option_4 = null,
   ) {
     $this->type = $type;
     $this->webConfig = $webConfig;
-    $this->option_3 = $option_3;
+    $this->cssStyle = $cssStyle;
+
+    if ($this->type == "footer") {
+      $this->cssStyle = " social_media_footer mt-20 ";
+    } elseif ($this->type == "header") {
+      $this->cssStyle = " ltn__social-media ";
+    }
+
     $this->option_4 = $option_4;
   }
 

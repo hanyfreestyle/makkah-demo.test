@@ -88,3 +88,14 @@
 html[lang="ar"] .updateFont {
     font-family: "Tajawal", sans-serif !important;
 }
+
+.changeLanguage {
+    font-family: "Tajawal", sans-serif !important;
+
+}
+
+html[lang="ar"] .changeLanguage {
+    font-family: "Inter", sans-serif !important;
+}
+
+

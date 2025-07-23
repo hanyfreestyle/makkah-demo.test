@@ -5,8 +5,8 @@
         <div class="col-md-7">
           <div class="ltn__top-bar-menu">
             <ul>
-              <li><a href="#"><i class="icon-mail"></i> info@makkah.com</a></li>
-              <li><a href="#"><i class="icon-placeholder"></i> 15/A, Nest Tower, NYC</a></li>
+              <li><a href="#"><i class="fa-solid fa-envelope-circle-check"></i> {{$webConfig->email}}</a></li>
+              <li><a href="#"><i class="fa-solid fa-location-dot"></i> {{$webConfig->schema_address}} ,{{$webConfig->schema_city}}</a></li>
             </ul>
           </div>
         </div>
@@ -17,23 +17,16 @@
                 <li>
                   <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
                     <ul>
-                      <li><a href="#" class="dropdown-toggle"><span class="active-currency">English</span></a>
-                        <ul>
-                          <li><a href="#">Arabic</a></li>
-                        </ul>
+                      <li>
+                        <a href="{{ LaravelLocalization::getLocalizedURL(webChangeLocale(),$pageView['go_home']) }}">
+                          <span class="active-currency changeLanguage">{{__('web/def.change_language')}}</span>
+                        </a>
                       </li>
                     </ul>
                   </div>
                 </li>
                 <li>
-                  <div class="ltn__social-media">
-                    <ul>
-                      <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                      <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                      <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-                      <li><a href="#" title="Dribbble"><i class="fab fa-dribbble"></i></a></li>
-                    </ul>
-                  </div>
+                  <x-makkah.def.social-media type="header" :web-config="$webConfig"/>
                 </li>
               </ul>
             </div>

@@ -1,5 +1,5 @@
-@if($type == 'footer')
-  <div class="social_media_footer mt-20">
+@if($type == 'footer' or $type == 'header')
+  <div class="{{$cssStyle}}">
     <ul>
       @if(!empty($webConfig->social['facebook']))
         <li><a href="{{$webConfig->social['facebook']}}" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
