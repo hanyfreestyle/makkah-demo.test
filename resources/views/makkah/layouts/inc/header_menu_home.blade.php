@@ -14,7 +14,7 @@
           <div class="top-bar-right text-end">
             <div class="ltn__top-bar-menu">
               <ul>
-                <li>                                    <!-- ltn__language-menu -->
+                <li>
                   <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
                     <ul>
                       <li><a href="#" class="dropdown-toggle"><span class="active-currency">English</span></a>
@@ -47,7 +47,10 @@
       <div class="row">
         <div class="col">
           <div class="site-logo-wrap">
-            <div class="site-logo edit_logo"><a href="index.php"><img src="img/logo-2.png" alt="Logo"></a></div>
+            <div class="site-logo edit_logo"><a href="index.php">
+                <img src="{{defImagesDir('logo_light','photo')}}" class="img-fluid"/>
+              </a>
+            </div>
             <div class="get-support clearfix d-none">
               <div class="get-support-icon"><i class="icon-call"></i></div>
               <div class="get-support-info"><h6>Get Support</h6>                                <h4><a href="tel:+123456789">123-456-789-10</a></h4></div>
@@ -87,11 +90,18 @@
         </div>
       </div>
     </div>
-  </div>    <!-- ltn__header-middle-area end --></header><!-- Utilize Mobile Menu Start -->
+  </div>
+  <!-- ltn__header-middle-area end -->
+</header>
+<!-- Utilize Mobile Menu Start -->
 <div id="ltn__utilize-mobile-menu" class="ltn__utilize ltn__utilize-mobile-menu">
   <div class="ltn__utilize-menu-inner ltn__scrollbar">
     <div class="ltn__utilize-menu-head">
-      <div class="site-logo"><a href="index.php"><img src="img/logo.png" alt="Logo"></a></div>
+      <div class="site-logo">
+        <a href="index.php">
+          <img src="{{defImagesDir('logo_dark','photo')}}" class="img-fluid"/>
+        </a>
+      </div>
       <button class="ltn__utilize-close">×</button>
     </div>
     <div class="ltn__utilize-menu">
