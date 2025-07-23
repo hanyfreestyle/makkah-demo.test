@@ -24,7 +24,7 @@
                 <img src="{{defImagesDir('logo_light','photo')}}" class="img-fluid"/>
               </div>
             </div>
-            <p>{{$webConfig->footer_text}}</p>
+            <p class="footer_text">{{$webConfig->footer_text}}</p>
           </div>
         </div>
         <div class="col-xl-4 col-md-6 col-sm-6 col-12">
@@ -38,20 +38,20 @@
 
                 <li>
                   <div class="footer-address-icon"><i class="fa-solid fa-square-phone"></i></div>
-                  <div class="footer-address-info"><p><a href="tel:+0123-456789">{{$webConfig->phone_num}}</a></p></div>
+                  <div class="footer-address-info footer_number"><p><a href="tel:+0123-456789">{{$webConfig->phone_num}}</a></p></div>
                 </li>
 
                 <li>
                   <div class="footer-address-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                  <div class="footer-address-info"><p><a href="tel:+0123-456789">{{$webConfig->whatsapp_num}}</a></p></div>
+                  <div class="footer-address-info footer_number"><p><a href="tel:+0123-456789">{{$webConfig->whatsapp_num}}</a></p></div>
                 </li>
                 <li>
                   <div class="footer-address-icon"><i class="fa-solid fa-at"></i></div>
-                  <div class="footer-address-info"><p><a href="mailto:example@example.com">example@example.com</a></p></div>
+                  <div class="footer-address-info footer_number"><p><a href="mailto:example@example.com">{{$webConfig->email}}</a></p></div>
                 </li>
               </ul>
             </div>
-            <div class="ltn__social-media mt-20">
+            <div class="ltn__social-mediaCC social_media_footer mt-20">
               <ul>
                 <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
                 <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
