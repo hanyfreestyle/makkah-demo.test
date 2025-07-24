@@ -23,7 +23,7 @@ class LatestNews extends Component {
     if ($this->latestNews == null) {
       $this->latestNews = \App\Models\LatestNews\LatestNews::query()
         ->where('is_active', true)
-        ->orderBy('created_at', 'DESC')
+        ->orderBy('created_at')
         ->take(6)
         ->get();
     }

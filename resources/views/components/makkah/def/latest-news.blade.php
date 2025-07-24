@@ -13,8 +13,8 @@
           <div class="col-lg-12">
             <div class="ltn__blog-item ltn__blog-item-3">
               <div class="ltn__blog-img">
-                <a href="blog-details.html">
-                  <img src="{{defImagesDir('news_thumbnail','photo')}}" alt="#">
+                <a href="{{route('web.latest_news_view',$news->slug)}}">
+                  <x-web.def.img :row="$news" def-photo="news_thumbnail" def-photo-row="photo" class=""/>
                 </a>
               </div>
               <div class="ltn__blog-brief">
@@ -34,7 +34,7 @@
 
                     </ul>
                   </div>
-                  <div class="ltn__blog-btn"><a href="blog-details.html">{{__('web/def.read_more')}}</a></div>
+                  <div class="ltn__blog-btn"><a href="{{route('web.latest_news_view',$news->slug)}}">{{__('web/def.read_more')}}</a></div>
                 </div>
               </div>
             </div>

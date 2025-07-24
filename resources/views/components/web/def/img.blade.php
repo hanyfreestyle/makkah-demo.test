@@ -4,6 +4,7 @@
         <img data-src="{{getPhotoPath($row->{$rowName},$defPhoto,$defPhotoRow)}}"
              alt="{{$row->$altRow}}" title="{{$row->$altRow}}" class="lazy {{$class}}" @if($w) width="{{$w}}" @endif @if($h) height="{{$h}}" @endif >
     @else
+
         <img src="{{getPhotoPath($row->{$rowName},$defPhoto,$defPhotoRow)}}"
              alt="{{$row->$altRow}}" title="{{$row->$altRow}}" class="{{$class}}" @if($w) width="{{$w}}" @endif @if($h) height="{{$h}}" @endif >
     @endif

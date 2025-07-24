@@ -28,16 +28,15 @@ if (!function_exists('defPublicUrl')) {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-if (!function_exists('getPhotoPath')) {
-    function getPhotoPath($file, $defPhoto = "logo", $defPhotoRow = "photo_thumbnail"): string {
-        if ($file) {
-            $sendImg = Storage::disk('root_folder')->url($file);
-        } else {
-//            $defPhotoList = DefaultWebController::getDefPhotoById($defPhoto);
-            $sendImg = defImagesDir($defPhotoList->{$defPhotoRow} ?? '');
-        }
-        return $sendImg;
+if (!function_exists ('getPhotoPath')) {
+  function getPhotoPath ($file, $defPhoto = "logo", $defPhotoRow = "photo_thumbnail"): string {
+
+    if (!empty($file) && Storage::disk ('root_folder')->exists ($file)) {
+      return Storage::disk ('root_folder')->url ($file);
     }
+    return defImagesDir ($defPhoto, $defPhotoRow);
+
+  }
 }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
