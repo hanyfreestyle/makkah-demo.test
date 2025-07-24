@@ -32,6 +32,8 @@ return [
             'whatsapp_send' => 'WhatsApp Sender Number',
             'web_url' => 'Website URL',
             'email' => 'Email Address',
+            'google_map_url' => 'Google Map URL',
+
 
             'facebook' => 'Facebook',
             'youtube' => 'YouTube',

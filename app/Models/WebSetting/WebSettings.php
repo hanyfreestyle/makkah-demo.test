@@ -38,6 +38,7 @@ class WebSettings extends Model {
         'def_url',
         'schema',
         'social',
+        'google_map_url',
     ];
 
     protected $casts = [

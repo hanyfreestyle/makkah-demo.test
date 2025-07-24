@@ -12,19 +12,13 @@ use App\Models\WebSetting\WebSiteSettings;
 use App\Traits\Admin\Helper\SmartResourceTrait;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Actions\Action;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Group;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Config;
+use Filament\Forms;
 use Illuminate\Support\Facades\Gate;
 
 class SiteSettings extends Page implements HasForms, HasActions {
@@ -85,42 +79,42 @@ class SiteSettings extends Page implements HasForms, HasActions {
   public function form(Form $form): Form {
     return $form
       ->schema([
-        Group::make()->schema([
-          Group::make()->schema([
+        Forms\Components\Group::make()->schema([
+          Forms\Components\Group::make()->schema([
             TranslatableTabs::make()
               ->availableLocales(config('app.web_add_lang'))
               ->localeTabSchema(fn (TranslatableTab $tab) => [
-                TextInput::make($tab->makeName('name'))
+                Forms\Components\TextInput::make($tab->makeName('name'))
                   ->label(__('filament/settings/webSetting.web.columns.name'))
                   ->extraAttributes(fn () => rtlIfArabic($tab->getLocale()))
                   ->required(),
-                Textarea::make($tab->makeName('closed_mass'))
+                Forms\Components\Textarea::make($tab->makeName('closed_mass'))
                   ->label(__('filament/settings/webSetting.web.columns.closed_mass'))
                   ->rows(3)
                   ->extraAttributes(fn () => rtlIfArabic($tab->getLocale()))
                   ->required(),
 
-                Textarea::make($tab->makeName('footer_text'))
+                Forms\Components\Textarea::make($tab->makeName('footer_text'))
                   ->label(__('filament/settings/webSetting.web.columns.footer_text'))
                   ->rows(3)
                   ->extraAttributes(fn () => rtlIfArabic($tab->getLocale()))
                   ->required(),
 
-                TextInput::make($tab->makeName('meta_des'))
+                Forms\Components\TextInput::make($tab->makeName('meta_des'))
                   ->label(__('filament/settings/webSetting.web.columns.meta_des'))
                   ->extraAttributes(fn () => rtlIfArabic($tab->getLocale()))
                   ->required(),
-                TextInput::make($tab->makeName('whatsapp_des'))
+                Forms\Components\TextInput::make($tab->makeName('whatsapp_des'))
                   ->label(__('filament/settings/webSetting.web.columns.whatsapp_des'))
                   ->extraAttributes(fn () => rtlIfArabic($tab->getLocale()))
                   ->required(),
 
               ])->columns(1),
           ])->columnSpan(2),
-          Group::make()->schema([
-            Section::make(__('filament/settings/webSetting.web.section.setting'))->schema([
+          Forms\Components\Group::make()->schema([
+            Forms\Components\Section::make(__('filament/settings/webSetting.web.section.setting'))->schema([
 
-              Toggle::make('web_status')
+              Forms\Components\Toggle::make('web_status')
                 ->label(__('filament/settings/webSetting.web.columns.web_status'))
                 ->inline(false)
                 ->required()
@@ -130,7 +124,7 @@ class SiteSettings extends Page implements HasForms, HasActions {
                   }
                 }),
 
-              DatePicker::make('web_status_date')
+              Forms\Components\DatePicker::make('web_status_date')
                 ->label(__('filament/settings/webSetting.web.columns.web_status_date'))
                 ->nullable()
                 ->requiredIf('web_status', false) // ⬅️ مطلوب فقط لو الموقع مغلق
@@ -140,12 +134,12 @@ class SiteSettings extends Page implements HasForms, HasActions {
                   'after_or_equal' => __('filament/settings/webSetting.web.req.after_or_equal'),
                 ]),
 
-              Toggle::make('switch_lang')
+              Forms\Components\Toggle::make('switch_lang')
                 ->label(__('filament/settings/webSetting.web.columns.switch_lang'))
                 ->inline(false)
                 ->required(),
 
-//              Select::make('lang')
+//              Forms\Components\Select::make('lang')
 //                ->label(__('filament/settings/webSetting.web.columns.lang'))
 //                ->options(config('app.web_lang'))
 //                ->searchable()
@@ -153,48 +147,48 @@ class SiteSettings extends Page implements HasForms, HasActions {
 //                ->required(),
 
 
-//              Toggle::make('users_login')
+//              Forms\Components\Toggle::make('users_login')
 //                ->label(__('filament/settings/webSetting.web.columns.users_login'))
 //                ->inline(false)
 //                ->required(),
 //
 //
-//              Toggle::make('users_register')
+//              Forms\Components\Toggle::make('users_register')
 //                ->label(__('filament/settings/webSetting.web.columns.users_register'))
 //                ->inline(false)
 //                ->required(),
 //
-//              Toggle::make('users_forget_password')
+//              Forms\Components\Toggle::make('users_forget_password')
 //                ->label(__('filament/settings/webSetting.web.columns.users_forget_password'))
 //                ->inline(false)
 //                ->required(),
 
 
             ])->columnSpan(1)->columns(2),
-            Section::make(__('filament/settings/webSetting.web.section.phones'))->schema([
-              Group::make()->schema([
-                TextInput::make('phone_num')
+            Forms\Components\Section::make(__('filament/settings/webSetting.web.section.phones'))->schema([
+              Forms\Components\Group::make()->schema([
+                Forms\Components\TextInput::make('phone_num')
                   ->label(__('filament/settings/webSetting.web.columns.phone_num'))
                   ->maxLength(255)
                   ->extraAttributes(fn () => rtlIfArabic('en'))
                   ->columnSpan(1)
                   ->required(),
 
-                TextInput::make('phone_call')
+                Forms\Components\TextInput::make('phone_call')
                   ->label(__('filament/settings/webSetting.web.columns.phone_call'))
                   ->maxLength(255)
                   ->extraAttributes(fn () => rtlIfArabic('en'))
                   ->columnSpan(1)
                   ->required(),
 
-                TextInput::make('whatsapp_num')
+                Forms\Components\TextInput::make('whatsapp_num')
                   ->label(__('filament/settings/webSetting.web.columns.whatsapp_num'))
                   ->maxLength(255)
                   ->extraAttributes(fn () => rtlIfArabic('en'))
                   ->columnSpan(1)
                   ->required(),
 
-                TextInput::make('whatsapp_send')
+                Forms\Components\TextInput::make('whatsapp_send')
                   ->label(__('filament/settings/webSetting.web.columns.whatsapp_send'))
                   ->maxLength(255)
                   ->extraAttributes(fn () => rtlIfArabic('en'))
@@ -204,7 +198,7 @@ class SiteSettings extends Page implements HasForms, HasActions {
 
               ])->columnSpan(2)->columns(2),
 
-              TextInput::make('web_url')
+              Forms\Components\TextInput::make('web_url')
                 ->label(__('filament/settings/webSetting.web.columns.web_url'))
                 ->url()
                 ->maxLength(255)
@@ -213,7 +207,7 @@ class SiteSettings extends Page implements HasForms, HasActions {
                 ->required(),
 
 
-              TextInput::make('email')
+              Forms\Components\TextInput::make('email')
                 ->label(__('filament/settings/webSetting.web.columns.email'))
                 ->email()
                 ->extraAttributes(fn () => rtlIfArabic('en'))
@@ -222,9 +216,9 @@ class SiteSettings extends Page implements HasForms, HasActions {
                 ->required(),
 
 
-              TextInput::make('google_map_url')
+              Forms\Components\TextInput::make('google_map_url')
                 ->extraAttributes(fn () => rtlIfArabic('en'))
-                ->label(__('filament/settings/webSetting.web.columns.facebook'))
+                ->label(__('filament/settings/webSetting.web.columns.google_map_url'))
                 ->columnSpan(2)
                 ->url()
                 ->nullable(),
@@ -235,34 +229,34 @@ class SiteSettings extends Page implements HasForms, HasActions {
           ])->columnSpan(1)->columns(1),
 
         ])->columnSpanFull()->columns(3),
-        Group::make()->schema([
-          Section::make(__('filament/settings/webSetting.web.section.social'))->schema([
+        Forms\Components\Group::make()->schema([
+          Forms\Components\Section::make(__('filament/settings/webSetting.web.section.social'))->schema([
 
-            TextInput::make('social.facebook')
+            Forms\Components\TextInput::make('social.facebook')
               ->extraAttributes(fn () => rtlIfArabic('en'))
               ->label(__('filament/settings/webSetting.web.columns.facebook'))
               ->url()
               ->nullable(),
 
-            TextInput::make('social.twitter')
+            Forms\Components\TextInput::make('social.twitter')
               ->extraAttributes(fn () => rtlIfArabic('en'))
               ->label(__('filament/settings/webSetting.web.columns.twitter'))
               ->url()
               ->nullable(),
 
-            TextInput::make('social.youtube')
+            Forms\Components\TextInput::make('social.youtube')
               ->extraAttributes(fn () => rtlIfArabic('en'))
               ->label(__('filament/settings/webSetting.web.columns.youtube'))
               ->url()
               ->nullable(),
 
-            TextInput::make('social.instagram')
+            Forms\Components\TextInput::make('social.instagram')
               ->extraAttributes(fn () => rtlIfArabic('en'))
               ->label(__('filament/settings/webSetting.web.columns.instagram'))
               ->url()
               ->nullable(),
 
-            TextInput::make('social.linkedin')
+            Forms\Components\TextInput::make('social.linkedin')
               ->extraAttributes(fn () => rtlIfArabic('en'))
               ->label(__('filament/settings/webSetting.web.columns.linkedin'))
               ->url()
@@ -270,9 +264,9 @@ class SiteSettings extends Page implements HasForms, HasActions {
 
 
           ])->columnSpan(1)->columns('2'),
-          Section::make("Schema")->schema([
+          Forms\Components\Section::make("Schema")->schema([
 
-            Group::make()->schema([
+            Forms\Components\Group::make()->schema([
               ...SoftTranslatableTextArea::make()
                 ->setInputName('schema_address')
                 ->setTransMode(true)
@@ -288,31 +282,31 @@ class SiteSettings extends Page implements HasForms, HasActions {
 
             ])->columnSpan(6)->columns(2),
 
-            TextInput::make('schema.type')
+            Forms\Components\TextInput::make('schema.type')
               ->extraAttributes(fn () => rtlIfArabic('en'))
               ->label(__('filament/settings/webSetting.web.columns.schema_type'))
               ->columnSpan(3)
               ->nullable(),
 
-            TextInput::make('schema.country')
+            Forms\Components\TextInput::make('schema.country')
               ->extraAttributes(fn () => rtlIfArabic('en'))
               ->label(__('filament/settings/webSetting.web.columns.schema_country'))
               ->columnSpan(3)
               ->nullable(),
 
-            TextInput::make('schema.lat')
+            Forms\Components\TextInput::make('schema.lat')
               ->extraAttributes(fn () => rtlIfArabic('en'))
               ->label(__('filament/settings/webSetting.web.columns.schema_lat'))
               ->columnSpan(2)
               ->nullable(),
 
-            TextInput::make('schema.long')
+            Forms\Components\TextInput::make('schema.long')
               ->extraAttributes(fn () => rtlIfArabic('en'))
               ->label(__('filament/settings/webSetting.web.columns.schema_long'))
               ->columnSpan(2)
               ->nullable(),
 
-            TextInput::make('schema.postal_code')
+            Forms\Components\TextInput::make('schema.postal_code')
               ->extraAttributes(fn () => rtlIfArabic('en'))
               ->label(__('filament/settings/webSetting.web.columns.schema_postal_code'))
               ->columnSpan(2)
@@ -322,7 +316,7 @@ class SiteSettings extends Page implements HasForms, HasActions {
           ])->columnSpan(1)->columns('6'),
         ])->columnSpanFull()->columns(2),
 
-        Group::make()->schema([
+        Forms\Components\Group::make()->schema([
 
         ])->columnSpan(1)->columns(2),
       ])->columns(2)

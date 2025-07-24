@@ -35,7 +35,7 @@
               <ul>
                 <li>
                   <div class="footer-address-icon"><i class="fa-solid fa-location-dot"></i></div>
-                  <div class="footer-address-info"><p>{{$webConfig->schema_address}} <br>{{$webConfig->schema_city}}</p></div>
+                  <div class="footer-address-info"><p><a href="{{$webConfig->google_map_url}}" target="_blank">{{$webConfig->schema_address}} <br>{{$webConfig->schema_city}}</a></p></div>
                 </li>
 
                 <li>

@@ -5,7 +5,7 @@
         <div class="col-md-7">
           <div class="ltn__top-bar-menu">
             <ul>
-              <li><a href="https://maps.app.goo.gl/BK3JQzjHF1PaPhSb8" target="_blank"><i class="fa-solid fa-location-dot"></i> {{$webConfig->schema_address}} ,{{$webConfig->schema_city}}</a></li>
+              <li><a href="{{$webConfig->google_map_url}}" target="_blank"><i class="fa-solid fa-location-dot"></i> {{$webConfig->schema_address}} ,{{$webConfig->schema_city}}</a></li>
             </ul>
           </div>
         </div>

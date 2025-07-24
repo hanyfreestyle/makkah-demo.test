@@ -3,7 +3,8 @@
 }
 
 .fi-logo{
-   height: 70px!important;
+    min-height: 95%!important;
+   /*height: 70px!important;*/
 }
 textarea.cke_source {
     color: #000000 !important;
