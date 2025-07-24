@@ -9,7 +9,7 @@
     <div class="row  ltn__blog-slider-one-active slick-arrow-1 ltn__blog-item-3-normal">            <!-- Blog Item -->
       <div class="col-lg-12">
         <div class="ltn__blog-item ltn__blog-item-3">
-          <div class="ltn__blog-img"><a href="blog-details.html"><img src="img/blog/1.jpg" alt="#"></a></div>
+          <div class="ltn__blog-img"><a href="blog-details.html"><img src="{{defImagesDir('logo_dark','photo')}}" alt="#"></a></div>
           <div class="ltn__blog-brief">
             <div class="ltn__blog-meta">
               <ul>
@@ -31,7 +31,7 @@
       </div>            <!-- Blog Item -->
       <div class="col-lg-12">
         <div class="ltn__blog-item ltn__blog-item-3">
-          <div class="ltn__blog-img"><a href="blog-details.html"><img src="img/blog/2.jpg" alt="#"></a></div>
+          <div class="ltn__blog-img"><a href="blog-details.html"><img src="{{defImagesDir('logo_dark','photo')}}" alt="#"></a></div>
           <div class="ltn__blog-brief">
             <div class="ltn__blog-meta">
               <ul>
@@ -53,7 +53,7 @@
       </div>            <!-- Blog Item -->
       <div class="col-lg-12">
         <div class="ltn__blog-item ltn__blog-item-3">
-          <div class="ltn__blog-img"><a href="blog-details.html"><img src="img/blog/3.jpg" alt="#"></a></div>
+          <div class="ltn__blog-img"><a href="blog-details.html"><img src="{{defImagesDir('logo_dark','photo')}}" alt="#"></a></div>
           <div class="ltn__blog-brief">
             <div class="ltn__blog-meta">
               <ul>
@@ -75,7 +75,7 @@
       </div>            <!-- Blog Item -->
       <div class="col-lg-12">
         <div class="ltn__blog-item ltn__blog-item-3">
-          <div class="ltn__blog-img"><a href="blog-details.html"><img src="img/blog/4.jpg" alt="#"></a></div>
+          <div class="ltn__blog-img"><a href="blog-details.html"><img src="{{defImagesDir('logo_dark','photo')}}" alt="#"></a></div>
           <div class="ltn__blog-brief">
             <div class="ltn__blog-meta">
               <ul>
@@ -97,7 +97,7 @@
       </div>            <!-- Blog Item -->
       <div class="col-lg-12">
         <div class="ltn__blog-item ltn__blog-item-3">
-          <div class="ltn__blog-img"><a href="blog-details.html"><img src="img/blog/5.jpg" alt="#"></a></div>
+          <div class="ltn__blog-img"><a href="blog-details.html"><img src="{{defImagesDir('logo_dark','photo')}}" alt="#"></a></div>
           <div class="ltn__blog-brief">
             <div class="ltn__blog-meta">
               <ul>
@@ -116,6 +116,7 @@
             </div>
           </div>
         </div>
-      </div>            <!--  -->        </div>
+      </div>
+    </div>
   </div>
 </div>

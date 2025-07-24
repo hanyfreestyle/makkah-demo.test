@@ -19,32 +19,32 @@ class DatabaseSeeder extends Seeder {
 
 //      $titles = [
 //        'ar' => [
-//          'إطلاق مشروع سكني فاخر جديد في القاهرة الجديدة',
-//          'ارتفاع الطلب على الوحدات التجارية في دبي',
-//          'فرص استثمارية عقارية في العاصمة الإدارية',
-//          'انخفاض أسعار العقارات في بعض مناطق الرياض',
-//          'توقعات بانتعاش السوق العقاري في أبوظبي',
-//          'إطلاق منصة رقمية لشراء العقارات في السعودية',
-//          'مشروع منتجع سياحي فاخر يفتتح قريبًا في الساحل الشمالي',
-//          'نمو مستمر في سوق العقارات الفاخرة بدبي',
-//          'أهم النصائح قبل شراء عقار للاستثمار',
-//          'المناطق الأكثر جذبًا للمستثمرين العقاريين في 2025',
-//          'مؤتمر عقاري عالمي ينطلق الشهر القادم في الرياض',
-//          'شراكة جديدة لتطوير مشاريع عقارية ذكية'
+//          'افتتاح مشروع كمبوند فاخر جديد في التجمع الخامس',
+//          'زيادة الإقبال على الوحدات الإدارية بالتجمع الخامس',
+//          'فرص استثمارية واعدة في قلب مدينة 6 أكتوبر',
+//          'هبوط أسعار الأراضي في مناطق محددة من أكتوبر',
+//          'إطلاق مشروع تجاري ضخم على محور 26 يوليو',
+//          'نمو مستمر في سوق الشقق الفاخرة بالتجمع الخامس',
+//          'توقعات بارتفاع أسعار العقارات في 6 أكتوبر خلال 2025',
+//          'أفضل الكمبوندات للاستثمار العقاري في التجمع الخامس',
+//          'الفرص الذهبية لشراء وحدات تجارية في أكتوبر الجديدة',
+//          'توسعات عمرانية جديدة بالقرب من العاصمة الإدارية',
+//          'افتتاح مول تجاري جديد في قلب التجمع الخامس',
+//          'شراكات استراتيجية لتطوير مشروعات سكنية في 6 أكتوبر'
 //        ],
 //        'en' => [
-//          'New Luxury Residential Project Launched in New Cairo',
-//          'Rising Demand for Commercial Units in Dubai',
-//          'Real Estate Investment Opportunities in the New Capital',
-//          'Property Prices Decline in Some Areas of Riyadh',
-//          'Real Estate Market Expected to Recover in Abu Dhabi',
-//          'New Digital Platform Launched for Property Buying in KSA',
-//          'Luxury Resort Project to Open Soon in North Coast',
-//          'Luxury Real Estate Market Continues to Grow in Dubai',
-//          'Top Tips Before Buying Property for Investment',
-//          'Top Locations Attracting Real Estate Investors in 2025',
-//          'Global Real Estate Conference to Launch Next Month in Riyadh',
-//          'New Partnership to Develop Smart Property Projects'
+//          'New Luxury Compound Launched in New Cairo – Fifth Settlement',
+//          'Rising Demand for Administrative Units in Fifth Settlement',
+//          'Promising Investment Opportunities in 6th of October City',
+//          'Land Prices Drop in Selected Areas of October City',
+//          'Massive Commercial Project Launched on July 26th Axis',
+//          'Continuous Growth in Luxury Apartment Market in New Cairo',
+//          'Property Prices in October City Expected to Rise by 2025',
+//          'Top Compounds for Real Estate Investment in Fifth Settlement',
+//          'Golden Opportunities for Buying Commercial Units in New October',
+//          'Urban Expansion Near the New Administrative Capital',
+//          'New Shopping Mall Opens in the Heart of Fifth Settlement',
+//          'Strategic Partnerships to Develop Housing Projects in October City'
 //        ],
 //      ];
 //
