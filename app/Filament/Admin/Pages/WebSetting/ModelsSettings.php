@@ -48,6 +48,7 @@ class ModelsSettings extends Page implements HasForms, HasActions {
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     public function mount(): void {
         $valueStore = getConfigJsonFile("module");
+
         $state = $valueStore->get('modules', []); // هنا بنجيب كل الحقول العادية
         $this->form->fill($state);
     }
