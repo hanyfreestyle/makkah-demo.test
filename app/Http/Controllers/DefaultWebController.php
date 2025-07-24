@@ -41,6 +41,7 @@ class DefaultWebController extends Controller {
             'webConfig' => self::getWebSettingsCash($this->is_cash),
             'defPhotoList' => self::getDefPhotoCash($this->is_cash),
             'listing_unit' => null,
+            'headerHomeMenu' => false,
         ];
         foreach ($sharedData as $key => $value) {
             $this->$key = $value;

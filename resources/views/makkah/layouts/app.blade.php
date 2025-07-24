@@ -25,7 +25,13 @@
 <body>
 
 <div class="body-wrapper">
-  @include('makkah.layouts.inc.header_menu_home')
+  @if($headerHomeMenu)
+    @include('makkah.layouts.inc.header_menu_home')
+  @else
+    @include('makkah.layouts.inc.header_menu')
+  @endif
+
+
   @yield('content')
   @include('makkah.layouts.inc.footer')
 </div>
