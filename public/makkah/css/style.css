@@ -4988,7 +4988,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
     left: auto;
     display: block;
     overflow: hidden;
-    width: 400px;
+    width: 90%!important;
     height: 100vh;
     padding: 20px 10px 20px 30px;
     -webkit-transition: all .5s ease 0s;
@@ -5001,6 +5001,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
     -webkit-box-shadow: none;
     box-shadow: none;
     z-index: 99999;
+
 }
 
 .ltn__utilize.ltn__utilize-mobile-menu {
@@ -9198,6 +9199,10 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 
 .ltn__social-media-2 ul li:last-child {
     margin-right: 0;
+}
+
+html[lang="ar"] .ltn__social-media-2 ul li:last-child {
+    margin-right: 10px;
 }
 
 .ltn__social-media-2 ul li:hover a {

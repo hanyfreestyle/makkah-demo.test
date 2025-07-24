@@ -27,6 +27,8 @@ class SocialMedia extends Component {
       $this->cssStyle = " social_media_footer mt-20 ";
     } elseif ($this->type == "header") {
       $this->cssStyle = " ltn__social-media ";
+    } elseif ($this->type == "mobile") {
+      $this->cssStyle = " ltn__social-media-2 ";
     }
 
     $this->option_4 = $option_4;

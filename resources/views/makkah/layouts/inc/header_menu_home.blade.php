@@ -5,7 +5,7 @@
         <div class="col-md-7">
           <div class="ltn__top-bar-menu">
             <ul>
-              <li><a href="#"><i class="fa-solid fa-location-dot"></i> {{$webConfig->schema_address}} ,{{$webConfig->schema_city}}</a></li>
+              <li><a href="https://maps.app.goo.gl/BK3JQzjHF1PaPhSb8" target="_blank"><i class="fa-solid fa-location-dot"></i> {{$webConfig->schema_address}} ,{{$webConfig->schema_city}}</a></li>
             </ul>
           </div>
         </div>
@@ -94,27 +94,25 @@
     </div>
     <div class="ltn__utilize-menu">
       <ul>
-        <li><a href="{{route('web.index')}}">Home</a></li>
-        <li><a href="about.php">About Us</a></li>
-        <li><a href="#">Our Project</a>
+        <li><a href="{{route('web.index')}}">{{__('web/def.menu.home')}}</a></li>
+        <li><a href="{{route('web.about_us')}}">{{__('web/def.menu.about_us')}}</a></li>
+        <li><a href="#">{{__('web/def.menu.our_project')}}</a>
           <ul class="sub-menu">
             <li><a href="#">Rowaq Sheikh Zayed</a></li>
             <li><a href="#">October Projects</a></li>
             <li><a href="#">Alexadria Projects</a></li>
           </ul>
         </li>
-        <li><a href="#">News</a></li>
-        <li><a href="contact.php">Contact Us</a></li>
+        <li><a href="{{route('web.latest_news')}}">{{__('web/def.menu.latest_news')}}</a></li>
+        <li><a href="{{route('web.contact_us')}}">{{__('web/def.menu.contact_us')}}</a></li>
+        <li>
+          <a class="changeLanguage" href="{{ LaravelLocalization::getLocalizedURL(webChangeLocale(),$pageView['go_home']) }}">
+            {{__('web/def.change_language')}}
+          </a>
+        </li>
       </ul>
     </div>
-    <div class="ltn__social-media-2">
-      <ul>
-        <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-        <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-        <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-        <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-      </ul>
-    </div>
+    <x-makkah.def.social-media type="mobile" :web-config="$webConfig"/>
   </div>
 </div>
 <div class="ltn__utilize-overlay"></div>
