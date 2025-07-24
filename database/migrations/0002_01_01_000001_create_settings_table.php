@@ -26,6 +26,7 @@ return new class extends Migration {
             $table->string('whatsapp_send')->nullable();
             $table->string('email')->nullable();
             $table->string('def_url')->nullable();
+            $table->string('google_map_url')->nullable();
 
             $table->json('social')->nullable();
             $table->json('schema')->nullable();

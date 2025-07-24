@@ -2,6 +2,9 @@
     gap: 0.2rem !important; /* أو 1rem حسب اللي يناسبك */
 }
 
+.fi-logo{
+   height: 70px!important;
+}
 textarea.cke_source {
     color: #000000 !important;
 }
