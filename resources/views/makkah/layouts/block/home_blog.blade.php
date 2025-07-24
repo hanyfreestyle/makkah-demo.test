@@ -6,7 +6,7 @@
           <h1 class="section-title">Leatest News Feeds</h1></div>
       </div>
     </div>
-    <div class="row  ltn__blog-slider-one-active slick-arrow-1 ltn__blog-item-3-normal">            <!-- Blog Item -->
+    <div class="row  ltn__blog-slider-one-active slick-arrow-1 ltn__blog-item-3-normal">
       <div class="col-lg-12">
         <div class="ltn__blog-item ltn__blog-item-3">
           <div class="ltn__blog-img"><a href="blog-details.html"><img src="{{defImagesDir('logo_dark','photo')}}" alt="#"></a></div>
@@ -28,7 +28,7 @@
             </div>
           </div>
         </div>
-      </div>            <!-- Blog Item -->
+      </div>
       <div class="col-lg-12">
         <div class="ltn__blog-item ltn__blog-item-3">
           <div class="ltn__blog-img"><a href="blog-details.html"><img src="{{defImagesDir('logo_dark','photo')}}" alt="#"></a></div>
@@ -50,7 +50,7 @@
             </div>
           </div>
         </div>
-      </div>            <!-- Blog Item -->
+      </div>
       <div class="col-lg-12">
         <div class="ltn__blog-item ltn__blog-item-3">
           <div class="ltn__blog-img"><a href="blog-details.html"><img src="{{defImagesDir('logo_dark','photo')}}" alt="#"></a></div>
@@ -72,7 +72,7 @@
             </div>
           </div>
         </div>
-      </div>            <!-- Blog Item -->
+      </div>
       <div class="col-lg-12">
         <div class="ltn__blog-item ltn__blog-item-3">
           <div class="ltn__blog-img"><a href="blog-details.html"><img src="{{defImagesDir('logo_dark','photo')}}" alt="#"></a></div>
@@ -94,7 +94,7 @@
             </div>
           </div>
         </div>
-      </div>            <!-- Blog Item -->
+      </div>
       <div class="col-lg-12">
         <div class="ltn__blog-item ltn__blog-item-3">
           <div class="ltn__blog-img"><a href="blog-details.html"><img src="{{defImagesDir('logo_dark','photo')}}" alt="#"></a></div>

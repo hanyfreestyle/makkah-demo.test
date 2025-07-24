@@ -473,7 +473,6 @@
             slidesToShow: 3,
             slidesToScroll: 1,
             initialSlide: 2,
-            centerMode: false,
             centerPadding: '0px',
             asNavFor: '.ltn__slider-11-active',
             dots: false, /* image slide dots */
@@ -917,6 +916,7 @@
             infinite: true,
             speed: 300,
             slidesToShow: 3,
+            rtl: $('html').attr('dir') === 'rtl',
             slidesToScroll: 1,
             prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left" alt="Arrow Icon"></i></a>',
             nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right" alt="Arrow Icon"></i></a>',

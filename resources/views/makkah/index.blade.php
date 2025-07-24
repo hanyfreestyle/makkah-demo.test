@@ -4,9 +4,9 @@
 
   @include('makkah.layouts.inc.home_slider')
 
-  @include('makkah.layouts.block.home_project')
-  @include('makkah.layouts.block.home_counter')
-  @include('makkah.layouts.block.home_plan')
+{{--  @include('makkah.layouts.block.home_project')--}}
+{{--  @include('makkah.layouts.block.home_counter')--}}
+{{--  @include('makkah.layouts.block.home_plan')--}}
   @include('makkah.layouts.block.home_blog')
 
 @endsection
