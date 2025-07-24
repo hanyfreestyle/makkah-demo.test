@@ -15,6 +15,7 @@
   {{--    {!! $minifyTools->setDir('makkah/')->MinifyCss('css/font-icons.css',"Web",$cssReBuild) !!}--}}
   {!! $minifyTools->setDir('makkah/')->MinifyCss('css/plugins.css',$cssMinifyType,$cssReBuild) !!}
   {!! $minifyTools->setDir('makkah/')->MinifyCss('css/style_root.css',$cssMinifyType,$cssReBuild) !!}
+  {!! $minifyTools->setDir('makkah/')->MinifyCss('css/header.css',$cssMinifyType,$cssReBuild) !!}
   {!! $minifyTools->setDir('makkah/')->MinifyCss('css/style.css',$cssMinifyType,$cssReBuild) !!}
   {!! $minifyTools->setDir('makkah/')->MinifyCss('css/footer.css',$cssMinifyType,$cssReBuild) !!}
   {!! $minifyTools->setDir('makkah/')->MinifyCss('css/edit.css',$cssMinifyType,$cssReBuild) !!}
