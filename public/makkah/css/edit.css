@@ -98,4 +98,13 @@ html[lang="ar"] .changeLanguage {
     font-family: "Inter", sans-serif !important;
 }
 
+.cta_number {
+    font-family: "Inter", sans-serif !important;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 1.7 !important;
+
+}
+
 
