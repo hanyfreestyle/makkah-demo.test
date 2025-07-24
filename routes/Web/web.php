@@ -11,7 +11,9 @@ Route::group(['middleware' => ['UnderConstruction']], function () {
     Route::get('/about-us', [HomePageController::class, 'aboutUs'])->name('web.about_us');
     Route::get('/contact-us', [HomePageController::class, 'contactUs'])->name('web.contact_us');
     Route::get('/latest-news', [HomePageController::class, 'latestNews'])->name('web.latest_news');
-
+    Route::get('/latest-news/{slug}', [HomePageController::class, 'latestNewsView'])->name('web.latest_news_view');
+//    Route::get(LaravelLocalization::transRoute('routes.LatestNews_View'),
+//      [WebPageController::class, 'LatestNews_View'])->name('LatestNews_View');
 
   });
 });

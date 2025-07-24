@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\RealEstate;
 
 use App\Http\Controllers\DefaultWebController;
+use App\Models\LatestNews\LatestNews;
 use Illuminate\Support\Facades\View;
 
 class HomePageController extends DefaultWebController {
@@ -60,8 +61,22 @@ class HomePageController extends DefaultWebController {
     ]);
   }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  public function latestNewsView($slug) {
+    $meta = parent::getMeatByCatId('home');
+    $slug = Url_Slug($slug);
+    $news = LatestNews::query()
+      ->whereTranslation('slug', $slug)
+      ->firstOrFail();
+    $pageView['slug'] = route('web.latest_news_view', $news->translate(webChangeLocale())->slug);
 
-
+    self::printSeoMeta($meta, 'web.index');
+    return view('makkah.latest_news_view')->with([
+      'news' => $news,
+      'pageView' => $pageView,
+    ]);
+  }
 
 
 }

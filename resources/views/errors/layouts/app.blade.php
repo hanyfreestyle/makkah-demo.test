@@ -7,7 +7,8 @@
   @php
     $webConfig =  App\Traits\Web\LoadWebSettings::getWebSettingsCash(true);
     $defPhotoList =  App\Traits\Web\LoadWebSettings::getDefPhotoCash(true);
-    $pageView['go_home'] =  route('web.index');
+//    $pageView['go_home'] =  route('web.index');
+    $pageView['slug'] =  route('web.index');
     $minifyTools =  new App\Helpers\Admin\Minifier\MinifyTools;
     $cssMinifyType =  "Seo";
     $cssReBuild =  true;

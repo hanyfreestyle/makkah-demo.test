@@ -23,7 +23,7 @@
         <li><a href="{{route('web.contact_us')}}">{{__('web/def.menu.contact_us')}}</a></li>
         @if($webConfig->switch_lang)
           <li>
-            <a class="changeLanguage" href="{{ LaravelLocalization::getLocalizedURL(webChangeLocale(),$pageView['go_home']) }}">
+            <a class="changeLanguage" href="{{ LaravelLocalization::getLocalizedURL(webChangeLocale(),$pageView['slug'], [], true) }}">
               {{__('web/def.change_language')}}
             </a>
           </li>

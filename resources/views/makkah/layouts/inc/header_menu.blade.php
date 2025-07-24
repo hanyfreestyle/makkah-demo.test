@@ -18,7 +18,7 @@
                     <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
                       <ul>
                         <li>
-                          <a href="{{ LaravelLocalization::getLocalizedURL(webChangeLocale(),$pageView['go_home']) }}">
+                          <a href="{{ LaravelLocalization::getLocalizedURL(webChangeLocale(),$pageView['slug'], [], true) }}">
                             <span class="active-currency changeLanguage">{{__('web/def.change_language')}}</span>
                           </a>
                         </li>
