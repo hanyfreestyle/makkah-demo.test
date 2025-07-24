@@ -104,7 +104,15 @@ html[lang="ar"] .changeLanguage {
     font-weight: 500;
     letter-spacing: 1px;
     line-height: 1.7 !important;
-
 }
+
+@media (min-width: 992px) {
+    .img_404 {
+        max-width: 700px !important;
+    }
+}
+
+
+
 
 

@@ -1,56 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ thisCurrentLocale() }}" {!!htmlDir()!!} >
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="index, follow">
-    <x-web.def.google-tags type="web_master_meta"/>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    {!! SEO::generate() !!}
-    <x-web.def.fav-icon/>
-    {!! $MinifyTools->setDir('fonts')->MinifyCss('fontawesome/css/all.css',$cssMinifyType,false) !!}
-    {!! $MinifyTools->setDir('fonts')->MinifyCss('bootstrap-icons/bootstrap-icons.css',$cssMinifyType,$cssReBuild) !!}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  @php
+    $webConfig =  App\Traits\Web\LoadWebSettings::getWebSettingsCash(true);
+    $defPhotoList =  App\Traits\Web\LoadWebSettings::getDefPhotoCash(true);
+    $pageView['go_home'] =  route('web.index');
+    $minifyTools =  new App\Helpers\Admin\Minifier\MinifyTools;
+    $cssMinifyType =  "Seo";
+    $cssReBuild =  true;
+  @endphp
+  {!! SEO::generate() !!}
+  <x-web.def.fav-icon/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
-    {!! $MinifyTools->setDir('web-def')->MinifyCss('vendor/bootstrap/css/bootstrap.min.css',$cssMinifyType,$cssReBuild) !!}
-    {!! $MinifyTools->setDir('web-def')->MinifyCss('vendor/aos/aos.css',$cssMinifyType,$cssReBuild) !!}
-    {!! $MinifyTools->setDir('web-def')->MinifyCss('vendor/glightbox/css/glightbox.min.css',$cssMinifyType,$cssReBuild) !!}
-    {!! $MinifyTools->setDir('web-def')->MinifyCss('vendor/swiper/swiper-bundle.min.css',$cssMinifyType,$cssReBuild) !!}
-
-    <!-- Main CSS File -->
-    {!! $MinifyTools->setDir('web-def')->MinifyCss('css/main.css',$cssMinifyType,$cssReBuild) !!}
-
-    @yield('AddStyle')
-    @stack('StyleFile')
-
-    @if(thisCurrentLocale() == 'ar')
-
-    @endif
-
+  {{--    {!! $minifyTools->setDir('makkah/')->MinifyCss('css/font-icons.css',"Web",$cssReBuild) !!}--}}
+  {!!  $minifyTools->setDir('makkah/')->MinifyCss('css/plugins.css',$cssMinifyType,$cssReBuild) !!}
+  {!! $minifyTools->setDir('makkah/')->MinifyCss('css/style_root.css',$cssMinifyType,$cssReBuild) !!}
+  {!! $minifyTools->setDir('makkah/')->MinifyCss('css/header.css',$cssMinifyType,$cssReBuild) !!}
+  {!! $minifyTools->setDir('makkah/')->MinifyCss('css/style.css',$cssMinifyType,$cssReBuild) !!}
+  {!! $minifyTools->setDir('makkah/')->MinifyCss('css/footer.css',$cssMinifyType,$cssReBuild) !!}
+  {!! $minifyTools->setDir('makkah/')->MinifyCss('css/edit.css',$cssMinifyType,$cssReBuild) !!}
+  @yield('yieldStyle')
+  @stack('stackStyle')
 </head>
-
 <body>
 
+<div class="body-wrapper">
+  @include('makkah.layouts.inc.header_menu')
+  @yield('content')
+  @include('makkah.layouts.inc.footer')
+</div>
 
-@yield('content')
-
-
-
-
-<!-- Vendor JS Files -->
-{!!  $MinifyTools->setDir('web-def')->MinifyJs('vendor/bootstrap/js/bootstrap.bundle.min.js',"Web",false) !!}
-{!!  $MinifyTools->setDir('web-def')->MinifyJs('vendor/aos/aos.js',"Web",false) !!}
-{!!  $MinifyTools->setDir('web-def')->MinifyJs('vendor/glightbox/js/glightbox.min.js',"Web",false) !!}
-{!!  $MinifyTools->setDir('web-def')->MinifyJs('vendor/swiper/swiper-bundle.min.js',"Web",false) !!}
-{!!  $MinifyTools->setDir('web-def')->MinifyJs('vendor/purecounter/purecounter_vanilla.js',"Web",false) !!}
-
-
-<!-- Main JS File -->
-{!!  $MinifyTools->setDir('web-def')->MinifyJs('js/main.js',"Web",false) !!}
+<div class="preloader d-none" id="preloader">
+  <div class="preloader-inner">
+    <div class="spinner">
+      <div class="dot1"></div>
+      <div class="dot2"></div>
+    </div>
+  </div>
+</div>
 
 
-@yield('TempScript')
-@stack('ScriptCode')
-<x-web.font.load-web-font/>
+{!! $minifyTools->setDir('makkah/')->MinifyJs('js/plugins.js',"Web",false) !!}
+{!! $minifyTools->setDir('makkah/')->MinifyJs('js/main.js',"Web",false) !!}
+
+@yield('yieldScript')
+@stack('stackScript')
 </body>
 </html>
