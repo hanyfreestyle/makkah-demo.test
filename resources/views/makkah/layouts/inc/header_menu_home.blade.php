@@ -13,17 +13,20 @@
           <div class="top-bar-right {{textDir()}}">
             <div class="ltn__top-bar-menu">
               <ul>
-                <li>
-                  <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
-                    <ul>
-                      <li>
-                        <a href="{{ LaravelLocalization::getLocalizedURL(webChangeLocale(),$pageView['go_home']) }}">
-                          <span class="active-currency changeLanguage">{{__('web/def.change_language')}}</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
+                @if($webConfig->switch_lang)
+                  <li>
+                    <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
+                      <ul>
+                        <li>
+                          <a href="{{ LaravelLocalization::getLocalizedURL(webChangeLocale(),$pageView['go_home']) }}">
+                            <span class="active-currency changeLanguage">{{__('web/def.change_language')}}</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
+                  </li>
+                @endif
                 <li>
                   <x-makkah.def.social-media type="header" :web-config="$webConfig"/>
                 </li>
@@ -105,11 +108,13 @@
         </li>
         <li><a href="{{route('web.latest_news')}}">{{__('web/def.menu.latest_news')}}</a></li>
         <li><a href="{{route('web.contact_us')}}">{{__('web/def.menu.contact_us')}}</a></li>
-        <li>
-          <a class="changeLanguage" href="{{ LaravelLocalization::getLocalizedURL(webChangeLocale(),$pageView['go_home']) }}">
-            {{__('web/def.change_language')}}
-          </a>
-        </li>
+        @if($webConfig->switch_lang)
+          <li>
+            <a class="changeLanguage" href="{{ LaravelLocalization::getLocalizedURL(webChangeLocale(),$pageView['go_home']) }}">
+              {{__('web/def.change_language')}}
+            </a>
+          </li>
+        @endif
       </ul>
     </div>
     <x-makkah.def.social-media type="mobile" :web-config="$webConfig"/>

@@ -21,7 +21,7 @@ class HomePageController extends DefaultWebController {
     $meta = parent::getMeatByCatId('home');
     self::printSeoMeta($meta, 'web.index');
 
-//    dd($this->webConfig->social);
+//     dd($this->webConfig);
 
 
 
