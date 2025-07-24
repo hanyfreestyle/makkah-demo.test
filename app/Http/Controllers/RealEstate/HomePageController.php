@@ -43,24 +43,25 @@ class HomePageController extends DefaultWebController {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  public function latestNews() {
-    $meta = parent::getMeatByCatId('home');
-    self::printSeoMeta($meta, 'web.index');
-    return view('makkah.index')->with([
-
-    ]);
-  }
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public function contactUs() {
     $meta = parent::getMeatByCatId('home');
     self::printSeoMeta($meta, 'web.index');
-    return view('makkah.index')->with([
+    return view('makkah.contact_us')->with([
 
     ]);
   }
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  public function latestNews() {
+    $meta = parent::getMeatByCatId('home');
+    self::printSeoMeta($meta, 'web.index');
+    return view('makkah.latest_news')->with([
+
+    ]);
+  }
+
+
+
 
 
 }

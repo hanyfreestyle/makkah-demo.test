@@ -1,34 +1,37 @@
 @unless ($breadcrumbs->isEmpty())
-    @push('stackStyle')
-
-    @endpush
-
-    <div class="breadcrumbs" id="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
-        @foreach ($breadcrumbs as $breadcrumb)
-            @if (!is_null($breadcrumb->url) && !$loop->last)
-                <div class="breadcrumb-slide" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+  <div class="breadcrumb_area text-left" id="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="breadcrumb_list">
+            <ul>
+              @foreach ($breadcrumbs as $breadcrumb)
+                @if (!is_null($breadcrumb->url) && !$loop->last)
+                  <li class="breadcrumb-slide" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
                     <a itemprop="item" href="{!! $breadcrumb->url !!}" aria-label="{{$breadcrumb->title}}">
-                    <span itemprop="name">
+                      @if($loop->index == 0)
+                        <span class="ltn__secondary-color"><i class="fas fa-home"></i></span>
+                      @endif
+                      <span itemprop="name">
                         {!! $breadcrumb->title !!}
                     </span>
                     </a>
                     <meta itemprop="position" content=" {{$loop->index+1}}"/>
-                    @if (thisCurrentLocale() === 'ar')
-                        <span class="separator"><i class="fas fa-chevron-left"></i></span>
-                    @else
-                        <span class="separator"><i class="fas fa-chevron-right"></i></span>
-                    @endif
-
-                </div>
-            @else
-                <div class="breadcrumb-slide " itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                  </li>
+                @else
+                  <li class="breadcrumb-slide " itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
                      <span itemprop="item" href="{!! $breadcrumb->url !!}" aria-label="{{$breadcrumb->title}}">
                          <span class="current" itemprop="name">{!! $breadcrumb->title !!}</span>
                      </span>
                     <meta itemprop="position" content=" {{$loop->index+1}}"/>
-                </div>
-            @endif
-        @endforeach
+                  </li>
+                @endif
+              @endforeach
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 @endunless
 

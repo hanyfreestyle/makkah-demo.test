@@ -24,7 +24,7 @@ return [
     */
 
 //    'view' => 'breadcrumbs::bootstrap5',
-    'view' => 'real-estate.partials.breadcrumbs',
+    'view' => 'makkah.partials.breadcrumbs',
 
     /*
     |--------------------------------------------------------------------------

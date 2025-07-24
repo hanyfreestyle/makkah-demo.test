@@ -1,16 +1,8 @@
 @extends('makkah.layouts.app')
 
 @section('content')
+  {!! Breadcrumbs::render('contact_us') !!}
 
-  @include('makkah.layouts.inc.home_slider')
 @endsection
 
-@push('stackStyle')
-
-@endpush
-
-
-@push('stackScript')
-
-@endpush
 
