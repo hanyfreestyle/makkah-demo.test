@@ -1,3 +1,46 @@
+.pageHeading h1 {
+    letter-spacing: 1px;
+    font-size:2.2rem;
+    color: var(--def-color);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+    margin: 0 auto 10px;
+}
+
+.pageHeading h1::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 70%; /* 👈 عرض البوردر */
+    height: 3px;
+    background-color: var(--def-color);
+}
+
+.pageHeading p {
+    font-size: 1.1rem;
+    color: rgba(0,0,0,.6);
+    padding: 5px 300px;
+    font-weight: 500;
+}
+
+@media (max-width: 767px) {
+    .pageHeading h1 {
+
+        font-size:1.8rem;
+
+    }
+
+    .pageHeading p {
+        font-size:1rem;
+        padding: 5px 20px;
+    }
+
+}
+
+
+
 .edit_logo img {
     max-height: 60px !important;
     width: auto;
@@ -186,10 +229,10 @@ html[lang="ar"] .breadcrumb_list ul li:last-child {
     display: none;
 }
 
-.ltn__blog-meta{
-    padding: 0!important;
-    margin: 0!important;
-    margin-bottom: 3px!important;
+.ltn__blog-meta {
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-bottom: 3px !important;
 }
 
 html[lang="ar"] .ltn__blog-meta li i {
@@ -198,7 +241,7 @@ html[lang="ar"] .ltn__blog-meta li i {
 }
 
 
-.news_title{
+.news_title {
     font-size: 17px;
     line-height: 1.6;
     min-height: 55px;
@@ -207,14 +250,15 @@ html[lang="ar"] .ltn__blog-meta li i {
 
 .lineCrop2 {
     display: -webkit-box;
-    -webkit-line-clamp: 2;       /* عدد السطور */
+    -webkit-line-clamp: 2; /* عدد السطور */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .lineCrop3 {
     display: -webkit-box;
-    -webkit-line-clamp: 3;       /* عدد السطور */
+    -webkit-line-clamp: 3; /* عدد السطور */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;

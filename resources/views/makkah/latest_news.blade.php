@@ -3,6 +3,9 @@
 @section('content')
   {!! Breadcrumbs::render('latest_news') !!}
 
+  <x-makkah.def.page-heading :meta="$meta"/>
+
+
   <div class="ltn__blog-area ltn__blog-item-3-normal mb-100">
     <div class="container">
       <div class="row">
