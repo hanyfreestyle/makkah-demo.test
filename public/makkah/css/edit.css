@@ -25,6 +25,20 @@
     font-weight: 500;
 }
 
+.breadcrumb_list ul {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    white-space: nowrap;
+    align-items: center;
+}
+
+.breadcrumb_list ul li {
+    flex-shrink: 0;
+}
+
+
+
 @media (max-width: 767px) {
     .pageHeading h1 {
 
