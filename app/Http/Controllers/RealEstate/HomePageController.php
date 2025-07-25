@@ -62,6 +62,7 @@ class HomePageController extends DefaultWebController {
       ->where('is_active', true)
 //      ->translatedIn()
 //      ->with('translation')
+//      ->whereNotNull('photo')
       ->orderBy('id', 'desc')
       ->paginate(9);
 
