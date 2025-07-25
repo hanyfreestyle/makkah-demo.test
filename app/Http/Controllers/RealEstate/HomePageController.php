@@ -54,20 +54,21 @@ class HomePageController extends DefaultWebController {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public function latestNews() {
+
     $meta = parent::getMeatByCatId('home');
     self::printSeoMeta($meta, 'web.index');
 
     $latestNews = LatestNews::query()
       ->where('is_active', true)
 //      ->translatedIn()
-      ->with('translation')
+//      ->with('translation')
       ->orderBy('id', 'desc')
       ->paginate(9);
 
 
-//    if ($posts->isEmpty()) {
-//      self::abortError404('Empty');
-//    }
+    if ($latestNews->isEmpty()) {
+      self::abortError404('Empty');
+    }
 
 
     return view('makkah.latest_news')->with([

@@ -83,7 +83,8 @@ if (!function_exists('textDir')) {
     return $icon;
   }
 }
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 if (!function_exists('localizationDirSame')) {
   function localizationDirSame(): string {
     if (thisCurrentLocale() == 'en') {
@@ -93,7 +94,8 @@ if (!function_exists('localizationDirSame')) {
     }
   }
 }
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 if (!function_exists('localizationDirDifferent')) {
   function localizationDirDifferent(): string {
     if (thisCurrentLocale() == 'en') {

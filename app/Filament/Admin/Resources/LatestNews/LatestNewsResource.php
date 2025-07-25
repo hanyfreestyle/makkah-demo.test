@@ -48,7 +48,6 @@ class LatestNewsResource extends Resource implements HasShieldPermissions {
     return [
       'index' => Pages\ListLatestNews::route('/'),
       'create' => Pages\CreateLatestNews::route('/create'),
-      'view' => Pages\ViewLatestNews::route('/{record}'),
       'edit' => Pages\EditLatestNews::route('/{record}/edit'),
     ];
   }
@@ -59,7 +58,6 @@ class LatestNewsResource extends Resource implements HasShieldPermissions {
 
     return $form->schema([
       Group::make()->schema([
-//                SlugInput::make('slug'),
         TranslatableTabs::make('translations')
           ->availableLocales(config('app.web_add_lang'))
           ->localeTabSchema(fn (TranslatableTab $tab) => [
