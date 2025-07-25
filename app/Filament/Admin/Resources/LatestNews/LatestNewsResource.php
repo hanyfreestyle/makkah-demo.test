@@ -113,7 +113,7 @@ class LatestNewsResource extends Resource implements HasShieldPermissions {
   public static function getPermissionPrefixes(): array {
     return static::filterPermissions(
       skipKeys: ['view'],
-      keepKeys: ['cat', 'sort', 'publish'],
+      keepKeys: [],
     );
   }
 
