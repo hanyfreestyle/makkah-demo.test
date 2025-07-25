@@ -30,7 +30,7 @@
                   <x-makkah.def.social-media type="header" :web-config="$webConfig"/>
                 </li>
                 <li>
-                  <div class="header-top-btn cta_number"><a href="tel:{{$webConfig->phone_call}}">{{$webConfig->phone_num}}</a></div>
+                  <div class="header-top-btn cta_number"><a href="{{ctaActionCall($webConfig)}}">{{$webConfig->phone_num}}</a></div>
                 </li>
               </ul>
             </div>

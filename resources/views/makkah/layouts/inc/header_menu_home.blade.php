@@ -64,7 +64,7 @@
                   </li>
                   <li><a href="{{route('web.latest_news')}}">{{__('web/def.menu.latest_news')}}</a></li>
                   <li><a href="{{route('web.contact_us')}}">{{__('web/def.menu.contact_us')}}</a></li>
-                  <li class="special-link cta_number"><a href="tel:{{$webConfig->phone_call}}">{{$webConfig->phone_num}} </a></li>
+                  <li class="special-link cta_number"><a href="{{ctaActionCall($webConfig)}}">{{$webConfig->phone_num}} </a></li>
                 </ul>
               </div>
             </nav>

@@ -29,8 +29,7 @@
         </div>
         <div class="col-lg-4">
           <aside class="sidebar-area blog-sidebar ltn__right-sidebar blogSideBar">
-            <x-makkah.widget.latest-news-feed/>
-
+            {{--            <x-makkah.widget.latest-news-feed/>--}}
             <x-makkah.widget.makkah/>
             <x-makkah.widget.form/>
 
@@ -44,6 +43,20 @@
                   <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
                 </ul>
               </div>
+
+              <div class="widget_cta_btn">
+
+{{--                <a href="tel:+123456789" class="btn call_us updateFont">--}}
+{{--                  <i class="fas fa-phone-alt"></i> {{__('default/lang.cta.call')}}--}}
+{{--                </a>--}}
+                <a href="https://wa.me/123456789" class="btn whatsapp updateFont">
+                  <i class="fab fa-whatsapp"></i>  {{__('default/lang.cta.whatsapp')}}
+                </a>
+                    <a href="https://wa.me/123456789" class="btn map updateFont">
+                      <i class="fas fa-map"></i>  {{__('default/lang.cta.map')}}
+                    </a>
+              </div>
+
             </div>
 
 

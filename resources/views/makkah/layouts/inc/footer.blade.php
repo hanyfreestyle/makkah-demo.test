@@ -40,7 +40,7 @@
 
                 <li>
                   <div class="footer-address-icon"><i class="fa-solid fa-square-phone"></i></div>
-                  <div class="footer-address-info footer_number"><p><a href="tel:{{$webConfig->phone_call}}">{{$webConfig->phone_num}}</a></p></div>
+                  <div class="footer-address-info footer_number"><p><a href="{{ctaActionCall($webConfig)}}">{{$webConfig->phone_num}}</a></p></div>
                 </li>
 
                 <li>
