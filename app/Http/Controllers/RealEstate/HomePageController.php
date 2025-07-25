@@ -62,7 +62,7 @@ class HomePageController extends DefaultWebController {
 //      ->translatedIn()
       ->with('translation')
       ->orderBy('id', 'desc')
-      ->paginate(3);
+      ->paginate(9);
 
 
 //    if ($posts->isEmpty()) {
