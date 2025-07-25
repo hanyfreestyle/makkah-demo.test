@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder {
     loadSeederFromFileWithLang('user_guide', true);
     loadSeederFromFileWithLang('user_guide_photo', true);
     loadSeederFromFileWithLang('latest_news', true);
+    loadSeederFromFileWithLang('makkah_project', true);
 
 //      $titles = [
 //        'ar' => [
@@ -80,6 +81,53 @@ class DatabaseSeeder extends Seeder {
 //          ],
 //        ]);
 //      }
+
+//    $titles = [
+//      'ar' => [
+//        'رواق الشيخ زايد',
+//        'مشروعات أكتوبر',
+//        'مشروعات الإسكندرية',
+//
+//      ],
+//      'en' => [
+//        'Rowaq Sheikh Zayed',
+//        'October Projects',
+//        'Alexandria Projects',
+//      ],
+//    ];
+//
+//    foreach (range(0, 2) as $i) {
+//      $newsId = DB::table('makkah_project')->insertGetId([
+//        'has_en' => true,
+//        'user_id' => null,
+//        'photo' => null,
+//        'photo_thumbnail' => null,
+//        'is_active' => true,
+//        'created_at' => now(),
+//        'updated_at' => now(),
+//      ]);
+//
+//      DB::table('makkah_project_lang')->insert([
+//        [
+//          'project_id' => $newsId,
+//          'locale' => 'ar',
+//          'slug' => Url_Slug($titles['ar'][$i]),
+//          'name' => $titles['ar'][$i],
+//          'des' => $titles['ar'][$i],
+//          'g_title' => $titles['ar'][$i],
+//          'g_des' => $titles['ar'][$i],
+//        ],
+//        [
+//          'project_id' => $newsId,
+//          'locale' => 'en',
+//          'slug' => Url_Slug($titles['en'][$i]),
+//          'name' => $titles['en'][$i],
+//          'des' => $titles['en'][$i],
+//          'g_title' => $titles['en'][$i],
+//          'g_des' => $titles['en'][$i],
+//        ],
+//      ]);
+//    }
 
   }
 }
