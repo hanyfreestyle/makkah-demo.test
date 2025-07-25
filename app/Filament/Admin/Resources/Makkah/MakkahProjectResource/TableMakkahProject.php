@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Filament\Admin\Resources\Makkah\MakkahProjectResource;
 
 use App\FilamentCustom\Table\CreatedDates;
@@ -17,53 +18,36 @@ use Filament\Tables\Columns\TextColumn\TextColumnSize;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
-trait TableMakkahProject{
+trait TableMakkahProject {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    public static function table(Table $table): Table {
-        return $table
-//            ->modifyQueryUsing(fn($query) => $query->withCount('posts'))
-            ->columns([
-                ImageColumnDef::make('photo')->width(60)->height(40),
-                TranslationTextColumn::make('name'),
-                IconColumn::make('is_active')->label(__('default/lang.columns.is_active'))->boolean(),
-//                TextColumn::make('posts_count')
-//                    ->label(__('posts_count'))
-//                    ->size(TextColumnSize::Large)
-//                    ->badge()
-//                    ->sortable(),
-                ...CreatedDates::make()->toggleable(true)->getColumns(),
-            ])->filters([
-                TrashedFilter::make(),
-            ])
-            ->persistFiltersInSession()
-            ->persistSearchInSession()
-            ->persistSortInSession()
-            ->actions([
-
-                EditAction::make()->hidden(fn($record) => $record->trashed()),
-                DeleteAction::make(),
-//                DeleteAction::make()
-//                    ->before(function ($record) {
-//                        if ($record->posts()->withoutTrashed()->count() > 0) {
-//                            Notification::make()
-//                                ->title(__('filament/Menu/product.category.err_delete.title'))
-//                                ->danger()
-//                                ->body(__('filament/Menu/product.category.err_delete.body'))
-//                                ->send();
-//                            return false;
-//                        }
-//                    }),
-                ForceDeleteAction::make(),
-                RestoreAction::make(),
-            ])
-            ->bulkActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ])
-            ->recordUrl(fn($record) => static::getTableRecordUrl($record))
-            ->defaultSort('id', 'desc');
-    }
+  public static function table(Table $table): Table {
+    return $table
+      ->columns([
+        TextColumn::make('id')->label('ID')->sortable()->searchable(),
+        ImageColumnDef::make('photo')->width(60)->height(40),
+        TranslationTextColumn::make('name'),
+        IconColumn::make('is_active')->label(__('default/lang.columns.is_active'))->boolean(),
+        ...CreatedDates::make()->toggleable(false)->getColumns(),
+      ])->filters([
+        TrashedFilter::make()->searchable(),
+      ])
+      ->persistFiltersInSession()
+      ->persistSearchInSession()
+      ->persistSortInSession()
+      ->actions([
+        EditAction::make()->hidden(fn ($record) => $record->trashed())->iconButton(),
+        DeleteAction::make()->iconButton(),
+        ForceDeleteAction::make(),
+        RestoreAction::make(),
+      ])
+      ->bulkActions([
+        BulkActionGroup::make([
+          DeleteBulkAction::make(),
+        ]),
+      ])
+      ->recordUrl(fn ($record) => static::getTableRecordUrl($record))
+      ->defaultSort('id', 'asc');
+  }
 }
 

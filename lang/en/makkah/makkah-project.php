@@ -1,13 +1,13 @@
 <?php
 return [
-    'navigation_group' => 'Manage Makkah Project',
-    'navigation_label' => 'Makkah Project',
-    'model_label' => 'Makkah Project',
-    'plural_model_label' => 'Makkah Projects',
-    'add_but_label' => 'Makkah Projects',
+  'navigation_group' => 'Manage Projects',
+  'navigation_label' => 'Manage Projects',
+  'model_label' => 'Projects',
+  'plural_model_label' => 'Projects',
+  'add_but_label' => 'Add Project',
 
-    'columns' => [
-        'has_en' => 'Has En',
-        'user_id' => 'User Id',
-    ],
+  'columns' => [
+    'has_en' => 'Has En',
+    'user_id' => 'User Id',
+  ],
 ];
