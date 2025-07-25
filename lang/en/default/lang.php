@@ -56,6 +56,10 @@ return [
     'map' => 'Map',
     'whatsapp' => 'Whatsapp',
     'massage' => 'Massage',
+    'form_name' => 'Your Name',
+    'form_phone' => 'Your Phone',
+    'form_btn_send' => 'Send',
+    'form_btn_send_request' => 'Send Request',
   ],
 
   'tab_list' => [

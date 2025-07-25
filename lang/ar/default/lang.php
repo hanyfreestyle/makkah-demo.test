@@ -58,6 +58,11 @@ return [
     'map' => 'الخريطة',
     'whatsapp' => 'واتساب',
     'massage' => 'رسالة',
+
+    'form_name' => 'الأسم ',
+    'form_phone' => 'رقم الهاتف',
+    'form_btn_send' => 'ارسال',
+    'form_btn_send_request' => 'ارسل الطلب',
   ],
   'filter' => [
     'from' => 'من',

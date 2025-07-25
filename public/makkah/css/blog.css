@@ -143,3 +143,29 @@ html[lang="en"] .widget_cta_btn .btn i {
 .btn:hover {
     opacity: 0.85;
 }
+
+
+
+.makkah_widget h5{
+    color: var(--def-color);
+    font-size: 22px;
+    margin-top: 10px;
+
+}
+
+.makkah_widget .title{
+    color: var(--def-color);
+    font-size: 22px;
+    margin-top: 15px;
+
+}
+
+
+.makkah_widget .about_us{
+
+    font-size: 1rem;
+    line-height: 1.5;
+
+
+}
+

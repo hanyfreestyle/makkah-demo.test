@@ -28,36 +28,12 @@
           </div>
         </div>
         <div class="col-lg-4">
+
           <aside class="sidebar-area blog-sidebar ltn__right-sidebar blogSideBar">
-            {{--            <x-makkah.widget.latest-news-feed/>--}}
+            <x-makkah.widget.latest-news-feed/>
             <x-makkah.widget.makkah/>
             <x-makkah.widget.form/>
-
-            <div class="widget ltn__social-media-widget">
-              <h4 class="ltn__widget-title ltn__widget-title-border-2">Follow us</h4>
-              <div class="ltn__social-media-2">
-                <ul>
-                  <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                  <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                  <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                  <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-                </ul>
-              </div>
-
-              <div class="widget_cta_btn">
-
-{{--                <a href="tel:+123456789" class="btn call_us updateFont">--}}
-{{--                  <i class="fas fa-phone-alt"></i> {{__('default/lang.cta.call')}}--}}
-{{--                </a>--}}
-                <a href="https://wa.me/123456789" class="btn whatsapp updateFont">
-                  <i class="fab fa-whatsapp"></i>  {{__('default/lang.cta.whatsapp')}}
-                </a>
-                    <a href="https://wa.me/123456789" class="btn map updateFont">
-                      <i class="fas fa-map"></i>  {{__('default/lang.cta.map')}}
-                    </a>
-              </div>
-
-            </div>
+            <x-makkah.widget.follow-us/>
 
 
           </aside>
