@@ -9,7 +9,7 @@
         <div class="col-lg-8">
           <div class="ltn__blog-details-wrap blogDetails_wrap">
             <div class="ltn__page-details-inner ltn__blog-details-inner">
-              <h1 class="ltn__blog-title">{{$news->name}}</h1>
+              <h1 class="ltn__blog-title title updateFont">{{$news->name}}</h1>
 
               <div class="ltn__blog-meta blog_meta_date">
                 <ul>
