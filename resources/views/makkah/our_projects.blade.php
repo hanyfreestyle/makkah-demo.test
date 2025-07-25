@@ -1,7 +1,7 @@
 @extends('makkah.layouts.app')
 
 @section('content')
-  {!! Breadcrumbs::render('latest_news') !!}
+  {!! Breadcrumbs::render('our_projects') !!}
 
   <x-makkah.def.page-heading :meta="$meta"/>
 
@@ -13,7 +13,7 @@
           <div class="col-lg-4 col-sm-6 col-12">
             <div class="ltn__blog-item ltn__blog-item-3">
               <div class="ltn__blog-img">
-                <a href="{{route('web.latest_news_view',$news->slug)}}">
+                <a href="{{route('web.project_view',$news->slug)}}">
                   <x-web.def.img :row="$news" def-photo="news_thumbnail" def-photo-row="photo" class=""/>
                 </a>
               </div>
@@ -24,7 +24,7 @@
                   </ul>
                 </div>
                 <h3 class="news_title">
-                  <a href="{{route('web.latest_news_view',$news->slug)}}" class="updateFont lineCrop2">
+                  <a href="{{route('web.project_view',$news->slug)}}" class="updateFont lineCrop2">
                     {{$news->name}}
                   </a>
                 </h3>
@@ -32,7 +32,7 @@
                   <div class="ltn__blog-meta">
                     <ul></ul>
                   </div>
-                  <div class="ltn__blog-btn"><a href="{{route('web.latest_news_view',$news->slug)}}">{{__('web/def.read_more')}}</a></div>
+                  <div class="ltn__blog-btn"><a href="{{route('web.project_view',$news->slug)}}">{{__('web/def.read_more')}}</a></div>
                 </div>
               </div>
             </div>
