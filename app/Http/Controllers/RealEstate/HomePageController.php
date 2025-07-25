@@ -56,8 +56,22 @@ class HomePageController extends DefaultWebController {
   public function latestNews() {
     $meta = parent::getMeatByCatId('home');
     self::printSeoMeta($meta, 'web.index');
-    return view('makkah.latest_news')->with([
 
+    $latestNews = LatestNews::query()
+      ->where('is_active', true)
+//      ->translatedIn()
+      ->with('translation')
+      ->orderBy('id', 'desc')
+      ->paginate(3);
+
+
+//    if ($posts->isEmpty()) {
+//      self::abortError404('Empty');
+//    }
+
+
+    return view('makkah.latest_news')->with([
+      'latestNews' => $latestNews,
     ]);
   }
 
