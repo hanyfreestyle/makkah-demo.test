@@ -14,11 +14,10 @@ use App\Models\LatestNews\LatestNews;
 use App\Helpers\FilamentAstrotomic\Forms\Components\TranslatableTabs;
 use App\Helpers\FilamentAstrotomic\TranslatableTab;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use Filament\Forms\Components\Group;
 use Filament\Resources\Resource;
 use Filament\Forms\Form;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Toggle;
+use Filament\Forms;
+
 
 class LatestNewsResource extends Resource implements HasShieldPermissions {
   use Translatable;
@@ -26,21 +25,10 @@ class LatestNewsResource extends Resource implements HasShieldPermissions {
   use TableLatestNews;
 
   protected static ?string $model = LatestNews::class;
-  protected static ?string $navigationIcon = 'heroicon-s-rectangle-group';
+  protected static ?string $navigationIcon = 'fas-blog';
   protected static ?string $translationTable = 'latest_news_lang';
   protected static ?string $uploadDirectory = 'latest-news';
 
-//    public static bool $showCategoryActions = true;
-//    public static string $relatedResourceClass = BlogCategoryResource::class;
-//    public static string $modelPolicy = LatestNews::class;
-
-//    public static function canViewAny(): bool {
-//        return Gate::forUser(auth()->user())->allows('viewAnyCategory', LatestNews::class) ;
-//    }
-//
-//    public static function shouldRegisterNavigation(): bool {
-//        return false;
-//    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -57,7 +45,7 @@ class LatestNewsResource extends Resource implements HasShieldPermissions {
     $filterId = getModuleConfigKey("LatestNews_filter_photo", 0);
 
     return $form->schema([
-      Group::make()->schema([
+      Forms\Components\Group::make()->schema([
         TranslatableTabs::make('translations')
           ->availableLocales(config('app.web_add_lang'))
           ->localeTabSchema(fn (TranslatableTab $tab) => [
@@ -65,20 +53,20 @@ class LatestNewsResource extends Resource implements HasShieldPermissions {
               ->setDes(true)
               ->setEditor(true)
               ->setSeoRequired(false)
-              ->getColumns($tab, 'latest_news_lang'),
+              ->getColumns($tab, static::$translationTable),
           ]),
       ])->columnSpan(2),
 
-      Group::make()->schema([
-        Section::make()->schema([
+      Forms\Components\Group::make()->schema([
+        Forms\Components\Section::make()->schema([
           ...WebpUploadWithFilter::make()
             ->setFilterId($filterId)
             ->setUploadDirectory(static::$uploadDirectory)
             ->setRequiredUpload(false)
-            ->setCanChangeFilter(true)
+            ->setCanChangeFilter(false)
             ->getColumns(),
 
-          Toggle::make('is_active')
+          Forms\Components\Toggle::make('is_active')
             ->label(__('default/lang.columns.is_active'))
             ->default(true)
             ->required(),
@@ -95,18 +83,21 @@ class LatestNewsResource extends Resource implements HasShieldPermissions {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//    public static function getNavigationGroup(): ?string {
-//        return __('latest-news/latest-news.navigation_group');
-//    }
-//    public static function getNavigationLabel(): string {
-//        return __('latest-news/latest-news.navigation_label');
-//    }
-//    public static function getModelLabel(): string {
-//        return __('latest-news/latest-news.model_label');
-//    }
-//    public static function getPluralModelLabel(): string {
-//        return __('latest-news/latest-news.plural_model_label');
-//    }
+//  public static function getNavigationGroup(): ?string {
+//    return __('latest-news/latest-news.navigation_group');
+//  }
+
+  public static function getNavigationLabel(): string {
+    return __('latest-news/latest-news.navigation_label');
+  }
+
+  public static function getModelLabel(): string {
+    return __('latest-news/latest-news.model_label');
+  }
+
+  public static function getPluralModelLabel(): string {
+    return __('latest-news/latest-news.plural_model_label');
+  }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
