@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Models\Makkah;
 
+use App\Traits\Admin\Model\ClearsCacheOnChange;
 use App\Traits\Admin\Model\WithModelEvents;
 use App\Traits\Admin\Query\TranslatableScopes;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
@@ -12,30 +14,34 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MakkahProject extends Model implements TranslatableContract {
-    use Translatable;
-    use TranslatableScopes;
-    use WithModelEvents;
-    use SoftDeletes;
+  use Translatable;
+  use TranslatableScopes;
+  use WithModelEvents;
+  use ClearsCacheOnChange;
+  use SoftDeletes;
 
-    protected $table = "makkah_project";
-    protected $primaryKey = 'id';
-    protected $translationForeignKey = 'project_id';
-    public $translationModel = MakkahProjectTranslation::class; 
-public array $translatedAttributes = ['project_id', 'locale', 'slug', 'name', 'des', 'g_title', 'g_des'];
-    protected $fillable = ['has_en', 'user_id', 'photo', 'photo_thumbnail', 'is_active'];
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    protected static function booted() {
-        static::bootWithModelEvents();
-    }
+  protected $table = "makkah_project";
+  protected $primaryKey = 'id';
+  protected $translationForeignKey = 'project_id';
+  public $translationModel = MakkahProjectTranslation::class;
+  public array $translatedAttributes = ['project_id', 'locale', 'slug', 'name', 'des', 'g_title', 'g_des'];
+  protected $fillable = ['has_en', 'user_id', 'photo', 'photo_thumbnail', 'is_active'];
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    public static function getCacheKey(): string {
-        return "MakkahProject_CashList_";
-    }
+//  protected static function booted() {
+//    static::bootWithModelEvents();
+//  }
 
-    
+  protected static function booted() {
+    self::bootClearsCacheOnChange();
+  }
+
+  public function cacheKeys(): array {
+    return [
+      'ProjectMenu_CashList_',
+    ];
+  }
+
 
 }

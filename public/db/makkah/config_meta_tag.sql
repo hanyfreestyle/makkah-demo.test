@@ -9,6 +9,6 @@ INSERT INTO `config_meta_tag` (`id`, `cat_id`, `photo`, `photo_thumbnail`, `is_a
 ('4', 'err_404', NULL, NULL, '1', '2024-01-26 05:35:18', '2024-01-26 05:35:18', NULL),
 ('5', 'contact_us', NULL, NULL, '1', '2025-01-05 20:59:26', '2025-01-05 20:59:26', NULL),
 ('6', 'latest_news', NULL, NULL, '1', '2025-01-13 04:32:00', '2025-07-25 16:16:10', NULL),
-('7', 'subject_list', NULL, NULL, '1', '2025-01-14 00:48:24', '2025-01-14 00:48:24', NULL),
+('7', 'our_project', NULL, NULL, '1', '2025-01-14 00:48:24', '2025-07-25 19:09:03', NULL),
 ('8', 'clasess_list', NULL, NULL, '1', '2025-01-14 01:37:33', '2025-01-14 01:37:33', NULL);
 COMMIT;

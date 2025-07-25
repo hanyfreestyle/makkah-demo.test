@@ -28,42 +28,44 @@ Breadcrumbs::for('latest_news_view', function (BreadcrumbTrail $trail, $news) {
 });
 
 
-Breadcrumbs::for('developer_list', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('our_projects', function (BreadcrumbTrail $trail) {
   $trail->parent('home');
-  $trail->push(__('webLang/header.menu_developers'), route('page_developers'));
+  $trail->push(__('web/def.menu.our_project'), route('web.our_projects'));
+});
+
+Breadcrumbs::for('project_view', function (BreadcrumbTrail $trail, $project) {
+  $trail->parent('our_projects');
+  $trail->push($project->name, route('web.project_view', $project->slug));
 });
 
 
-Breadcrumbs::for('blogCatList', function (BreadcrumbTrail $trail, $Category) {
-  $trail->parent('blog');
-  $trail->push($Category->name, route('page_blogCatList', $Category->slug));
-});
 
-Breadcrumbs::for('post_view', function (BreadcrumbTrail $trail, $Category, $Post) {
-  $trail->parent('blog');
-  $trail->push($Category->name, route('page_blogCatList', $Category->slug));
-  $trail->push($Post->name, route('page_blogCatList', $Post->slug));
-});
-
-Breadcrumbs::for('CompoundsList', function (BreadcrumbTrail $trail) {
-  $trail->parent('home');
-  $trail->push(__('webLang/header.menu_compounds'), route('page_compounds'));
-});
-
-Breadcrumbs::for('LocationView', function (BreadcrumbTrail $trail, $trees) {
-  $trail->parent('CompoundsList');
-  foreach ($trees as $tree) {
-    $trail->push($tree->name, route('page_locationView', $tree->slug));
-  }
-});
-
-Breadcrumbs::for('ProjectView', function (BreadcrumbTrail $trail, $trees, $unit) {
-  $trail->parent('CompoundsList');
-  foreach ($trees as $tree) {
-    $trail->push($tree->name, route('page_locationView', $tree->slug));
-  }
-  $trail->push($unit->name ?? '', route('page_ListView', $unit->slug));
-});
+//
+//Breadcrumbs::for('post_view', function (BreadcrumbTrail $trail, $Category, $Post) {
+//  $trail->parent('blog');
+//  $trail->push($Category->name, route('page_blogCatList', $Category->slug));
+//  $trail->push($Post->name, route('page_blogCatList', $Post->slug));
+//});
+//
+//Breadcrumbs::for('CompoundsList', function (BreadcrumbTrail $trail) {
+//  $trail->parent('home');
+//  $trail->push(__('webLang/header.menu_compounds'), route('page_compounds'));
+//});
+//
+//Breadcrumbs::for('LocationView', function (BreadcrumbTrail $trail, $trees) {
+//  $trail->parent('CompoundsList');
+//  foreach ($trees as $tree) {
+//    $trail->push($tree->name, route('page_locationView', $tree->slug));
+//  }
+//});
+//
+//Breadcrumbs::for('ProjectView', function (BreadcrumbTrail $trail, $trees, $unit) {
+//  $trail->parent('CompoundsList');
+//  foreach ($trees as $tree) {
+//    $trail->push($tree->name, route('page_locationView', $tree->slug));
+//  }
+//  $trail->push($unit->name ?? '', route('page_ListView', $unit->slug));
+//});
 
 
 

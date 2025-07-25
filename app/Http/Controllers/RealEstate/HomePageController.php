@@ -4,6 +4,7 @@ namespace App\Http\Controllers\RealEstate;
 
 use App\Http\Controllers\DefaultWebController;
 use App\Models\LatestNews\LatestNews;
+use App\Models\Makkah\MakkahProject;
 use Illuminate\Support\Facades\View;
 
 class HomePageController extends DefaultWebController {
@@ -75,6 +76,7 @@ class HomePageController extends DefaultWebController {
     ]);
   }
 
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public function latestNewsView($slug) {
@@ -91,6 +93,49 @@ class HomePageController extends DefaultWebController {
       'pageView' => $pageView,
     ]);
   }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  public function ourProjects() {
+
+    $meta = parent::getMeatByCatId('our_project');
+    self::printSeoMeta($meta, 'web.our_projects');
+
+    $ourProjects = MakkahProject::query()
+      ->where('is_active', true)
+//      ->translatedIn()
+      ->orderBy('id', 'asc')
+      ->paginate(9);
+
+
+    if ($ourProjects->isEmpty()) {
+      self::abortError404('Empty');
+    }
+
+    return view('makkah.our_projects')->with([
+      'ourProjects' => $ourProjects,
+      'meta' => $meta,
+    ]);
+  }
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  public function projectView($slug) {
+    $meta = parent::getMeatByCatId('home');
+    $slug = Url_Slug($slug);
+    $project = MakkahProject::query()
+      ->whereTranslation('slug', $slug)
+      ->firstOrFail();
+    $pageView['slug'] = route('web.project_view', $project->translate(webChangeLocale())->slug);
+
+    self::printSeoMeta($meta, 'web.index');
+    return view('makkah.projects_view')->with([
+      'project' => $project,
+      'pageView' => $pageView,
+    ]);
+  }
+
+
 
 
 }

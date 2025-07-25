@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\RealEstate;
 
+use App\Models\Makkah\MakkahProject;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
@@ -24,6 +25,10 @@ trait __LoadConstructData {
     $this->pageView = $pageView;
     View::share('pageView', $pageView);
 
+    $projectMenu = self::cashProjectMenu($this->is_cash);
+    View::share('projectMenu', $projectMenu);
+
+
 //    $locationsList = self::CashLocationList($this->is_cash);
 //    View::share('locationsList', $locationsList);
 //
@@ -42,8 +47,7 @@ trait __LoadConstructData {
 //    $blogCategoryList = self::CashBlogCategoryList($this->is_cash);
 //    View::share('blogCategoryList', $blogCategoryList);
 //
-//    $locationsMenu = self::cashLocationMenu($this->is_cash);
-//    View::share('locationsMenu', $locationsMenu);
+
 //
 //    $developersMenu = self::cashDeveloperMenu($this->is_cash);
 //    View::share('developersMenu', $developersMenu);
@@ -62,207 +66,207 @@ trait __LoadConstructData {
 //        View::share('pagesLinkMenu', $pagesLinkMenu);
   }
 
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  static function CashLocationList($cash = true) {
+  static function cashProjectMenu($cash = true) {
     if ($cash) {
-      $location = Cache::remember("Location_CashList_" . app()->getLocale(), cashDay(1), function () {
-        return Location::query()->with('translation')->get();
-      });
-    } else {
-      $location = Location::query()->with('translation')->get();
-    }
-    return $location;
-  }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  static function CashProjectTypeList($cash = true) {
-    if ($cash) {
-      $projectTypeList = Cache::remember("DataProjectType_CashList_" . app()->getLocale(), cashDay(1), function () {
-        return DataProjectType::query()->with('translation')->get();
-      });
-    } else {
-      $projectTypeList = DataProjectType::query()->with('translation')->get();
-    }
-    return $projectTypeList;
-  }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  static function CashProjectStatusList($cash = true) {
-    if ($cash) {
-      $projectTypeList = Cache::remember("DataProjectStatus_CashList_" . app()->getLocale(), cashDay(1), function () {
-        return DataProjectStatus::query()->with('translation')->get();
-      });
-    } else {
-      $projectTypeList = DataProjectStatus::query()->with('translation')->get();
-    }
-    return $projectTypeList;
-  }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  static function CashPropertyTypeList($cash = true) {
-    if ($cash) {
-      $projectTypeList = Cache::remember("DataUnitType_CashList_" . app()->getLocale(), cashDay(1), function () {
-        return DataUnitType::query()->with('translation')->get();
-      });
-    } else {
-      $projectTypeList = DataUnitType::query()->with('translation')->get();
-    }
-    return $projectTypeList;
-  }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  static function CashBlogCategoryList($cash = true) {
-    if ($cash) {
-      $blogCategoryList = Cache::remember("DataBlogCategory_CashList_" . app()->getLocale(), cashDay(1), function () {
-        return BlogCategory::query()->where('is_active', true)->with('translation')->get();
-      });
-    } else {
-      $blogCategoryList = BlogCategory::query()->where('is_active', true)->with('translation')->get();
-    }
-    return $blogCategoryList;
-  }
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  static function CashProjectNameList($cash = true) {
-    if ($cash) {
-      $projectNameList = Cache::remember("DataProjectName_CashList_" . app()->getLocale(), cashDay(1), function () {
-        return self::getTranslatedProjectNameQuery("listings", "listing_translations", "listing_id");
-      });
-    } else {
-      $projectNameList = self::getTranslatedProjectNameQuery("listings", "listing_translations", "listing_id");
-    }
-    return $projectNameList;
-  }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  public static function getTranslatedProjectNameQuery($TableName, $TableTranslations, $ForeignKey) {
-    return DB::table("$TableName")
-      ->select("$TableName.id", "$TableTranslations.name as name")
-      ->where('listing_type', "Project")
-      ->where('is_published', true)
-      ->join("$TableTranslations", function ($join) use ($TableName, $TableTranslations, $ForeignKey) {
-        $join->on("$TableTranslations.$ForeignKey", '=', "$TableName.id")
-          ->where("$TableTranslations.locale", '=', app()->getLocale());
-      })
-      ->orderBy("$TableName.id")
-      ->pluck('name', 'id');
-  }
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  static function cashLocationMenu($cash = true) {
-    if ($cash) {
-      $cashLocationMenu = Cache::remember("LocationMenu_CashList_" . app()->getLocale(), cashDay(1), function () {
-        return Location::query()
+      $cashProjectMenu = Cache::remember("ProjectMenu_CashList_" . app()->getLocale(), cashDay(1), function () {
+        return MakkahProject::query()
           ->where('is_active', true)
-          ->with('translations')
-          ->withCount('projects')
-          ->orderBy('projects_count', 'desc')
+          ->orderBy('id', 'asc')
           ->take(8)
           ->get();
       });
     } else {
-      $cashLocationMenu = Location::query()
+      $cashProjectMenu = MakkahProject::query()
         ->where('is_active', true)
-        ->with('translations')
-        ->withCount('projects')
-        ->orderBy('projects_count', 'desc')
+        ->orderBy('id', 'asc')
         ->take(8)
         ->get();
     }
-    return $cashLocationMenu;
+    return $cashProjectMenu;
   }
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  static function cashDeveloperMenu($cash = true) {
-    if ($cash) {
-      $developer = Cache::remember("Developer_CashList_" . app()->getLocale(), cashDay(1), function () {
-        return Developer::query()
-          ->where('id', '!=', 365)
-          ->where('is_active', true)
-          ->with('translation')
-          ->withCount('units')
-          ->orderBy('units_count', 'desc')
-          ->get()
-          ->map(function ($developer) {
-            return [
-              'id' => $developer->id,
-              'name' => $developer->name,
-              'slug' => $developer->slug,
-              'projects_count' => $developer->units_count,
-            ];
-          });
-      });
-    } else {
-      $developer = Developer::query()
-        ->where('id', '!=', 365)
-        ->where('is_active', true)
-        ->with('translation')
-        ->withCount('units')
-        ->orderBy('units_count', 'desc')
-        ->get()
-        ->map(function ($developer) {
-          return [
-            'id' => $developer->id,
-            'name' => $developer->name,
-            'slug' => $developer->slug,
-            'projects_count' => $developer->units_count,
-          ];
-        });
-    }
-    return $developer;
-  }
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  static function cashAmenitiesList($cash = true) {
-    if ($cash) {
-      $location = Cache::remember("Amenity_CashList_" . app()->getLocale(), cashDay(1), function () {
-        return Amenity::query()->with('translation')->get();
-      });
-    } else {
-      $location = Amenity::query()->with('translation')->get();
-    }
-    return $location;
-  }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  static function cashListingPageMenu($cash = true) {
-    $ids = [23, 24, 25, 35, 36, 250, 251, 252];
-    if ($cash) {
-      $listingPageMenuMenu = Cache::remember("ListingPage_CashList_" . app()->getLocale(), cashDay(1), function () use ($ids) {
-        return ListingsPage::query()
-          ->where('is_active', true)
-          ->where('location_id', '!=', null)
-          ->whereIn('id', $ids)
-          ->translatedIn()
-          ->with('location')
-          ->with('project')
-          ->get();
-      });
-    } else {
-      $listingPageMenuMenu = ListingsPage::query()
-        ->where('is_active', true)
-        ->where('location_id', '!=', null)
-        ->whereIn('id', $ids)
-        ->translatedIn()
-        ->with('location')
-        ->with('project')
-        ->get();
-    }
-    return $listingPageMenuMenu;
-  }
+//
+//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//  static function CashLocationList($cash = true) {
+//    if ($cash) {
+//      $location = Cache::remember("Location_CashList_" . app()->getLocale(), cashDay(1), function () {
+//        return Location::query()->with('translation')->get();
+//      });
+//    } else {
+//      $location = Location::query()->with('translation')->get();
+//    }
+//    return $location;
+//  }
+//
+//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//  static function CashProjectTypeList($cash = true) {
+//    if ($cash) {
+//      $projectTypeList = Cache::remember("DataProjectType_CashList_" . app()->getLocale(), cashDay(1), function () {
+//        return DataProjectType::query()->with('translation')->get();
+//      });
+//    } else {
+//      $projectTypeList = DataProjectType::query()->with('translation')->get();
+//    }
+//    return $projectTypeList;
+//  }
+//
+//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//  static function CashProjectStatusList($cash = true) {
+//    if ($cash) {
+//      $projectTypeList = Cache::remember("DataProjectStatus_CashList_" . app()->getLocale(), cashDay(1), function () {
+//        return DataProjectStatus::query()->with('translation')->get();
+//      });
+//    } else {
+//      $projectTypeList = DataProjectStatus::query()->with('translation')->get();
+//    }
+//    return $projectTypeList;
+//  }
+//
+//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//  static function CashPropertyTypeList($cash = true) {
+//    if ($cash) {
+//      $projectTypeList = Cache::remember("DataUnitType_CashList_" . app()->getLocale(), cashDay(1), function () {
+//        return DataUnitType::query()->with('translation')->get();
+//      });
+//    } else {
+//      $projectTypeList = DataUnitType::query()->with('translation')->get();
+//    }
+//    return $projectTypeList;
+//  }
+//
+//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//  static function CashBlogCategoryList($cash = true) {
+//    if ($cash) {
+//      $blogCategoryList = Cache::remember("DataBlogCategory_CashList_" . app()->getLocale(), cashDay(1), function () {
+//        return BlogCategory::query()->where('is_active', true)->with('translation')->get();
+//      });
+//    } else {
+//      $blogCategoryList = BlogCategory::query()->where('is_active', true)->with('translation')->get();
+//    }
+//    return $blogCategoryList;
+//  }
+//
+//
+//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//  static function CashProjectNameList($cash = true) {
+//    if ($cash) {
+//      $projectNameList = Cache::remember("DataProjectName_CashList_" . app()->getLocale(), cashDay(1), function () {
+//        return self::getTranslatedProjectNameQuery("listings", "listing_translations", "listing_id");
+//      });
+//    } else {
+//      $projectNameList = self::getTranslatedProjectNameQuery("listings", "listing_translations", "listing_id");
+//    }
+//    return $projectNameList;
+//  }
+//
+//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//  public static function getTranslatedProjectNameQuery($TableName, $TableTranslations, $ForeignKey) {
+//    return DB::table("$TableName")
+//      ->select("$TableName.id", "$TableTranslations.name as name")
+//      ->where('listing_type', "Project")
+//      ->where('is_published', true)
+//      ->join("$TableTranslations", function ($join) use ($TableName, $TableTranslations, $ForeignKey) {
+//        $join->on("$TableTranslations.$ForeignKey", '=', "$TableName.id")
+//          ->where("$TableTranslations.locale", '=', app()->getLocale());
+//      })
+//      ->orderBy("$TableName.id")
+//      ->pluck('name', 'id');
+//  }
+//
+//
+//
+//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//  static function cashDeveloperMenu($cash = true) {
+//    if ($cash) {
+//      $developer = Cache::remember("Developer_CashList_" . app()->getLocale(), cashDay(1), function () {
+//        return Developer::query()
+//          ->where('id', '!=', 365)
+//          ->where('is_active', true)
+//          ->with('translation')
+//          ->withCount('units')
+//          ->orderBy('units_count', 'desc')
+//          ->get()
+//          ->map(function ($developer) {
+//            return [
+//              'id' => $developer->id,
+//              'name' => $developer->name,
+//              'slug' => $developer->slug,
+//              'projects_count' => $developer->units_count,
+//            ];
+//          });
+//      });
+//    } else {
+//      $developer = Developer::query()
+//        ->where('id', '!=', 365)
+//        ->where('is_active', true)
+//        ->with('translation')
+//        ->withCount('units')
+//        ->orderBy('units_count', 'desc')
+//        ->get()
+//        ->map(function ($developer) {
+//          return [
+//            'id' => $developer->id,
+//            'name' => $developer->name,
+//            'slug' => $developer->slug,
+//            'projects_count' => $developer->units_count,
+//          ];
+//        });
+//    }
+//    return $developer;
+//  }
+//
+//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//  static function cashAmenitiesList($cash = true) {
+//    if ($cash) {
+//      $location = Cache::remember("Amenity_CashList_" . app()->getLocale(), cashDay(1), function () {
+//        return Amenity::query()->with('translation')->get();
+//      });
+//    } else {
+//      $location = Amenity::query()->with('translation')->get();
+//    }
+//    return $location;
+//  }
+//
+//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//  static function cashListingPageMenu($cash = true) {
+//    $ids = [23, 24, 25, 35, 36, 250, 251, 252];
+//    if ($cash) {
+//      $listingPageMenuMenu = Cache::remember("ListingPage_CashList_" . app()->getLocale(), cashDay(1), function () use ($ids) {
+//        return ListingsPage::query()
+//          ->where('is_active', true)
+//          ->where('location_id', '!=', null)
+//          ->whereIn('id', $ids)
+//          ->translatedIn()
+//          ->with('location')
+//          ->with('project')
+//          ->get();
+//      });
+//    } else {
+//      $listingPageMenuMenu = ListingsPage::query()
+//        ->where('is_active', true)
+//        ->where('location_id', '!=', null)
+//        ->whereIn('id', $ids)
+//        ->translatedIn()
+//        ->with('location')
+//        ->with('project')
+//        ->get();
+//    }
+//    return $listingPageMenuMenu;
+//  }
 
 
 }

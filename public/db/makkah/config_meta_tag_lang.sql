@@ -15,8 +15,8 @@ INSERT INTO `config_meta_tag_lang` (`id`, `meta_tag_id`, `locale`, `name`, `des`
 ('10', '5', 'en', 'Contact Us', NULL, 'Contact Us | [WebSiteName]', 'Contact Us | [WebSiteName]'),
 ('11', '6', 'ar', 'اخر الاخبار', 'اختر الخطة التي تناسب احتياجاتك التعليمية واستفد من مجموعة متنوعة من الخدمات المصممة لتحسين تجربة التعلم وتطوير مهاراتك بسهولة وفعالية.', 'اخر الاخبار  | [WebSiteName]', 'تابع أحدث أخبار الاستثمار العقاري في مصر، مع تغطية حصرية للمشروعات الجديدة، وتحليلات السوق العقاري في التجمع الخامس ومدينة 6 أكتوبر.'),
 ('12', '6', 'en', 'Latest News', 'Choose the plan that suits your educational needs and enjoy a variety of services designed to enhance your learning experience and develop your skills efficiently', 'Latest News | [WebSiteName]', 'Stay updated with the latest real estate news in Egypt, including exclusive coverage of new projects and market analysis in Fifth Settlement and 6th October.'),
-('13', '7', 'ar', 'المواد الدراسية', 'نقدم مواد دراسية أساسية مصممة بعناية لتعزيز المعرفة الأكاديمية وبناء أساس قوي للتعلم. نركز على توفير تجربة', 'المواد الدراسية  | [WebSiteName]', 'المواد الدراسية  | [WebSiteName]'),
-('14', '7', 'en', 'Subjects', 'We provide carefully designed core subjects to enhance academic knowledge and build a strong learning', 'Subjects | [WebSiteName]', 'Subjects | [WebSiteName]'),
+('13', '7', 'ar', 'المشاريع', 'نقدم مواد دراسية أساسية مصممة بعناية لتعزيز المعرفة الأكاديمية وبناء أساس قوي للتعلم. نركز على توفير تجربة', 'المشاريع  | [WebSiteName]', 'المشاريع'),
+('14', '7', 'en', 'Our Projects', 'We provide carefully designed core subjects to enhance academic knowledge and build a strong learning', 'Our Projects| [WebSiteName]', 'Our Projects'),
 ('15', '8', 'ar', 'الفصول الدراسية', NULL, 'الفصول الدراسية', 'الفصول الدراسية'),
 ('16', '8', 'en', 'Classes', NULL, 'Classes', 'Classes');
 COMMIT;

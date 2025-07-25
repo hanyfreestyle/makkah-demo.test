@@ -63,9 +63,9 @@
             <h4 class="footer-title">{{__('web/def.footer.our_project')}}</h4>
             <div class="footer-menu">
               <ul>
-                <li><a href="#">Rowaq Sheikh Zayed</a></li>
-                <li><a href="#">October Projects</a></li>
-                <li><a href="#">Alexandria Projects</a></li>
+                @foreach($projectMenu as $project)
+                  <li><a href="{{route('web.project_view',$project->slug)}}">{{$project->name}}</a></li>
+                @endforeach
               </ul>
             </div>
           </div>
