@@ -3,46 +3,45 @@
 namespace App\Filament\Admin\Resources\Builder;
 
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
-use App\FilamentCustom\Table\FilterWithArchive;
 use Astrotomic\Translatable\Translatable;
-use App\Filament\Admin\Resources\Builder\BuilderPageResource\Pages;
+use App\Filament\Admin\Resources\Builder\BuilderBlocksResource\Pages;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Admin\Helper\SmartResourceTrait;
-use App\Models\Builder\BuilderPage;
+use App\Models\Builder\BuilderBlocks;
 use Filament\Resources\Resource;
 use Filament\Forms\Form;
 use Filament\Tables;
 use Filament\Forms;
 
-class BuilderPageResource extends Resource {
+class BuilderBlocksResource extends Resource {
   use Translatable;
   use SmartResourceTrait;
 
-  protected static ?string $model = BuilderPage::class;
+  protected static ?string $model = BuilderBlocks::class;
   protected static ?string $navigationIcon = 'heroicon-s-rectangle-group';
-  protected static ?string $uploadDirectory = 'BuilderPageResource';
+  protected static ?string $uploadDirectory = 'BuilderBlocksResource';
 
-//    public static bool $showCategoryActions = true;
-//    public static string $relatedResourceClass = BlogCategoryResource::class;
-//    public static string $modelPolicy = BuilderPage::class;
+//  public static bool $showCategoryActions = true;
+//  public static string $relatedResourceClass = BlogCategoryResource::class;
+//  public static string $modelPolicy = BuilderPage::class;
 //
-//    public static function canViewAny(): bool {
-//        return Gate::forUser(auth()->user())->allows('viewAnyCategory', BuilderPage::class) ;
-//    }
+//  public static function canViewAny(): bool {
+//    return Gate::forUser(auth()->user())->allows('viewAnyCategory', BuilderPage::class) ;
+//  }
 //
-//    public static function shouldRegisterNavigation(): bool {
-//        return false;
-//    }
+//  public static function shouldRegisterNavigation(): bool {
+//    return false;
+//  }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public static function getPages(): array {
     return [
-      'index' => Pages\ListBuilderPages::route('/'),
-      'create' => Pages\CreateBuilderPage::route('/create'),
-      'edit' => Pages\EditBuilderPage::route('/{record}/edit'),
+      'index' => Pages\ListBuilderBlocks::route('/'),
+      'create' => Pages\CreateBuilderBlocks::route('/create'),
+      'edit' => Pages\EditBuilderBlocks::route('/{record}/edit'),
     ];
   }
 
@@ -111,16 +110,16 @@ class BuilderPageResource extends Resource {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 //    public static function getNavigationGroup(): ?string {
-//        return __('builder/builder-page.navigation_group');
+//        return __('builder/builder-blocks.navigation_group');
 //    }
 //    public static function getNavigationLabel(): string {
-//        return __('builder/builder-page.navigation_label');
+//        return __('builder/builder-blocks.navigation_label');
 //    }
 //    public static function getModelLabel(): string {
-//        return __('builder/builder-page.model_label');
+//        return __('builder/builder-blocks.model_label');
 //    }
 //    public static function getPluralModelLabel(): string {
-//        return __('builder/builder-page.plural_model_label');
+//        return __('builder/builder-blocks.plural_model_label');
 //    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -137,4 +136,5 @@ class BuilderPageResource extends Resource {
   public static function getRecordTitle(?Model $record): Htmlable|string|null {
     return getTranslatedValue($record->name) ?? null;
   }
+
 }
