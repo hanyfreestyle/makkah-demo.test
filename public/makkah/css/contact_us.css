@@ -1,0 +1,49 @@
+.contactPage .title-2 {
+    margin-bottom: 30px;
+    font-size: 22px;
+    font-weight: 600;
+    border-left: 4px solid;
+    border-color: var(--def-color);
+    padding-left: 10px;
+    color: var(--def-color);
+
+}
+
+html[lang="ar"] .contactPage .title-2 {
+    border-left: 0;
+    border-right: 4px solid;
+    padding-left: 0;
+    padding-right: 10px;
+}
+
+.contactPage .ltn__widget-title-border-2 {
+    border-left: 3px solid;
+    color: var(--def-color);
+    border-color: var(--def-color);
+    padding-left: 10px;
+    position: relative;
+
+}
+
+html[lang="ar"] .ltn__widget-title-border-2 {
+    border-left: 0;
+    border-right: 4px solid;
+    padding-left: 0;
+    padding-right: 10px;
+}
+
+
+.contactAddress .footer-address-icon i{
+    color: var(--def-color)!important;
+}
+
+.contactAddress ul li .footer-address-info p a {
+    color: rgba(0,0,0,.7)!important;
+}
+.contactPage {
+
+}
+
+
+
+
