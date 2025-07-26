@@ -30,10 +30,8 @@ INSERT INTO `makkah_project_lang` (`id`, `project_id`, `locale`, `slug`, `name`,
 	<li><strong>تلال أكتوبر</strong> &ndash; مشروع فاخر يدمج الحداثة بالطبيعة، يضم فلل وتاون هاوس.</li>
 	<li><strong>ذا كورت يارد</strong> &ndash; مشروع سكني شبابي بالقرب من مدينة الإنتاج الإعلامي، بأسعار تنافسية.</li>
 </ul>
-
-<p>تركز جميع مشروعاتنا على تقديم تجربة معيشية متكاملة تشمل مناطق خضراء، خدمات أمنية متقدمة، مراكز تجارية، مسارات مشي، ومساحات ترفيهية. نحن لا نبني عقارات فقط، بل نخلق مجتمعات تنبض بالحياة.</p>
 ', 'مشروعات أكتوبر', 'مشروعات أكتوبر'),
-('4', '2', 'en', 'october-projects', 'October Projects', '<p><strong>6th of October City, Egypt</strong> &ndash; With years of experience in real estate development, our company continues to deliver outstanding projects in one of Egypt&rsquo;s fastest-growing cities. Our October developments offer more than just residential units &mdash; they provide a complete lifestyle combining advanced infrastructure, prime locations, and modern architectural vision.</p>
+('4', '2', 'en', 'october-projects', 'October Projects', '<p><strong>6th of October City, Egypt</strong> &ndash; With years of experience in real estate development, our company continues to deliver outstanding projects in one of Egypt&rsquo;s fastest-growing cities.</p>
 
 <h2>From the Heart of the City to the Heart of Life</h2>
 
@@ -56,8 +54,6 @@ INSERT INTO `makkah_project_lang` (`id`, `project_id`, `locale`, `slug`, `name`,
 	<li><strong>بالم فيو كفر عبده</strong> &ndash; شقق راقية بإطلالة مفتوحة وتصميمات عصرية.</li>
 	<li><strong>أندلسية لوران</strong> &ndash; وحدات بإطلالة بحرية وخدمات فندقية متكاملة.</li>
 </ul>
-
-<p>تواصل الشركة اليوم رؤيتها في تطوير مشروعات جديدة في المدينة، واضعة نصب عينيها المزج بين الأصالة والرؤية المستقبلية، لتكون الإسكندرية دائمًا على خريطة الإنجازات العقارية.</p>
 ', 'مشروعات الإسكندرية', 'مشروعات الإسكندرية'),
 ('6', '3', 'en', 'alexandria-projects', 'Alexandria Projects', '<p><strong>Alexandria, Egypt</strong> &ndash; It all started here. Alexandria was the birthplace of our company&rsquo;s journey into real estate development. Over the years, we have successfully delivered a range of distinguished residential projects in the city&#39;s most prestigious neighborhoods, offering a living experience that reflects the elegance and heritage of Alexandria.</p>
 
@@ -66,11 +62,9 @@ INSERT INTO `makkah_project_lang` (`id`, `project_id`, `locale`, `slug`, `name`,
 <p>From Smouha to Kafr Abdo, and from Louran to Al Maamoura, our company has developed upscale residential units that meet the needs of families and investors alike&mdash;prioritizing architectural detail, prime locations, and top-tier services and amenities.</p>
 
 <ul>
-	<li><strong>Royal Residence &ndash; Smouha</strong> &ndash; A fully integrated compound next to Smouha Club.</li>
-	<li><strong>Palm View &ndash; Kafr Abdo</strong> &ndash; Elegant apartments with open views and modern designs.</li>
+	<li><strong>Royal Residence</strong> &ndash; A fully integrated compound next to Smouha Club.</li>
+	<li><strong>Palm View &ndash; Kafr Abdo</strong> &ndash; Elegant apartments with open views</li>
 	<li><strong>Andalusia &ndash; Louran</strong> &ndash; Seaview residences with full hotel-style services.</li>
 </ul>
-
-<p>Today, the company continues to expand its vision across Alexandria with upcoming projects that blend authenticity with modern aspirations&mdash;ensuring the city remains at the heart of our real estate achievements.</p>
 ', 'Alexandria Projects', 'Alexandria Projects');
 COMMIT;
