@@ -19,7 +19,7 @@
                 </ul>
               </div>
               <div class="blogPhoto">
-                <x-web.def.img :row="$news" row-name="photo" def-photo="news_thumbnail" def-photo-row="photo" class=""/>
+                <x-web.def.img :row="$news" row-name="photo" def-photo="news_photo" def-photo-row="photo" class=""/>
               </div>
               <div class="newsDesPrint mt-20">
                 {!! $news->des !!}

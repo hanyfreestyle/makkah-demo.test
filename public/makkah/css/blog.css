@@ -232,7 +232,7 @@ html[lang="ar"] .newsDesPrint h2 {
 }
 
 .newsDesPrint ul {
-    padding-left: 20px;
+    padding-right: 20px;
     margin-bottom: 20px;
 }
 
@@ -241,17 +241,17 @@ html[lang="ar"] .newsDesPrint h2 {
     margin-bottom: 5px!important;
     font-size: 16px;
     position: relative;
-    padding-left: 18px;
+    padding-right: 18px;
+
 }
 
-.newsDesPrintX ul li::before {
-    content: "•";
-    color: #1c3f63;
-    font-size: 20px;
-    position: absolute;
-    left: 0;
-    top: 0;
+
+html[lang="ar"] .newsDesPrint ul li {
+    padding-left:18px;
+    padding-right: 0;
 }
+
+
 
 .newsDesPrint blockquote {
     background: #eef5fa;
@@ -270,7 +270,6 @@ html[lang="ar"] .newsDesPrint h2 {
 .newsDesPrint blockquote::before {
     position: absolute;
     content: "";
-
     font-size: 150px;
     right: 45px;
     -webkit-transition: all .3s ease 0s;
@@ -285,21 +284,19 @@ html[lang="ar"] .newsDesPrint h2 {
 }
 
 
-
-
 html[lang="ar"] .newsDesPrint blockquote {
     font-family: "Tajawal", sans-serif !important;
 
 }
 
 .newsDesPrint a {
-    color: var(--def-color)!important;
+    color: var(--def-color) !important;
     text-decoration: none;
     font-weight: 600;
 }
 
 .newsDesPrint strong {
-    color: var(--def-color)!important;
+    color: var(--def-color) !important;
 }
 
 .newsDesPrint a:hover {

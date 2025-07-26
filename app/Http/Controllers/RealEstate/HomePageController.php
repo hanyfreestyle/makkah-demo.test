@@ -58,6 +58,9 @@ class HomePageController extends DefaultWebController {
 
     $meta = parent::getMeatByCatId('latest_news');
     self::printSeoMeta($meta, 'web.latest_news');
+    $pageView = $this->pageView;
+    $pageView['selMenu'] = "latest_news";
+
 
     $latestNews = LatestNews::query()
       ->where('is_active', true)
@@ -73,6 +76,7 @@ class HomePageController extends DefaultWebController {
     return view('makkah.latest_news')->with([
       'latestNews' => $latestNews,
       'meta' => $meta,
+      'pageView' => $pageView,
     ]);
   }
 
@@ -82,6 +86,9 @@ class HomePageController extends DefaultWebController {
   public function latestNewsView($slug) {
     $meta = parent::getMeatByCatId('home');
     $slug = Url_Slug($slug);
+    $pageView = $this->pageView;
+    $pageView['selMenu'] = "latest_news";
+
     $news = LatestNews::query()
       ->whereTranslation('slug', $slug)
       ->firstOrFail();
@@ -101,6 +108,8 @@ class HomePageController extends DefaultWebController {
 
     $meta = parent::getMeatByCatId('our_project');
     self::printSeoMeta($meta, 'web.our_projects');
+    $pageView = $this->pageView;
+    $pageView['selMenu'] = "our_project";
 
     $ourProjects = MakkahProject::query()
       ->where('is_active', true)
@@ -116,6 +125,7 @@ class HomePageController extends DefaultWebController {
     return view('makkah.our_projects')->with([
       'ourProjects' => $ourProjects,
       'meta' => $meta,
+      'pageView' => $pageView,
     ]);
   }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -123,6 +133,9 @@ class HomePageController extends DefaultWebController {
   public function projectView($slug) {
     $meta = parent::getMeatByCatId('home');
     $slug = Url_Slug($slug);
+    $pageView = $this->pageView;
+    $pageView['selMenu'] = "our_project";
+
     $project = MakkahProject::query()
       ->whereTranslation('slug', $slug)
       ->firstOrFail();
@@ -134,8 +147,6 @@ class HomePageController extends DefaultWebController {
       'pageView' => $pageView,
     ]);
   }
-
-
 
 
 }

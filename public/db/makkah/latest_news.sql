@@ -15,5 +15,5 @@ INSERT INTO `latest_news` (`id`, `has_en`, `user_id`, `photo`, `photo_thumbnail`
 ('10', '1', NULL, NULL, NULL, '1', NULL, '2025-07-25 10:07:33', '2025-07-25 10:07:33'),
 ('11', '1', NULL, 'latest-news/2025-07/img-68835768464d8.webp', 'latest-news/2025-07/img-68835768464d8_thumb.webp', '1', NULL, '2025-07-25 10:07:33', '2025-07-25 19:07:36'),
 ('12', '1', NULL, 'latest-news/2025-07/img-68827959bf0bd.webp', 'latest-news/2025-07/img-68827959bf0bd_thumb.webp', '1', NULL, '2025-07-25 10:07:33', '2025-07-25 06:20:10'),
-('13', NULL, NULL, 'latest-news/2025-07/img-6883ce58053ad.webp', 'latest-news/2025-07/img-6883ce58053ad_thumb.webp', '1', NULL, '2025-07-25 20:59:54', '2025-07-25 21:35:04');
+('13', NULL, NULL, 'latest-news/2025-07/img-6883ce58053ad.webp', 'latest-news/2025-07/img-6883ce58053ad_thumb.webp', '1', NULL, '2025-07-25 20:59:54', '2025-07-26 10:44:00');
 COMMIT;

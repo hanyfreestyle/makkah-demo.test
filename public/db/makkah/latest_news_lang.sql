@@ -68,8 +68,6 @@ INSERT INTO `latest_news_lang` (`id`, `news_id`, `locale`, `slug`, `name`, `des`
 <h2>للتواصل أو الحجز</h2>
 
 <p>للمزيد من التفاصيل حول الوحدات المتاحة وخطط الدفع، يُرجى التواصل مع فريق المبيعات عبر الرقم <a href=\"tel:+201234567890\">01234567890</a> أو زيارة <a href=\"https://rowaq-eg.com\">الموقع الرسمي لرواق</a>.</p>
-
-<p>نُشر بتاريخ: 25 يوليو 2025</p>
 ', NULL, NULL),
 ('26', '13', 'en', 'riwaq-combines-sustainability-with-luxury-in-the-heart-of-sheikh-zayed', 'Riwaq Combines Sustainability with Luxury in the Heart of Sheikh Zayed', '<p><strong>Sheikh Zayed, Egypt &ndash;</strong> In a time when sustainability is no longer a luxury but a necessity, <strong>Riwaq Compound</strong> stands out as a pioneering project that seamlessly blends green technology with upscale living. It presents a complete lifestyle model for modern residents seeking peace, safety, and environmental responsibility.</p>
 

@@ -58,14 +58,14 @@
                 <ul>
                   <li><a href="{{route('web.index')}}">{{__('web/def.menu.home')}}</a></li>
                   <li><a href="{{route('web.about_us')}}">{{__('web/def.menu.about_us')}}</a></li>
-                  <li><a href="#">{{__('web/def.menu.our_project')}}</a>
+                  <li><a class="{{selActive($pageView, 'our_project')}}"  href="{{route('web.our_projects')}}">{{__('web/def.menu.our_project')}}</a>
                     <ul>
                       @foreach($projectMenu as $project)
                         <li><a href="{{route('web.project_view',$project->slug)}}">{{$project->name}}</a></li>
                       @endforeach
                     </ul>
                   </li>
-                  <li><a href="{{route('web.latest_news')}}">{{__('web/def.menu.latest_news')}}</a></li>
+                  <li><a class="{{selActive($pageView, 'latest_news')}}" href="{{route('web.latest_news')}}">{{__('web/def.menu.latest_news')}}</a></li>
                   <li><a href="{{route('web.contact_us')}}">{{__('web/def.menu.contact_us')}}</a></li>
                 </ul>
               </div>

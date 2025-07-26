@@ -16,7 +16,7 @@ trait __LoadConstructData {
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public function LoadMainVar() {
     $pageView = [
-      'SelMenu' => '',
+      'selMenu' => null,
       'show_fix' => true,
       'slug' => null,
       'go_home' => null,

@@ -8,5 +8,5 @@ INSERT INTO `config_def_photos` (`id`, `cat_id`, `photo`, `photo_thumbnail`, `po
 ('3', 'home_slider', 'def-photo/2025-07/img-6880c80d2c832.webp', NULL, '0', '2025-07-24 05:30:36', '2025-07-24 05:31:25'),
 ('4', 'err_404', 'def-photo/2025-07/img-6882303b44d62.webp', NULL, '0', '2025-07-25 04:07:47', '2025-07-25 04:08:11'),
 ('5', 'news_thumbnail', 'def-photo/2025-07/img-688267fb725e5.webp', NULL, '0', '2025-07-25 02:04:18', '2025-07-25 02:06:03'),
-('6', 'news_photo', 'def-photo/2025-07/img-6882690731667.webp', NULL, '0', '2025-07-25 02:10:31', '2025-07-25 02:10:31');
+('6', 'news_photo', 'def-photo/2025-07/img-688484994b6bf.webp', NULL, '0', '2025-07-25 02:10:31', '2025-07-26 10:32:41');
 COMMIT;
