@@ -113,7 +113,6 @@ class HomePageController extends DefaultWebController {
 
     $ourProjects = MakkahProject::query()
       ->where('is_active', true)
-//      ->translatedIn()
       ->orderBy('id', 'asc')
       ->paginate(9);
 

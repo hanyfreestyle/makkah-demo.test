@@ -27,6 +27,7 @@ return new class extends Migration {
             $table->string('email')->nullable();
             $table->string('def_url')->nullable();
             $table->string('google_map_url')->nullable();
+            $table->text('google_map_embed')->nullable();
 
             $table->json('social')->nullable();
             $table->json('schema')->nullable();

@@ -223,6 +223,13 @@ class SiteSettings extends Page implements HasForms, HasActions {
                 ->url()
                 ->nullable(),
 
+              Forms\Components\TextInput::make('google_map_embed')
+                ->extraAttributes(fn () => rtlIfArabic('en'))
+                ->label(__('filament/settings/webSetting.web.columns.google_map_embed'))
+                ->columnSpan(2)
+                ->url()
+                ->nullable(),
+
 
             ])->columnSpan(1)->columns(2),
 

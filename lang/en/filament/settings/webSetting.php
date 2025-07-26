@@ -33,6 +33,7 @@ return [
             'web_url' => 'Website URL',
             'email' => 'Email Address',
             'google_map_url' => 'Google Map URL',
+            'google_map_embed' => 'Google Map ُmbed',
 
 
             'facebook' => 'Facebook',

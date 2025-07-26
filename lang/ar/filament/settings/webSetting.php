@@ -34,6 +34,7 @@ return [
             'web_url' => 'رابط الموقع',
             'email' => 'البريد الإلكتروني',
             'google_map_url' => 'رابط الخريطة',
+            'google_map_embed' => 'كود الخريطة',
 
             'facebook' => 'فيسبوك',
             'youtube' => 'يوتيوب',
