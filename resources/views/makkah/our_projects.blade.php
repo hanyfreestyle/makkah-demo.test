@@ -5,45 +5,42 @@
 
   <x-makkah.def.page-heading :meta="$meta"/>
 
-
-  <div class="ltn__blog-area ltn__blog-item-3-normal mb-100">
-    <div class="container">
-      <div class="row">
-        @foreach($ourProjects as $news)
-          <div class="col-lg-4 col-sm-6 col-12">
-            <div class="ltn__blog-item ltn__blog-item-3">
-              <div class="ltn__blog-img">
-                <a href="{{route('web.project_view',$news->slug)}}">
-                  <x-web.def.img :row="$news" def-photo="news_thumbnail" def-photo-row="photo" class=""/>
-                </a>
+  @foreach($ourProjects as  $project)
+    <div class="ltn__about-us-area our_project_list pt-120--- pb-20 mt-30">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 ">
+            <h2 class="project_name updateFont">{{$project->name}}</h2>
+          </div>
+          <div class="col-lg-6 ">
+            <div class="project_photo mt-10">
+              <x-web.def.img :row="$project" def-photo="news_thumbnail" def-photo-row="photo" class=""/>
+            </div>
+          </div>
+          <div class="col-lg-6 ">
+            <div class="project_infoWrap">
+              <div class="newsDesPrint mt-10">
+                {!! $project->des !!}
               </div>
-              <div class="ltn__blog-brief">
-                <div class="ltn__blog-meta">
-                  <ul>
-                    <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i>{{printFormattedDate($news->created_at)}}</li>
-                  </ul>
-                </div>
-                <h3 class="news_title">
-                  <a href="{{route('web.project_view',$news->slug)}}" class="updateFont lineCrop2">
-                    {{$news->name}}
-                  </a>
-                </h3>
-                <div class="ltn__blog-meta-btn">
-                  <div class="ltn__blog-meta">
-                    <ul></ul>
-                  </div>
-                  <div class="ltn__blog-btn"><a href="{{route('web.project_view',$news->slug)}}">{{__('web/def.read_more')}}</a></div>
-                </div>
+
+
+              <div class="btn-wrapper animated {{textDir()}}">
+                <a href="{{route('web.project_view',$project->slug)}}" class="theme-btn-1 btn btn-effect-1 updateFont">
+                  {{__('web/def.read_more')}}
+                </a>
               </div>
             </div>
           </div>
-        @endforeach
+        </div>
       </div>
-      <x-makkah.def.pagination :rows="$ourProjects"/>
     </div>
-  </div>
+    <hr>
+  @endforeach
 
 @endsection
 
-
+@push('stackStyle')
+  {!! $minifyTools->setDir('makkah/')->MinifyCss('css/blog.css',$cssMinifyType,$cssReBuild) !!}
+  {!! $minifyTools->setDir('makkah/')->MinifyCss('css/our_project.css',$cssMinifyType,$cssReBuild) !!}
+@endpush
 

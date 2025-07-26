@@ -125,12 +125,7 @@ class HomePageController extends DefaultWebController {
     $ourProjects = MakkahProject::query()
       ->where('is_active', true)
       ->orderBy('id', 'asc')
-      ->paginate(9);
-
-
-    if ($ourProjects->isEmpty()) {
-      self::abortError404('Empty');
-    }
+      ->get();
 
     return view('makkah.our_projects')->with([
       'ourProjects' => $ourProjects,
