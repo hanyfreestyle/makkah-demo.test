@@ -94,10 +94,8 @@
   </div>
   <!-- CONTACT MESSAGE AREA END -->
 
-  <!-- GOOGLE MAP AREA START -->
   <div class="google-map">
-
-    <iframe src="{{$webConfig->google_map_embed}}"  width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="{{$webConfig->google_map_embed}}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 @endsection
 

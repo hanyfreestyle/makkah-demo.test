@@ -36,20 +36,30 @@ class HomePageController extends DefaultWebController {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public function aboutUs() {
-    $meta = parent::getMeatByCatId('home');
-    self::printSeoMeta($meta, 'web.index');
-    return view('makkah.about_us')->with([
+    $meta = parent::getMeatByCatId('about_us');
+    self::printSeoMeta($meta, 'web.about_us');
 
+    $pageView = $this->pageView;
+    $pageView['selMenu'] = "about_us";
+
+    return view('makkah.about_us')->with([
+      'meta' => $meta,
+      'pageView' => $pageView,
     ]);
   }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public function contactUs() {
-    $meta = parent::getMeatByCatId('home');
-    self::printSeoMeta($meta, 'web.index');
-    return view('makkah.contact_us')->with([
+    $meta = parent::getMeatByCatId('contact_us');
+    self::printSeoMeta($meta, 'web.contact_us');
+    $pageView = $this->pageView;
+    $pageView['selMenu'] = "contact_us";
+    $pageView['cta_footer'] = false;
 
+    return view('makkah.contact_us')->with([
+      'meta' => $meta,
+      'pageView' => $pageView,
     ]);
   }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -110,6 +120,7 @@ class HomePageController extends DefaultWebController {
     self::printSeoMeta($meta, 'web.our_projects');
     $pageView = $this->pageView;
     $pageView['selMenu'] = "our_project";
+    $pageView['cta_footer'] = false;
 
     $ourProjects = MakkahProject::query()
       ->where('is_active', true)

@@ -1,19 +1,4 @@
-<div class="ltn__call-to-action-area call-to-action-6 before-bg-bottom" data-bs-bg="img/1.jpg--">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="call-to-action-inner call-to-action-inner-6 ltn__secondary-bg position-relative text-center---">
-          <div class="coll-to-info text-color-white">
-            <h1 class="updateFont">{{__('web/def.footer.cta_h1')}}</h1>
-            <p>{{__('web/def.footer.cta_p')}}</p>
-          </div>
-          <div class="btn-wrapper"><a class="btn btn-effect-3 btn-white updateFont" href="#our-project">{{__('web/def.footer.cta_btn')}}</a></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
+<x-makkah.cta.footer-cta :page-view="$pageView"/>
 
 <footer class="ltn__footer-area">
   <div class="footer-top-area  section-bg-2 plr--5">

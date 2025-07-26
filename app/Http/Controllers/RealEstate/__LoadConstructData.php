@@ -20,6 +20,8 @@ trait __LoadConstructData {
       'show_fix' => true,
       'slug' => null,
       'go_home' => null,
+      'cta_footer' => true,
+      'cta_footer_slug' => route('web.our_projects'),
     ];
 
     $this->pageView = $pageView;
