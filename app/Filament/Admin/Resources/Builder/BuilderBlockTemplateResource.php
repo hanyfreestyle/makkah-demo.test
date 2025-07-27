@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources\Builder;
 use App\Enums\Builder\EnumsBlockTemplate;
 use App\Enums\Builder\EnumsBlockType;
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
+use App\FilamentCustom\Table\ImageColumnDef;
 use App\FilamentCustom\UploadFile\WebpUploadFixedSize;
 use App\Traits\Admin\Helper\EnumHasLabelOptionsTrait;
 use Astrotomic\Translatable\Translatable;
@@ -29,6 +30,7 @@ use Filament\Forms\Components\Toggle;
 use Illuminate\Support\Facades\Gate;
 use Filament\Tables;
 use Filament\Forms;
+use Illuminate\Validation\Rule;
 
 class BuilderBlockTemplateResource extends Resource implements HasShieldPermissions {
   use Translatable;
@@ -69,10 +71,32 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
         ->label("#")
         ->sortable()
         ->searchable(),
+
+      ImageColumnDef::make('photo')->width(80)->height(40),
+
       Tables\Columns\TextColumn::make('name.' . $thisLang)
         ->label(__('default/lang.columns.name'))
         ->sortable()
         ->searchable(),
+
+      Tables\Columns\TextColumn::make('slug')
+        ->label('Slug')
+        ->sortable()
+        ->searchable(),
+
+      Tables\Columns\TextColumn::make('type')
+        ->label('النوع')
+        ->formatStateUsing(fn ($state) => EnumsBlockType::tryFrom($state)?->label())
+        ->sortable()
+        ->searchable(),
+
+      Tables\Columns\TextColumn::make('template')
+        ->label('القالب')
+        ->formatStateUsing(fn ($state) => EnumsBlockTemplate::tryFrom($state)?->label())
+        ->sortable()
+        ->searchable(),
+
+
       Tables\Columns\IconColumn::make('is_active')
         ->label(__('default/lang.columns.is_active'))
         ->boolean()
@@ -103,9 +127,33 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
 
 
         Group::make()->schema([
-          SlugInput::make('slug'),
+//          SlugInput::make('slug')
+          Forms\Components\TextInput::make('slug')
+            ->label(__('default/lang.columns.slug'))
+            ->extraAttributes(fn () => rtlIfArabic('en'))
+            ->rule(function (callable $get, $record) {
+              return Rule::unique('builder_block_template', 'slug')
+                ->where(fn ($query) =>
+                $query->where('type', $get('type'))
+                  ->where('template', $get('template'))
+                )
+                ->ignore($record?->id);
+            })
 
 
+
+            ->afterStateUpdated(function ($state, callable $set) {
+              $slug = Url_Slug($state);
+              $set('slug', $slug);
+            })
+            ->beforeStateDehydrated(function ($state) {
+              return Url_Slug($state);
+            })
+            ->required()
+        ])->
+        columnSpan(2)->columns(2),
+
+        Group::make()->schema([
           Select::make('type')
             ->label('نوع البلوك')
             ->options(

@@ -10,12 +10,15 @@ return new class extends Migration {
 
     Schema::create('builder_block_template', function (Blueprint $table) {
       $table->id();
+      $table->string('slug')->nullable();
       $table->json('name');
       $table->string('type')->nullable();
       $table->string('template')->nullable();
       $table->string("photo")->nullable();
       $table->json('config')->nullable();
       $table->boolean("is_active")->default(true);
+
+      $table->unique(['slug', 'type', 'template']);
     });
 
     Schema::create('builder_block', function (Blueprint $table) {
