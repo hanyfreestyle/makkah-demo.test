@@ -91,8 +91,8 @@ class BuilderBlocksResource extends Resource {
       Forms\Components\Section::make()->schema([
 //        Forms\Components\TextInput::make('slug')->required(),
         SlugInput::make('slug')->required(),
-        ...SoftTranslatableInput::make()->setUniqueTable("builder_blocks")->getColumns(),
-        Forms\Components\Repeater::make('settings.items')
+        ...SoftTranslatableInput::make()->setUniqueTable("builder_block")->getColumns(),
+        Forms\Components\Repeater::make('schema.items')
           ->label('Items')
           ->schema([
             Forms\Components\TextInput::make('number')->numeric()->required(),
@@ -152,5 +152,7 @@ class BuilderBlocksResource extends Resource {
   public static function getRecordTitle(?Model $record): Htmlable|string|null {
     return getTranslatedValue($record->name) ?? null;
   }
+
+
 
 }

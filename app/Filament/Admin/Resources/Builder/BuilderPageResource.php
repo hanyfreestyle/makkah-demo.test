@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources\Builder;
 
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
 use App\FilamentCustom\Table\FilterWithArchive;
+use App\Models\Builder\BuilderBlock;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderPageResource\Pages;
 use Filament\Tables\Table;
@@ -86,10 +87,20 @@ class BuilderPageResource extends Resource {
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public static function form(Form $form): Form {
     $filterId = getModuleConfigKey("builder_page_filter_photo", 0);
+    $locale = app()->getLocale();
 
     return $form->schema([
       Forms\Components\Section::make()->schema([
-        ...SoftTranslatableInput::make()->setUniqueTable("builder_pages")->getColumns(),
+        ...SoftTranslatableInput::make()->setUniqueTable("builder_page")->getColumns(),
+        Forms\Components\Select::make('blocks')
+          ->label('اختر البلوكات')
+//          ->options(fn () => BuilderBlock::query()->get()->pluck("name.{$locale}", 'id'))
+          ->relationship('blocks', 'id') // ← نرجّع الترتيب للـ id
+          ->getOptionLabelFromRecordUsing(fn ($record) => $record->display_name)
+          ->multiple()
+          ->preload()
+          ->searchable(),
+
       ])->columnSpan(2)->columns(2),
       Forms\Components\Section::make()->schema([
         Forms\Components\Toggle::make('is_active')

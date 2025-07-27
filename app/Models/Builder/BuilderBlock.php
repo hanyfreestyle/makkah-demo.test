@@ -19,6 +19,10 @@ class BuilderBlock extends Model {
     'schema' => 'array',
   ];
 
+  public function getDisplayNameAttribute(): string {
+    return $this->name[app()->getLocale()] ?? reset($this->name);
+  }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   protected static function booted() {
@@ -36,5 +40,6 @@ class BuilderBlock extends Model {
     return $this->belongsToMany(BuilderPage::class, 'builder_page_pivot', 'block_id', 'page_id')
       ->withPivot('position');
   }
+
 
 }

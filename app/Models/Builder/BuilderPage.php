@@ -29,11 +29,16 @@ class BuilderPage extends Model {
     ];
   }
 
-  public function blocks(): BelongsToMany
-  {
+  public function blocks(): BelongsToMany {
     return $this->belongsToMany(BuilderBlock::class, 'builder_page_pivot', 'page_id', 'block_id')
       ->withPivot('position')
-      ->orderBy('pivot_position');
+      ->orderBy('builder_page_pivot.position');
   }
+
+//  public function blocks(): BelongsToMany
+//  {
+//    return $this->belongsToMany(BuilderBlock::class, 'builder_page_pivot', 'page_id', 'block_id');
+//  }
+
 
 }
