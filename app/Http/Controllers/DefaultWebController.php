@@ -42,6 +42,7 @@ class DefaultWebController extends Controller {
             'defPhotoList' => self::getDefPhotoCash($this->is_cash),
             'listing_unit' => null,
             'headerHomeMenu' => false,
+            'thisCurrentLocale' => thisCurrentLocale(),
         ];
         foreach ($sharedData as $key => $value) {
             $this->$key = $value;

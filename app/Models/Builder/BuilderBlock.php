@@ -4,6 +4,7 @@ namespace App\Models\Builder;
 
 use App\Traits\Admin\Model\ClearsCacheOnChange;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class BuilderBlock extends Model {
@@ -40,6 +41,10 @@ class BuilderBlock extends Model {
   public function pages(): BelongsToMany {
     return $this->belongsToMany(BuilderPage::class, 'builder_page_pivot', 'block_id', 'page_id')
       ->withPivot('position');
+  }
+
+  public function template(): belongsTo {
+    return $this->belongsTo(BuilderBlockTemplate::class, 'template_id');
   }
 
 

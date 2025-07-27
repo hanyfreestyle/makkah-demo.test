@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\RealEstate;
 
 use App\Http\Controllers\DefaultWebController;
+use App\Models\Builder\BuilderBlock;
+use App\Models\Builder\BuilderPage;
 use App\Models\LatestNews\LatestNews;
 use App\Models\Makkah\MakkahProject;
 use Illuminate\Support\Facades\View;
@@ -25,8 +27,18 @@ class HomePageController extends DefaultWebController {
     self::printSeoMeta($meta, 'web.index');
     View::share('headerHomeMenu', true);
 
+
+    $page = BuilderPage::query()->where('id', 1)->firstOrFail();
+    $blocks = $page->blocks()
+      ->with('template') // تأكد إن العلاقة template موجودة
+       ->orderBy('builder_page_pivot.position') // حسب جدول pivot
+      ->get();
+
+//    dd($blocks);
+
     return view('makkah.index')->with([
-//      'latestBlog' => $latestBlog,
+      'blocks' => $blocks,
+
 //      'featuredProperties' => $featuredProperties,
 //      'popularTerritories' => $popularTerritories,
 //      'topDevelopers' => $topDevelopers,
