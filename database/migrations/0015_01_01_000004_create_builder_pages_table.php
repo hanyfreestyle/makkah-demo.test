@@ -8,16 +8,28 @@ return new class extends Migration {
 
   public function up(): void {
 
-     Schema::create('builder_block', function (Blueprint $table) {
+    Schema::create('builder_block_template', function (Blueprint $table) {
       $table->id();
       $table->json('name');
       $table->string('type')->nullable();
+      $table->string('template')->nullable();
+      $table->string("photo")->nullable();
+      $table->json('config')->nullable();
+      $table->boolean("is_active")->default(true);
+    });
+
+    Schema::create('builder_block', function (Blueprint $table) {
+      $table->id();
+      $table->bigInteger('template_id')->unsigned();
+      $table->json('name');
+//      $table->string('type')->nullable();
       $table->string('slug')->unique()->nullable();
       $table->string("photo")->nullable();
       $table->string("photo_thumbnail")->nullable();
       $table->json('config')->nullable();
       $table->json('schema')->nullable();
       $table->boolean("is_active")->default(true);
+      $table->foreign('template_id')->references('id')->on('builder_block_template')->onDelete('cascade');
     });
 
 
@@ -48,5 +60,6 @@ return new class extends Migration {
     Schema::dropIfExists('builder_page_pivot');
     Schema::dropIfExists('builder_page');
     Schema::dropIfExists('builder_block');
+    Schema::dropIfExists('builder_block_template');
   }
 };
