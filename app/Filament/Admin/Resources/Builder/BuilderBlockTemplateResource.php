@@ -2,8 +2,14 @@
 
 namespace App\Filament\Admin\Resources\Builder;
 
+use App\Enums\Builder\EnumsBlockTemplate;
+use App\Enums\Builder\EnumsBlockType;
+use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
+use App\FilamentCustom\UploadFile\WebpUploadFixedSize;
+use App\Traits\Admin\Helper\EnumHasLabelOptionsTrait;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderBlockTemplateResource\Pages;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
@@ -94,24 +100,59 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
 
     return $form->schema([
       Group::make()->schema([
-        SlugInput::make('slug'),
-        TranslatableTabs::make('translations')
-          ->availableLocales(config('app.web_add_lang'))
-          ->localeTabSchema(fn (TranslatableTab $tab) => [
-            ...MainInput::make()
-              ->setDes(false)
-              ->setSeoRequired(false)
-              ->getColumns($tab),
-          ]),
-      ])->columnSpan(2),
+
+
+        Group::make()->schema([
+          SlugInput::make('slug'),
+
+
+          Select::make('type')
+            ->label('نوع البلوك')
+            ->options(
+              collect(EnumsBlockType::cases())
+                ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
+                ->sort() // ⬅️ الترتيب الأبجدي حسب الاسم الظاهر
+                ->toArray()
+            )
+            ->searchable()
+            ->required(),
+
+          Select::make('template')
+            ->label("template")
+            ->options(
+              collect(EnumsBlockTemplate::cases())
+                ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
+                ->sort() // ⬅️ الترتيب الأبجدي حسب الاسم الظاهر
+                ->toArray()
+            )
+            ->searchable()
+            ->required(),
+
+        ])->columnSpan(2)->columns(2),
+
+
+        Group::make()->schema([
+//        SlugInput::make('slug'),
+          ...SoftTranslatableInput::make()->setUniqueTable("builder_block_template")->getColumns(),
+        ])->columnSpan(2)->columns(2),
+
+
+      ])->columnSpan(2)->columns(2),
+
 
       Group::make()->schema([
         Section::make()->schema([
-          ...WebpUploadWithFilter::make()
-            ->setFilterId($filterId)
+
+          ...WebpUploadFixedSize::make()
+            ->setFileName('photo')
+            ->setThumbnail(false)
             ->setUploadDirectory(static::$uploadDirectory)
             ->setRequiredUpload(false)
-            ->setCanChangeFilter(true)
+            ->setResize(800, 400, 90)
+            ->setFilter(5)
+            ->setThumbnailSize(200, 200, 90)
+            ->setCanvas('#fff')
+            ->setAspectRatio(null)
             ->getColumns(),
 
           Toggle::make('is_active')
@@ -156,6 +197,7 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public static function getRecordTitle(?Model $record): Htmlable|string|null {
-    return $record->translation->name ?? null;
+    return getTranslatedValue($record->name) ?? null;
   }
+
 }

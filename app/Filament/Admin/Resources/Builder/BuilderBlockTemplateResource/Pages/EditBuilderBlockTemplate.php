@@ -8,6 +8,7 @@ use App\Traits\Admin\FormAction\WithSaveAndClose;
 use Filament\Actions;
 use App\Traits\Admin\UploadPhoto\WithGallerySaving;
 use App\Helpers\FilamentAstrotomic\Resources\Pages\Record\EditTranslatable;
+use Illuminate\Contracts\Support\Htmlable;
 
 class EditBuilderBlockTemplate extends EditRecord {
     use EditTranslatable;
@@ -19,9 +20,9 @@ class EditBuilderBlockTemplate extends EditRecord {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    public function getRecordTitle(): string {
-        return $this->record->translate(app()->getLocale())->name ?? "";
-    }
+  public function getRecordTitle(): Htmlable|string {
+    return getTranslatedValue($this->record->name) ?? "";
+  }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
