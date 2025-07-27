@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\Builder;
 
+use App\FilamentCustom\Form\Inputs\SlugInput;
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderBlocksResource\Pages;
@@ -9,7 +10,7 @@ use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Admin\Helper\SmartResourceTrait;
-use App\Models\Builder\BuilderBlocks;
+use App\Models\Builder\BuilderBlock;
 use Filament\Resources\Resource;
 use Filament\Forms\Form;
 use Filament\Tables;
@@ -19,7 +20,7 @@ class BuilderBlocksResource extends Resource {
   use Translatable;
   use SmartResourceTrait;
 
-  protected static ?string $model = BuilderBlocks::class;
+  protected static ?string $model = BuilderBlock::class;
   protected static ?string $navigationIcon = 'heroicon-s-rectangle-group';
   protected static ?string $uploadDirectory = 'BuilderBlocksResource';
 
@@ -88,7 +89,22 @@ class BuilderBlocksResource extends Resource {
 
     return $form->schema([
       Forms\Components\Section::make()->schema([
-        ...SoftTranslatableInput::make()->setUniqueTable("builder_pages")->getColumns(),
+//        Forms\Components\TextInput::make('slug')->required(),
+        SlugInput::make('slug')->required(),
+        ...SoftTranslatableInput::make()->setUniqueTable("builder_blocks")->getColumns(),
+        Forms\Components\Repeater::make('settings.items')
+          ->label('Items')
+          ->schema([
+            Forms\Components\TextInput::make('number')->numeric()->required(),
+            Forms\Components\Grid::make(2)->schema([
+              Forms\Components\TextInput::make('icon')->label('icon')->required(),
+              Forms\Components\TextInput::make('label.ar')->label('Label (AR)')->required(),
+              Forms\Components\TextInput::make('label.en')->label('Label (EN)')->required(),
+            ]),
+          ])
+          ->minItems(1)
+          ->defaultItems(1)
+
       ])->columnSpan(2)->columns(2),
       Forms\Components\Section::make()->schema([
         Forms\Components\Toggle::make('is_active')

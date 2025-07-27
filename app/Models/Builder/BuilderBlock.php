@@ -4,17 +4,19 @@ namespace App\Models\Builder;
 
 use App\Traits\Admin\Model\ClearsCacheOnChange;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class BuilderBlocks extends Model {
+class BuilderBlock extends Model {
   use ClearsCacheOnChange;
 
-  protected $table = "builder_blocks";
+  protected $table = "builder_block";
   protected $primaryKey = 'id';
   public $timestamps = false;
-  protected $fillable = ['name', 'type', 'slug', 'settings', 'is_active'];
-
+  protected $fillable = ['name', 'type', 'slug', 'photo', 'photo_thumbnail', 'config', 'schema', 'is_active'];
   protected $casts = [
     'name' => 'array',
+    'config' => 'array',
+    'schema' => 'array',
   ];
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -26,10 +28,13 @@ class BuilderBlocks extends Model {
 
   public function cacheKeys(): array {
     return [
-      'DataCampaign_CashList_all_',
-      'DataCampaign_CashList_only_active_',
+      'key',
     ];
   }
 
+  public function pages(): BelongsToMany {
+    return $this->belongsToMany(BuilderPage::class, 'builder_page_pivot', 'block_id', 'page_id')
+      ->withPivot('position');
+  }
 
 }

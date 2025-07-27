@@ -8,17 +8,20 @@ return new class extends Migration {
 
   public function up(): void {
 
-    Schema::create('builder_blocks', function (Blueprint $table) {
+     Schema::create('builder_block', function (Blueprint $table) {
       $table->id();
       $table->json('name');
       $table->string('type')->nullable();
       $table->string('slug')->unique()->nullable();
-      $table->json('settings')->nullable();
+      $table->string("photo")->nullable();
+      $table->string("photo_thumbnail")->nullable();
+      $table->json('config')->nullable();
+      $table->json('schema')->nullable();
       $table->boolean("is_active")->default(true);
     });
 
 
-    Schema::create('builder_pages', function (Blueprint $table) {
+    Schema::create('builder_page', function (Blueprint $table) {
       $table->id();
       $table->integer('parent_id')->nullable();
       $table->json('name');
@@ -28,19 +31,21 @@ return new class extends Migration {
     });
 
 
-    Schema::create('builder_block_page', function (Blueprint $table) {
+    Schema::create('builder_page_pivot', function (Blueprint $table) {
       $table->id();
-      $table->foreignId('builder_block_id')->constrained()->cascadeOnDelete();
-      $table->foreignId('builder_page_id')->constrained()->cascadeOnDelete();
+      $table->bigInteger('block_id')->unsigned();
+      $table->bigInteger('page_id')->unsigned();
       $table->unsignedInteger('position')->default(0);
+      $table->foreign('block_id')->references('id')->on('builder_block')->onDelete('cascade');
+      $table->foreign('page_id')->references('id')->on('builder_page')->onDelete('cascade');
       $table->timestamps();
     });
 
   }
 
   public function down(): void {
-    Schema::dropIfExists('builder_block_page');
-    Schema::dropIfExists('builder_pages');
-    Schema::dropIfExists('builder_blocks');
+    Schema::dropIfExists('builder_page_pivot');
+    Schema::dropIfExists('builder_page');
+    Schema::dropIfExists('builder_block');
   }
 };
