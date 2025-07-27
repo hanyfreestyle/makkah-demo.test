@@ -25,8 +25,8 @@ return new class extends Migration {
       $table->id();
       $table->bigInteger('template_id')->unsigned();
       $table->json('name');
-//      $table->string('type')->nullable();
-      $table->string('slug')->unique()->nullable();
+      $table->string('type')->nullable();
+//      $table->string('slug')->unique()->nullable();
       $table->string("photo")->nullable();
       $table->string("photo_thumbnail")->nullable();
       $table->json('config')->nullable();

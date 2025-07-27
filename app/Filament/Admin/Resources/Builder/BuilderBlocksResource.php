@@ -2,10 +2,16 @@
 
 namespace App\Filament\Admin\Resources\Builder;
 
+use App\Enums\Builder\EnumsBlockType;
 use App\FilamentCustom\Form\Inputs\SlugInput;
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
+use App\Models\Builder\BuilderBlockTemplate;
+use App\Service\Builder\BlockFormFactory;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderBlocksResource\Pages;
+use Filament\Facades\Filament;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Get;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +21,9 @@ use Filament\Resources\Resource;
 use Filament\Forms\Form;
 use Filament\Tables;
 use Filament\Forms;
+use Filament\Forms\Components\View;
+use PHPUnit\Metadata\Group;
+
 
 class BuilderBlocksResource extends Resource {
   use Translatable;
@@ -87,34 +96,51 @@ class BuilderBlocksResource extends Resource {
   public static function form(Form $form): Form {
     $filterId = getModuleConfigKey("builder_page_filter_photo", 0);
 
-    return $form->schema([
-      Forms\Components\Section::make()->schema([
-//        Forms\Components\TextInput::make('slug')->required(),
-        SlugInput::make('slug')->required(),
-        ...SoftTranslatableInput::make()->setUniqueTable("builder_block")->getColumns(),
-        Forms\Components\Repeater::make('schema.items')
-          ->label('Items')
-          ->schema([
-            Forms\Components\TextInput::make('number')->numeric()->required(),
-            Forms\Components\Grid::make(2)->schema([
-              Forms\Components\TextInput::make('icon')->label('icon')->required(),
-              Forms\Components\TextInput::make('label.ar')->label('Label (AR)')->required(),
-              Forms\Components\TextInput::make('label.en')->label('Label (EN)')->required(),
-            ]),
-          ])
-          ->minItems(1)
-          ->defaultItems(1)
 
-      ])->columnSpan(2)->columns(2),
-      Forms\Components\Section::make()->schema([
-        Forms\Components\Toggle::make('is_active')
-          ->label(__('default/lang.columns.is_active'))
-          ->inline(false)
-          ->default(true)
+    return $form->schema([
+      ...SoftTranslatableInput::make()->setUniqueTable("builder_block")->getColumns(),
+
+      Forms\Components\Group::make()->schema([
+        Forms\Components\Select::make('type')
+          ->label('نوع البلوك')
+          ->options(
+            collect(EnumsBlockType::cases())
+              ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
+              ->sort()
+              ->toArray()
+          )
+          ->reactive()
+          ->live()       // يُعيد الرندر لحظياً
           ->required(),
 
-      ])->columnSpan(1)->columns(2),
-    ])->columns(3);
+        Forms\Components\Radio::make('template_id')
+          ->label('اختر القالب')
+          ->options(function (callable $get) {
+            return BuilderBlockTemplate::query()
+              ->when($get('type'), fn ($q, $type) => $q->where('type', $type))
+              ->get()
+              ->mapWithKeys(fn ($template) => [
+                $template->id => $template->name['ar'],
+              ])
+              ->toArray();
+          })
+          ->reactive()
+          ->columns(2)
+          ->required(),
+      ])
+        ->columnSpanFull()
+        ->visible(fn (Get $get, $livewire) => $livewire instanceof \Filament\Resources\Pages\CreateRecord),
+
+      Forms\Components\Group::make()
+        ->schema(function (Get $get) {
+          $slug = \App\Models\Builder\BuilderBlockTemplate::find($get('template_id'))?->slug;
+          $type = \App\Models\Builder\BuilderBlockTemplate::find($get('template_id'))?->type;
+          return BlockFormFactory::make($type, $slug);
+        })
+        ->columnSpanFull()
+        ->columns(4)
+        ->visible(fn ($get, $livewire) => $livewire instanceof \Filament\Resources\Pages\EditRecord),
+    ]);
   }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -152,7 +178,6 @@ class BuilderBlocksResource extends Resource {
   public static function getRecordTitle(?Model $record): Htmlable|string|null {
     return getTranslatedValue($record->name) ?? null;
   }
-
 
 
 }

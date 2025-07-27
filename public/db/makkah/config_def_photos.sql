@@ -3,10 +3,10 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 INSERT INTO `config_def_photos` (`id`, `cat_id`, `photo`, `photo_thumbnail`, `position`, `created_at`, `updated_at`) VALUES
-('1', 'logo_light', 'def-photo/2025-07/img-6880c2b6538fb.webp', NULL, '0', '2025-07-24 22:53:01', '2025-07-24 23:08:38'),
-('2', 'logo_dark', 'def-photo/2025-07/img-6880c49e66df1.webp', NULL, '0', '2025-07-24 23:16:20', '2025-07-24 23:16:46'),
-('3', 'home_slider', 'def-photo/2025-07/img-6880c80d2c832.webp', NULL, '0', '2025-07-24 23:30:36', '2025-07-24 23:31:25'),
-('4', 'err_404', 'def-photo/2025-07/img-6882303b44d62.webp', NULL, '0', '2025-07-25 22:07:47', '2025-07-25 22:08:11'),
-('5', 'news_thumbnail', 'def-photo/2025-07/img-688267fb725e5.webp', NULL, '0', '2025-07-25 20:04:18', '2025-07-25 20:06:03'),
-('6', 'news_photo', 'def-photo/2025-07/img-688484994b6bf.webp', NULL, '0', '2025-07-25 20:10:31', '2025-07-27 04:32:41');
+('1', 'logo_light', 'def-photo/2025-07/img-6880c2b6538fb.webp', NULL, '0', '2025-07-25 01:53:01', '2025-07-25 02:08:38'),
+('2', 'logo_dark', 'def-photo/2025-07/img-6880c49e66df1.webp', NULL, '0', '2025-07-25 02:16:20', '2025-07-25 02:16:46'),
+('3', 'home_slider', 'def-photo/2025-07/img-6880c80d2c832.webp', NULL, '0', '2025-07-25 02:30:36', '2025-07-25 02:31:25'),
+('4', 'err_404', 'def-photo/2025-07/img-6882303b44d62.webp', NULL, '0', '2025-07-26 01:07:47', '2025-07-26 01:08:11'),
+('5', 'news_thumbnail', 'def-photo/2025-07/img-688267fb725e5.webp', NULL, '0', '2025-07-25 23:04:18', '2025-07-25 23:06:03'),
+('6', 'news_photo', 'def-photo/2025-07/img-688484994b6bf.webp', NULL, '0', '2025-07-25 23:10:31', '2025-07-27 07:32:41');
 COMMIT;
