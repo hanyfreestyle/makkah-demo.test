@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\Builder;
 
+use App\Filament\Admin\Resources\BuilderPageResource\RelationManagers\BlocksRelationManager;
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
 use App\FilamentCustom\Table\FilterWithArchive;
 use App\Models\Builder\BuilderBlock;
@@ -62,6 +63,12 @@ class BuilderPageResource extends Resource {
           ->label(__('default/lang.columns.name'))
           ->sortable()
           ->searchable(),
+
+        Tables\Columns\TextColumn::make('blocks')
+          ->label('البلوكات')
+          ->getStateUsing(fn ($record) => $record->blocks->map(fn ($block) => $block->display_name)->toArray()
+          )->badge(),
+
         Tables\Columns\IconColumn::make('is_active')
           ->label(__('default/lang.columns.is_active'))
           ->boolean()
@@ -116,7 +123,9 @@ class BuilderPageResource extends Resource {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public static function getRelations(): array {
-    return [];
+    return [
+      BlocksRelationManager::class,
+    ];
   }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

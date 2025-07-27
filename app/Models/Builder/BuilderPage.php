@@ -31,7 +31,7 @@ class BuilderPage extends Model {
 
   public function blocks(): BelongsToMany {
     return $this->belongsToMany(BuilderBlock::class, 'builder_page_pivot', 'page_id', 'block_id')
-      ->withPivot('position')
+      ->withPivot(['position', 'is_active'])
       ->orderBy('builder_page_pivot.position');
   }
 

@@ -36,6 +36,7 @@ return new class extends Migration {
       $table->bigInteger('block_id')->unsigned();
       $table->bigInteger('page_id')->unsigned();
       $table->unsignedInteger('position')->default(0);
+      $table->boolean('is_active')->default(true);
       $table->foreign('block_id')->references('id')->on('builder_block')->onDelete('cascade');
       $table->foreign('page_id')->references('id')->on('builder_page')->onDelete('cascade');
       $table->timestamps();

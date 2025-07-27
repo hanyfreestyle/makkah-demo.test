@@ -28,9 +28,22 @@ class EditBuilderPage extends EditRecord {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//    public function afterSave(): void {
-//        $this->setRelation('photos')->afterSaveGallery();
+  public function afterSave(): void {
+
+//    $newBlockIds = collect($this->data['blocks'])->sort()->values();
+//
+//    $this->record->loadMissing('blocks');
+//
+//    $originalBlockIds = $this->record->blocks->pluck('id')->sort()->values();
+//
+//    if ($newBlockIds->diff($originalBlockIds)->isNotEmpty() || $originalBlockIds->diff($newBlockIds)->isNotEmpty()) {
+//      redirect(request()->header('Referer') ?? request()->url());
 //    }
+
+    redirect(request()->header('Referer') ?? request()->url());
+  }
+
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
