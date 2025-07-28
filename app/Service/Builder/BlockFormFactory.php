@@ -5,9 +5,11 @@ namespace App\Service\Builder;
 class BlockFormFactory {
 
   public static function make(?string $type, ?string $slug): array {
+//    dd($type);
     $map = [
       'hero' => HeroBlockForm::class,
       'counter' => CounterBlockForm::class,
+      'cursor' => CursorBlockForm::class,
 //      'slider' => SliderBlockForm::class,
 
     ];

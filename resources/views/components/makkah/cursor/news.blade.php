@@ -1,13 +1,17 @@
 @if(count($latestNews) >0 )
   <div class="ltn__blog-area pt-120 pb-70">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="section-title-area ltn__section-title-2--- text-center">
-            <h2 class="section-title">Leatest News Feeds</h2>
+
+      @if($title)
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-title-area ltn__section-title-2--- text-center">
+              <h2 class="section-title updateFont">{{$title}}</h2>
+            </div>
           </div>
         </div>
-      </div>
+      @endif
+
       <div class="row  ltn__blog-slider-one-active slick-arrow-1 ltn__blog-item-3-normal">
         @foreach($latestNews as $news)
           <div class="col-lg-12">

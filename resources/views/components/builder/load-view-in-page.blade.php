@@ -16,6 +16,7 @@
         @include($viewPath, [
             'block' => $block,
             'schema' => $block->schema,
+            'config' => $block->config,
         ])
 
         {{--      {{dd($block->schema)}}--}}

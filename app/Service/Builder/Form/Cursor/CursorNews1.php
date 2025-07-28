@@ -1,0 +1,53 @@
+<?php
+
+namespace App\Service\Builder\Form\Cursor;
+
+
+use App\FilamentCustom\UploadFile\WebpUploadFixedSize;
+use App\Service\Builder\Function\BuilderTranslatableInput;
+use App\Service\Builder\Function\BuilderTranslatableTextArea;
+use App\Service\Builder\Function\SetProtectedValTrait;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms;
+use Guava\FilamentIconPicker\Forms\IconPicker;
+
+class CursorNews1 {
+  use SetProtectedValTrait;
+
+  public static function make(): static {
+    return new static();
+  }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  public function getColumns(): array {
+    $columns = [];
+
+    $columns[] = Forms\Components\Group::make()->schema([
+      Forms\Components\Section::make()->schema([
+
+        ...BuilderTranslatableInput::make()
+          ->setInputName('schema.h1')
+          ->setLabel(__('builder/_default.title'))
+          ->getColumns(),
+
+
+      ])->columns(2),
+    ])->columnSpan(6)->columns(2);
+
+
+    $columns[] = Forms\Components\Group::make()->schema([
+      Forms\Components\Section::make()->schema([
+        Forms\Components\TextInput::make('config.take')
+          ->label(__('builder/_default.take'))
+          ->numeric()
+          ->required()
+          ->extraAttributes(fn () => rtlIfArabic("en"))
+
+      ])->columns(1),
+    ])->columnSpan(2)->columns(2);
+
+
+    return $columns;
+  }
+}

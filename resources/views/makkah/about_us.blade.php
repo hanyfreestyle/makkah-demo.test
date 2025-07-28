@@ -1,8 +1,7 @@
 @extends('makkah.layouts.app')
 
 @section('content')
-  {!! Breadcrumbs::render('about_us') !!}
-
+  {!! Breadcrumbs::render('about_us') !!}\
 @endsection
 
 

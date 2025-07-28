@@ -10,5 +10,6 @@ return [
   'years' => 'Years',
   'btn' => 'Button Text',
   'btn_url' => 'Url',
+  'take' => 'Specify number of items',
 
 ];
