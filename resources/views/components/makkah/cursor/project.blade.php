@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="section-title-area ltn__section-title-2--- text-center">
-              <h1 class="section-title">{{$title}}</h1>
+              <h1 class="section-title updateFont">{{$title}}</h1>
               @if($des)
                 <p>{{$des}}</p>
               @endif
