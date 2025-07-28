@@ -7,7 +7,7 @@ return [
     'gallery_file' => 'اضافة الى معرض الصور',
     'post_name' => 'عنوان المقال',
     'post_description' => 'المحتوى',
-    'name' => 'الاسم ',
+    'name' => 'Name ',
     'description' => 'Description',
   ],
 

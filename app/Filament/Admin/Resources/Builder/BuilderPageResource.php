@@ -97,13 +97,14 @@ class BuilderPageResource extends Resource {
     return $form->schema([
       Forms\Components\Section::make()->schema([
         ...SoftTranslatableInput::make()->setUniqueTable("builder_page")->getColumns(),
+
         Forms\Components\Select::make('blocks')
-          ->label('اختر البلوكات')
-//          ->options(fn () => BuilderBlock::query()->get()->pluck("name.{$locale}", 'id'))
+          ->label( __('builder/builder-page.columns.blocks'))
           ->relationship('blocks', 'id') // ← نرجّع الترتيب للـ id
           ->getOptionLabelFromRecordUsing(fn ($record) => $record->display_name)
           ->multiple()
           ->preload()
+          ->columnSpanFull()
           ->searchable(),
 
       ])->columnSpan(2)->columns(2),

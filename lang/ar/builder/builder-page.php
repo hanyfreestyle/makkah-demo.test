@@ -7,6 +7,6 @@ return [
   'add_but_label' => 'اضافة صفحة',
 
   'columns' => [
-
+    'blocks' => 'البلوكات',
   ],
 ];

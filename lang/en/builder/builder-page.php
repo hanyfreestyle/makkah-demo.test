@@ -7,6 +7,6 @@ return [
   'add_but_label' => 'Add Page',
 
   'columns' => [
-
+    'blocks' => 'Blocks',
   ],
 ];
