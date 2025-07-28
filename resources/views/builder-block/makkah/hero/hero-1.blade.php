@@ -8,16 +8,21 @@
               <div class="slide-item-info">
                 <div class="slide-item-info-inner ltn__slide-animation">
                   <h1 class="slide-title animated updateFont">
-                    <span class="number">{{$schema['number'][$thisCurrentLocale ?? null]}}</span>
-                    <span class="years">{{$schema['years'][$thisCurrentLocale] ?? null}}</span>
-                    <br> {{$schema['h1'][$thisCurrentLocale] ?? null}}
+                    <span class="number">{{getLangData($schema, 'number')}}</span>
+                    <span class="years">{{getLangData($schema, 'years')}}</span>
+
+                    <br> {{getLangData($schema, 'h1')}}
                   </h1>
                   <div class="slide-brief animated updateFont">
                     <p>
-                      {{$schema['des'][$thisCurrentLocale] ?? null}}
+                      {{getLangData($schema, 'des')}}
                     </p>
                   </div>
-                  <div class="btn-wrapper animated "><a href="{{$schema['btn_url'][$thisCurrentLocale] ?? null}}" class="theme-btn-1 btn btn-effect-1 updateFont">{{$schema['btn'][$thisCurrentLocale] ?? null}}</a></div>
+                  <div class="btn-wrapper animated ">
+                    <a href=" {{getLangData($schema, 'btn_url')}}" class="theme-btn-1 btn btn-effect-1 updateFont">
+                      {{getLangData($schema, 'btn')}}
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

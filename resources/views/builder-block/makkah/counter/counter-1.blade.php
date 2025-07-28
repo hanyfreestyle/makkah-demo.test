@@ -5,10 +5,9 @@
       @foreach($block->schema['items']  as $item)
         <div class="col-md-3 col-sm-6 align-self-center">
           <div class="ltn__counterup-item text-color-white---">
-{{--            {{$item['icon']}}--}}
-            <div class="counter-icon"><i class="{{updateFontawesomeIcon($item['icon'])}}"></i></div>
-            {!! updateCounterPlusMakkah($item['number']) !!}
-            <h6 class="updateFont">{{$item['name'][$thisCurrentLocale]}}</h6></div>
+            <div class="counter-icon"><i class="{{updateFontawesomeIcon(getData($item, 'icon'))}}"></i></div>
+            {!! updateCounterPlusMakkah(getData($item, 'number')) !!}
+            <h6 class="updateFont">{{getLangData($item, 'name')}}</h6></div>
         </div>
       @endforeach
     </div>
