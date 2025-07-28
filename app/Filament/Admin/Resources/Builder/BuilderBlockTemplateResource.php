@@ -38,9 +38,9 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
 //    return Gate::forUser(auth()->user())->allows('viewAnyCategory', BuilderPage::class) ;
 //  }
 //
-//  public static function shouldRegisterNavigation(): bool {
-//    return false;
-//  }
+  public static function shouldRegisterNavigation(): bool {
+    return false;
+  }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||

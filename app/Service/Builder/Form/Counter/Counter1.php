@@ -55,7 +55,7 @@ class Counter1 {
         ->defaultItems(1)
 
 
-    ])->columnSpan(4);
+    ])->columnSpan(8);
 
     return $columns;
   }
