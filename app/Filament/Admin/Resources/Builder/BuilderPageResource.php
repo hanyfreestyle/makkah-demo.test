@@ -2,7 +2,8 @@
 
 namespace App\Filament\Admin\Resources\Builder;
 
-use App\Filament\Admin\Resources\BuilderPageResource\RelationManagers\BlocksRelationManager;
+
+use App\Filament\Admin\Resources\Builder\BuilderPageResource\RelationManagers\BlocksRelationManager;
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderPageResource\Pages;

@@ -159,6 +159,17 @@
       0 => 'FreestyleRepo\\FilamentPhoneInput\\FilamentPhoneInputServiceProvider',
     ),
   ),
+  'ibrahimbougaoua/radiobuttonimage' => 
+  array (
+    'aliases' => 
+    array (
+      'RadioButtonImage' => 'IbrahimBougaoua\\RadioButtonImage\\Facades\\RadioButtonImage',
+    ),
+    'providers' => 
+    array (
+      0 => 'IbrahimBougaoua\\RadioButtonImage\\RadioButtonImageServiceProvider',
+    ),
+  ),
   'jeffgreco13/filament-breezy' => 
   array (
     'aliases' => 
