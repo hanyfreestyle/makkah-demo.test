@@ -29,9 +29,8 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
   use Translatable;
   use SmartResourceTrait;
 
-
   protected static ?string $model = BuilderBlockTemplate::class;
-  protected static ?string $navigationIcon = 'heroicon-s-rectangle-group';
+  protected static ?string $navigationIcon = 'fas-paintbrush';
   protected static ?string $uploadDirectory = 'builder-template';
 
 //  public static bool $showCategoryActions = true;
@@ -56,10 +55,13 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
     ];
   }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public static function table(Table $table): Table {
     $thisLang = app()->getLocale();
 
     return $table->columns([
+
       Tables\Columns\TextColumn::make('id')
         ->label("#")
         ->sortable()
@@ -78,13 +80,13 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
         ->searchable(),
 
       Tables\Columns\TextColumn::make('type')
-        ->label('النوع')
+        ->label(__('builder/builder-block-template.columns.type'))
         ->formatStateUsing(fn ($state) => EnumsBlockType::tryFrom($state)?->label())
         ->sortable()
         ->searchable(),
 
       Tables\Columns\TextColumn::make('template')
-        ->label('القالب')
+        ->label(__('builder/builder-block-template.columns.template'))
         ->formatStateUsing(fn ($state) => EnumsBlockTemplate::tryFrom($state)?->label())
         ->sortable()
         ->searchable(),
@@ -110,31 +112,26 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
       ->recordUrl(fn ($record) => static::getTableRecordUrl($record))
       ->defaultSort('id', 'desc');
   }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public static function form(Form $form): Form {
-    $filterId = getModuleConfigKey("builder_block_template_filter_photo", 0);
 
     return $form->schema([
-      Group::make()->schema([
+      Section::make()->schema([
 
 
         Group::make()->schema([
-//          SlugInput::make('slug')
           Forms\Components\TextInput::make('slug')
             ->label(__('default/lang.columns.slug'))
             ->extraAttributes(fn () => rtlIfArabic('en'))
             ->rule(function (callable $get, $record) {
               return Rule::unique('builder_block_template', 'slug')
-                ->where(fn ($query) =>
-                $query->where('type', $get('type'))
+                ->where(fn ($query) => $query->where('type', $get('type'))
                   ->where('template', $get('template'))
                 )
                 ->ignore($record?->id);
             })
-
-
-
             ->afterStateUpdated(function ($state, callable $set) {
               $slug = Url_Slug($state);
               $set('slug', $slug);
@@ -148,7 +145,7 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
 
         Group::make()->schema([
           Select::make('type')
-            ->label('نوع البلوك')
+            ->label(__('builder/builder-block-template.columns.type'))
             ->options(
               collect(EnumsBlockType::cases())
                 ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
@@ -159,7 +156,7 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
             ->required(),
 
           Select::make('template')
-            ->label("template")
+            ->label(__('builder/builder-block-template.columns.template'))
             ->options(
               collect(EnumsBlockTemplate::cases())
                 ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
@@ -173,7 +170,6 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
 
 
         Group::make()->schema([
-//        SlugInput::make('slug'),
           ...SoftTranslatableInput::make()->setUniqueTable("builder_block_template")->getColumns(),
         ])->columnSpan(2)->columns(2),
 
@@ -213,18 +209,21 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//    public static function getNavigationGroup(): ?string {
-//        return __('builder/builder-block-template.navigation_group');
-//    }
-//    public static function getNavigationLabel(): string {
-//        return __('builder/builder-block-template.navigation_label');
-//    }
-//    public static function getModelLabel(): string {
-//        return __('builder/builder-block-template.model_label');
-//    }
-//    public static function getPluralModelLabel(): string {
-//        return __('builder/builder-block-template.plural_model_label');
-//    }
+  public static function getNavigationGroup(): ?string {
+    return __('builder/builder-block-template.navigation_group');
+  }
+
+  public static function getNavigationLabel(): string {
+    return __('builder/builder-block-template.navigation_label');
+  }
+
+  public static function getModelLabel(): string {
+    return __('builder/builder-block-template.model_label');
+  }
+
+  public static function getPluralModelLabel(): string {
+    return __('builder/builder-block-template.plural_model_label');
+  }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||

@@ -2,9 +2,11 @@
 
 namespace App\Filament\Admin\Resources\Builder;
 
+use App\Enums\Builder\EnumsBlockTemplate;
 use App\Enums\Builder\EnumsBlockType;
 use App\FilamentCustom\Form\Inputs\SlugInput;
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
+use App\FilamentCustom\Table\ImageColumnDef;
 use App\Models\Builder\BuilderBlockTemplate;
 use App\Service\Builder\BlockFormFactory;
 use Astrotomic\Translatable\Translatable;
@@ -12,6 +14,7 @@ use App\Filament\Admin\Resources\Builder\BuilderBlocksResource\Pages;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Get;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
@@ -30,7 +33,7 @@ class BuilderBlocksResource extends Resource {
   use SmartResourceTrait;
 
   protected static ?string $model = BuilderBlock::class;
-  protected static ?string $navigationIcon = 'heroicon-s-rectangle-group';
+  protected static ?string $navigationIcon = 'fas-puzzle-piece';
   protected static ?string $uploadDirectory = 'BuilderBlocksResource';
 
 //  public static bool $showCategoryActions = true;
@@ -55,21 +58,49 @@ class BuilderBlocksResource extends Resource {
     ];
   }
 
+  public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder {
+    return parent::getEloquentQuery()->with('template');
+  }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public static function table(Table $table): Table {
     $thisLang = app()->getLocale();
 
     return $table
+      ->modifyQueryUsing(fn ($query) => $query->with('template'))
       ->columns([
+//        ImageColumnDef::make('template.photo')->width(80)->height(40),
         Tables\Columns\TextColumn::make('id')
           ->label("#")
           ->sortable()
           ->searchable(),
+
+        ImageColumn::make('template.photo')
+          ->label('')
+          ->disk('root_folder'),
+
         Tables\Columns\TextColumn::make('name.' . $thisLang)
           ->label(__('default/lang.columns.name'))
           ->sortable()
           ->searchable(),
+
+
+        Tables\Columns\TextColumn::make('template.template')
+          ->label(__('builder/builder-block-template.columns.template'))
+          ->formatStateUsing(fn ($state) => EnumsBlockTemplate::tryFrom($state)?->label())
+          ->sortable()
+          ->searchable(),
+
+
+        Tables\Columns\TextColumn::make('template.type')
+          ->label(__('builder/builder-block-template.columns.type'))
+          ->formatStateUsing(fn ($state) => EnumsBlockType::tryFrom($state)?->label())
+          ->sortable()
+          ->searchable(),
+
+
+
+
         Tables\Columns\IconColumn::make('is_active')
           ->label(__('default/lang.columns.is_active'))
           ->boolean()
@@ -151,18 +182,21 @@ class BuilderBlocksResource extends Resource {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//    public static function getNavigationGroup(): ?string {
-//        return __('builder/builder-blocks.navigation_group');
-//    }
-//    public static function getNavigationLabel(): string {
-//        return __('builder/builder-blocks.navigation_label');
-//    }
-//    public static function getModelLabel(): string {
-//        return __('builder/builder-blocks.model_label');
-//    }
-//    public static function getPluralModelLabel(): string {
-//        return __('builder/builder-blocks.plural_model_label');
-//    }
+  public static function getNavigationGroup(): ?string {
+    return __('builder/builder-block-template.navigation_group');
+  }
+
+  public static function getNavigationLabel(): string {
+    return __('builder/builder-blocks.navigation_label');
+  }
+
+  public static function getModelLabel(): string {
+    return __('builder/builder-blocks.model_label');
+  }
+
+  public static function getPluralModelLabel(): string {
+    return __('builder/builder-blocks.plural_model_label');
+  }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||

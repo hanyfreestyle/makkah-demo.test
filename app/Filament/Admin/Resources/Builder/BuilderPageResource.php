@@ -4,8 +4,6 @@ namespace App\Filament\Admin\Resources\Builder;
 
 use App\Filament\Admin\Resources\BuilderPageResource\RelationManagers\BlocksRelationManager;
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
-use App\FilamentCustom\Table\FilterWithArchive;
-use App\Models\Builder\BuilderBlock;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderPageResource\Pages;
 use Filament\Tables\Table;
@@ -23,7 +21,7 @@ class BuilderPageResource extends Resource {
   use SmartResourceTrait;
 
   protected static ?string $model = BuilderPage::class;
-  protected static ?string $navigationIcon = 'heroicon-s-rectangle-group';
+  protected static ?string $navigationIcon = 'fas-file-lines';
   protected static ?string $uploadDirectory = 'BuilderPageResource';
 
 //    public static bool $showCategoryActions = true;
@@ -130,18 +128,21 @@ class BuilderPageResource extends Resource {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//    public static function getNavigationGroup(): ?string {
-//        return __('builder/builder-page.navigation_group');
-//    }
-//    public static function getNavigationLabel(): string {
-//        return __('builder/builder-page.navigation_label');
-//    }
-//    public static function getModelLabel(): string {
-//        return __('builder/builder-page.model_label');
-//    }
-//    public static function getPluralModelLabel(): string {
-//        return __('builder/builder-page.plural_model_label');
-//    }
+  public static function getNavigationGroup(): ?string {
+    return __('builder/builder-block-template.navigation_group');
+  }
+
+  public static function getNavigationLabel(): string {
+    return __('builder/builder-page.navigation_label');
+  }
+
+  public static function getModelLabel(): string {
+    return __('builder/builder-page.model_label');
+  }
+
+  public static function getPluralModelLabel(): string {
+    return __('builder/builder-page.plural_model_label');
+  }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||

@@ -1,15 +1,15 @@
 <?php
 return [
-    'navigation_group' => 'Manage Builder Block Template',
-    'navigation_label' => 'Builder Block Template',
-    'model_label' => 'Builder Block Template',
-    'plural_model_label' => 'Builder Block Templates',
-    'add_but_label' => 'Builder Block Templates',
+    'navigation_group' => 'ادارة القوالب',
+    'navigation_label' => 'ادارة قوالب البلوكات',
+    'model_label' => 'قوالب البلوكات',
+    'plural_model_label' => 'قوالب البلوكات',
+    'add_but_label' => 'اضافة قالب جديد',
 
     'columns' => [
-        'name' => 'Name',
-        'type' => 'Type',
-        'template' => 'Template',
-        'config' => 'Config',
+        'name' => 'الاسم',
+        'type' => 'النوع',
+        'template' => 'القالب',
+
     ],
 ];
