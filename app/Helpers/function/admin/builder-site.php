@@ -19,8 +19,8 @@ if (!function_exists('getTranslatedValue')) {
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 if (!function_exists('updateFontawesomeIcon')) {
   function updateFontawesomeIcon(?string $icon): ?string {
-    $arr = ['fas-'];
-    $arr_replace = ['fa-'];
+    $arr = ['fas-', 'fab-'];
+    $arr_replace = ['fa fa-', 'fa-brands fa-'];
     return str_replace($arr, $arr_replace, $icon);
   }
 }

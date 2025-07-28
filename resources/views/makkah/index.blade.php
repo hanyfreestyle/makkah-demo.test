@@ -2,7 +2,7 @@
 
 @section('content')
 
-  @include('makkah.layouts.inc.home_slider')
+{{--  @include('makkah.layouts.inc.home_slider')--}}
 
   @foreach ($blocks as $block)
     @php
@@ -15,7 +15,7 @@
     @if(View::exists($viewPath))
       @include($viewPath, [
           'block' => $block,
-          'settings' => $block->settings,
+          'schema' => $block->schema,
       ])
 
 {{--      {{dd($block->schema)}}--}}
