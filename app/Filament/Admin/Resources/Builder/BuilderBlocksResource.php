@@ -172,14 +172,14 @@ class BuilderBlocksResource extends Resource {
         ->visible(fn (Get $get, $livewire) => $livewire instanceof \Filament\Resources\Pages\CreateRecord),
 
 
-      Forms\Components\Section::make()
+      Forms\Components\Group::make()
         ->schema(function (Get $get) {
           $slug = \App\Models\Builder\BuilderBlockTemplate::find($get('template_id'))?->slug;
           $type = \App\Models\Builder\BuilderBlockTemplate::find($get('template_id'))?->type;
           return BlockFormFactory::make($type, $slug);
         })
+        ->columns(8)
         ->columnSpanFull()
-        ->columns(4)
         ->visible(fn ($get, $livewire) => $livewire instanceof \Filament\Resources\Pages\EditRecord),
     ])->columns(8);
   }
