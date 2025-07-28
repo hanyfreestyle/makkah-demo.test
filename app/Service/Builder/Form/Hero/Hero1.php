@@ -41,10 +41,10 @@ class Hero1 {
           ->setLabel(__('builder/_default.title'))
           ->getColumns(),
 
-//        ...BuilderTranslatableTextArea::make()
-//          ->setInputName('schema.des')
-//          ->setLabel(__('builder/_default.description'))
-//          ->getColumns(),
+        ...BuilderTranslatableTextArea::make()
+          ->setInputName('schema.des')
+          ->setLabel(__('builder/_default.description'))
+          ->getColumns(),
 
         ...BuilderTranslatableInput::make()
           ->setInputName('schema.btn')

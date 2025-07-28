@@ -3,7 +3,7 @@
 namespace App\Service\Builder\Function;
 
 use App\Traits\Admin\Helper\SmartSetFunctionTrait;
-use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\Textarea;
 
 
 class BuilderTranslatableTextArea {
