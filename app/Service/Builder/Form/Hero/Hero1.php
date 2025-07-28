@@ -2,7 +2,8 @@
 
 namespace App\Service\Builder\Form\Hero;
 
-use App\Service\Builder\Form\SetProtectedValTrait;
+
+use App\Service\Builder\Function\SetProtectedValTrait;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms;
 use Guava\FilamentIconPicker\Forms\IconPicker;

@@ -4,15 +4,11 @@ namespace App\Filament\Admin\Resources\Builder;
 
 use App\Enums\Builder\EnumsBlockTemplate;
 use App\Enums\Builder\EnumsBlockType;
-use App\FilamentCustom\Form\Inputs\SlugInput;
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
-use App\FilamentCustom\Table\ImageColumnDef;
 use App\Models\Builder\BuilderBlockTemplate;
 use App\Service\Builder\BlockFormFactory;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderBlocksResource\Pages;
-use Filament\Facades\Filament;
-use Filament\Forms\Components\Hidden;
 use Filament\Forms\Get;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
@@ -25,8 +21,6 @@ use Filament\Resources\Resource;
 use Filament\Forms\Form;
 use Filament\Tables;
 use Filament\Forms;
-use Filament\Forms\Components\View;
-use PHPUnit\Metadata\Group;
 
 
 class BuilderBlocksResource extends Resource {
@@ -128,10 +122,19 @@ class BuilderBlocksResource extends Resource {
   public static function form(Form $form): Form {
     return $form->schema([
 
+      Forms\Components\Group::make()->schema([
+        Forms\Components\Section::make()->schema([
+          ...SoftTranslatableInput::make()->setUniqueTable("builder_block")->getColumns(),
+        ])->columns(2),
 
-      Forms\Components\Section::make()->schema([
-        ...SoftTranslatableInput::make()->setUniqueTable("builder_block")->getColumns(),
-      ])->columns(2),
+      ])->columnSpan(6)->columns(2),
+
+
+      Forms\Components\Group::make()->schema([
+        Forms\Components\View::make('builder/admin/template-photo')
+          ->label(false)
+          ->visible(fn ($get, $livewire) => $livewire instanceof \Filament\Resources\Pages\EditRecord),
+      ])->columnSpan(2)->columns(1),
 
 
       Forms\Components\Section::make()->schema([
@@ -146,27 +149,7 @@ class BuilderBlocksResource extends Resource {
               ->toArray()
           )
           ->reactive()
-//          ->live()
           ->required(),
-
-//        Forms\Components\Radio::make('template_id')
-//          ->label(__('builder/builder-blocks.columns.block_template'))
-//          ->options(function (callable $get) {
-//            if (!$get('type')) {
-//              return [];
-//            }
-//
-//            return BuilderBlockTemplate::query()
-//              ->when($get('type'), fn ($q, $type) => $q->where('type', $type))
-//              ->get()
-//              ->mapWithKeys(fn ($template) => [
-//                $template->id => $template->name['ar'],
-//              ])
-//              ->toArray();
-//          })
-//          ->reactive()
-//          ->columns(2)
-//          ->required(),
 
         RadioButtonImage::make('template_id')
           ->label(__('builder/builder-blocks.columns.block_template'))
@@ -189,7 +172,7 @@ class BuilderBlocksResource extends Resource {
         ->visible(fn (Get $get, $livewire) => $livewire instanceof \Filament\Resources\Pages\CreateRecord),
 
 
-      Forms\Components\Group::make()
+      Forms\Components\Section::make()
         ->schema(function (Get $get) {
           $slug = \App\Models\Builder\BuilderBlockTemplate::find($get('template_id'))?->slug;
           $type = \App\Models\Builder\BuilderBlockTemplate::find($get('template_id'))?->type;
@@ -198,7 +181,7 @@ class BuilderBlocksResource extends Resource {
         ->columnSpanFull()
         ->columns(4)
         ->visible(fn ($get, $livewire) => $livewire instanceof \Filament\Resources\Pages\EditRecord),
-    ]);
+    ])->columns(8);
   }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

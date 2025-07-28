@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Builder\Form;
+namespace App\Service\Builder\Function;
 
 trait SetProtectedValTrait {
   protected array $setLang = [];

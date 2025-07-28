@@ -9,18 +9,15 @@ use App\FilamentCustom\Table\ImageColumnDef;
 use App\FilamentCustom\UploadFile\WebpUploadFixedSize;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderBlockTemplateResource\Pages;
-use Filament\Forms\Components\Select;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Admin\Helper\SmartResourceTrait;
 use App\Models\Builder\BuilderBlockTemplate;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use Filament\Forms\Components\Group;
 use Filament\Resources\Resource;
 use Filament\Forms\Form;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Toggle;
+
 use Filament\Tables;
 use Filament\Forms;
 use Illuminate\Validation\Rule;
@@ -118,10 +115,10 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
   public static function form(Form $form): Form {
 
     return $form->schema([
-      Section::make()->schema([
+      Forms\Components\Section::make()->schema([
 
 
-        Group::make()->schema([
+        Forms\Components\Group::make()->schema([
           Forms\Components\TextInput::make('slug')
             ->label(__('default/lang.columns.slug'))
             ->extraAttributes(fn () => rtlIfArabic('en'))
@@ -143,8 +140,8 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
         ])->
         columnSpan(2)->columns(2),
 
-        Group::make()->schema([
-          Select::make('type')
+        Forms\Components\Group::make()->schema([
+          Forms\Components\Select::make('type')
             ->label(__('builder/builder-block-template.columns.type'))
             ->options(
               collect(EnumsBlockType::cases())
@@ -155,7 +152,7 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
             ->searchable()
             ->required(),
 
-          Select::make('template')
+          Forms\Components\Select::make('template')
             ->label(__('builder/builder-block-template.columns.template'))
             ->options(
               collect(EnumsBlockTemplate::cases())
@@ -169,7 +166,7 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
         ])->columnSpan(2)->columns(2),
 
 
-        Group::make()->schema([
+        Forms\Components\Group::make()->schema([
           ...SoftTranslatableInput::make()->setUniqueTable("builder_block_template")->getColumns(),
         ])->columnSpan(2)->columns(2),
 
@@ -177,8 +174,8 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
       ])->columnSpan(2)->columns(2),
 
 
-      Group::make()->schema([
-        Section::make()->schema([
+      Forms\Components\Group::make()->schema([
+        Forms\Components\Section::make()->schema([
 
           ...WebpUploadFixedSize::make()
             ->setFileName('photo')
@@ -192,7 +189,7 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
             ->setAspectRatio(null)
             ->getColumns(),
 
-          Toggle::make('is_active')
+          Forms\Components\Toggle::make('is_active')
             ->label(__('default/lang.columns.is_active'))
             ->default(true)
             ->required(),

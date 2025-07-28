@@ -3,13 +3,13 @@
 namespace App\Service\Builder;
 
 class BlockFormFactory {
+
   public static function make(?string $type, ?string $slug): array {
-
-
     $map = [
       'hero' => HeroBlockForm::class,
-//      'slider' => SliderBlockForm::class,
       'counter' => CounterBlockForm::class,
+//      'slider' => SliderBlockForm::class,
+
     ];
 
     $class = $map[$type] ?? null;
