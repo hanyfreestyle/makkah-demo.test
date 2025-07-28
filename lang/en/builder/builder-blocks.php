@@ -6,6 +6,8 @@ return [
   'add_but_label' => 'Add Block',
 
   'columns' => [
+    'block_type' => 'Select Block Type',
+    'block_template' => 'Select Block Template',
 
   ],
 ];

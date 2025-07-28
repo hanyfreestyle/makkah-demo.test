@@ -99,8 +99,6 @@ class BuilderBlocksResource extends Resource {
           ->searchable(),
 
 
-
-
         Tables\Columns\IconColumn::make('is_active')
           ->label(__('default/lang.columns.is_active'))
           ->boolean()
@@ -125,15 +123,19 @@ class BuilderBlocksResource extends Resource {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public static function form(Form $form): Form {
-    $filterId = getModuleConfigKey("builder_page_filter_photo", 0);
-
-
     return $form->schema([
-      ...SoftTranslatableInput::make()->setUniqueTable("builder_block")->getColumns(),
 
-      Forms\Components\Group::make()->schema([
+
+      Forms\Components\Section::make()->schema([
+        ...SoftTranslatableInput::make()->setUniqueTable("builder_block")->getColumns(),
+      ])->columns(2),
+
+
+      Forms\Components\Section::make()->schema([
         Forms\Components\Select::make('type')
-          ->label('نوع البلوك')
+          ->label(__('builder/builder-blocks.columns.block_type'))
+          ->searchable()
+          ->preload()
           ->options(
             collect(EnumsBlockType::cases())
               ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
@@ -141,12 +143,16 @@ class BuilderBlocksResource extends Resource {
               ->toArray()
           )
           ->reactive()
-          ->live()       // يُعيد الرندر لحظياً
+//          ->live()
           ->required(),
 
         Forms\Components\Radio::make('template_id')
-          ->label('اختر القالب')
+          ->label(__('builder/builder-blocks.columns.block_template'))
           ->options(function (callable $get) {
+            if (!$get('type')) {
+              return [];
+            }
+
             return BuilderBlockTemplate::query()
               ->when($get('type'), fn ($q, $type) => $q->where('type', $type))
               ->get()
@@ -161,6 +167,7 @@ class BuilderBlocksResource extends Resource {
       ])
         ->columnSpanFull()
         ->visible(fn (Get $get, $livewire) => $livewire instanceof \Filament\Resources\Pages\CreateRecord),
+
 
       Forms\Components\Group::make()
         ->schema(function (Get $get) {

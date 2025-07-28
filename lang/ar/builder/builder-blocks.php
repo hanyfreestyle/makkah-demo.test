@@ -7,6 +7,7 @@ return [
   'add_but_label' => 'اضافة بلوك',
 
   'columns' => [
-
+    'block_type' => 'اختار نوع البلوك',
+    'block_template' => 'اختار القالب',
   ],
 ];
