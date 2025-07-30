@@ -32,6 +32,9 @@ return [
     'email_verified_at' => 'Email Verified',
     'position' => 'Position',
     'has_en' => 'Add English',
+    'short' => 'Short Description',
+    'video' => 'Video',
+    'video_url' => 'Video URL',
   ],
 
   'but' => [

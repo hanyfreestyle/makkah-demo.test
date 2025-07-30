@@ -26,9 +26,9 @@
                 <div class="col-lg-12 align-self-center">
                   <div class="slide-item-info">
                     <div class="slide-item-info-inner ltn__slide-animation">
-                      @if($project->id == 1)
+                      @if($project->video != null)
                         <div class="slide-video mb-50">
-                          <a class="ltn__video-icon-2 ltn__video-icon-2-border" href="https://www.youtube.com/embed/tlThdr3O5Qo" data-rel="lightcase:myCollection">
+                          <a class="ltn__video-icon-2 ltn__video-icon-2-border" href="https://www.youtube.com/embed/{{$project->video}}" data-rel="lightcase:myCollection">
                             <i class="fa fa-play"></i>
                           </a>
                         </div>
@@ -36,11 +36,14 @@
 
 
                       <h1 class="slide-title animated updateFont">{{$project->name ?? ''}}</h1>
-                      {{--                      <div class="slide-brief animated">--}}
-                      {{--                        <p>{{$project->g_des ?? ''}}</p>--}}
-                      {{--                      </div>--}}
+                        @if($project->short)
+                          <div class="slide-brief animated">
+                            <p>{{$project->short ?? ''}}</p>
+                          </div>
+                        @endif
+
                       <div class="btn-wrapper animated">
-                        <a href="shop.html" class="theme-btn-1 btn btn-effect-1 updateFont">{{__('web/def.read_more')}}</a>
+                        <a href="{{ route('web.project_view',$project->slug) }}" class="theme-btn-1 btn btn-effect-1 updateFont">{{__('web/def.read_more')}}</a>
                       </div>
                     </div>
                   </div>

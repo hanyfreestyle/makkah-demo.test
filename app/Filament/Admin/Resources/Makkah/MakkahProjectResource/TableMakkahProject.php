@@ -15,6 +15,7 @@ use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\TextColumn\TextColumnSize;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
@@ -28,7 +29,8 @@ trait TableMakkahProject {
         ImageColumnDef::make('photo')->width(60)->height(40),
         TranslationTextColumn::make('name'),
         IconColumn::make('is_active')->label(__('default/lang.columns.is_active'))->boolean(),
-        ...CreatedDates::make()->toggleable(false)->getColumns(),
+        ...CreatedDates::make()->toggleable(true)->getColumns(),
+        ToggleColumn::make('is_active')->label(__('default/lang.columns.is_active'))->sortable(),
       ])->filters([
         TrashedFilter::make()->searchable(),
       ])

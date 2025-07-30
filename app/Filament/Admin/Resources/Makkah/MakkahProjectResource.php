@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\Makkah;
 
+use App\FilamentCustom\Form\Inputs\SoftTranslatableTextArea;
 use App\FilamentCustom\Form\Translation\MainInputWithSlug;
 use App\Service\Builder\Function\BuilderTranslatableTextArea;
 use Astrotomic\Translatable\Translatable;
@@ -79,11 +80,21 @@ class MakkahProjectResource extends Resource implements HasShieldPermissions {
         ]),
 
 
-        ...BuilderTranslatableTextArea::make()
-          ->setInputName('short')
-          ->setDataRequired(false)
-          ->setLabel(__('builder/_default.description'))
-          ->getColumns(),
+        Forms\Components\Section::make()->schema([
+
+          Forms\Components\TextInput::make('video')
+            ->label(__('default/lang.columns.video_url'))
+            ->extraAttributes(fn () => rtlIfArabic('en'))
+            ->nullable(),
+
+          ...SoftTranslatableTextArea::make()
+            ->setInputName('short')
+            ->setDataRequired(false)
+            ->setTransMode(true)
+            ->setLabel(__('default/lang.columns.short'))
+            ->getColumns(),
+        ]),
+
 
 
       ])->columnSpan(1),
