@@ -21,8 +21,6 @@ html[lang="ar"] .ltn__header-top-area .ltn__social-media ul li {
 }
 
 
-
-
 .top-area-color-white {
     background-color: var(--ltn__primary-color);
 }
@@ -99,8 +97,6 @@ html[lang="ar"] .ltn__top-bar-menu > ul > li:last-child {
 }
 
 
-
-
 .header-menu-wrap,
 .header-menu-column {
     position: inherit;
@@ -142,8 +138,6 @@ html[lang="ar"] .ltn__main-menu > ul > li {
     margin-right: 0px;
     margin-left: 30px;
 }
-
-
 
 
 html[lang="ar"] .ltn__main-menu > ul > li:last-child {
@@ -194,6 +188,7 @@ html[lang="ar"] .ltn__main-menu li > ul {
     text-align: right;
 
 }
+
 html[lang="ar"] .ltn__main-menu .sub-menu {
 
     text-align: right;
@@ -507,4 +502,74 @@ html[lang="ar"] .ltn__main-menu .sub-menu {
         width: 100%;
     }
 }
+
+
+.sliderArea_2 {
+    height: 75vh !important;
+}
+
+@media (min-width: 600px) {
+    .sliderArea_2 {
+        height: 80vh !important;
+    }
+}
+
+
+.slick-slide-arrow-1 .slick-arrow {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 40px;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    line-height: 58px;
+    border: 1px solid var(--border-color-1);
+    text-align: center;
+    font-size: 20px;
+    color: var(--ltn__primary-color) !important;
+    z-index: 1;
+    opacity: 1;
+    visibility: visible !important;
+
+}
+
+.slick-slide-arrow-1 .slick-arrow:hover {
+    background-color: var(--ltn__secondary-color);
+    border-color: var(--ltn__secondary-color);
+    color: var(--white) !important;
+}
+
+.slick-slide-arrow-1 .slick-next {
+    right: 40px !important;
+    left: auto;
+}
+
+.slick-slide-arrow-1:hover .slick-arrow {
+    opacity: 1;
+    visibility: visible;
+    left: 20px;
+}
+
+.slick-slide-arrow-1:hover .slick-next {
+    right: 20px;
+    left: auto;
+}
+
+.slick-slide-dots-1 .slick-dots {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    margin: 0;
+}
+
+
+@media (max-width: 600px) {
+    .slick-slide-arrow-1 .slick-arrow {
+        top: 90%;
+    }
+}
+
 

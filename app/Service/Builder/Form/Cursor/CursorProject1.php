@@ -7,12 +7,15 @@ use App\FilamentCustom\UploadFile\WebpUploadFixedSize;
 use App\Service\Builder\Function\BuilderTranslatableInput;
 use App\Service\Builder\Function\BuilderTranslatableTextArea;
 use App\Service\Builder\Function\SetProtectedValTrait;
+use App\Traits\Admin\Helper\SmartSetFunctionTrait;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms;
 use Guava\FilamentIconPicker\Forms\IconPicker;
 
 class CursorProject1 {
   use SetProtectedValTrait;
+
+
 
   public static function make(): static {
     return new static();
@@ -29,10 +32,12 @@ class CursorProject1 {
         ...BuilderTranslatableInput::make()
           ->setInputName('schema.h1')
           ->setLabel(__('builder/_default.title'))
+          ->setDataRequired($this->setDataRequired)
           ->getColumns(),
 
         ...BuilderTranslatableTextArea::make()
           ->setInputName('schema.des')
+          ->setDataRequired($this->setDataRequired)
           ->setLabel(__('builder/_default.description'))
           ->getColumns(),
 
