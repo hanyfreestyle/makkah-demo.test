@@ -44,13 +44,10 @@
 }
 
 
-@media (max-width: 767px) {
+@media (max-width: 1000px) {
     .pageHeading h1 {
-
         font-size: 1.8rem;
-
     }
-
     .pageHeading p {
         font-size: 1rem;
         padding: 5px 20px;
@@ -321,7 +318,40 @@ html[lang="ar"] textarea {
     width: 100%!important;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1000px) {
+    .ltn__slide-item {
+        height: 150vh;
+    }
+
+    .ltn__slide-item .slideNumber span.number {
+        font-size: 150px !important;
+    }
+
+    .ltn__slide-item .slideNumber span.years {
+        font-size: 35px !important;
+    }
+
+    .ltn__slide-item .slideTitle {
+        font-size: 40px !important;
+    }
+
+    html[lang="ar"]  .ltn__slide-item .slideTitle {
+        font-size: 55px !important;
+    }
+
+
+    .slide-brief p {
+        font-size: 22px !important;
+    }
+    .ltn__slide-item .btn {
+        font-size: 16px !important;
+        font-weight: 600;
+    }
+
+}
+
+
+@media (max-width: 500px) {
     .ltn__slide-item {
         height: 100vh;
     }
