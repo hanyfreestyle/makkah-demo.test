@@ -39,8 +39,13 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
 //  }
 //
   public static function shouldRegisterNavigation(): bool {
-    return false;
+    if (env('APP_ENV') === 'production') {
+      return false;
+    } else {
+      return true;
+    }
   }
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -87,7 +92,6 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
         ->formatStateUsing(fn ($state) => EnumsBlockTemplate::tryFrom($state)?->label())
         ->sortable()
         ->searchable(),
-
 
       Tables\Columns\IconColumn::make('is_active')
         ->label(__('default/lang.columns.is_active'))

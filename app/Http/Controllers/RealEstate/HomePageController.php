@@ -30,8 +30,10 @@ class HomePageController extends DefaultWebController {
 
     $page = BuilderPage::query()->where('id', 1)->firstOrFail();
     $blocks = $page->blocks()
+      ->where('builder_block.is_active', true)
+      ->where('builder_page_pivot.is_active', true)
       ->with('template') // تأكد إن العلاقة template موجودة
-       ->orderBy('builder_page_pivot.position') // حسب جدول pivot
+      ->orderBy('builder_page_pivot.position') // حسب جدول pivot
       ->get();
 
 //    dd($blocks);

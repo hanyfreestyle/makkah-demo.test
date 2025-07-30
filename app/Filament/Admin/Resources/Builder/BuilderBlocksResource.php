@@ -95,11 +95,15 @@ class BuilderBlocksResource extends Resource {
           ->sortable()
           ->searchable(),
 
-
-        Tables\Columns\IconColumn::make('is_active')
+        Tables\Columns\ToggleColumn::make('is_active')
           ->label(__('default/lang.columns.is_active'))
-          ->boolean()
+
           ->sortable(),
+
+//        Tables\Columns\IconColumn::make('is_active')
+//          ->label(__('default/lang.columns.is_active'))
+//          ->boolean()
+//          ->sortable(),
 
       ])->filters([
 //        ...FilterWithArchive::make()->getColumns(),
