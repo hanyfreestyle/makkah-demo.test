@@ -7,14 +7,16 @@
             <div class="col-lg-12 align-self-center">
               <div class="slide-item-info">
                 <div class="slide-item-info-inner ltn__slide-animation">
-                  <h1 class="slide-title animated updateFont">
-                    <span class="number">{{getLangData($schema, 'number')}}</span>
-                    <span class="years">{{getLangData($schema, 'years')}}</span>
 
-                    <br> {{getLangData($schema, 'h1')}}
+                  <div class="slideNumber animated ">
+                    <span class="number">{{getLangData($schema, 'number')}}</span>
+                    <span class="years updateFont">{{getLangData($schema, 'years')}}</span>
+                  </div>
+                  <h1 class="slide-title slideTitle animated updateFont">
+                     {{getLangData($schema, 'h1')}}
                   </h1>
-                  <div class="slide-brief animated updateFont">
-                    <p>
+                  <div class="slide-brief slideBrief animated">
+                    <p class="updateFont">
                       {{getLangData($schema, 'des')}}
                     </p>
                   </div>

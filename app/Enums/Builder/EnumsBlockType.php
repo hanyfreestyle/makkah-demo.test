@@ -11,6 +11,8 @@ enum EnumsBlockType: string {
   case counter = 'counter';
   case slider = 'slider';
   case cursor = 'cursor';
+  case cta = 'cta';
+  case gallery = 'gallery';
 
 
   public function label(): string {
@@ -19,6 +21,8 @@ enum EnumsBlockType: string {
       self::counter => 'Counter',
       self::slider => 'Slider',
       self::cursor => 'Cursor',
+      self::cta => 'Cta',
+      self::gallery => 'Gallery',
 
     };
   }
