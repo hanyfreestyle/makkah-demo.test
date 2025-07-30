@@ -14,7 +14,7 @@
               <div class="ltn__blog-meta blog_meta_date">
                 <ul>
                   <li class="ltn__blog-date ">
-                    <i class="far fa-calendar-alt"></i>{{printFormattedDate($news->created_at)}}
+                    <i class="far fa-calendar-alt"></i>{{printFormattedDate($news->published_at)}}
                   </li>
                 </ul>
               </div>

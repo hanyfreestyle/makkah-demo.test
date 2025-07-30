@@ -10,7 +10,7 @@ use Illuminate\View\Component;
 class News extends Component {
 
   public $latestNews;
-  public int $take ;
+  public int $take;
   public string|null $title;
   public $option_4;
 
@@ -26,7 +26,9 @@ class News extends Component {
     if ($this->latestNews == null) {
       $this->latestNews = LatestNews::query()
         ->where('is_active', true)
-        ->orderBy('created_at')
+        ->whereNotNull('published_at')
+        ->where('published_at', '<=', now())
+        ->orderBy('published_at', 'desc')
         ->take($this->take)
         ->get();
     }

@@ -88,8 +88,10 @@ class HomePageController extends DefaultWebController {
 
     $latestNews = LatestNews::query()
       ->where('is_active', true)
+      ->whereNotNull('published_at')
+      ->where('published_at','<=', now())
 //      ->translatedIn()
-      ->orderBy('id', 'desc')
+      ->orderBy('published_at', 'desc')
       ->paginate(9);
 
 

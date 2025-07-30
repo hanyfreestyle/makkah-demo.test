@@ -21,9 +21,11 @@ class LatestNewsFeed extends Component {
     $option_4 = null,
   ) {
     if ($this->latestNews == null) {
-      $this->latestNews =  LatestNews::query()
+      $this->latestNews = LatestNews::query()
         ->where('is_active', true)
-        ->orderBy('created_at')
+        ->whereNotNull('published_at')
+        ->where('published_at', '<=', now())
+        ->orderBy('published_at', 'desc')
         ->take(4)
         ->get();
     }
