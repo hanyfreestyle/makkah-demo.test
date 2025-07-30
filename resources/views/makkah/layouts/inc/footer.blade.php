@@ -28,7 +28,11 @@
 
                 <li>
                   <div class="footer-address-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                  <div class="footer-address-info footer_number"><p><a href="#">{{$webConfig->whatsapp_num}}</a></p></div>
+                  <div class="footer-address-info footer_number">
+                    <p>
+                      <a href="{{ctaActionWhatsapp($webConfig)}}">{{$webConfig->whatsapp_num}}</a>
+                    </p>
+                  </div>
                 </li>
                 <li>
                   <div class="footer-address-icon"><i class="fa-solid fa-at"></i></div>
@@ -81,3 +85,14 @@
     </div>
   </div>
 </footer>
+
+<div class="floating-buttons">
+  <a href="{{ctaActionCall($webConfig)}}" class="floating-button call">
+    <i class="fas fa-phone-alt"></i>
+    <span class="floating-button-tooltip">{{__('webLang/footer.cta_call_us')}}</span>
+  </a>
+  <a href="{{ctaActionWhatsapp($webConfig)}}" target="_blank" class="floating-button whatsapp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="floating-button-tooltip">{{__('webLang/footer.cta_whatsapp')}}</span>
+  </a>
+</div>

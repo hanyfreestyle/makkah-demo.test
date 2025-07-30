@@ -26,7 +26,11 @@
 
               <li>
                 <div class="footer-address-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                <div class="footer-address-info footer_number"><p><a href="#">{{$webConfig->whatsapp_num}}</a></p></div>
+                <div class="footer-address-info footer_number">
+                  <p>
+                    <a href="{{ctaActionWhatsapp($webConfig)}}">{{$webConfig->whatsapp_num}}</a>
+                  </p>
+                </div>
               </li>
               <li>
                 <div class="footer-address-icon"><i class="fa-solid fa-at"></i></div>
@@ -38,7 +42,7 @@
 
         <div class="widget ltn__social-media-widget mb-20">
           <h4 class="ltn__widget-title ltn__widget-title-border-2 updateFont">{{__('web/def.contact.zayed_branch')}}</h4>
-           <p>{{__('web/def.contact.form_soon')}}</p>
+          <p>{{__('web/def.contact.form_soon')}}</p>
         </div>
 
 
