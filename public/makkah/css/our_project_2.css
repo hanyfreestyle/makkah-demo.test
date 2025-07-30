@@ -1,0 +1,183 @@
+.project-section {
+    padding:3rem 0!important;
+    display: flex;
+    align-items: center;
+
+}
+
+.project-image {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+
+.mask-wave000 {
+    clip-path: ellipse(100% 55% at 48% 44%);
+}
+
+.mask-wave {
+    clip-path: ellipse(100% 50% at 50% 50%);
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.project-image:hover img {
+    transform: scale(1.05);
+}
+
+.project-content {
+    padding: 1rem;
+}
+
+.project-title {
+    font-size: clamp(1.8rem, 3vw, 1.7rem);
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.project-title::before {
+    content: '';
+    width: 50px;
+    height: 3px;
+    background: var(--def-color);
+    position: absolute;
+    bottom: -8px;
+    right: auto;
+    left: 0;
+    border-radius: 2px;
+}
+
+html[lang="ar"] .project-title::before {
+
+    right: 0;
+    left: auto;
+}
+
+.project-description {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.8;
+    margin: 1.5rem 0;
+    font-weight: 400;
+}
+
+.project-features {
+    margin-top: 1.5rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    color: #555;
+    font-weight: 500;
+}
+
+.feature-item i {
+    margin-right: 8px;
+    width: 20px;
+    font-size: 1rem;
+}
+
+html[lang="ar"] .feature-item i {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+
+
+/* أيقونات مخصصة لكل مشروع */
+.project-1 .feature-item:nth-child(1) i { color: #e74c3c; } /* مبنى */
+.project-1 .feature-item:nth-child(2) i { color: #2ecc71; } /* أشجار */
+.project-1 .feature-item:nth-child(3) i { color: #9b59b6; } /* مرافق */
+.project-1 .feature-item:nth-child(4) i { color: #f39c12; } /* أمان */
+
+.project-2 .feature-item:nth-child(1) i { color: #3498db; } /* موقع */
+.project-2 .feature-item:nth-child(2) i { color: #e67e22; } /* مواصلات */
+.project-2 .feature-item:nth-child(3) i { color: #1abc9c; } /* تسوق */
+.project-2 .feature-item:nth-child(4) i { color: #e91e63; } /* ترفيه */
+
+.project-3 .feature-item:nth-child(1) i { color: #0077be; } /* بحر */
+.project-3 .feature-item:nth-child(2) i { color: #27ae60; } /* مناخ */
+.project-3 .feature-item:nth-child(3) i { color: #8e44ad; } /* تاريخ */
+.project-3 .feature-item:nth-child(4) i { color: #f1c40f; } /* شاطئ */
+
+/* تصميم للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .project-section {
+        padding: 2rem 0;
+        min-height: auto;
+    }
+
+    .project-image {
+        height: 300px;
+        margin-bottom: 1.5rem;
+    }
+
+    .project-content {
+        padding: 0.5rem;
+    }
+
+    .main-title {
+        margin: 1.5rem 0;
+    }
+
+    .project-title::before {
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+    }
+}
+
+/* تأثيرات الحركة */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.8s ease;
+}
+
+.slide-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.8s ease;
+}
+
+.slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}

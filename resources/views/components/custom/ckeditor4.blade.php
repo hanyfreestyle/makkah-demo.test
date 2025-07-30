@@ -13,6 +13,8 @@
                 CKEDITOR.replace(editorId, {
                     language: '{{ $locale }}',
                     height: {{$editorHeight}},
+                    allowedContent: true,
+                    extraAllowedContent: 'i(*)[*]{*}; span(*)[*]{*}; div(*)[*]{*}',
                     contentsLangDirection: '{{ $locale == 'ar' ? 'rtl' : 'ltr' }}',
                     removePlugins : 'print,save,newpage,flash,another,form',
                     toolbarGroups : [
@@ -29,7 +31,8 @@
                 });
 
                 CKEDITOR.config.versionCheck = false;
-                CKEDITOR.config.fillEmptyBlocks = false;
+{{--                CKEDITOR.config.fillEmptyBlocks = false;--}}
+                CKEDITOR.dtd.$removeEmpty['i']    = false;
                 CKEDITOR.config.removeButtons = 'Save,NewPage,ExportPdf,Preview,Print,Templates,About,Smiley,SpecialChar,PageBreak,Iframe,Language,BidiRtl,BidiLtr,Subscript,Superscript,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Find,Replace,SelectAll,Scayt';
 
                 CKEDITOR.instances[editorId].on('change', function() {
