@@ -4,9 +4,9 @@
 
       @if($title)
         <div class="row">
-          <div class="col-lg-12">
-            <div class="section-title-area ltn__section-title-2--- text-center">
-              <h2 class="section-title updateFont">{{$title}}</h2>
+          <div class="col-lg-12 mb-3">
+            <div class="pageHeading text-center">
+              <h2 class="title updateFont">{{$title}}</h2>
             </div>
           </div>
         </div>

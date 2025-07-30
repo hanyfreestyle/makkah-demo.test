@@ -2,9 +2,9 @@
     color: var(--def-color) !important;
 }
 
-.pageHeading h1 {
+.pageHeading .title {
     letter-spacing: 1px;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     color: var(--def-color);
     position: relative;
     display: inline-block;
@@ -12,7 +12,7 @@
     margin: 0 auto 10px;
 }
 
-.pageHeading h1::after {
+.pageHeading .title::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -28,6 +28,8 @@
     padding: 5px 300px;
     font-weight: 500;
 }
+
+
 
 .breadcrumb_list ul {
     display: flex;

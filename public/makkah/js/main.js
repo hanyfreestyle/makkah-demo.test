@@ -1627,6 +1627,7 @@
             dots: false,
             infinite: true,
             speed: 300,
+            rtl: $('html').attr('dir') === 'rtl',
             slidesToShow: 3,
             slidesToScroll: 1,
             prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left" alt="Arrow Icon"></i></a>',
@@ -1636,6 +1637,7 @@
                     breakpoint: 1200,
                     settings: {
                         arrows: false,
+                        rtl: $('html').attr('dir') === 'rtl',
                         dots: true
                     }
                 },
@@ -1643,6 +1645,7 @@
                     breakpoint: 992,
                     settings: {
                         arrows: false,
+                        rtl: $('html').attr('dir') === 'rtl',
                         dots: true,
                         slidesToShow: 2,
                         slidesToScroll: 1
@@ -1653,6 +1656,7 @@
                     settings: {
                         arrows: false,
                         dots: true,
+                        rtl: $('html').attr('dir') === 'rtl',
                         slidesToShow: 2,
                         slidesToScroll: 1
                     }
@@ -1662,6 +1666,7 @@
                     settings: {
                         arrows: false,
                         dots: true,
+                        rtl: $('html').attr('dir') === 'rtl',
                         slidesToShow: 1,
                         slidesToScroll: 1
                     }

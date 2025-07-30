@@ -1,11 +1,12 @@
 @if(count($projectList) > 0)
-  <div class="ltn__search-by-place-area section-bg-1 before-bg-top--- bg-image-top--- pt-115 pb-70" data-bs-bg="img/bg/20.jpg">
+{{--  <div class="ltn__search-by-place-area section-bg-1 before-bg-top--- bg-image-top--- pt-115 pb-70" data-bs-bg="img/bg/20.jpg">--}}
+  <div class="pt-70 pb-70" >
     <div class="container-fluid" id="our-project">
       @if($title)
         <div class="row">
           <div class="col-lg-12">
-            <div class="section-title-area ltn__section-title-2--- text-center">
-              <h1 class="section-title updateFont">{{$title}}</h1>
+            <div class="pageHeading text-center">
+              <h2 class="title updateFont">{{$title}}</h2>
               @if($des)
                 <p>{{$des}}</p>
               @endif
