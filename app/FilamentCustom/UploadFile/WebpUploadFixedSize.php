@@ -69,6 +69,14 @@ class WebpUploadFixedSize {
     return $this;
   }
 
+  public function setMultipleFiles(bool $multipleFiles): static {
+    $this->multipleFiles = $multipleFiles;
+    if ($this->multipleFiles) {
+      $this->previewAble = false;
+    }
+    return $this;
+  }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public function getColumns(): array {
@@ -88,6 +96,7 @@ class WebpUploadFixedSize {
       ->directory($this->uploadDirectory)
       ->acceptedFileTypes(['image/*'])
       ->hiddenLabel()
+      ->multiple($this->multipleFiles)
       ->image()
       ->imageEditor()
       ->downloadable()

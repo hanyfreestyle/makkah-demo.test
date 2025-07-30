@@ -11,7 +11,7 @@ class BlockFormFactory {
       'counter' => CounterBlockForm::class,
       'cursor' => CursorBlockForm::class,
       'cta' => CtaBlockForm::class,
-//      'slider' => SliderBlockForm::class,
+      'gallery' => GalleryBlockForm::class,
 
     ];
 
