@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Builder\Form\Hero;
+namespace App\Service\Builder\Form\Cta;
 
 use App\FilamentCustom\UploadFile\WebpUploadFixedSize;
 use App\Service\Builder\Function\BuilderTranslatableInput;
@@ -8,7 +8,7 @@ use App\Service\Builder\Function\BuilderTranslatableTextArea;
 use App\Service\Builder\Function\SetProtectedValTrait;
 use Filament\Forms;
 
-class Hero1 {
+class Cta1 {
   use SetProtectedValTrait;
 
   public static function make(): static {
@@ -22,16 +22,6 @@ class Hero1 {
 
     $columns[] = Forms\Components\Group::make()->schema([
       Forms\Components\Section::make()->schema([
-
-        ...BuilderTranslatableInput::make()
-          ->setInputName('schema.number')
-          ->setLabel(__('builder/_default.number'))
-          ->getColumns(),
-
-        ...BuilderTranslatableInput::make()
-          ->setInputName('schema.years')
-          ->setLabel(__('builder/_default.years'))
-          ->getColumns(),
 
         ...BuilderTranslatableInput::make()
           ->setInputName('schema.h1')

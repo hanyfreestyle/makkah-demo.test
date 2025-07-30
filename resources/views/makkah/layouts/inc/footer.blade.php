@@ -1,5 +1,3 @@
-{{--<x-makkah.cta.footer-cta :page-view="$pageView"/>--}}
-
 <footer class="ltn__footer-area">
   <div class="footer-top-area  section-bg-2 plr--5">
     <div class="container">

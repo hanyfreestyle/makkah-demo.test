@@ -10,6 +10,7 @@ class BlockFormFactory {
       'hero' => HeroBlockForm::class,
       'counter' => CounterBlockForm::class,
       'cursor' => CursorBlockForm::class,
+      'cta' => CtaBlockForm::class,
 //      'slider' => SliderBlockForm::class,
 
     ];

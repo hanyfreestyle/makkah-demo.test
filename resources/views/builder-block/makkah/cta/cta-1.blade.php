@@ -4,12 +4,12 @@
       <div class="col-lg-12">
         <div class="call-to-action-inner call-to-action-inner-6 ltn__secondary-bg position-relative text-center---">
           <div class="coll-to-info text-color-white">
-            <h1 class="updateFont">{{__('web/def.footer.cta_h1')}}</h1>
-            <p>{{__('web/def.footer.cta_p')}}</p>
+            <h1 class="updateFont">{{getLangData($schema, 'h1')}}</h1>
+            <p>{{getLangData($schema, 'des')}}</p>
           </div>
           <div class="btn-wrapper">
-            <a class="btn btn-effect-3 btn-white updateFont" href="{{$pageView['cta_footer_slug'] ?? '#'}}">
-              {{__('web/def.footer.cta_btn')}}
+            <a class="btn btn-effect-3 btn-white updateFont" href="{{getLangData($schema, 'btn_url')}}">
+              {{getLangData($schema, 'btn')}}
             </a>
           </div>
         </div>
