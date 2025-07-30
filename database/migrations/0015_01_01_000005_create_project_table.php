@@ -13,8 +13,10 @@ return new class extends Migration {
       $table->boolean("has_en")->nullable();
       $table->integer("user_id")->nullable();
 
+
       $table->string("photo")->nullable();
       $table->string("photo_thumbnail")->nullable();
+      $table->string("video")->nullable();
 
       $table->boolean("is_active")->default(true);
       $table->softDeletes();
@@ -28,6 +30,7 @@ return new class extends Migration {
       $table->string('slug')->index();
       $table->string('name')->nullable();
       $table->longText('des')->nullable();
+      $table->longText('short')->nullable();
       $table->string('g_title')->nullable();
       $table->text('g_des')->nullable();
       $table->unique(['project_id', 'locale']);

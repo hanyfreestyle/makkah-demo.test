@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources\Makkah;
 
 use App\FilamentCustom\Form\Translation\MainInputWithSlug;
+use App\Service\Builder\Function\BuilderTranslatableTextArea;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Makkah\MakkahProjectResource\TableMakkahProject;
 use App\Filament\Admin\Resources\Makkah\MakkahProjectResource\Pages;
@@ -76,6 +77,15 @@ class MakkahProjectResource extends Resource implements HasShieldPermissions {
             ->default(true)
             ->required(),
         ]),
+
+
+        ...BuilderTranslatableTextArea::make()
+          ->setInputName('short')
+          ->setDataRequired(false)
+          ->setLabel(__('builder/_default.description'))
+          ->getColumns(),
+
+
       ])->columnSpan(1),
     ])->columns(3);
   }

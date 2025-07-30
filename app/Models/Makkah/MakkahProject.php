@@ -24,8 +24,8 @@ class MakkahProject extends Model implements TranslatableContract {
   protected $primaryKey = 'id';
   protected $translationForeignKey = 'project_id';
   public $translationModel = MakkahProjectTranslation::class;
-  public array $translatedAttributes = ['project_id', 'locale', 'slug', 'name', 'des', 'g_title', 'g_des'];
-  protected $fillable = ['has_en', 'user_id', 'photo', 'photo_thumbnail', 'is_active'];
+  public array $translatedAttributes = ['project_id', 'locale', 'slug', 'name', 'des', 'short', 'g_title', 'g_des'];
+  protected $fillable = ['has_en', 'user_id', 'photo', 'photo_thumbnail','video', 'is_active'];
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
