@@ -16,6 +16,7 @@ return new class extends Migration {
       $table->string("photo")->nullable();
       $table->string("photo_thumbnail")->nullable();
 
+      $table->date("published_at")->nullable();
       $table->boolean("is_active")->default(true);
       $table->softDeletes();
       $table->timestamps();

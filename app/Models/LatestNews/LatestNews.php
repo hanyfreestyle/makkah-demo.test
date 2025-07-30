@@ -23,7 +23,11 @@ class LatestNews extends Model implements TranslatableContract {
   protected $translationForeignKey = 'news_id';
   public $translationModel = LatestNewsTranslation::class;
   public array $translatedAttributes = ['news_id', 'locale', 'slug', 'name', 'des', 'g_title', 'g_des'];
-  protected $fillable = ['has_en', 'user_id', 'photo', 'photo_thumbnail', 'is_active'];
+  protected $fillable = ['has_en', 'user_id', 'photo', 'photo_thumbnail', 'published_at', 'is_active'];
+
+  protected $casts = [
+    'published_at' => 'datetime',
+  ];
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||

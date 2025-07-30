@@ -70,6 +70,12 @@ class LatestNewsResource extends Resource implements HasShieldPermissions {
             ->label(__('default/lang.columns.is_active'))
             ->default(true)
             ->required(),
+
+          Forms\Components\DatePicker::make('published_at')
+            ->label(__('default/lang.columns.published_at'))
+            ->default(now()) // set today as default date
+            ->required(),
+
         ]),
       ])->columnSpan(1),
     ])->columns(3);

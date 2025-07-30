@@ -25,6 +25,10 @@ trait TableLatestNews {
         TextColumn::make('id')->label('ID')->sortable()->searchable(),
         ImageColumnDef::make('photo')->width(60)->height(40),
         TranslationTextColumn::make('name'),
+        TextColumn::make('published_at')
+          ->label(__('default/lang.columns.published_at'))
+          ->sortable()
+          ->date(),
         IconColumn::make('is_active')->label(__('default/lang.columns.is_active'))->boolean(),
         ...CreatedDates::make()->toggleable(true)->getColumns(),
       ])->filters([
@@ -45,7 +49,7 @@ trait TableLatestNews {
         ]),
       ])
       ->recordUrl(fn ($record) => static::getTableRecordUrl($record))
-      ->defaultSort('id', 'desc');
+      ->defaultSort('published_at', 'desc');
   }
 }
 
