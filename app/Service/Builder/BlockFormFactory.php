@@ -12,6 +12,7 @@ class BlockFormFactory {
       'cursor' => CursorBlockForm::class,
       'cta' => CtaBlockForm::class,
       'gallery' => GalleryBlockForm::class,
+      'text' => TextBlockForm::class,
 
     ];
 
