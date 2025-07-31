@@ -27,7 +27,7 @@ class MetaTag extends Model implements TranslatableContract  {
     protected $translationForeignKey = 'meta_tag_id';
 
     public array $translatedAttributes = ['name', 'g_title', 'g_des', 'des',];
-    protected $fillable = ['cat_id', 'photo', 'photo_thumbnail', 'deleted_at'];
+    protected $fillable = ['cat_id','builder_page_id', 'photo', 'photo_thumbnail', 'deleted_at'];
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||

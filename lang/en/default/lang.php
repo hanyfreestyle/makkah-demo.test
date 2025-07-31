@@ -35,6 +35,7 @@ return [
     'short' => 'Short Description',
     'video' => 'Video',
     'video_url' => 'Video URL',
+    'builder_page_id' => 'Builder Page',
   ],
 
   'but' => [

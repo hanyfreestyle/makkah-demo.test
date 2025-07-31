@@ -19,6 +19,7 @@ return new class extends Migration {
       $table->string("video")->nullable();
 
       $table->boolean("is_active")->default(true);
+      $table->integer('builder_page_id')->unsigned()->nullable();
       $table->softDeletes();
       $table->timestamps();
     });

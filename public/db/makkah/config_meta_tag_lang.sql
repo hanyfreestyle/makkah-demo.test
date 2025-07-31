@@ -18,7 +18,5 @@ INSERT INTO `config_meta_tag_lang` (`id`, `meta_tag_id`, `locale`, `name`, `des`
 ('13', '7', 'ar', 'المشاريع', 'نقدم مواد دراسية أساسية مصممة بعناية لتعزيز المعرفة الأكاديمية وبناء أساس قوي للتعلم. نركز على توفير تجربة', 'المشاريع  |  مكة للتطوير العقارى شركة رائدة في مجال الاستثمار والتطوير العقاري', 'تتميز مشاريعنا العقارية بالتنوع والابتكار، وتشمل وحدات سكنية وتجارية في مواقع استراتيجية مثل أكتوبر والتجمع، بجودة عالية وتصميمات عصرية.'),
 ('14', '7', 'en', 'Our Projects', 'We provide carefully designed core subjects to enhance academic knowledge and build a strong learning', 'Our Projects|  Makkah for Real Estate Development has been a leader in property investment and development', 'We deliver exceptional real estate projects with modern designs and strategic locations, meeting client aspirations with top quality and comfort.
 
-'),
-('15', '8', 'ar', 'الفصول الدراسية', NULL, 'الفصول الدراسية', 'الفصول الدراسية'),
-('16', '8', 'en', 'Classes', NULL, 'Classes', 'Classes');
+');
 COMMIT;

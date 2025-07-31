@@ -3,26 +3,21 @@
 namespace App\Filament\Admin\Resources\Makkah;
 
 use App\FilamentCustom\Form\Inputs\SoftTranslatableTextArea;
+use App\FilamentCustom\Form\Select\SelectBuilderPage;
 use App\FilamentCustom\Form\Translation\MainInputWithSlug;
-use App\Service\Builder\Function\BuilderTranslatableTextArea;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Makkah\MakkahProjectResource\TableMakkahProject;
 use App\Filament\Admin\Resources\Makkah\MakkahProjectResource\Pages;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
-use App\FilamentCustom\Form\Inputs\SlugInput;
-use App\FilamentCustom\Form\Translation\MainInput;
 use App\FilamentCustom\UploadFile\WebpUploadWithFilter;
 use App\Traits\Admin\Helper\SmartResourceTrait;
 use App\Models\Makkah\MakkahProject;
 use App\Helpers\FilamentAstrotomic\Forms\Components\TranslatableTabs;
 use App\Helpers\FilamentAstrotomic\TranslatableTab;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use Filament\Forms\Components\Group;
 use Filament\Resources\Resource;
 use Filament\Forms\Form;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms;
 
 class MakkahProjectResource extends Resource implements HasShieldPermissions {
@@ -81,6 +76,8 @@ class MakkahProjectResource extends Resource implements HasShieldPermissions {
 
 
         Forms\Components\Section::make()->schema([
+
+          SelectBuilderPage::make('builder_page_id'),
 
           Forms\Components\TextInput::make('video')
             ->label(__('default/lang.columns.video_url'))
