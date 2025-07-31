@@ -36,6 +36,7 @@ return [
     'video' => 'فيديو',
     'video_url' => 'رابط الفيديو ',
     'builder_page_id' => 'تحديد صفحة القالب',
+    'builder_page_name' => 'قالب الصفحة',
 
   ],
 

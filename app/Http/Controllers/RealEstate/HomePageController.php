@@ -26,24 +26,9 @@ class HomePageController extends DefaultWebController {
     $meta = parent::getMeatByCatId('home');
     self::printSeoMeta($meta, 'web.index');
     View::share('headerHomeMenu', true);
-
-
-    $page = BuilderPage::query()->where('id', 1)->firstOrFail();
-    $blocks = $page->blocks()
-      ->where('builder_block.is_active', true)
-      ->where('builder_page_pivot.is_active', true)
-      ->with('template') // تأكد إن العلاقة template موجودة
-      ->orderBy('builder_page_pivot.position') // حسب جدول pivot
-      ->get();
-
-//    dd($blocks);
-
+    $blocks = self::getBuilderPageBlocks($meta->builder_page_id);
     return view('makkah.index')->with([
       'blocks' => $blocks,
-
-//      'featuredProperties' => $featuredProperties,
-//      'popularTerritories' => $popularTerritories,
-//      'topDevelopers' => $topDevelopers,
     ]);
   }
 
@@ -52,13 +37,15 @@ class HomePageController extends DefaultWebController {
   public function aboutUs() {
     $meta = parent::getMeatByCatId('about_us');
     self::printSeoMeta($meta, 'web.about_us');
-
     $pageView = $this->pageView;
     $pageView['selMenu'] = "about_us";
+
+    $blocks = self::getBuilderPageBlocks($meta->builder_page_id);
 
     return view('makkah.about_us')->with([
       'meta' => $meta,
       'pageView' => $pageView,
+      'blocks' => $blocks,
     ]);
   }
 
@@ -89,7 +76,7 @@ class HomePageController extends DefaultWebController {
     $latestNews = LatestNews::query()
       ->where('is_active', true)
       ->whereNotNull('published_at')
-      ->where('published_at','<=', now())
+      ->where('published_at', '<=', now())
 //      ->translatedIn()
       ->orderBy('published_at', 'desc')
       ->paginate(9);

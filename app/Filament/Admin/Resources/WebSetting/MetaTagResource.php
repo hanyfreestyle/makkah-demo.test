@@ -22,6 +22,7 @@ use Filament\Resources\Resource;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Section;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
@@ -108,13 +109,22 @@ class MetaTagResource extends Resource implements TranslatableContract {
       ->columns([
         ImageColumnDef::make('photo_thumbnail'),
         TranslationTextColumn::make('name'),
-        TranslationTextColumn::make('g_title')->label(__('default/lang.columns.g_title')),
+        TranslationTextColumn::make('g_title')->wrap()->limit(160)->label(__('default/lang.columns.g_title'))
+          ->lineClamp(2)
+          ->extraAttributes([
+            'style' => 'max-width: 300px; white-space: normal;',
+            'class' => 'text-sm leading-relaxed',
+          ]),
         TranslationTextColumn::make('g_des')->label(__('default/lang.columns.g_des'))
           ->lineClamp(2)
           ->extraAttributes([
             'style' => 'max-width: 350px; white-space: normal;',
             'class' => 'text-sm leading-relaxed',
           ]),
+
+        TextColumn::make('builder_page.name.ar')
+          ->label(__('default/lang.columns.builder_page_name')),
+
         ...CreatedDates::make()->toggleable(true)->getColumns(),
       ])->filters([
         TrashedFilter::make(),

@@ -3,61 +3,68 @@
 namespace App\Models\WebSetting;
 
 
+use App\Models\Builder\BuilderPage;
 use App\Traits\Admin\Model\ClearsCacheOnChange;
 use App\Traits\Admin\Model\WithModelEventsCache;
 use App\Traits\Admin\Model\WithModelEventsUploadPhotos;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 
 
-class MetaTag extends Model implements TranslatableContract  {
-    use Translatable;
-    use ClearsCacheOnChange;
-    use WithModelEventsUploadPhotos;
-    use SoftDeletes;
+class MetaTag extends Model implements TranslatableContract {
+  use Translatable;
+  use ClearsCacheOnChange;
+  use WithModelEventsUploadPhotos;
+  use SoftDeletes;
 
-    protected $table = "config_meta_tag";
-    protected static string $cashKey = 'cash_config_meta_tag';
-    protected $primaryKey = 'id';
-    public $translationModel = MetaTagTranslation::class;
-    protected $translationForeignKey = 'meta_tag_id';
+  protected $table = "config_meta_tag";
+  protected static string $cashKey = 'cash_config_meta_tag';
+  protected $primaryKey = 'id';
+  public $translationModel = MetaTagTranslation::class;
+  protected $translationForeignKey = 'meta_tag_id';
 
-    public array $translatedAttributes = ['name', 'g_title', 'g_des', 'des',];
-    protected $fillable = ['cat_id','builder_page_id', 'photo', 'photo_thumbnail', 'deleted_at'];
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    protected static function booted() {
-        self::bootClearsCacheOnChange();
-        static::bootWithModelEventsUploadPhotos();
-    }
-
-    public function cacheKeys(): array {
-        return [
-            'MetaTag_CashList_',
-        ];
-    }
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    public function translations(): HasMany {
-        return $this->hasMany(MetaTagTranslation::class, 'meta_tag_id');
-    }
+  public array $translatedAttributes = ['name', 'g_title', 'g_des', 'des',];
+  protected $fillable = ['cat_id', 'builder_page_id', 'photo', 'photo_thumbnail', 'deleted_at'];
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    public static function getMetaTagCashList($IsCash = true) {
-        $cashKey = self::$cashKey;
-        if ($IsCash) {
-            return Cache::remember($cashKey . app()->getLocale(), 3600, function () {
-                return MetaTag::query()->get();
-            });
-        } else {
-            return MetaTag::query()->get();
-        }
+  protected static function booted() {
+    self::bootClearsCacheOnChange();
+    static::bootWithModelEventsUploadPhotos();
+  }
+
+  public function cacheKeys(): array {
+    return [
+      'MetaTag_CashList_',
+    ];
+  }
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  public function translations(): HasMany {
+    return $this->hasMany(MetaTagTranslation::class, 'meta_tag_id');
+  }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  public static function getMetaTagCashList($IsCash = true) {
+    $cashKey = self::$cashKey;
+    if ($IsCash) {
+      return Cache::remember($cashKey . app()->getLocale(), 3600, function () {
+        return MetaTag::query()->get();
+      });
+    } else {
+      return MetaTag::query()->get();
     }
+  }
+
+
+  public function builder_page(): BelongsTo {
+    return $this->belongsTo(BuilderPage::class, 'builder_page_id');
+  }
 
 }

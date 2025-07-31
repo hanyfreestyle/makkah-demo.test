@@ -118,9 +118,8 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public static function form(Form $form): Form {
 
-    return $form->schema([
+   return $form->schema([
       Forms\Components\Section::make()->schema([
-
 
         Forms\Components\Group::make()->schema([
           Forms\Components\TextInput::make('slug')
