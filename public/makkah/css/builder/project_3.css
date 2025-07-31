@@ -1,0 +1,46 @@
+.cursorProject3 .sectionTitle{
+    max-width: 90%;
+    background: yellow;
+    margin: 0!important;
+    /*display: none;*/
+
+}
+
+.cursorProject3 .sectionDes{
+    max-width: 90%;
+    /*display: none;*/
+    background: yellow;
+    margin: 0!important;
+}
+
+html[lang="ar"] .slick-arrow-3 .slick-arrow {
+    right: auto;
+    left: 10px;
+}
+
+
+html[lang="ar"] .slick-arrow-3 .slick-next {
+    right: auto;
+    left: 85px;
+
+}
+
+.ltn__upcoming-project-item {
+    padding: 0;
+    -webkit-box-shadow: var(--ltn__box-shadow-4);
+    box-shadow: var(--ltn__box-shadow-4);
+    margin-top: 0;
+    margin-bottom: 50px;
+    background-color: var(--white);
+}
+
+.cursorProject3 .section-title-area {
+    margin-bottom: 20px;
+}
+
+.ltn__upcoming-project-img{
+    background: red;
+    height: 100%;
+    width: 100%!important;
+    margin: 0;
+}

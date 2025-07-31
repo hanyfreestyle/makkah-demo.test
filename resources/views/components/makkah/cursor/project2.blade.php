@@ -36,11 +36,11 @@
 
 
                       <h1 class="slide-title animated updateFont">{{$project->name ?? ''}}</h1>
-                        @if($project->short)
-                          <div class="slide-brief animated">
-                            <p>{{$project->short ?? ''}}</p>
-                          </div>
-                        @endif
+                      @if($project->short)
+                        <div class="slide-brief animated">
+                          <p>{{$project->short ?? ''}}</p>
+                        </div>
+                      @endif
 
                       <div class="btn-wrapper animated">
                         <a href="{{ route('web.project_view',$project->slug) }}" class="theme-btn-1 btn btn-effect-1 updateFont">{{__('web/def.read_more')}}</a>
@@ -52,21 +52,7 @@
             </div>
           </div>
         </div>
-
-        {{--                <div class="col-lg-4">--}}
-        {{--                    <div class="ltn__search-by-place-item">--}}
-        {{--                        <div class="search-by-place-img">--}}
-        {{--                            <a href="{{ route('web.project_view',$project->slug) }}">--}}
-        {{--                                <x-web.def.img :row="$project" def-photo="news_thumbnail" def-photo-row="photo" class=""/>--}}
-        {{--                            </a>--}}
-        {{--                        </div>--}}
-        {{--                        <div class="search-by-place-info text-center">--}}
-        {{--                            <h4><a class="updateFont" href="{{ route('web.project_view',$project->slug) }}">{{$project->name ?? ''}}</a></h4></div>--}}
-        {{--                    </div>--}}
-        {{--                </div>--}}
       @endforeach
-
-
     </div>
   </div>
 @endif

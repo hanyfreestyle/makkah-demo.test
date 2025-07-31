@@ -1612,6 +1612,8 @@
             arrows: true,
             dots: false,
             infinite: true,
+            rtl: $('html').attr('dir') === 'rtl',
+
             speed: 300,
             slidesToShow: 1,
             slidesToScroll: 1,

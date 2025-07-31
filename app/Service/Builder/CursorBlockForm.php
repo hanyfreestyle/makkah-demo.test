@@ -14,6 +14,7 @@ class CursorBlockForm implements BlockFormInterface {
       'cursor-news-1' => CursorNews1::make()->getColumns(),
       'cursor-project-1' => CursorProject1::make()->getColumns(),
       'cursor-project-2' => CursorProject1::make()->setDataRequired(false)->getColumns(),
+      'cursor-project-3' => CursorProject1::make()->setDataRequired(false)->setAddBlockPhoto(true)->getColumns(),
       default => [],
     };
 

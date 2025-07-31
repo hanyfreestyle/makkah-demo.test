@@ -16,7 +16,6 @@ class CursorProject1 {
   use SetProtectedValTrait;
 
 
-
   public static function make(): static {
     return new static();
   }
@@ -47,6 +46,22 @@ class CursorProject1 {
 
 
     $columns[] = Forms\Components\Group::make()->schema([
+
+      Forms\Components\Section::make()->schema([
+        ...WebpUploadFixedSize::make()
+          ->setFileName('photo')
+          ->setThumbnail(false)
+          ->setUploadDirectory($this->uploadDirectory)
+          ->setRequiredUpload(false)
+          ->setResize(800, 400, 90)
+          ->setFilter(1)
+          ->setThumbnailSize(200, 200, 90)
+          ->setCanvas('#fff')
+          ->setAspectRatio(null)
+          ->getColumns(),
+
+      ])->columns(1)->visible($this->setAddBlockPhoto),
+
       Forms\Components\Section::make()->schema([
         Forms\Components\TextInput::make('config.take')
           ->label(__('builder/_default.take'))
@@ -55,6 +70,8 @@ class CursorProject1 {
           ->extraAttributes(fn () => rtlIfArabic("en"))
 
       ])->columns(1),
+
+
     ])->columnSpan(2)->columns(2);
 
 
