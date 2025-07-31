@@ -15,31 +15,32 @@
       </div>
       <div class="row ltn__upcoming-project-slider-1-active slick-arrow-3">
         @foreach($projectList as $project)
-          <div class="col-lg-12">
-            <div class="ltn__upcoming-project-item">
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="ltn__upcoming-project-img">
-                    <img src="{{getPhotoPath($project->photo_thumbnail,"photo","photo")}}" alt="#">
+          <section class="project-section project-1">
+            <div class="col-lg-12">
+              <div class="ltn__upcoming-project-item">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="ltn__upcoming-project-img">
+                      <img src="{{getPhotoPath($project->photo_thumbnail,"photo","photo")}}" alt="#">
+                    </div>
                   </div>
-                </div>
-                <div class="col-lg-6 ">
-                  <div class="ltn__upcoming-project-info ltn__menu-widget">
-                    <h3 class="mb-15">{{$project->name}}</h3>
-                    @if($project->des)
-                      <div class="">
-                        <p>{!! $project->des ?? '' !!}</p>
-                      </div>
-                    @endif
+                  <div class="col-lg-6 ">
+                    <div class="ltn__upcoming-project-info ltn__menu-widget">
+                      <h3 class="project-title updateFont">{{$project->name}}</h3>
+                      @if($project->des)
+                        {!! $project->des ?? '' !!}
+                      @endif
 
-                    <div class="btn-wrapper animated">
-                      <a href="contact.html" class="theme-btn-1 btn btn-effect-1">Download Brochure</a>
+                      <div class="btn-wrapper animated mt-40 {{ textDir() }}">
+                        <a href="{{ route('web.project_view',$project->slug) }}" class="theme-btn-1 btn btn-effect-1 updateFont">{{__('web/def.read_more')}}</a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
+
         @endforeach
 
 

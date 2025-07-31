@@ -452,6 +452,7 @@
             appendDots: '.ltn__slider-11-pagination-count',
             infinite: true,
             autoplay: false,
+            rtl: $('html').attr('dir') === 'rtl',
             autoplaySpeed: 10000,
             speed: 500,
             asNavFor: '.ltn__slider-11-img-slide-arrow-active',
@@ -500,10 +501,12 @@
         });
 
         $('.ltn__slider-11-img-slide-arrow-active').slick({
-            slidesToShow: 3,
+            slidesToShow: 2,
             slidesToScroll: 1,
             initialSlide: 2,
             centerPadding: '0px',
+            rtl: $('html').attr('dir') === 'rtl',
+
             asNavFor: '.ltn__slider-11-active',
             dots: false, /* image slide dots */
             arrows: false, /* image slide arrow */
