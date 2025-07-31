@@ -7,5 +7,6 @@ INSERT INTO `builder_page_pivot` (`id`, `block_id`, `page_id`, `position`, `is_a
 ('2', '2', '1', '1', '1', NULL, NULL),
 ('3', '4', '1', '5', '1', NULL, NULL),
 ('5', '6', '1', '6', '1', NULL, NULL),
-('6', '8', '1', '2', '1', NULL, NULL);
+('6', '8', '1', '2', '1', NULL, NULL),
+('7', '6', '2', '0', '1', NULL, NULL);
 COMMIT;

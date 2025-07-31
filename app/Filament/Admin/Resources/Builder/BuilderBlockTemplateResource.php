@@ -4,11 +4,15 @@ namespace App\Filament\Admin\Resources\Builder;
 
 use App\Enums\Builder\EnumsBlockTemplate;
 use App\Enums\Builder\EnumsBlockType;
+use App\Enums\Status\EnumsActive;
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
+use App\FilamentCustom\Table\FilterWithArchive;
 use App\FilamentCustom\Table\ImageColumnDef;
 use App\FilamentCustom\UploadFile\WebpUploadFixedSize;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderBlockTemplateResource\Pages;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
@@ -99,8 +103,36 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
         ->sortable(),
 
     ])->filters([
-//        ...FilterWithArchive::make()->getColumns(),
-    ])
+//         ...FilterWithArchive::make()->getColumns(),
+      SelectFilter::make('is_active')
+        ->label(__('default/lang.enum.active.label'))
+        ->options(EnumsActive::options())
+        ->searchable()
+        ->preload(),
+
+      SelectFilter::make('type')
+        ->label(__('builder/builder-block-template.columns.type'))
+        ->options(
+          collect(EnumsBlockType::cases())
+            ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
+            ->sort()
+            ->toArray()
+        )
+        ->searchable()
+        ->preload(),
+
+      SelectFilter::make('template')
+        ->label(__('builder/builder-block-template.columns.template'))
+        ->options(
+          collect(EnumsBlockTemplate::cases())
+            ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
+            ->sort()
+            ->toArray()
+        )
+        ->searchable()
+        ->preload(),
+
+    ], layout: FiltersLayout::Modal)->filtersFormColumns(4)
       ->persistFiltersInSession()
       ->persistSearchInSession()
       ->persistSortInSession()

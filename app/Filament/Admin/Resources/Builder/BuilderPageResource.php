@@ -37,6 +37,10 @@ class BuilderPageResource extends Resource {
 //        return false;
 //    }
 
+  public function getDisplayNameAttribute(): string {
+    return $this->name[app()->getLocale()] ?? reset($this->name);
+  }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public static function getPages(): array {

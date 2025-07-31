@@ -18,7 +18,9 @@ class BuilderPage extends Model {
     'name' => 'array',
 
   ];
-
+  public function getDisplayNameAttribute(): string {
+    return $this->name[app()->getLocale()] ?? reset($this->name);
+  }
   protected static function booted() {
     self::bootClearsCacheOnChange();
   }

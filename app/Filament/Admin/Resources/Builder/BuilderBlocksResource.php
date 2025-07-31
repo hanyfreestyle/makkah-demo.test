@@ -6,11 +6,14 @@ use App\Enums\Builder\EnumsBlockTemplate;
 use App\Enums\Builder\EnumsBlockType;
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
 use App\Models\Builder\BuilderBlockTemplate;
+use App\Models\Builder\BuilderPage;
 use App\Service\Builder\BlockFormFactory;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderBlocksResource\Pages;
 use Filament\Forms\Get;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use IbrahimBougaoua\RadioButtonImage\Actions\RadioButtonImage;
 use Illuminate\Contracts\Support\Htmlable;
@@ -81,6 +84,11 @@ class BuilderBlocksResource extends Resource {
           ->sortable()
           ->searchable(),
 
+        Tables\Columns\TextColumn::make('pages')
+          ->label('الصفحات')
+          ->getStateUsing(fn ($record) => $record->pages->map(fn ($pages) => $pages->display_name)->toArray())
+          ->badge(),
+
 
         Tables\Columns\TextColumn::make('template.template')
           ->label(__('builder/builder-block-template.columns.template'))
@@ -106,8 +114,66 @@ class BuilderBlocksResource extends Resource {
 //          ->sortable(),
 
       ])->filters([
-//        ...FilterWithArchive::make()->getColumns(),
-      ])
+        SelectFilter::make('template.type')
+          ->label(__('builder/builder-block-template.columns.type'))
+          ->options(
+            collect(EnumsBlockType::cases())
+              ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
+              ->sort()
+              ->toArray()
+          )
+          ->searchable()
+          ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data): \Illuminate\Database\Eloquent\Builder {
+            if (! $data['value']) {
+              return $query;
+            }
+
+            return $query->whereHas('template', function ($q) use ($data) {
+              $q->where('type', $data['value']);
+            });
+          })
+          ->preload(),
+
+        SelectFilter::make('template.template')
+          ->label(__('builder/builder-block-template.columns.template'))
+          ->options(
+            collect(EnumsBlockTemplate::cases())
+              ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
+              ->sort()
+              ->toArray()
+          )
+          ->searchable()
+          ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data): \Illuminate\Database\Eloquent\Builder {
+            if (! $data['value']) {
+              return $query;
+            }
+
+            return $query->whereHas('template', function ($q) use ($data) {
+              $q->where('template', $data['value']);
+            });
+          })
+          ->preload(),
+
+
+        SelectFilter::make('page_id')
+          ->label('الصفحة')
+          ->options(
+            BuilderPage::all()
+              ->pluck("name." . app()->getLocale(), 'id') // لو name مترجم: ->pluck("name->" . app()->getLocale(), 'id')
+              ->toArray()
+          )
+          ->searchable()
+          ->preload()
+          ->query(function ($query, $data) {
+            if (! $data['value']) return $query;
+
+            return $query->whereHas('pages', function ($q) use ($data) {
+              $q->where('builder_page.id', $data['value']); // ← هنا التعديل
+            });
+          }),
+
+
+      ], layout: FiltersLayout::Modal)->filtersFormColumns(4)
       ->persistFiltersInSession()
       ->persistSearchInSession()
       ->persistSortInSession()
