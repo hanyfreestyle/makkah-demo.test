@@ -2,16 +2,15 @@
 
 namespace App\Service\Builder;
 
-use App\Service\Builder\Form\Counter\Counter1;
-use App\Service\Builder\Form\Hero\Hero1;
-use App\Service\Builder\Form\Hero\TextBlock3;
-use Filament\Forms\Components\TextInput;
+use App\Service\Builder\Form\Text\TextBlock1;
+use App\Service\Builder\Form\Text\TextBlock2;
 
 class TextBlockForm implements BlockFormInterface {
   public static function make(string $type, string $slug): array {
 //dd($slug);
     return match ($slug) {
-      'text-block-3' => TextBlock3::make()->getColumns(),
+      'text-block-1' => TextBlock1::make()->getColumns(),
+      'text-block-2' => TextBlock2::make()->getColumns(),
       default => [],
     };
   }

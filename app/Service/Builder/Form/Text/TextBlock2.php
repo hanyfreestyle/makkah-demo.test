@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Builder\Form\Hero;
+namespace App\Service\Builder\Form\Text;
 
 use App\FilamentCustom\UploadFile\WebpUploadFixedSize;
 use App\Service\Builder\Function\BuilderTranslatableInput;
@@ -8,7 +8,7 @@ use App\Service\Builder\Function\BuilderTranslatableTextArea;
 use App\Service\Builder\Function\SetProtectedValTrait;
 use Filament\Forms;
 
-class TextBlock3 {
+class TextBlock2 {
   use SetProtectedValTrait;
 
   public static function make(): static {
