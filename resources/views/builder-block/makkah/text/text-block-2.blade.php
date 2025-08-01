@@ -1,4 +1,4 @@
-<div class="ltn__about-us-area section-bg-1 aboutUs3 bg-image-right-before pt-30 pb-50">
+<div class="ltn__about-us-area section-bg-1 aboutUs_3 bg-image-right-before pt-30 pb-50">
   <div class="container">
     <div class="row">
       <div class="col-lg-6 align-self-center">
@@ -44,57 +44,6 @@
 
 @push('stackStyle')
   <style>
-
-      .aboutUs3 .listItem {
-          list-style: none;
-          padding: 0;
-
-
-      }
-
-      .aboutUs3 .listItem li {
-          font-size: 16px;
-          margin: 0 !important;
-          margin-bottom: 10px !important;
-          padding-bottom: 0;
-
-      }
-
-      .aboutUs3 .listItem li i {
-          color: var(--def-color);
-          font-size: 14px;
-      }
-
-
-      .aboutUs3 .title {
-          font-size: clamp(1.2rem, 3vw, 1.4rem);
-          font-weight: 600;
-
-          margin-bottom: 1rem;
-          margin-top: 1rem;
-          position: relative;
-          color: var(--def-color);
-      }
-
-      .aboutUs3 .title::before {
-          content: '';
-          width: 50px;
-          height: 3px;
-          background: var(--def-color);
-          position: absolute;
-          bottom: -8px;
-          right: auto;
-          left: 0;
-          border-radius: 2px;
-      }
-
-      html[lang="ar"] .aboutUs3 .title::before {
-
-          right: 0;
-          left: auto;
-      }
-
-
       .bg-image-right-before::before {
           position: absolute;
           content: "";
@@ -109,11 +58,6 @@
           top: 0;
       }
 
-      html[lang="ar"] .bg-image-right-before::before {
-          left: 0;
-          right: auto;
-
-      }
   </style>
 
 @endpush
