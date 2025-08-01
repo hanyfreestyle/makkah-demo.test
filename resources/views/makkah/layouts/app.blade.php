@@ -46,8 +46,8 @@
 </div>
 
 
-{!! $minifyTools->setDir('makkah/')->MinifyJs('js4/plugins.js',"Web",false) !!}
-{!! $minifyTools->setDir('makkah/')->MinifyJs('js4/main.js',"Web",false) !!}
+{!! $minifyTools->setDir('makkah/')->MinifyJs('js5/plugins.js',"Web",false) !!}
+{!! $minifyTools->setDir('makkah/')->MinifyJs('js5/main.js',"Web",false) !!}
 
 @yield('yieldScript')
 @stack('stackScript')
