@@ -78,6 +78,11 @@ html[lang="ar"] .aboutUs_1 .title::before {
 
 
 
+.chairMan .imgWrap img {
+    max-height: 400px;
+    border-radius: 6px;
+
+}
 
 
 

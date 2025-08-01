@@ -3,13 +3,15 @@
 @section('content')
   {!! Breadcrumbs::render('project_view',$project) !!}
 
-  <x-makkah.def.page-heading :meta="$project" :des="false"/>
-  <div class="container mt-50 mb-50" >
-    <div class="row">
-      <div class="col-lg-8">
-      </div>
-    </div>
-    </div>
+  <x-builder.load-view-in-page :blocks="$blocks"/>
+
+{{--  <x-makkah.def.page-heading :meta="$project" :des="false"/>--}}
+{{--  <div class="container mt-50 mb-50" >--}}
+{{--    <div class="row">--}}
+{{--      <div class="col-lg-8">--}}
+{{--      </div>--}}
+{{--    </div>--}}
+{{--    </div>--}}
 @endsection
 
 @push('stackStyle')

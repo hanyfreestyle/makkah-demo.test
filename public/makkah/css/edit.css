@@ -2,6 +2,10 @@
     color: var(--def-color) !important;
 }
 
+.pageHeading{
+    margin-top: 50px;
+}
+
 .pageHeading .title {
     letter-spacing: 1px;
     font-size: 1.8rem;
@@ -61,7 +65,7 @@
 }
 
 .breadcrumb_area {
-    margin-bottom: 50px;
+    margin-bottom: 0;
     padding-top: 7px;
     padding-bottom: 7px;
     background-color: var(--section-bg-6);
