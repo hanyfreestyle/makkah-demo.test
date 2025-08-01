@@ -7,31 +7,45 @@
 #property link      ""
 
 #property indicator_chart_window
+
+// إعدادات الوقت والتاريخ
 extern string note="MT4 Time Setting";
 extern int time_hour=0;
 extern int start_week_day=1;
 extern int start_week_hour=0;
 extern int end_week_bar_missing=1;
 extern int Nbars_of_day=1;
+
+// إعدادات مجموعة الخطوط العلوية (H1-H5)
 extern string note1="H1-H5 Setting";
 extern color color1=Green;
 extern int width1=2;
 extern int style1=0;
+
+// إعدادات مجموعة الخطوط السفلية من الهاي (H10-H14)
 extern string note2="H10-H14 Setting";
 extern color color2=LightGreen;
 extern int width2=2;
 extern int style2=0;
+
+// إعدادات مجموعة الخطوط العلوية من اللو (L1-L5)
 extern string note3="L1-L5 Setting";
 extern color color3=Pink;
 extern int width3=2;
 extern int style3=0;
+
+// إعدادات مجموعة الخطوط السفلية من اللو (L10-L14)
 extern string note4="L10-L14 Setting";
 extern color color4=Red;
 extern int width4=2;
 extern int style4=0;
+
+// إعدادات لون المستطيل
 extern string note5="Rectangle Color";
 extern color Rec_color1=Gray;
 extern color Rec_color2=PaleGoldenrod;
+
+// إعدادات النصوص والتعليقات
 extern string note6="Comment Setting";
 extern int corner=0;
 extern string note7="Column 1";
@@ -46,6 +60,8 @@ extern int ydis2=10;
 extern int font_size2=10;
 extern string font_type2="Arial";
 extern color font_color2=Yellow;
+
+// إعدادات ليبلات الأسعار
 extern string note9="Price Label Setting";
 extern bool show_price_Label=true;
 extern int size=1;
@@ -54,418 +70,586 @@ extern int x_dis_HL=1;
 
 extern bool Del_All_Objects=false;
 static int day=0;
+
+// متغيرات المستويات المحسوبة
+struct MagneticLevels {
+    double HL_Upper[5];   // HL1-HL5: مستويات المقاومة العلوية من الهاي
+    double HL_Lower[5];   // HL10-HL14: مستويات الدعم السفلية من الهاي
+    double LL_Upper[5];   // LL1-LL5: مستويات المقاومة العلوية من اللو
+    double LL_Lower[5];   // LL10-LL14: مستويات الدعم السفلية من اللو
+};
+
+// أسماء المجموعات لسهولة الوصول
+string HL_Upper_Names[5] = {"HL1", "HL2", "HL3", "HL4", "HL5"};
+string HL_Lower_Names[5] = {"HL10", "HL11", "HL12", "HL13", "HL14"};
+string LL_Upper_Names[5] = {"LL1", "LL2", "LL3", "LL4", "LL5"};
+string LL_Lower_Names[5] = {"LL10", "LL11", "LL12", "LL13", "LL14"};
+
+// خصائص كل مجموعة
+struct GroupProperties {
+    color line_color;
+    int line_width;
+    int line_style;
+};
+
 //+------------------------------------------------------------------+
-//| Custom indicator initialization function                         |
+//| دالة التهيئة                                                      |
 //+------------------------------------------------------------------+
 int init()
-  {
-//---- indicators
-//----
-   return(0);
-  }
+{
+    return(0);
+}
+
 //+------------------------------------------------------------------+
-//| Custom indicator deinitialization function                       |
+//| دالة إنهاء المؤشر                                                 |
 //+------------------------------------------------------------------+
 int deinit()
-  {
-//----
-if(Del_All_Objects==true) deletobject();
-//----
-   return(0);
-  }
-
+{
+    if(Del_All_Objects==true) DeleteAllObjects();
+    return(0);
+}
 
 //+------------------------------------------------------------------+
-//| Custom indicator iteration function                              |
+//| الدالة الرئيسية للمؤشر                                            |
 //+------------------------------------------------------------------+
 int start()
-  {
-if(Period()!=PERIOD_H1) return(0);
-  static int valid;
-// Keep only required variables
-double  HL1,HL2,HL3,HL4,HL5,HL10,HL11,HL12,HL13,HL14;
-double LL1,LL2,LL3,LL4,LL5,LL10,LL11,LL12,LL13,LL14;
-double rang1,rang2,rang3,rang4,rang5;
+{
+    // التأكد من أن المؤشر يعمل على فريم H1 فقط
+    if(Period()!=PERIOD_H1) return(0);
 
-static double  high,low;
+    static int valid;
+    MagneticLevels levels;
+    static double high, low;
 
-if(TimeDay(Time[0])!=day){deletobject(); day=TimeDay(Time[0]);}
-else return(0);
+    // حذف الكائنات عند تغيير اليوم
+    if(TimeDay(Time[0])!=day)
+    {
+        DeleteAllObjects();
+        day=TimeDay(Time[0]);
+    }
+    else return(0);
 
-   int   i;
-//----
-  int Nbars=Nbars_of_day*26;
-  double gn1=1.618033989;
-  double gn2=0.618033989;
-  double dig=1,dd=0;
-        int limit,b;
-//----
+    // إعداد المتغيرات الأساسية
+    int Nbars = Nbars_of_day * 26;
+    double dig = 1, dd = 0;
 
-for (i=Nbars;i>=0;i--)
- {
-//--------
-int barT1=iBarShift(Symbol(),PERIOD_H1,Time[i],false);
-      if(TimeHour(Time[barT1])==time_hour||(TimeDayOfWeek(Time[barT1])==start_week_day&&TimeHour(Time[barT1])==start_week_hour))
-      {
+    // المرور عبر البارات لحساب المستويات
+    for(int i = Nbars; i >= 0; i--)
+    {
+        int barT1 = iBarShift(Symbol(), PERIOD_H1, Time[i], false);
 
-      if(TimeDayOfWeek(Time[i])==start_week_day) dd=24-end_week_bar_missing;
-      else dd=24;
-      high=NormalizeDouble(iHigh(Symbol(),60,iHighest(Symbol(),60,MODE_HIGH,dd,barT1+1)),Digits)/Point;
-      low=NormalizeDouble(iLow(Symbol(),60,iLowest(Symbol(),60,MODE_LOW,dd,barT1+1)),Digits)/Point;
-
-               if(Digits==2||Digits==4){ high=high*10; low=low*10; dig=10;}
-
-         double range=high-low;
-
-         double golden_range=(MathSqrt(range+(range*gn2)))*10;
-         rang1=golden_range*gn1;
-         rang2=golden_range*(gn1+1);
-         rang3=golden_range*(gn1+2);
-         rang4=golden_range*(gn1+3);
-         rang5=golden_range*(gn1+4);
-
-         //--HL---
-         HL1 = high + rang1;
-         HL2 = high + rang2;
-         HL3 = high + rang3;
-         HL4 = high + rang4;
-         HL5 = high + rang5;
-         HL10 = high - rang1;
-         HL11 = high - rang2;
-         HL12 = high - rang3;
-         HL13 = high - rang4;
-         HL14 = high - rang5;
-
-         //--LL---
-         LL1 = low + rang1;
-         LL2 = low + rang2;
-         LL3 = low + rang3;
-         LL4 = low + rang4;
-         LL5 = low + rang5;
-         LL10 = low - rang1;
-         LL11 = low - rang2;
-         LL12 = low - rang3;
-         LL13 = low - rang4;
-         LL14 = low - rang5;
-
-        // Draw lines for HL1-HL5
-        Tline("HL1"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(HL1*Point/dig,Digits),width1,color1,style1,"= "+DoubleToStr(NormalizeDouble(HL1*Point/dig,Digits),Digits));
-        Tline("HL2"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(HL2*Point/dig,Digits),width1,color1,style1,"= "+DoubleToStr(NormalizeDouble(HL2*Point/dig,Digits),Digits));
-        Tline("HL3"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(HL3*Point/dig,Digits),width1,color1,style1,"= "+DoubleToStr(NormalizeDouble(HL3*Point/dig,Digits),Digits));
-        Tline("HL4"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(HL4*Point/dig,Digits),width1,color1,style1,"= "+DoubleToStr(NormalizeDouble(HL4*Point/dig,Digits),Digits));
-        Tline("HL5"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(HL5*Point/dig,Digits),width1,color1,style1,"= "+DoubleToStr(NormalizeDouble(HL5*Point/dig,Digits),Digits));
-
-        // Draw lines for HL10-HL14
-        Tline("HL10"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(HL10*Point/dig,Digits),width2,color2,style2,"= "+DoubleToStr(NormalizeDouble(HL10*Point/dig,Digits),Digits)+"\n Magnetic Area = "+DoubleToStr(LL1/dig-HL10/dig,0)+" Pips");
-        Tline("HL11"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(HL11*Point/dig,Digits),width2,color2,style2,"= "+DoubleToStr(NormalizeDouble(HL11*Point/dig,Digits),Digits));
-        Tline("HL12"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(HL12*Point/dig,Digits),width2,color2,style2,"= "+DoubleToStr(NormalizeDouble(HL12*Point/dig,Digits),Digits));
-        Tline("HL13"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(HL13*Point/dig,Digits),width2,color2,style2,"= "+DoubleToStr(NormalizeDouble(HL13*Point/dig,Digits),Digits));
-        Tline("HL14"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(HL14*Point/dig,Digits),width2,color2,style2,"= "+DoubleToStr(NormalizeDouble(HL14*Point/dig,Digits),Digits));
-
-        // Draw lines for LL1-LL5
-        Tline("LL1"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(LL1*Point/dig,Digits),width3,color3,style3,"= "+DoubleToStr(NormalizeDouble(LL1*Point/dig,Digits),Digits)+"\n Magnetic Area = "+DoubleToStr(LL1/dig-HL10/dig,0)+" Pips");
-        Tline("LL2"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(LL2*Point/dig,Digits),width3,color3,style3,"= "+DoubleToStr(NormalizeDouble(LL2*Point/dig,Digits),Digits));
-        Tline("LL3"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(LL3*Point/dig,Digits),width3,color3,style3,"= "+DoubleToStr(NormalizeDouble(LL3*Point/dig,Digits),Digits));
-        Tline("LL4"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(LL4*Point/dig,Digits),width3,color3,style3,"= "+DoubleToStr(NormalizeDouble(LL4*Point/dig,Digits),Digits));
-        Tline("LL5"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(LL5*Point/dig,Digits),width3,color3,style3,"= "+DoubleToStr(NormalizeDouble(LL5*Point/dig,Digits),Digits));
-
-        // Draw lines for LL10-LL14
-        Tline("LL10"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(LL10*Point/dig,Digits),width4,color4,style4,"= "+DoubleToStr(NormalizeDouble(LL10*Point/dig,Digits),Digits));
-        Tline("LL11"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(LL11*Point/dig,Digits),width4,color4,style4,"= "+DoubleToStr(NormalizeDouble(LL11*Point/dig,Digits),Digits));
-        Tline("LL12"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(LL12*Point/dig,Digits),width4,color4,style4,"= "+DoubleToStr(NormalizeDouble(LL12*Point/dig,Digits),Digits));
-        Tline("LL13"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(LL13*Point/dig,Digits),width4,color4,style4,"= "+DoubleToStr(NormalizeDouble(LL13*Point/dig,Digits),Digits));
-        Tline("LL14"+" "+TimeToStr(Time[i],TIME_DATE),barT1,NormalizeDouble(LL14*Point/dig,Digits),width4,color4,style4,"= "+DoubleToStr(NormalizeDouble(LL14*Point/dig,Digits),Digits));
-
-        // Draw magnetic area rectangle
-        if(HL10<LL1)
+        // التحقق من شروط البداية (ساعة محددة أو بداية الأسبوع)
+        if(TimeHour(Time[barT1]) == time_hour ||
+           (TimeDayOfWeek(Time[barT1]) == start_week_day && TimeHour(Time[barT1]) == start_week_hour))
         {
-        Rec("Magnetic Area"+" "+TimeToStr(Time[i],TIME_DATE),i,HL10*Point/dig,LL1*Point/dig,1,Rec_color1,0);
-        }else
-        {
-         Rec("Magnetic Area"+" "+TimeToStr(Time[i],TIME_DATE),i,HL10*Point/dig,LL1*Point/dig,1,Rec_color2,0);
+            // حساب عدد البارات حسب يوم الأسبوع
+            if(TimeDayOfWeek(Time[i]) == start_week_day)
+                dd = 24 - end_week_bar_missing;
+            else
+                dd = 24;
+
+            // الحصول على أعلى وأقل سعر في الفترة المحددة
+            high = NormalizeDouble(iHigh(Symbol(), 60, iHighest(Symbol(), 60, MODE_HIGH, dd, barT1+1)), Digits) / Point;
+            low = NormalizeDouble(iLow(Symbol(), 60, iLowest(Symbol(), 60, MODE_LOW, dd, barT1+1)), Digits) / Point;
+
+            // تعديل القيم حسب عدد الأرقام العشرية
+            if(Digits == 2 || Digits == 4)
+            {
+                high = high * 10;
+                low = low * 10;
+                dig = 10;
+            }
+
+            // حساب المستويات المغناطيسية
+            CalculateMagneticLevels(levels, high, low, dig);
+
+            // رسم جميع المستويات
+            DrawAllLevels(levels, i, barT1, dig);
+
+            // رسم المنطقة المغناطيسية
+            DrawMagneticArea(levels, i, dig);
+
+            // عرض المعلومات والليبلات
+            if(barT1 <= 23)
+            {
+                valid = barT1;
+                DisplayLabelsAndInfo(levels, high, low, dig, barT1);
+
+                // عرض ليبلات الأسعار إذا كانت مفعلة
+                if(show_price_Label == true)
+                {
+                    DisplayPriceLabels(levels, i, dig);
+                }
+            }
         }
+    }
 
-if(barT1<=23)
-{
-valid=barT1;
-   drawL("Range1",xdis1,ydis1,"Range 1", font_size1, font_type1, font_color1,corner);
-   drawL("Range2",xdis1,ydis1+20,"Range 2", font_size1, font_type1, font_color1,corner);
-   drawL("Range3",xdis1,ydis1+20*2,"Range 3", font_size1, font_type1, font_color1,corner);
-   drawL("Range4",xdis1,ydis1+20*3,"Range 4", font_size1, font_type1, font_color1,corner);
-   drawL("Range5",xdis1,ydis1+20*4,"Range 5", font_size1, font_type1, font_color1,corner);
-   drawL("Today_Range",xdis1,ydis1+20*5,"Today_Range", font_size1, font_type1, font_color1,corner);
-   drawL("Pre_day_Range",xdis1,ydis1+20*6,"Pre_day_Range", font_size1, font_type1, font_color1,corner);
-   drawL("===",xdis1,ydis1+20*7,"=======", font_size1, font_type1, font_color1,corner);
-   drawL("Pw_High",xdis1,ydis1+20*8,"Pw High", font_size1, font_type1, font_color1,corner);
-   drawL("Pw_Low",xdis1,ydis1+20*9,"Pw Low", font_size1, font_type1, font_color1,corner);
-   drawL("Pw_Open",xdis1,ydis1+20*10,"Pw Open", font_size1, font_type1, font_color1,corner);
+    // عرض نطاق اليوم الحالي
+    DisplayTodayRange(valid);
 
-   drawL("Range12",xdis2,ydis2,DoubleToStr(rang1/dig,0), font_size2, font_type2, font_color2,corner);
-   drawL("Range22",xdis2,ydis2+20,DoubleToStr(rang2/dig,0), font_size2, font_type2, font_color2,corner);
-   drawL("Range32",xdis2,ydis2+20*2,DoubleToStr(rang3/dig,0), font_size2, font_type2, font_color2,corner);
-   drawL("Range42",xdis2,ydis2+20*3,DoubleToStr(rang4/dig,0), font_size2, font_type2, font_color2,corner);
-   drawL("Range52",xdis2,ydis2+20*4,DoubleToStr(rang5/dig,0), font_size2, font_type2, font_color2,corner);
-
-   drawL("Pre_day_Range_",xdis2+35,ydis2+20*6,DoubleToStr((high-low)/dig,0), font_size2, font_type2, font_color2,corner);
-
-   drawL("Pw_Highh",xdis2,ydis2+20*8,DoubleToStr(trim(high),0), font_size2, font_type2, font_color2,corner);
-   drawL("Pw_Loww",xdis2,ydis2+20*9,DoubleToStr(trim(low),0), font_size2, font_type2, font_color2,corner);
-   drawL("Pw_Openn",xdis2,ydis2+20*10,DoubleToStr(trim(iOpen(Symbol(),PERIOD_H1,barT1)/Point),0), font_size2, font_type2, font_color2,corner);
-
-   if(show_price_Label==true)
-   {
-   if(time_hour>0)  {int addL=60*60*24+x_dis_LL*60*60; int addH=60*60*24+60*60*x_dis_HL;}
-   else {addL=60*60*24+60*60*x_dis_LL; addH=60*60*24+60*60*x_dis_HL;}
-
-   // Price labels for LL1-LL5
-   drawPrice("price_LL1",NormalizeDouble(LL1*Point/dig,Digits),color3,size,0,i,addL);
-   drawPrice("price_LL2",NormalizeDouble(LL2*Point/dig,Digits),color3,size,1,i,addL);
-   drawPrice("price_LL3",NormalizeDouble(LL3*Point/dig,Digits),color3,size,1,i,addL);
-   drawPrice("price_LL4",NormalizeDouble(LL4*Point/dig,Digits),color3,size,1,i,addL);
-   drawPrice("price_LL5",NormalizeDouble(LL5*Point/dig,Digits),color3,size,1,i,addL);
-
-   // Price labels for LL10-LL14
-   drawPrice("price_LL10",NormalizeDouble(LL10*Point/dig,Digits),color4,size,1,i,addL);
-   drawPrice("price_LL11",NormalizeDouble(LL11*Point/dig,Digits),color4,size,1,i,addL);
-   drawPrice("price_LL12",NormalizeDouble(LL12*Point/dig,Digits),color4,size,1,i,addL);
-   drawPrice("price_LL13",NormalizeDouble(LL13*Point/dig,Digits),color4,size,1,i,addL);
-   drawPrice("price_LL14",NormalizeDouble(LL14*Point/dig,Digits),color4,size,1,i,addL);
-
-   // Price labels for HL1-HL5
-   drawPrice("price_HL1",NormalizeDouble(HL1*Point/dig,Digits),color1,size,1,i,addH);
-   drawPrice("price_HL2",NormalizeDouble(HL2*Point/dig,Digits),color1,size,1,i,addH);
-   drawPrice("price_HL3",NormalizeDouble(HL3*Point/dig,Digits),color1,size,1,i,addH);
-   drawPrice("price_HL4",NormalizeDouble(HL4*Point/dig,Digits),color1,size,1,i,addH);
-   drawPrice("price_HL5",NormalizeDouble(HL5*Point/dig,Digits),color1,size,1,i,addH);
-
-   // Price labels for HL10-HL14
-   drawPrice("price_HL10",NormalizeDouble(HL10*Point/dig,Digits),color2,size,1,i,addH);
-   drawPrice("price_HL11",NormalizeDouble(HL11*Point/dig,Digits),color2,size,1,i,addH);
-   drawPrice("price_HL12",NormalizeDouble(HL12*Point/dig,Digits),color2,size,1,i,addH);
-   drawPrice("price_HL13",NormalizeDouble(HL13*Point/dig,Digits),color2,size,1,i,addH);
-   drawPrice("price_HL14",NormalizeDouble(HL14*Point/dig,Digits),color2,size,1,i,addH);
-}
-
-}
-}
-  }    //----
- double today_h=NormalizeDouble(iHigh(Symbol(),PERIOD_H1,iHighest(Symbol(),PERIOD_H1,MODE_HIGH,valid+1,0)),Digits)/Point;
- double today_l=NormalizeDouble(iLow(Symbol(),PERIOD_H1,iLowest(Symbol(),PERIOD_H1,MODE_LOW,valid+1,0)),Digits)/Point;
-
-  drawL("Today_Range_",xdis2+30,ydis2+20*5,DoubleToStr((today_h-today_l),0), font_size2, font_type2, font_color2,corner);
-
-   return(0);
-  }
-//+------------------------Trend Drawing------------------------------------------+
-void Tline(string name,int i,double p1,int width1,color color1,int style1,string des)
-{datetime b;
-
- if(TimeDayOfWeek(Time[i])!=start_week_day)
-  {
-    if(time_hour!=0)  b=StrToTime(TimeToStr(Time[i]+60*60*24,TIME_DATE)+" "+(time_hour-1));
-      else b=StrToTime(TimeToStr(Time[i],TIME_DATE)+" "+"23:00");
-  }
-  else
-  {
-   if(time_hour!=0)  {b=StrToTime(TimeToStr(Time[i]+60*60*24,TIME_DATE)+" "+(time_hour-1)); }
-   if(time_hour!=0&&TimeHour(Time[i])==0&&start_week_hour==0)  {b=StrToTime(TimeToStr(Time[i],TIME_DATE)+" "+(time_hour-1)); }
-   if(time_hour==0) b=StrToTime(TimeToStr(Time[i],TIME_DATE)+" "+"23:00");
-  }
-
-if((TimeDayOfWeek(Time[i])==start_week_day&&TimeHour(Time[i])==0)) name=name+" ";
-   ObjectCreate(name,OBJ_TREND,0,0,0,0,0);
-   ObjectSet(name,OBJPROP_PRICE1,p1);
-
-   if((TimeDayOfWeek(Time[i])==start_week_day&&TimeHour(Time[i])==0)){ObjectSet(name,OBJPROP_TIME1,StrToTime(TimeToStr(Time[i],TIME_DATE)+" "+0)); }
-   else {ObjectSet(name,OBJPROP_TIME1,StrToTime(TimeToStr(Time[i],TIME_DATE)+" "+time_hour));}
-
-   ObjectSet(name,OBJPROP_PRICE2,p1);
-   ObjectSet(name,OBJPROP_TIME2,b);
-   if(i>23)ObjectSet(name,OBJPROP_RAY,false);
-   else ObjectSet(name,OBJPROP_RAY,true);
-
-   ObjectSet(name,OBJPROP_COLOR,color1);
-   ObjectSet(name,OBJPROP_WIDTH,width1);
-   ObjectSet(name,OBJPROP_STYLE,style1);
-   string sObjDesc = StringConcatenate("",des);
-   ObjectSetText(name, sObjDesc,10,"Times New Roman",Black);
-   ObjectSet(name,OBJPROP_BACK,true);
-}
-
-//-----------------------------------------------------------------------------------------
-//--------------------------Draw Label-----------------------------------------------------
-int drawL(string name,int disx,int disy,string txt,int size_font,string type_font,color color1,int corner)
-{
- ObjectCreate(name,OBJ_LABEL,0,0,0,0);
- ObjectSet(name,OBJPROP_XDISTANCE,disx);
- ObjectSet(name,OBJPROP_YDISTANCE,disy);
- ObjectSetText(name,txt,size_font,type_font,color1);
-ObjectSet(name,OBJPROP_CORNER,corner);
-}
-
-//-----------------------------------------------------------------------------------------
-//---------------------------Draw Rectangle-----------------------------------------
-void Rec(string name,int i,double p1,double p2,int width1,color color1,int style1)
-{
-datetime b;
-
-if(TimeDayOfWeek(Time[i])!=start_week_day)
-  {
-    if(time_hour!=0)  b=StrToTime(TimeToStr(Time[i]+60*60*24,TIME_DATE)+" "+(time_hour-1));
-      else b=StrToTime(TimeToStr(Time[i],TIME_DATE)+" "+"23:00");
-  }
-  else
-  {
-   if(time_hour!=0)  {b=StrToTime(TimeToStr(Time[i]+60*60*24,TIME_DATE)+" "+(time_hour-1)); }
-   if(time_hour!=0&&TimeHour(Time[i])==0&&start_week_hour==0)  {b=StrToTime(TimeToStr(Time[i],TIME_DATE)+" "+(time_hour-1)); }
-   if(time_hour==0) b=StrToTime(TimeToStr(Time[i],TIME_DATE)+" "+"23:00");
-  }
-
-if((TimeDayOfWeek(Time[i])==start_week_day&&TimeHour(Time[i])==0)) name=name+" ";
-
-   ObjectCreate(name,OBJ_RECTANGLE,0,0,0,0,0);
-   ObjectSet(name,OBJPROP_PRICE1,p1);
-
-   if((TimeDayOfWeek(Time[i])==start_week_day&&TimeHour(Time[i])==0)){ObjectSet(name,OBJPROP_TIME1,StrToTime(TimeToStr(Time[i],TIME_DATE)+" "+0)); }
-   else {ObjectSet(name,OBJPROP_TIME1,StrToTime(TimeToStr(Time[i],TIME_DATE)+" "+time_hour));}
-
-   ObjectSet(name,OBJPROP_PRICE2,p2);
-   ObjectSet(name,OBJPROP_TIME2,b);
-
-   ObjectSet(name,OBJPROP_COLOR,color1);
-   ObjectSet(name,OBJPROP_WIDTH,width1);
-   ObjectSet(name,OBJPROP_STYLE,style1);
+    return(0);
 }
 
 //+------------------------------------------------------------------+
-//+-------------------------Trim String------------------------------
+//| حساب المستويات المغناطيسية بناءً على النسبة الذهبية              |
+//+------------------------------------------------------------------+
+void CalculateMagneticLevels(MagneticLevels &levels, double high, double low, double dig)
+{
+    // النسب الذهبية المستخدمة في الحسابات
+    double gn1 = 1.618033989;  // النسبة الذهبية
+    double gn2 = 0.618033989;  // النسبة الذهبية المعكوسة
+
+    // حساب النطاق الأساسي
+    double range = high - low;
+
+    // حساب النطاق الذهبي
+    double golden_range = (MathSqrt(range + (range * gn2))) * 10;
+
+    // حساب النطاقات الخمسة
+    double ranges[5];
+    for(int j = 0; j < 5; j++)
+    {
+        ranges[j] = golden_range * (gn1 + j);
+    }
+
+    // حساب مستويات الهاي (HL)
+    for(int j = 0; j < 5; j++)
+    {
+        levels.HL_Upper[j] = high + ranges[j];  // HL1-HL5: مستويات أعلى من الهاي
+        levels.HL_Lower[j] = high - ranges[j];  // HL10-HL14: مستويات أقل من الهاي
+    }
+
+    // حساب مستويات اللو (LL)
+    for(int j = 0; j < 5; j++)
+    {
+        levels.LL_Upper[j] = low + ranges[j];   // LL1-LL5: مستويات أعلى من اللو
+        levels.LL_Lower[j] = low - ranges[j];   // LL10-LL14: مستويات أقل من اللو
+    }
+}
+
+//+------------------------------------------------------------------+
+//| رسم جميع المستويات على الشارت                                    |
+//+------------------------------------------------------------------+
+void DrawAllLevels(MagneticLevels &levels, int i, int barT1, double dig)
+{
+    // خصائص كل مجموعة
+    GroupProperties groups[4];
+    groups[0].line_color = color1; groups[0].line_width = width1; groups[0].line_style = style1; // HL1-HL5
+    groups[1].line_color = color2; groups[1].line_width = width2; groups[1].line_style = style2; // HL10-HL14
+    groups[2].line_color = color3; groups[2].line_width = width3; groups[2].line_style = style3; // LL1-LL5
+    groups[3].line_color = color4; groups[3].line_width = width4; groups[3].line_style = style4; // LL10-LL14
+
+    // رسم مستويات HL العلوية (HL1-HL5)
+    for(int j = 0; j < 5; j++)
+    {
+        string description = "= " + DoubleToStr(NormalizeDouble(levels.HL_Upper[j] * Point / dig, Digits), Digits);
+        DrawTrendLine(HL_Upper_Names[j] + " " + TimeToStr(Time[i], TIME_DATE),
+                     barT1, NormalizeDouble(levels.HL_Upper[j] * Point / dig, Digits),
+                     groups[0], i, description);
+    }
+
+    // رسم مستويات HL السفلية (HL10-HL14)
+    for(int j = 0; j < 5; j++)
+    {
+        string description = "= " + DoubleToStr(NormalizeDouble(levels.HL_Lower[j] * Point / dig, Digits), Digits);
+        if(j == 0) // إضافة معلومات المنطقة المغناطيسية للخط الأول
+        {
+            description += "\n Magnetic Area = " + DoubleToStr(levels.LL_Upper[0]/dig - levels.HL_Lower[0]/dig, 0) + " Pips";
+        }
+        DrawTrendLine(HL_Lower_Names[j] + " " + TimeToStr(Time[i], TIME_DATE),
+                     barT1, NormalizeDouble(levels.HL_Lower[j] * Point / dig, Digits),
+                     groups[1], i, description);
+    }
+
+    // رسم مستويات LL العلوية (LL1-LL5)
+    for(int j = 0; j < 5; j++)
+    {
+        string description = "= " + DoubleToStr(NormalizeDouble(levels.LL_Upper[j] * Point / dig, Digits), Digits);
+        if(j == 0) // إضافة معلومات المنطقة المغناطيسية للخط الأول
+        {
+            description += "\n Magnetic Area = " + DoubleToStr(levels.LL_Upper[0]/dig - levels.HL_Lower[0]/dig, 0) + " Pips";
+        }
+        DrawTrendLine(LL_Upper_Names[j] + " " + TimeToStr(Time[i], TIME_DATE),
+                     barT1, NormalizeDouble(levels.LL_Upper[j] * Point / dig, Digits),
+                     groups[2], i, description);
+    }
+
+    // رسم مستويات LL السفلية (LL10-LL14)
+    for(int j = 0; j < 5; j++)
+    {
+        string description = "= " + DoubleToStr(NormalizeDouble(levels.LL_Lower[j] * Point / dig, Digits), Digits);
+        DrawTrendLine(LL_Lower_Names[j] + " " + TimeToStr(Time[i], TIME_DATE),
+                     barT1, NormalizeDouble(levels.LL_Lower[j] * Point / dig, Digits),
+                     groups[3], i, description);
+    }
+}
+
+//+------------------------------------------------------------------+
+//| رسم خط اتجاه واحد مع خصائصه                                      |
+//+------------------------------------------------------------------+
+void DrawTrendLine(string name, int bar_index, double price, GroupProperties &props, int i, string description)
+{
+    datetime start_time, end_time;
+
+    // حساب أوقات بداية ونهاية الخط
+    CalculateLineTime(i, start_time, end_time);
+
+    // إضافة مسافة للاسم في حالات خاصة
+    if((TimeDayOfWeek(Time[i]) == start_week_day && TimeHour(Time[i]) == 0))
+        name = name + " ";
+
+    // إنشاء الخط
+    ObjectCreate(name, OBJ_TREND, 0, 0, 0, 0, 0);
+    ObjectSet(name, OBJPROP_PRICE1, price);
+    ObjectSet(name, OBJPROP_TIME1, start_time);
+    ObjectSet(name, OBJPROP_PRICE2, price);
+    ObjectSet(name, OBJPROP_TIME2, end_time);
+
+    // تحديد ما إذا كان الخط يمتد أم لا
+    if(i > 23)
+        ObjectSet(name, OBJPROP_RAY, false);
+    else
+        ObjectSet(name, OBJPROP_RAY, true);
+
+    // تطبيق خصائص الخط
+    ObjectSet(name, OBJPROP_COLOR, props.line_color);
+    ObjectSet(name, OBJPROP_WIDTH, props.line_width);
+    ObjectSet(name, OBJPROP_STYLE, props.line_style);
+    ObjectSet(name, OBJPROP_BACK, true);
+
+    // إضافة النص التوضيحي
+    ObjectSetText(name, description, 10, "Times New Roman", Black);
+}
+
+//+------------------------------------------------------------------+
+//| حساب أوقات بداية ونهاية الخط                                     |
+//+------------------------------------------------------------------+
+void CalculateLineTime(int i, datetime &start_time, datetime &end_time)
+{
+    // حساب وقت النهاية
+    if(TimeDayOfWeek(Time[i]) != start_week_day)
+    {
+        if(time_hour != 0)
+            end_time = StrToTime(TimeToStr(Time[i] + 60*60*24, TIME_DATE) + " " + (time_hour-1));
+        else
+            end_time = StrToTime(TimeToStr(Time[i], TIME_DATE) + " " + "23:00");
+    }
+    else
+    {
+        if(time_hour != 0)
+        {
+            end_time = StrToTime(TimeToStr(Time[i] + 60*60*24, TIME_DATE) + " " + (time_hour-1));
+        }
+        if(time_hour != 0 && TimeHour(Time[i]) == 0 && start_week_hour == 0)
+        {
+            end_time = StrToTime(TimeToStr(Time[i], TIME_DATE) + " " + (time_hour-1));
+        }
+        if(time_hour == 0)
+            end_time = StrToTime(TimeToStr(Time[i], TIME_DATE) + " " + "23:00");
+    }
+
+    // حساب وقت البداية
+    if((TimeDayOfWeek(Time[i]) == start_week_day && TimeHour(Time[i]) == 0))
+    {
+        start_time = StrToTime(TimeToStr(Time[i], TIME_DATE) + " " + 0);
+    }
+    else
+    {
+        start_time = StrToTime(TimeToStr(Time[i], TIME_DATE) + " " + time_hour);
+    }
+}
+
+//+------------------------------------------------------------------+
+//| رسم المنطقة المغناطيسية (المستطيل)                               |
+//+------------------------------------------------------------------+
+void DrawMagneticArea(MagneticLevels &levels, int i, double dig)
+{
+    datetime start_time, end_time;
+    CalculateLineTime(i, start_time, end_time);
+
+    string name = "Magnetic Area" + " " + TimeToStr(Time[i], TIME_DATE);
+    if((TimeDayOfWeek(Time[i]) == start_week_day && TimeHour(Time[i]) == 0))
+        name = name + " ";
+
+    double price1 = levels.HL_Lower[0] * Point / dig;  // HL10
+    double price2 = levels.LL_Upper[0] * Point / dig;  // LL1
+
+    ObjectCreate(name, OBJ_RECTANGLE, 0, 0, 0, 0, 0);
+    ObjectSet(name, OBJPROP_PRICE1, price1);
+    ObjectSet(name, OBJPROP_TIME1, start_time);
+    ObjectSet(name, OBJPROP_PRICE2, price2);
+    ObjectSet(name, OBJPROP_TIME2, end_time);
+
+    // اختيار لون المستطيل حسب العلاقة بين المستويات
+    if(levels.HL_Lower[0] < levels.LL_Upper[0])
+    {
+        ObjectSet(name, OBJPROP_COLOR, Rec_color1);
+    }
+    else
+    {
+        ObjectSet(name, OBJPROP_COLOR, Rec_color2);
+    }
+
+    ObjectSet(name, OBJPROP_WIDTH, 1);
+    ObjectSet(name, OBJPROP_STYLE, 0);
+}
+
+//+------------------------------------------------------------------+
+//| عرض الليبلات والمعلومات على الشارت                              |
+//+------------------------------------------------------------------+
+void DisplayLabelsAndInfo(MagneticLevels &levels, double high, double low, double dig, int barT1)
+{
+    // حساب النطاقات لعرضها
+    double gn1 = 1.618033989;
+    double gn2 = 0.618033989;
+    double range = high - low;
+    double golden_range = (MathSqrt(range + (range * gn2))) * 10;
+
+    // عرض أسماء النطاقات (العمود الأول)
+    CreateLabel("Range1", xdis1, ydis1, "Range 1", font_size1, font_type1, font_color1, corner);
+    CreateLabel("Range2", xdis1, ydis1+20, "Range 2", font_size1, font_type1, font_color1, corner);
+    CreateLabel("Range3", xdis1, ydis1+40, "Range 3", font_size1, font_type1, font_color1, corner);
+    CreateLabel("Range4", xdis1, ydis1+60, "Range 4", font_size1, font_type1, font_color1, corner);
+    CreateLabel("Range5", xdis1, ydis1+80, "Range 5", font_size1, font_type1, font_color1, corner);
+    CreateLabel("Today_Range", xdis1, ydis1+100, "Today_Range", font_size1, font_type1, font_color1, corner);
+    CreateLabel("Pre_day_Range", xdis1, ydis1+120, "Pre_day_Range", font_size1, font_type1, font_color1, corner);
+    CreateLabel("===", xdis1, ydis1+140, "=======", font_size1, font_type1, font_color1, corner);
+    CreateLabel("Pw_High", xdis1, ydis1+160, "Pw High", font_size1, font_type1, font_color1, corner);
+    CreateLabel("Pw_Low", xdis1, ydis1+180, "Pw Low", font_size1, font_type1, font_color1, corner);
+    CreateLabel("Pw_Open", xdis1, ydis1+200, "Pw Open", font_size1, font_type1, font_color1, corner);
+
+    // عرض قيم النطاقات (العمود الثاني)
+    for(int j = 0; j < 5; j++)
+    {
+        double range_value = golden_range * (gn1 + j);
+        CreateLabel("Range" + (j+1) + "2", xdis2, ydis2 + (j*20), DoubleToStr(range_value/dig, 0),
+                   font_size2, font_type2, font_color2, corner);
+    }
+
+    CreateLabel("Pre_day_Range_", xdis2+35, ydis2+120, DoubleToStr((high-low)/dig, 0),
+               font_size2, font_type2, font_color2, corner);
+    CreateLabel("Pw_Highh", xdis2, ydis2+160, DoubleToStr(trim(high), 0),
+               font_size2, font_type2, font_color2, corner);
+    CreateLabel("Pw_Loww", xdis2, ydis2+180, DoubleToStr(trim(low), 0),
+               font_size2, font_type2, font_color2, corner);
+    CreateLabel("Pw_Openn", xdis2, ydis2+200, DoubleToStr(trim(iOpen(Symbol(), PERIOD_H1, barT1)/Point), 0),
+               font_size2, font_type2, font_color2, corner);
+}
+
+//+------------------------------------------------------------------+
+//| إنشاء ليبل نصي                                                   |
+//+------------------------------------------------------------------+
+void CreateLabel(string name, int x_distance, int y_distance, string text,
+                int font_size, string font_type, color text_color, int corner_pos)
+{
+    ObjectCreate(name, OBJ_LABEL, 0, 0, 0, 0);
+    ObjectSet(name, OBJPROP_XDISTANCE, x_distance);
+    ObjectSet(name, OBJPROP_YDISTANCE, y_distance);
+    ObjectSetText(name, text, font_size, font_type, text_color);
+    ObjectSet(name, OBJPROP_CORNER, corner_pos);
+}
+
+//+------------------------------------------------------------------+
+//| عرض ليبلات الأسعار                                               |
+//+------------------------------------------------------------------+
+void DisplayPriceLabels(MagneticLevels &levels, int i, double dig)
+{
+    int addL, addH;
+
+    // حساب الإزاحة الزمنية للليبلات
+    if(time_hour > 0)
+    {
+        addL = 60*60*24 + x_dis_LL*60*60;
+        addH = 60*60*24 + 60*60*x_dis_HL;
+    }
+    else
+    {
+        addL = 60*60*24 + 60*60*x_dis_LL;
+        addH = 60*60*24 + 60*60*x_dis_HL;
+    }
+
+    // عرض ليبلات أسعار LL1-LL5
+    for(int j = 0; j < 5; j++)
+    {
+        CreatePriceLabel("price_" + LL_Upper_Names[j],
+                        NormalizeDouble(levels.LL_Upper[j] * Point / dig, Digits),
+                        color3, size, (j == 0) ? 0 : 1, i, addL);
+    }
+
+    // عرض ليبلات أسعار LL10-LL14
+    for(int j = 0; j < 5; j++)
+    {
+        CreatePriceLabel("price_" + LL_Lower_Names[j],
+                        NormalizeDouble(levels.LL_Lower[j] * Point / dig, Digits),
+                        color4, size, 1, i, addL);
+    }
+
+    // عرض ليبلات أسعار HL1-HL5
+    for(int j = 0; j < 5; j++)
+    {
+        CreatePriceLabel("price_" + HL_Upper_Names[j],
+                        NormalizeDouble(levels.HL_Upper[j] * Point / dig, Digits),
+                        color1, size, 1, i, addH);
+    }
+
+    // عرض ليبلات أسعار HL10-HL14
+    for(int j = 0; j < 5; j++)
+    {
+        CreatePriceLabel("price_" + HL_Lower_Names[j],
+                        NormalizeDouble(levels.HL_Lower[j] * Point / dig, Digits),
+                        color2, size, 1, i, addH);
+    }
+}
+
+//+------------------------------------------------------------------+
+//| إنشاء ليبل سعر                                                   |
+//+------------------------------------------------------------------+
+void CreatePriceLabel(string name, double price, color label_color, int width, int style, int i, int time_offset)
+{
+    ObjectCreate(name, OBJ_ARROW, 0, 0, 0);
+    ObjectSet(name, OBJPROP_ARROWCODE, 6);
+    ObjectSet(name, OBJPROP_TIME1, StrToTime(TimeToStr(iTime(NULL, PERIOD_H1, i) + time_offset, TIME_DATE|TIME_MINUTES)));
+    ObjectSet(name, OBJPROP_PRICE1, price);
+    ObjectSet(name, OBJPROP_COLOR, label_color);
+    ObjectSet(name, OBJPROP_WIDTH, width);
+    ObjectSet(name, OBJPROP_STYLE, style);
+    ObjectSetText(name, DoubleToStr(price, Digits), 10, "Arial", label_color);
+}
+
+//+------------------------------------------------------------------+
+//| عرض نطاق اليوم الحالي                                            |
+//+------------------------------------------------------------------+
+void DisplayTodayRange(int valid)
+{
+    double today_h = NormalizeDouble(iHigh(Symbol(), PERIOD_H1, iHighest(Symbol(), PERIOD_H1, MODE_HIGH, valid+1, 0)), Digits) / Point;
+    double today_l = NormalizeDouble(iLow(Symbol(), PERIOD_H1, iLowest(Symbol(), PERIOD_H1, MODE_LOW, valid+1, 0)), Digits) / Point;
+
+    CreateLabel("Today_Range_", xdis2+30, ydis2+100, DoubleToStr((today_h - today_l), 0),
+               font_size2, font_type2, font_color2, corner);
+}
+
+//+------------------------------------------------------------------+
+//| دالة تبسيط الأرقام (نفس الدالة الأصلية)                          |
+//+------------------------------------------------------------------+
 int trim(double h)
-{double last;
-   string no=DoubleToStr(h,0);
-   string nn[];
-   int i;
-   last=h;
-   while(last>9)
-   {last=0;
-     for(i=0;i<StringLen(no);i++)
-     {
-        nn[i]=StringSubstr(no,i,1);
-        last=StrToDouble(nn[i])+last;
-     }
-     no=DoubleToStr(last,0);
-   }
-
-   return(last);
-}
-
-//-----------------------------------------------------------------------------------------
-int drawPrice(string name,double p1,color color1,int width1,int style1,int i,int d)
 {
- ObjectCreate(name,OBJ_ARROW,0,0,0);
- ObjectSet(name,OBJPROP_ARROWCODE,6);
- ObjectSet(name,OBJPROP_TIME1,StrToTime(TimeToStr(iTime(NULL,PERIOD_H1,i)+d,TIME_DATE|TIME_MINUTES)));
- ObjectSet(name,OBJPROP_PRICE1,p1);
- ObjectSet(name,OBJPROP_COLOR,color1);
- ObjectSet(name,OBJPROP_WIDTH,width1);
- ObjectSet(name,OBJPROP_STYLE,style1);
- ObjectSetText(name,DoubleToStr(p1,Digits),10,"Arial",color1);
+    double last;
+    string no = DoubleToStr(h, 0);
+    string nn[];
+    int i;
+    last = h;
+
+    while(last > 9)
+    {
+        last = 0;
+        for(i = 0; i < StringLen(no); i++)
+        {
+            nn[i] = StringSubstr(no, i, 1);
+            last = StrToDouble(nn[i]) + last;
+        }
+        no = DoubleToStr(last, 0);
+    }
+
+    return(last);
 }
 
-//-------------------------Object Delete----------------------------------------------------
-int deletobject()
+//+------------------------------------------------------------------+
+//| حذف جميع الكائنات                                                |
+//+------------------------------------------------------------------+
+int DeleteAllObjects()
 {
-//----
-  int i;
-string a;
-for (i=Bars;i>=0;i--)
- {
- if((TimeDayOfWeek(Time[i])==start_week_day&&TimeHour(Time[i])==0)) a=" ";
- else a="";
+    int i;
+    string suffix;
 
-   // Delete HL1-HL5 objects
-   ObjectDelete("HL1"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("HL2"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("HL3"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("HL4"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("HL5"+" "+TimeToStr(Time[i],TIME_DATE)+a);
+    // حذف جميع الخطوط والكائنات لكل بار
+    for(i = Bars; i >= 0; i--)
+    {
+        // تحديد اللاحقة حسب اليوم والساعة
+        if((TimeDayOfWeek(Time[i]) == start_week_day && TimeHour(Time[i]) == 0))
+            suffix = " ";
+        else
+            suffix = "";
 
-   // Delete HL10-HL14 objects
-   ObjectDelete("HL10"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("HL11"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("HL12"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("HL13"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("HL14"+" "+TimeToStr(Time[i],TIME_DATE)+a);
+        string date_string = TimeToStr(Time[i], TIME_DATE);
 
-   // Delete LL1-LL5 objects
-   ObjectDelete("LL1"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("LL2"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("LL3"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("LL4"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("LL5"+" "+TimeToStr(Time[i],TIME_DATE)+a);
+        // حذف مستويات HL العلوية (HL1-HL5)
+        for(int j = 0; j < 5; j++)
+        {
+            ObjectDelete(HL_Upper_Names[j] + " " + date_string + suffix);
+        }
 
-   // Delete LL10-LL14 objects
-   ObjectDelete("LL10"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("LL11"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("LL12"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("LL13"+" "+TimeToStr(Time[i],TIME_DATE)+a);
-   ObjectDelete("LL14"+" "+TimeToStr(Time[i],TIME_DATE)+a);
+        // حذف مستويات HL السفلية (HL10-HL14)
+        for(int j = 0; j < 5; j++)
+        {
+            ObjectDelete(HL_Lower_Names[j] + " " + date_string + suffix);
+        }
 
-ObjectDelete("Magnetic Area"+" "+TimeToStr(Time[i],TIME_DATE)+a);
+        // حذف مستويات LL العلوية (LL1-LL5)
+        for(int j = 0; j < 5; j++)
+        {
+            ObjectDelete(LL_Upper_Names[j] + " " + date_string + suffix);
+        }
 
- }
- ObjectDelete("Range1");
- ObjectDelete("Range12");
- ObjectDelete("Range2");
- ObjectDelete("Range22");
- ObjectDelete("Range3");
- ObjectDelete("Range32");
- ObjectDelete("Range4");
- ObjectDelete("Range42");
- ObjectDelete("Range5");
- ObjectDelete("Range52");
- ObjectDelete("===");
- ObjectDelete("Pw_High");
- ObjectDelete("Pw_Low");
- ObjectDelete("Pw_Open");
- ObjectDelete("Pw_Highh");
- ObjectDelete("Pw_Loww");
- ObjectDelete("Pw_Openn");
+        // حذف مستويات LL السفلية (LL10-LL14)
+        for(int j = 0; j < 5; j++)
+        {
+            ObjectDelete(LL_Lower_Names[j] + " " + date_string + suffix);
+        }
 
- if(show_price_Label==true)
- {
- // Delete price labels for LL1-LL5
- ObjectDelete("price_LL1");
- ObjectDelete("price_LL2");
- ObjectDelete("price_LL3");
- ObjectDelete("price_LL4");
- ObjectDelete("price_LL5");
+        // حذف المنطقة المغناطيسية
+        ObjectDelete("Magnetic Area" + " " + date_string + suffix);
+    }
 
- // Delete price labels for LL10-LL14
- ObjectDelete("price_LL10");
- ObjectDelete("price_LL11");
- ObjectDelete("price_LL12");
- ObjectDelete("price_LL13");
- ObjectDelete("price_LL14");
+    // حذف ليبلات المعلومات
+    ObjectDelete("Range1");
+    ObjectDelete("Range12");
+    ObjectDelete("Range2");
+    ObjectDelete("Range22");
+    ObjectDelete("Range3");
+    ObjectDelete("Range32");
+    ObjectDelete("Range4");
+    ObjectDelete("Range42");
+    ObjectDelete("Range5");
+    ObjectDelete("Range52");
+    ObjectDelete("===");
+    ObjectDelete("Pw_High");
+    ObjectDelete("Pw_Low");
+    ObjectDelete("Pw_Open");
+    ObjectDelete("Pw_Highh");
+    ObjectDelete("Pw_Loww");
+    ObjectDelete("Pw_Openn");
+    ObjectDelete("Today_Range");
+    ObjectDelete("Today_Range_");
+    ObjectDelete("Pre_day_Range_");
+    ObjectDelete("Pre_day_Range");
 
- // Delete price labels for HL1-HL5
- ObjectDelete("price_HL1");
- ObjectDelete("price_HL2");
- ObjectDelete("price_HL3");
- ObjectDelete("price_HL4");
- ObjectDelete("price_HL5");
+    // حذف ليبلات الأسعار إذا كانت مفعلة
+    if(show_price_Label == true)
+    {
+        // حذف ليبلات أسعار LL العلوية (LL1-LL5)
+        for(int j = 0; j < 5; j++)
+        {
+            ObjectDelete("price_" + LL_Upper_Names[j]);
+        }
 
- // Delete price labels for HL10-HL14
- ObjectDelete("price_HL10");
- ObjectDelete("price_HL11");
- ObjectDelete("price_HL12");
- ObjectDelete("price_HL13");
- ObjectDelete("price_HL14");
+        // حذف ليبلات أسعار LL السفلية (LL10-LL14)
+        for(int j = 0; j < 5; j++)
+        {
+            ObjectDelete("price_" + LL_Lower_Names[j]);
+        }
 
- ObjectDelete("Today_Range");
- ObjectDelete("Today_Range_");
- ObjectDelete("Pre_day_Range_");
- ObjectDelete("Pre_day_Range");
-}
+        // حذف ليبلات أسعار HL العلوية (HL1-HL5)
+        for(int j = 0; j < 5; j++)
+        {
+            ObjectDelete("price_" + HL_Upper_Names[j]);
+        }
 
-return(0);
+        // حذف ليبلات أسعار HL السفلية (HL10-HL14)
+        for(int j = 0; j < 5; j++)
+        {
+            ObjectDelete("price_" + HL_Lower_Names[j]);
+        }
+    }
+
+    return(0);
 }
