@@ -15,10 +15,18 @@ if (!function_exists('client_config')) {
         }
         $basePath = 'app/ConfigApp/' . $folderName;
         $file = base_path($basePath . $fileName . '.php');
+
         // تحقق إذا الملف موجود
         if (file_exists($file)) {
             return require $file;
+        }else{
+          $basePath = 'app/ConfigApp/Default/' ;
+          $file = base_path($basePath . $fileName . '.php');
+          if (file_exists($file)) {
+            return require $file;
+          }
         }
+
         return $default;
     }
 }
