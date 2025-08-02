@@ -340,10 +340,10 @@ HTML;
     public static function getNavigationGroup(): ?string {
         return __('developers-tools/fileList.navigation_group');
     }
-//
-//    public static function getNavigationLabel(): string {
-//        return __('developers-tools/fileList.backup.NavigationLabel');
-//    }
+
+    public static function getNavigationLabel(): string {
+        return __('developers-tools/fileList.backup.NavigationLabel');
+    }
 //
 //    public function getTitle(): string|Htmlable {
 //        return __('developers-tools/fileList.backup.Title');

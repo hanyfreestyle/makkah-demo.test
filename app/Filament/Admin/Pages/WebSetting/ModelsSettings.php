@@ -6,7 +6,6 @@ use App\FilamentCustom\Setting\DefaultSettings;
 use App\FilamentCustom\Setting\LoadDefaultSettings;
 use App\Models\WebSetting\WebSiteSettings;
 use App\Traits\Admin\Helper\SmartResourceTrait;
-use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Actions\Action;
 use Filament\Forms\Contracts\HasForms;

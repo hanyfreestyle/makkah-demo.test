@@ -34,7 +34,7 @@ class ListDatabaseTables extends Page {
 
         $defaultDatabaseList = self::DefaultDatabaseList();
         $removeListFromAll = self::removeListFromAll();
-        $removeListFromClient = client_config('remove-db', true);
+        $removeListFromClient = client_config('removeDb\db-table-list', true);
         $removeTables = array_merge($defaultDatabaseList,$removeListFromAll,$removeListFromClient);
         return array_values(array_diff($existingTables, $removeTables));
 

@@ -13,7 +13,7 @@ if (!function_exists('client_config')) {
         if ($clientFolder) {
             $folderName = config('appConfig.client_name') . "/";
         }
-        $basePath = 'app/config/' . $folderName;
+        $basePath = 'app/ConfigApp/' . $folderName;
         $file = base_path($basePath . $fileName . '.php');
         // تحقق إذا الملف موجود
         if (file_exists($file)) {
@@ -78,7 +78,7 @@ if (!function_exists('getBackgroundsDirectory')) {
 if (!function_exists('getConfigJsonFile')) {
     function getConfigJsonFile($fileName) {
         $clientFolder = config('appConfig.client_name');
-        $pathToFile = base_path("app/config/$clientFolder/$fileName.json");
+        $pathToFile = base_path("app/ConfigApp/$clientFolder/$fileName.json");
         if (!file_exists(dirname($pathToFile))) {
             mkdir(dirname($pathToFile), 0755, true);
         }

@@ -100,7 +100,7 @@ trait SmartResourceTrait {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     public static function getNavigationSortNumber(): int {
-        $map = client_config('filament-navigation-map', true);
+        $map = client_config('navigationSort/mapSort', true);
         $counter = 0;
         foreach ($map as $group => $resources) {
             foreach ($resources as $resourceClass) {

@@ -9,7 +9,7 @@ class LoadDefaultSettings {
   public static function loadConfigData(): array {
     $defaultValues = self::loadData();
     $folderName = config('appConfig.client_name');
-    $activeModules = loadArrayFromPhpFile(base_path('app/config/' . $folderName . '/activeModules.php'));
+    $activeModules = loadArrayFromPhpFile(base_path('app/ConfigApp/' . $folderName . '/activeModules/modules.php'));
     return self::mergedSections($defaultValues, $activeModules);
   }
 

@@ -1,28 +1,34 @@
 <?php
 
 return [
-    'navigation_group' => 'Admin Core',
+  'navigation_group' => ':::: Admin Developers Tools ::::',
 
-    'category' => [
-        'NavigationLabel' => 'Manage File List',
-        'ModelLabel' => 'File',
-        'PluralModelLabel' => 'Files List',
-    ],
+  'category' => [
+    'NavigationLabel' => 'Manage Category ',
+    'ModelLabel' => 'Category',
+    'PluralModelLabel' => 'Category',
+  ],
 
-    'backup' => [
-        'NavigationLabel' => 'Back Up Files',
-        'Title' => 'Back Up Files',
-    ],
+  'file' => [
+    'NavigationLabel' => 'Manage File List ',
+    'ModelLabel' => 'File',
+    'PluralModelLabel' => 'File List',
+  ],
 
-    'exportDb' => [
-        'NavigationLabel' => 'Export Database',
-        'Title' => 'Export Database',
-    ],
+  'backup' => [
+    'NavigationLabel' => 'Back Up Files',
+    'Title' => 'Back Up Files',
+  ],
 
-    'listDb' => [
-        'NavigationLabel' => 'List Database Tables',
-        'Title' => 'List Database Tables',
-    ],
+  'exportDb' => [
+    'NavigationLabel' => 'Export Database',
+    'Title' => 'Export Database',
+  ],
+
+  'listDb' => [
+    'NavigationLabel' => 'List Database Tables',
+    'Title' => 'List Database Tables',
+  ],
 
 ];
 
