@@ -58,6 +58,7 @@ class MediaManagerController extends Controller {
             'RealEstateBlog' => \App\Models\RealEstate\BlogPost::class,
             'RealEstateListing' => \App\Models\RealEstate\Listing::class,
             'user_guide' => \App\Models\UserGuide\UserGuidePage::class,
+            'blockPhotos' => \App\Models\Builder\BuilderBlock::class,
             // ضيف أي موديل تاني هنا حسب الحاجة
         ];
 

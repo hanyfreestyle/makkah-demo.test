@@ -4,14 +4,14 @@ namespace App\Models\Builder;
 
 
 use App\Traits\Admin\Model\ClearsCacheOnChange;
-use App\Traits\Admin\Model\WithModelEvents;
+use App\Traits\Admin\Model\WithModelEventsUploadPhotos;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class BuilderBlock extends Model {
-  use WithModelEvents;
+  use WithModelEventsUploadPhotos;
   use ClearsCacheOnChange;
 
   protected $table = "builder_block";

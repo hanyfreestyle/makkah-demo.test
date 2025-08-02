@@ -8,7 +8,10 @@ use App\Service\Builder\Function\BuilderTranslatableInput;
 use App\Service\Builder\Function\BuilderTranslatableTextArea;
 use App\Service\Builder\Function\SetProtectedValTrait;
 use Filament\Forms;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
+use Illuminate\Support\HtmlString;
 
 class Gallery1 {
   use SetProtectedValTrait;
@@ -20,66 +23,50 @@ class Gallery1 {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public function getColumns(): array {
-
+    $model = 'blockPhotos';
     $columns = [];
 
     $columns[] = Forms\Components\Group::make()->schema([
       Forms\Components\Section::make()->schema([
+        Group::make()->schema([
+          Placeholder::make("")
+            ->content(function ($record) use ($model) {
+              return new HtmlString(view('components.admin.media.media-manager-list', [
+                'record' => $record,
+                'modelName' => $model,
+              ])->render());
+            }),
+        ])->columnSpan(2),
+      ])->columnSpan(2)->columns(2),
 
-//        ...BuilderTranslatableInput::make()
-//          ->setInputName('schema.number')
-//          ->setLabel(__('builder/_default.number'))
-//          ->getColumns(),
-//
-//        ...BuilderTranslatableInput::make()
-//          ->setInputName('schema.years')
-//          ->setLabel(__('builder/_default.years'))
-//          ->getColumns(),
-//
-//        ...BuilderTranslatableInput::make()
-//          ->setInputName('schema.h1')
-//          ->setLabel(__('builder/_default.title'))
-//          ->getColumns(),
-//
-//        ...BuilderTranslatableTextArea::make()
-//          ->setInputName('schema.des')
-//          ->setLabel(__('builder/_default.description'))
-//          ->getColumns(),
-//
-//        ...BuilderTranslatableInput::make()
-//          ->setInputName('schema.btn')
-//          ->setLabel(__('builder/_default.btn'))
-//          ->getColumns(),
-//
-//        ...BuilderTranslatableInput::make()
-//          ->setInputName('schema.btn_url')
-//          ->setLabel(__('builder/_default.btn_url'))
+      Forms\Components\Section::make(__('default/lang.construct.gallery_file'))->schema([
+//        ...WebpUploadWithFilter::make()
+//          ->setFileName('gallery')
+//          ->setMultipleFiles(true)
+//          ->setFilterId(4)
+//          ->setUploadDirectory($this->uploadDirectory)
+//          ->setRequiredUpload(true)
 //          ->getColumns(),
 
 
-      ])->columns(2),
-    ])->columnSpan(6)->columns(2);
-
-
-    $columns[] = Forms\Components\Group::make()->schema([
-      Forms\Components\Section::make()->schema([
         ...WebpUploadFixedSize::make()
           ->setFileName('gallery')
-          ->setThumbnail(false)
-          ->setUploadDirectory('hany-darwish')
-          ->setRequiredUpload(true)
+          ->setMultipleFiles(true)
+          ->setThumbnail(true)
+          ->setUploadDirectory($this->uploadDirectory)
+          ->setRequiredUpload(false)
           ->setResize(800, 400, 90)
           ->setFilter(1)
           ->setThumbnailSize(200, 200, 90)
           ->setCanvas('#fff')
-          ->setMultipleFiles(true)
           ->setAspectRatio(null)
+          ->setRequiredUpload(true)
           ->getColumns(),
 
-      ])->columns(1),
 
-    ])->columnSpan(2)->columns(2);
+      ])->columnSpan(1),
 
+    ])->columnSpan(8)->columns(3);
 
     return $columns;
   }

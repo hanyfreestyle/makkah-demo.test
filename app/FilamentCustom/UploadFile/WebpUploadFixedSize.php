@@ -95,6 +95,7 @@ class WebpUploadFixedSize {
       ->visibility($this->diskDir)
       ->directory($this->uploadDirectory)
       ->acceptedFileTypes(['image/*'])
+      ->previewable($this->previewAble)
       ->hiddenLabel()
       ->multiple($this->multipleFiles)
       ->image()
