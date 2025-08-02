@@ -139,7 +139,6 @@ class HomePageController extends DefaultWebController {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public function projectView($slug) {
-    $meta = parent::getMeatByCatId('home');
     $slug = Url_Slug($slug);
     $pageView = $this->pageView;
     $pageView['selMenu'] = "our_project";
@@ -149,9 +148,9 @@ class HomePageController extends DefaultWebController {
       ->firstOrFail();
     $pageView['slug'] = route('web.project_view', $project->translate(webChangeLocale())->slug);
 
-    $blocks = self::getBuilderPageBlocks($meta->builder_page_id);
+    $blocks = self::getBuilderPageBlocks($project->builder_page_id);
+    self::printSeoMeta($project, 'web.project_view');
 
-    self::printSeoMeta($meta, 'web.index');
     return view('makkah.projects_view')->with([
       'project' => $project,
       'pageView' => $pageView,

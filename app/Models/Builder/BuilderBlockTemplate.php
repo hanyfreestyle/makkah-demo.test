@@ -15,7 +15,7 @@ class BuilderBlockTemplate extends Model {
   protected $table = "builder_block_template";
   protected $primaryKey = 'id';
   public $timestamps = false;
-  protected $fillable = ['name', 'slug', 'type', 'template', 'photo', 'config', 'is_active'];
+  protected $fillable = ['name', 'slug', 'type', 'template', 'photo','photo_thumbnail', 'config', 'is_active'];
 
   protected $casts = [
     'name' => 'array',

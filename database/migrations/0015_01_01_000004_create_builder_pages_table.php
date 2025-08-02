@@ -15,6 +15,7 @@ return new class extends Migration {
       $table->string('type')->nullable();
       $table->string('template')->nullable();
       $table->string("photo")->nullable();
+      $table->string("photo_thumbnail")->nullable();
       $table->json('config')->nullable();
       $table->boolean("is_active")->default(true);
       $table->unique(['slug', 'type', 'template']);
