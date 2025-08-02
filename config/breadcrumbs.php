@@ -24,7 +24,7 @@ return [
     */
 
 //    'view' => 'breadcrumbs::bootstrap5',
-    'view' => 'makkah.partials.breadcrumbs',
+    'view' => env('BREADCRUMBS_VIEW', null),
 
     /*
     |--------------------------------------------------------------------------
