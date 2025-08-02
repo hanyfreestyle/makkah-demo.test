@@ -17,16 +17,15 @@ return new class extends Migration {
       $table->string("photo")->nullable();
       $table->json('config')->nullable();
       $table->boolean("is_active")->default(true);
-
       $table->unique(['slug', 'type', 'template']);
     });
+
 
     Schema::create('builder_block', function (Blueprint $table) {
       $table->id();
       $table->bigInteger('template_id')->unsigned();
       $table->json('name');
       $table->string('type')->nullable();
-//      $table->string('slug')->unique()->nullable();
       $table->string("photo")->nullable();
       $table->string("photo_thumbnail")->nullable();
       $table->json('config')->nullable();
@@ -57,9 +56,22 @@ return new class extends Migration {
       $table->timestamps();
     });
 
+
+    Schema::create('builder_block_photos', function (Blueprint $table) {
+      $table->bigIncrements('id');
+      $table->bigInteger('block_id')->unsigned();
+      $table->string("photo")->nullable();
+      $table->string("photo_thumbnail")->nullable();
+      $table->boolean("is_active")->default(true);
+      $table->integer("position")->default(0);
+      $table->integer("is_default")->default(0);
+//      $table->foreign('block_id')->references('id')->on('builder_block')->onDelete('cascade');
+    });
+
   }
 
   public function down(): void {
+    Schema::dropIfExists('builder_block_photos');
     Schema::dropIfExists('builder_page_pivot');
     Schema::dropIfExists('builder_page');
     Schema::dropIfExists('builder_block');

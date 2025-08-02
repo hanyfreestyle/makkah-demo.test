@@ -15,6 +15,7 @@ class EditBuilderBlocks extends EditRecord {
   use EditTranslatable;
   use WithSaveAndClose;
   use WithNextAndPreviousActions;
+  use WithGallerySaving;
 
   protected static string $resource = BuilderBlocksResource::class;
 
@@ -33,6 +34,11 @@ class EditBuilderBlocks extends EditRecord {
     ];
   }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  public function afterSave(): void {
+    $this->setRelation('photos')->afterSaveGallery();
+  }
 }
 
 

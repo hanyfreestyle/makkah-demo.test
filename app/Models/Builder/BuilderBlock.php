@@ -2,12 +2,16 @@
 
 namespace App\Models\Builder;
 
+
 use App\Traits\Admin\Model\ClearsCacheOnChange;
+use App\Traits\Admin\Model\WithModelEvents;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class BuilderBlock extends Model {
+  use WithModelEvents;
   use ClearsCacheOnChange;
 
   protected $table = "builder_block";
@@ -31,6 +35,10 @@ class BuilderBlock extends Model {
     self::bootClearsCacheOnChange();
   }
 
+  public static function getGalleryRelation(): string {
+    return 'photos';
+  }
+
 
   public function cacheKeys(): array {
     return [
@@ -47,5 +55,8 @@ class BuilderBlock extends Model {
     return $this->belongsTo(BuilderBlockTemplate::class, 'template_id');
   }
 
+  public function photos(): HasMany {
+    return $this->hasMany(BuilderBlockPhoto::class, 'block_id')->orderBy('position');
+  }
 
 }
