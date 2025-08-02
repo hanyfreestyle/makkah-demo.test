@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder {
     loadSeederFromFile('builder_block', true);
     loadSeederFromFile('builder_page', true);
     loadSeederFromFile('builder_page_pivot', true);
+    loadSeederFromFile('builder_block_photos', true);
 
 
 //      $titles = [
