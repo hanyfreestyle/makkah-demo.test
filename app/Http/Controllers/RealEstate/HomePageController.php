@@ -149,6 +149,7 @@ class HomePageController extends DefaultWebController {
     $pageView['slug'] = route('web.project_view', $project->translate(webChangeLocale())->slug);
 
     $blocks = self::getBuilderPageBlocks($project->builder_page_id);
+
     self::printSeoMeta($project, 'web.project_view');
 
     return view('makkah.projects_view')->with([

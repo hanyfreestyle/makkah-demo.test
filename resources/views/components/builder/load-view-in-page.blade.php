@@ -13,13 +13,13 @@
   @endphp
 
   @if(View::exists($viewPath))
-    @if($block->schema != null)
+{{--    @if($block->schema != null)--}}
       @include($viewPath, [
           'block' => $block,
           'schema' => $block->schema,
           'config' => $block->config,
       ])
-    @endif
+{{--    @endif--}}
   @else
     <div class="bg-red-100 text-red-600 p-4 my-2">
       العرض غير متاح لهذا البلوك ({{ $viewPath }})

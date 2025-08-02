@@ -2,7 +2,7 @@
     color: var(--def-color) !important;
 }
 
-.pageHeading{
+.pageHeading {
     margin-top: 50px;
 }
 
@@ -34,7 +34,6 @@
 }
 
 
-
 .breadcrumb_list ul {
     display: flex;
     flex-wrap: nowrap;
@@ -52,6 +51,7 @@
     .pageHeading h1 {
         font-size: 1.8rem;
     }
+
     .pageHeading p {
         font-size: 1rem;
         padding: 5px 20px;
@@ -310,7 +310,7 @@ html[lang="ar"] textarea {
 .slide-brief {
     max-width: 1300px !important;
     font-size: 16px !important;
-    width: 100%!important;
+    width: 100% !important;
 }
 
 .slide-brief p {
@@ -319,7 +319,7 @@ html[lang="ar"] textarea {
     font-weight: 600;
     letter-spacing: 1px;
     color: rgba(255, 255, 255, .9);
-    width: 100%!important;
+    width: 100% !important;
 }
 
 @media (max-width: 1000px) {
@@ -339,7 +339,7 @@ html[lang="ar"] textarea {
         font-size: 40px !important;
     }
 
-    html[lang="ar"]  .ltn__slide-item .slideTitle {
+    html[lang="ar"] .ltn__slide-item .slideTitle {
         font-size: 55px !important;
     }
 
@@ -347,6 +347,7 @@ html[lang="ar"] textarea {
     .slide-brief p {
         font-size: 22px !important;
     }
+
     .ltn__slide-item .btn {
         font-size: 16px !important;
         font-weight: 600;
@@ -372,7 +373,7 @@ html[lang="ar"] textarea {
         font-size: 40px !important;
     }
 
-    html[lang="ar"]  .ltn__slide-item .slideTitle {
+    html[lang="ar"] .ltn__slide-item .slideTitle {
         font-size: 55px !important;
     }
 
@@ -380,6 +381,7 @@ html[lang="ar"] textarea {
     .slide-brief p {
         font-size: 22px !important;
     }
+
     .ltn__slide-item .btn {
         font-size: 16px !important;
         font-weight: 600;
@@ -388,5 +390,40 @@ html[lang="ar"] textarea {
 }
 
 
+/*.projectHero .ltn__slider-area{*/
+/*    height: 60vh!important;*/
 
+/*}*/
+
+.projectHero .ltn__slide-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 75vh !important;
+}
+
+.projectHero h1 {
+    display: inline!important;
+    color: var(--def-color);
+    background: rgba(0,0,0,.7)!important;
+    padding: 10px 100px;
+    width: auto!important;
+}
+
+
+@media (max-width: 500px) {
+    .projectHero h1 {
+        display: inline-block!important;
+        color: var(--def-color);
+        background: rgba(0,0,0,.7)!important;
+        padding: 10px 15px;
+        width: auto!important;
+        font-size: 40px!important;
+    }
+
+
+    html[lang="ar"] .projectHero .slideTitle {
+        font-size: 40px !important;
+    }
+
+}
 

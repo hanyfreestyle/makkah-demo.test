@@ -12,10 +12,10 @@ class GalleryBlockForm implements BlockFormInterface {
 //    dd($slug);
     return match ($slug) {
       'gallery-1' => Gallery1::make()
-        ->setPhotoFilter(5)
-        ->setPhotoSize(600,1200)
-        ->setPhotoFilterThumbnail(4)
-        ->setPhotoThumbnailSize(300,300)
+        ->setPhotoFilter(3)
+        ->setPhotoSize(1200,600)
+        ->setPhotoFilterThumbnail(2)
+        ->setPhotoThumbnailSize(450,400)
         ->setPhotoCanvas('#fff')
         ->getColumns(),
       default => [],

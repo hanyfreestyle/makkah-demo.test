@@ -53,7 +53,7 @@ class Gallery1 {
           ->setThumbnailSize($this->photoThumbnailWidth, $this->photoThumbnailHeight)
           ->setCanvas($this->photoCanvas)
           ->setAspectRatio(null)
-          ->setRequiredUpload(true)
+          ->setRequiredUpload(false)
           ->getColumns(),
 
 

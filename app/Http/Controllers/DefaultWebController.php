@@ -217,7 +217,7 @@ class DefaultWebController extends Controller {
   static function getBuilderPageBlocks($builder_page_id) {
     $page = BuilderPage::query()->where('id', $builder_page_id)->first();
     if ($page) {
-      $blocks = $page->blocks()
+      $blocks = $page->blocks()->with('photos')
         ->where('builder_block.is_active', true)
         ->where('builder_page_pivot.is_active', true)
         ->with('template') // تأكد إن العلاقة template موجودة
