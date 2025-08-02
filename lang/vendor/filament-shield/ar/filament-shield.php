@@ -87,7 +87,7 @@ return [
         'meta_tag' => 'ادارة الميتا تاج',
         'web_privacy' => 'ادارة سياسية الموقع',
         'upload_filter' => 'ادارة فلاتر الصور',
-        ...client_config('filament-shield-ar', true),
+        ...client_config('dataTables\shield-ar', true),
     ],
 
 

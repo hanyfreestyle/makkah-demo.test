@@ -31,7 +31,7 @@ class ManageDataResource extends Resource implements HasShieldPermissions {
             keepKeys: ['sort'],
             addKeys: [
                 'placeIn' => 'before',
-                'keys' => client_config('data-table-arr', true),
+                'keys' => client_config('dataTables\table-arr', true),
             ],
         );
     }

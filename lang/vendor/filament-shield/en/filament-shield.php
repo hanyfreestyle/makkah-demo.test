@@ -80,6 +80,6 @@ return [
         'reorder' => 'Reorder',
         'restore_any' => 'Restore Any',
         'replicate' => 'Replicate',
-        ...client_config('filament-shield-en', true),
+        ...client_config('dataTables\shield-en', true),
     ],
 ];
