@@ -13,6 +13,7 @@ class WebpUploadFixedSize {
 
 
   protected int $filter = 4;
+  protected int $filterThumbnail = 4;
   protected int $width = 300;
   protected int $height = 300;
   protected int $quality = 90;
@@ -31,10 +32,17 @@ class WebpUploadFixedSize {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  public function setFilter(int $filter = 4): static {
-    $this->filter = $filter;
+  public function setFilter(int $filterThumbnail = 4): static {
+    $this->filter = $filterThumbnail;
     return $this;
   }
+
+  public function setFilterThumbnail(int $filter = 4): static {
+    $this->filterThumbnail = $filter;
+    return $this;
+  }
+
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public function setResize(int $width, int $height, int $quality = 90): static {
@@ -181,7 +189,7 @@ class WebpUploadFixedSize {
 
     if ($this->generateThumbnail) {
       $size = [
-        'type' => $this->filter,
+        'type' => $this->filterThumbnail,
         'width' => $this->thumbWidth,
         'height' => $this->thumbHeight,
       ];
@@ -189,6 +197,8 @@ class WebpUploadFixedSize {
       if ($record) {
         $record->photo_thumbnail = $thumbnailPath;
       }
+    } else {
+      $record->photo_thumbnail = null;
     }
 
 //        if (!$this->isMultiple()) {

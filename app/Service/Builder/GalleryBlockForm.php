@@ -11,7 +11,13 @@ class GalleryBlockForm implements BlockFormInterface {
   public static function make(string $type, string $slug): array {
 //    dd($slug);
     return match ($slug) {
-      'gallery-1' => Gallery1::make()->getColumns(),
+      'gallery-1' => Gallery1::make()
+        ->setPhotoFilter(5)
+        ->setPhotoSize(600,1200)
+        ->setPhotoFilterThumbnail(4)
+        ->setPhotoThumbnailSize(300,300)
+        ->setPhotoCanvas('#fff')
+        ->getColumns(),
       default => [],
     };
   }

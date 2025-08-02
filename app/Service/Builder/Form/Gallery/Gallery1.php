@@ -40,25 +40,18 @@ class Gallery1 {
       ])->columnSpan(2)->columns(2),
 
       Forms\Components\Section::make(__('default/lang.construct.gallery_file'))->schema([
-//        ...WebpUploadWithFilter::make()
-//          ->setFileName('gallery')
-//          ->setMultipleFiles(true)
-//          ->setFilterId(4)
-//          ->setUploadDirectory($this->uploadDirectory)
-//          ->setRequiredUpload(true)
-//          ->getColumns(),
-
 
         ...WebpUploadFixedSize::make()
           ->setFileName('gallery')
           ->setMultipleFiles(true)
+          ->setRequiredUpload(false)
           ->setThumbnail(true)
           ->setUploadDirectory($this->uploadDirectory)
-          ->setRequiredUpload(false)
-          ->setResize(800, 400, 90)
-          ->setFilter(1)
-          ->setThumbnailSize(200, 200, 90)
-          ->setCanvas('#fff')
+          ->setFilter($this->photoFilter)
+          ->setResize($this->photoWidth, $this->photoHeight, $this->quality)
+          ->setFilterThumbnail($this->photoFilterThumbnail)
+          ->setThumbnailSize($this->photoThumbnailWidth, $this->photoThumbnailHeight)
+          ->setCanvas($this->photoCanvas)
           ->setAspectRatio(null)
           ->setRequiredUpload(true)
           ->getColumns(),
