@@ -89,6 +89,7 @@ return [
             'DataCountryResource',
             'BlogCategoryResource',
 //            'ProjectResource','ProjectUnitsResource','ForSaleResource'
+            'BuilderBlockTemplateResource',
             'DataCampaignResource', 'DataContactTimeResource', 'DataContactTypeResource', 'DataDeliveryDateResource', 'DataDeveloperResource',
             'DataDistrictResource', 'DataFinishingTypeResource', 'DataFollowingTypeResource', 'DataFurnishedTypeResource', 'DataLeadSourceResource',
             'DataLeadSourceSubResource', 'DataPaymentTypeResource', 'DataServiceTypeResource', 'DataUnitAreaResource', 'DataUnitTypeResource',

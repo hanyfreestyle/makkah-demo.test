@@ -10,6 +10,7 @@ use App\Models\Builder\BuilderPage;
 use App\Service\Builder\BlockFormFactory;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderBlocksResource\Pages;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms\Get;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Enums\FiltersLayout;
@@ -24,27 +25,16 @@ use Filament\Resources\Resource;
 use Filament\Forms\Form;
 use Filament\Tables;
 use Filament\Forms;
+use Illuminate\Support\Facades\Auth;
 
 
-class BuilderBlocksResource extends Resource {
+class BuilderBlocksResource extends Resource implements HasShieldPermissions {
   use Translatable;
   use SmartResourceTrait;
 
   protected static ?string $model = BuilderBlock::class;
   protected static ?string $navigationIcon = 'fas-puzzle-piece';
   protected static ?string $uploadDirectory = 'BuilderBlocksResource';
-
-//  public static bool $showCategoryActions = true;
-//  public static string $relatedResourceClass = BlogCategoryResource::class;
-//  public static string $modelPolicy = BuilderPage::class;
-//
-//  public static function canViewAny(): bool {
-//    return Gate::forUser(auth()->user())->allows('viewAnyCategory', BuilderPage::class) ;
-//  }
-//
-//  public static function shouldRegisterNavigation(): bool {
-//    return false;
-//  }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -69,7 +59,7 @@ class BuilderBlocksResource extends Resource {
     return $table
       ->modifyQueryUsing(fn ($query) => $query->with('template'))
       ->columns([
-//        ImageColumnDef::make('template.photo')->width(80)->height(40),
+
         Tables\Columns\TextColumn::make('id')
           ->label("#")
           ->sortable()
@@ -105,13 +95,9 @@ class BuilderBlocksResource extends Resource {
 
         Tables\Columns\ToggleColumn::make('is_active')
           ->label(__('default/lang.columns.is_active'))
-
+          ->visible(fn () => Auth::user()?->can('update_builder::builder::blocks'))
           ->sortable(),
 
-//        Tables\Columns\IconColumn::make('is_active')
-//          ->label(__('default/lang.columns.is_active'))
-//          ->boolean()
-//          ->sortable(),
 
       ])->filters([
         SelectFilter::make('template.type')
@@ -124,7 +110,7 @@ class BuilderBlocksResource extends Resource {
           )
           ->searchable()
           ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data): \Illuminate\Database\Eloquent\Builder {
-            if (! $data['value']) {
+            if (!$data['value']) {
               return $query;
             }
 
@@ -144,7 +130,7 @@ class BuilderBlocksResource extends Resource {
           )
           ->searchable()
           ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data): \Illuminate\Database\Eloquent\Builder {
-            if (! $data['value']) {
+            if (!$data['value']) {
               return $query;
             }
 
@@ -165,7 +151,7 @@ class BuilderBlocksResource extends Resource {
           ->searchable()
           ->preload()
           ->query(function ($query, $data) {
-            if (! $data['value']) return $query;
+            if (!$data['value']) return $query;
 
             return $query->whereHas('pages', function ($q) use ($data) {
               $q->where('builder_page.id', $data['value']); // ← هنا التعديل
@@ -267,12 +253,14 @@ class BuilderBlocksResource extends Resource {
   }
 
   public static function getNavigationLabel(): string {
-    return __('builder/builder-blocks.navigation_label');
+   return __('builder/builder-blocks.navigation_label');
   }
+
 
   public static function getModelLabel(): string {
     return __('builder/builder-blocks.model_label');
   }
+
 
   public static function getPluralModelLabel(): string {
     return __('builder/builder-blocks.plural_model_label');
@@ -283,7 +271,7 @@ class BuilderBlocksResource extends Resource {
   public static function getPermissionPrefixes(): array {
     return static::filterPermissions(
       skipKeys: ['view'],
-      keepKeys: ['cat', 'sort', 'publish'],
+      keepKeys: ['sort', 'replicate'],
     );
   }
 

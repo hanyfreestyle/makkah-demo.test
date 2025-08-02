@@ -34,20 +34,8 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
   protected static ?string $navigationIcon = 'fas-paintbrush';
   protected static ?string $uploadDirectory = 'builder-template';
 
-//  public static bool $showCategoryActions = true;
-//  public static string $relatedResourceClass = BlogCategoryResource::class;
-//  public static string $modelPolicy = BuilderPage::class;
-//
-//  public static function canViewAny(): bool {
-//    return Gate::forUser(auth()->user())->allows('viewAnyCategory', BuilderPage::class) ;
-//  }
-//
-  public static function shouldRegisterNavigation(): bool {
-    if (env('APP_ENV') === 'production') {
-      return false;
-    } else {
-      return true;
-    }
+  public static function canAccess(): bool {
+    return isLocalSuperAdmin();
   }
 
 
@@ -103,7 +91,7 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
         ->sortable(),
 
     ])->filters([
-//         ...FilterWithArchive::make()->getColumns(),
+
       SelectFilter::make('is_active')
         ->label(__('default/lang.enum.active.label'))
         ->options(EnumsActive::options())
@@ -150,7 +138,7 @@ class BuilderBlockTemplateResource extends Resource implements HasShieldPermissi
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public static function form(Form $form): Form {
 
-   return $form->schema([
+    return $form->schema([
       Forms\Components\Section::make()->schema([
 
         Forms\Components\Group::make()->schema([

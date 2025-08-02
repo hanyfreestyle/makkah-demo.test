@@ -7,6 +7,7 @@ use App\Filament\Admin\Resources\Builder\BuilderPageResource\RelationManagers\Bl
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderPageResource\Pages;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
@@ -17,25 +18,13 @@ use Filament\Forms\Form;
 use Filament\Tables;
 use Filament\Forms;
 
-class BuilderPageResource extends Resource {
+class BuilderPageResource extends Resource implements HasShieldPermissions {
   use Translatable;
   use SmartResourceTrait;
 
   protected static ?string $model = BuilderPage::class;
   protected static ?string $navigationIcon = 'fas-file-lines';
   protected static ?string $uploadDirectory = 'BuilderPageResource';
-
-//    public static bool $showCategoryActions = true;
-//    public static string $relatedResourceClass = BlogCategoryResource::class;
-//    public static string $modelPolicy = BuilderPage::class;
-//
-//    public static function canViewAny(): bool {
-//        return Gate::forUser(auth()->user())->allows('viewAnyCategory', BuilderPage::class) ;
-//    }
-//
-//    public static function shouldRegisterNavigation(): bool {
-//        return false;
-//    }
 
   public function getDisplayNameAttribute(): string {
     return $this->name[app()->getLocale()] ?? reset($this->name);
@@ -96,15 +85,13 @@ class BuilderPageResource extends Resource {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public static function form(Form $form): Form {
-    $filterId = getModuleConfigKey("builder_page_filter_photo", 0);
-    $locale = app()->getLocale();
 
     return $form->schema([
       Forms\Components\Section::make()->schema([
         ...SoftTranslatableInput::make()->setUniqueTable("builder_page")->getColumns(),
 
         Forms\Components\Select::make('blocks')
-          ->label( __('builder/builder-page.columns.blocks'))
+          ->label(__('builder/builder-page.columns.blocks'))
           ->relationship('blocks', 'id') // ← نرجّع الترتيب للـ id
           ->getOptionLabelFromRecordUsing(fn ($record) => $record->display_name)
           ->multiple()
@@ -155,7 +142,7 @@ class BuilderPageResource extends Resource {
   public static function getPermissionPrefixes(): array {
     return static::filterPermissions(
       skipKeys: ['view'],
-      keepKeys: ['cat', 'sort', 'publish'],
+      keepKeys: ['sort', 'replicate'],
     );
   }
 

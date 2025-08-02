@@ -5,6 +5,8 @@
 return [
   \App\Models\LatestNews\LatestNews::class => \App\Policies\LatestNews\LatestNewsPolicy::class,
   \App\Models\Makkah\MakkahProject::class => \App\Policies\Makkah\MakkahProjectPolicy::class,
+  \App\Models\Builder\BuilderBlock::class => \App\Policies\Builder\BuilderBlockPolicy::class,
+  \App\Models\Builder\BuilderPage::class => \App\Policies\Builder\BuilderPagePolicy::class,
 
 
 //  \App\Models\Data\ManageData::class => \App\Policies\RealEstate\ClientManageDataPolicy::class,
