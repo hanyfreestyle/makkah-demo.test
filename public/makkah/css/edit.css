@@ -432,3 +432,112 @@ html[lang="ar"] textarea {
     top: 50% !important;
 }
 
+
+.aminities_1 a .category-icon {
+    /*margin-right: 0;*/
+    /*margin-left: auto;*/
+    margin: auto;
+}
+
+
+.ltn__category-item-5-2 a .category-brief {
+    -webkit-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+
+.ltn__category-item-5-2:hover {
+    background-color: var(--ltn__secondary-color);
+}
+
+.ltn__category-item-5-2:hover .category-number,
+.ltn__category-item-5-2:hover .category-brief {
+    color: var(--white);
+}
+
+.aminities_1 a .category-icon {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    font-size: 45px;
+    border-radius: 100%;
+    background-color: var(--section-bg-5);
+    color: var(--ltn__secondary-color);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.aminities_1 a {
+    padding: 20px 20px 20px;
+    display: block;
+    position: relative;
+}
+
+
+.aminities_1 {
+    border: none;
+    /*-webkit-box-shadow: var(--ltn__box-shadow-4);*/
+    /*box-shadow: var(--ltn__box-shadow-4);*/
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+.aminities_1 a {
+    /*padding: 40px 30px 35px;*/
+    padding: 0;
+    display: block;
+    position: relative;
+}
+
+.aminities_1 a span {
+    display: block;
+}
+
+.aminities_1 a .category-icon {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    font-size: 45px;
+    border-radius: 100%;
+    background-color: var(--section-bg-5);
+    color: var(--ltn__secondary-color);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.aminities_1 a .category-title {
+    font-size: 16px;
+    font-weight: 600;
+
+    color: var(--ltn__heading-color);
+    -webkit-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    margin-bottom: 10px;
+}
+
+.aminities_2 a .category-title {
+    font-size: 16px;
+    font-weight: 600;
+
+    color: rgba(255, 255, 255, .7);
+    -webkit-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    margin-bottom: 10px;
+    /*background: var(--ltn__secondary-color);*/
+    display: inline-block;
+    min-width: 70%;
+    border-radius: 3px;
+}
+
+
+html[lang="ar"] .slick-arrow-3 .slick-arrow {
+    left: 0;
+    right: auto;
+}
+
+html[lang="ar"] .slick-arrow-3 .slick-next {
+    left: 85px;
+    right: auto;
+}

@@ -9692,35 +9692,7 @@ html[lang="ar"] .ltn__social-media-2 ul li:last-child {
     color: var(--white);
 }
 
-.ltn__category-item-5-2 a .category-icon {
-    margin-right: 0;
-    margin-left: auto;
-}
 
-.ltn__category-item-5-2 a .category-number {
-    -webkit-transition: all 0.3s ease 0s;
-    -o-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s;
-    font-size: 20px;
-    font-weight: 600;
-    font-family: var(--ltn__body-font);
-    color: var(--ltn__secondary-color);
-}
-
-.ltn__category-item-5-2 a .category-brief {
-    -webkit-transition: all 0.3s ease 0s;
-    -o-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s;
-}
-
-.ltn__category-item-5-2:hover {
-    background-color: var(--ltn__secondary-color);
-}
-
-.ltn__category-item-5-2:hover .category-number,
-.ltn__category-item-5-2:hover .category-brief {
-    color: var(--white);
-}
 
 @media (max-width: 1200px) {
     .ltn__category-item-5 a {

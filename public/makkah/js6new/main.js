@@ -1203,7 +1203,8 @@
             centerPadding: '80px',
             infinite: true,
             speed: 300,
-            slidesToShow: 2,
+            rtl: $('html').attr('dir') === 'rtl',
+            slidesToShow: 5,
             slidesToScroll: 1,
             prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left" alt="Arrow Icon"></i></a>',
             nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right" alt="Arrow Icon"></i></a>',
@@ -1211,7 +1212,7 @@
                 {
                     breakpoint: 1200,
                     settings: {
-                        slidesToShow: 2,
+                        slidesToShow: 6,
                         slidesToScroll: 1
                     }
                 },
@@ -1220,7 +1221,7 @@
                     settings: {
                         arrows: false,
                         dots: true,
-                        slidesToShow: 2,
+                        slidesToShow: 4,
                         slidesToScroll: 1
                     }
                 },
@@ -1229,7 +1230,7 @@
                     settings: {
                         arrows: false,
                         dots: true,
-                        slidesToShow: 1,
+                        slidesToShow: 4,
                         slidesToScroll: 1
                     }
                 },
@@ -1239,7 +1240,7 @@
                         arrows: false,
                         dots: true,
                         centerMode: false,
-                        slidesToShow: 1,
+                        slidesToShow: 2,
                         slidesToScroll: 1
                     }
                 }
@@ -1446,7 +1447,7 @@
             26. Image Slide - 4 
         --------------------------------------------------------- */
         $('.ltn__image-slider-4-active').slick({
-            rtl: false,
+            rtl: $('html').attr('dir') === 'rtl',
             arrows: true,
             dots: false,
             infinite: true,
