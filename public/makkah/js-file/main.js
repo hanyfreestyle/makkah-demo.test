@@ -343,8 +343,8 @@
         $('a[data-rel^=lightcase]').lightcase({
             transition: 'elastic', /* none, fade, fadeInline, elastic, scrollTop, scrollRight, scrollBottom, scrollLeft, scrollHorizontal and scrollVertical */
             swipe: true,
-            maxWidth: 1170,
-            maxHeight: 600,
+            maxWidth:'auto',
+            maxHeight: 'auto',
         });
 
         /* --------------------------------------------------------
@@ -352,7 +352,8 @@
         --------------------------------------------------------- */
         $('.ltn__slide-one-active').slick({
             autoplay: false,
-            autoplaySpeed: 2000,
+            autoplaySpeed: 3000,
+            rtl: $('html').attr('dir') === 'rtl',
             arrows: true,
             dots: true,
             fade: true,
@@ -365,10 +366,39 @@
             nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right" alt="Arrow Icon"></i></a>',
             responsive: [
                 {
-                    breakpoint: 1200,
+                    breakpoint: 1600,
                     settings: {
-                        arrows: false,
-                        dots: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 575,
+                    settings: {
+                        arrows: true,
+                        dots: false,
+                        slidesToShow: 1,
+                        slidesToScroll: 1
                     }
                 }
             ]
@@ -422,6 +452,7 @@
             appendDots: '.ltn__slider-11-pagination-count',
             infinite: true,
             autoplay: false,
+            rtl: $('html').attr('dir') === 'rtl',
             autoplaySpeed: 10000,
             speed: 500,
             asNavFor: '.ltn__slider-11-img-slide-arrow-active',
@@ -470,10 +501,12 @@
         });
 
         $('.ltn__slider-11-img-slide-arrow-active').slick({
-            slidesToShow: 3,
+            slidesToShow: 2,
             slidesToScroll: 1,
             initialSlide: 2,
             centerPadding: '0px',
+            rtl: $('html').attr('dir') === 'rtl',
+
             asNavFor: '.ltn__slider-11-active',
             dots: false, /* image slide dots */
             arrows: false, /* image slide arrow */
@@ -1170,7 +1203,8 @@
             centerPadding: '80px',
             infinite: true,
             speed: 300,
-            slidesToShow: 2,
+            rtl: $('html').attr('dir') === 'rtl',
+            slidesToShow: 5,
             slidesToScroll: 1,
             prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left" alt="Arrow Icon"></i></a>',
             nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right" alt="Arrow Icon"></i></a>',
@@ -1178,7 +1212,7 @@
                 {
                     breakpoint: 1200,
                     settings: {
-                        slidesToShow: 2,
+                        slidesToShow: 6,
                         slidesToScroll: 1
                     }
                 },
@@ -1187,7 +1221,7 @@
                     settings: {
                         arrows: false,
                         dots: true,
-                        slidesToShow: 2,
+                        slidesToShow: 4,
                         slidesToScroll: 1
                     }
                 },
@@ -1196,7 +1230,7 @@
                     settings: {
                         arrows: false,
                         dots: true,
-                        slidesToShow: 1,
+                        slidesToShow: 4,
                         slidesToScroll: 1
                     }
                 },
@@ -1206,7 +1240,7 @@
                         arrows: false,
                         dots: true,
                         centerMode: false,
-                        slidesToShow: 1,
+                        slidesToShow: 2,
                         slidesToScroll: 1
                     }
                 }
@@ -1413,7 +1447,7 @@
             26. Image Slide - 4 
         --------------------------------------------------------- */
         $('.ltn__image-slider-4-active').slick({
-            rtl: false,
+            rtl: $('html').attr('dir') === 'rtl',
             arrows: true,
             dots: false,
             infinite: true,
@@ -1582,6 +1616,8 @@
             arrows: true,
             dots: false,
             infinite: true,
+            rtl: $('html').attr('dir') === 'rtl',
+
             speed: 300,
             slidesToShow: 1,
             slidesToScroll: 1,
