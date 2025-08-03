@@ -7,11 +7,13 @@ use App\Enums\Builder\EnumsBlockType;
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
 use App\Models\Builder\BuilderBlockTemplate;
 use App\Models\Builder\BuilderPage;
+use App\Models\SnapCode;
 use App\Service\Builder\BlockFormFactory;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderBlocksResource\Pages;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms\Get;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
@@ -25,6 +27,7 @@ use Filament\Resources\Resource;
 use Filament\Forms\Form;
 use Filament\Tables;
 use Filament\Forms;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -100,6 +103,29 @@ class BuilderBlocksResource extends Resource implements HasShieldPermissions {
 
 
       ])->filters([
+
+//        SelectFilter::make('template.type')
+//          ->label(__('builder/builder-block-template.columns.type'))
+//          ->options(
+//            collect(EnumsBlockType::cases())
+//              ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
+//              ->sort()
+//              ->toArray()
+//          )
+//          ->multiple()
+//          ->searchable()
+//          ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data): \Illuminate\Database\Eloquent\Builder {
+//            if (!$data['value']) {
+//              return $query;
+//            }
+//
+//            return $query->whereHas('template', function ($q) use ($data) {
+//              $q->where('type', $data['value']);
+//            });
+//          })
+//          ->preload(),
+
+
         SelectFilter::make('template.type')
           ->label(__('builder/builder-block-template.columns.type'))
           ->options(
@@ -108,17 +134,20 @@ class BuilderBlocksResource extends Resource implements HasShieldPermissions {
               ->sort()
               ->toArray()
           )
+          ->multiple()
           ->searchable()
           ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data): \Illuminate\Database\Eloquent\Builder {
-            if (!$data['value']) {
+            if (empty($data['values'])) {
               return $query;
             }
-
             return $query->whereHas('template', function ($q) use ($data) {
-              $q->where('type', $data['value']);
+              // استخدم whereIn بدلاً من where للتعامل مع المصفوفة
+              $q->whereIn('type', $data['values']);
             });
           })
           ->preload(),
+
+
 
         SelectFilter::make('template.template')
           ->label(__('builder/builder-block-template.columns.template'))
@@ -165,6 +194,28 @@ class BuilderBlocksResource extends Resource implements HasShieldPermissions {
       ->persistSortInSession()
       ->actions([
         Tables\Actions\EditAction::make(),
+
+        Action::make('copy')
+          ->label(__('Copy'))
+          ->action(function (BuilderBlock $record) {
+            $newRecord = $record->replicate();
+            $newRecord->created_at = now();
+            $newRecord->save();
+
+            // نسخ العلاقة "pages" (علاقة many-to-many)
+//            foreach ($record->pages as $relation) {
+//              $newRecord->pages()->attach($relation->id, [
+//                'position' => $relation->pivot->position
+//              ]);
+//            }
+            session()->flash('success', __('The record has been copied successfully!'));
+//            return redirect()->route('filament.resources.codes.update', [
+//              'resource' => 'snap-codes',
+//              'record' => $newRecord->id,
+//            ]);
+          })
+          ->icon('heroicon-o-rectangle-stack')
+          ->color('success'),
       ])
       ->bulkActions([
 

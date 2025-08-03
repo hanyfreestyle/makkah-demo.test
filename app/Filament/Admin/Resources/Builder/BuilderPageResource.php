@@ -92,11 +92,22 @@ class BuilderPageResource extends Resource implements HasShieldPermissions {
 
         Forms\Components\Select::make('blocks')
           ->label(__('builder/builder-page.columns.blocks'))
-          ->relationship('blocks', 'id') // ← نرجّع الترتيب للـ id
+          ->relationship('blocks', 'id')
           ->getOptionLabelFromRecordUsing(fn ($record) => $record->display_name)
           ->multiple()
           ->preload()
           ->columnSpanFull()
+          ->getSearchResultsUsing(function (string $search): array {
+            $locale = app()->getLocale();
+            return \App\Models\Builder\BuilderBlock::query() // Replace with your actual model
+            ->where("name->{$locale}", 'like', "%{$search}%")
+              ->limit(50)
+              ->get()
+              ->mapWithKeys(fn ($record) => [
+                $record->getKey() => $record->display_name,
+              ])
+              ->toArray();
+          })
           ->searchable(),
 
       ])->columnSpan(2)->columns(2),
