@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder {
     loadSeederFromFileWithLang('latest_news', true);
     loadSeederFromFileWithLang('makkah_project', true);
     loadSeederFromFile('builder_block_template', true);
-    loadSeederFromFile('builder_block', true);
     loadSeederFromFile('builder_page', true);
+    loadSeederFromFile('builder_block', true);
     loadSeederFromFile('builder_page_pivot', true);
     loadSeederFromFile('builder_block_photos', true);
 

@@ -148,7 +148,6 @@ class BuilderBlocksResource extends Resource implements HasShieldPermissions {
           ->preload(),
 
 
-
         SelectFilter::make('template.template')
           ->label(__('builder/builder-block-template.columns.template'))
           ->options(
@@ -193,13 +192,16 @@ class BuilderBlocksResource extends Resource implements HasShieldPermissions {
       ->persistSearchInSession()
       ->persistSortInSession()
       ->actions([
-        Tables\Actions\EditAction::make(),
+
 
         Action::make('copy')
           ->label(__('Copy'))
           ->action(function (BuilderBlock $record) {
-            $newRecord = $record->replicate();
-            $newRecord->created_at = now();
+//            dd($record->name['ar']);
+            $newRecord = new BuilderBlock();
+            $newRecord->template_id = $record->template_id;
+            $newRecord->name = ['ar' => $record->name['ar'] . '  ---Copy', 'en' => $record->name['en'] . '  ---Copy'];
+            $newRecord->schema = $record->schema;
             $newRecord->save();
 
             // نسخ العلاقة "pages" (علاقة many-to-many)
@@ -216,9 +218,15 @@ class BuilderBlocksResource extends Resource implements HasShieldPermissions {
           })
           ->icon('heroicon-o-rectangle-stack')
           ->color('success'),
+
+        Tables\Actions\EditAction::make()->iconButton(),
+        Tables\Actions\DeleteAction::make()->iconButton(),
+
       ])
       ->bulkActions([
-
+        Tables\Actions\BulkActionGroup::make([
+          Tables\Actions\DeleteBulkAction::make(),
+        ]),
       ])
       ->recordUrl(fn ($record) => static::getTableRecordUrl($record))
       ->defaultSort('id', 'desc');
@@ -304,7 +312,7 @@ class BuilderBlocksResource extends Resource implements HasShieldPermissions {
   }
 
   public static function getNavigationLabel(): string {
-   return __('builder/builder-blocks.navigation_label');
+    return __('builder/builder-blocks.navigation_label');
   }
 
 

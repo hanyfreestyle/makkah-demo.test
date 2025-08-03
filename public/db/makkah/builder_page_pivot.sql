@@ -19,5 +19,7 @@ INSERT INTO `builder_page_pivot` (`id`, `block_id`, `page_id`, `position`, `is_a
 ('17', '16', '3', '4', '1', NULL, NULL),
 ('18', '17', '3', '6', '1', NULL, NULL),
 ('19', '18', '3', '2', '1', NULL, NULL),
-('20', '19', '3', '3', '1', NULL, NULL);
+('20', '19', '3', '3', '1', NULL, NULL),
+('22', '21', '4', '0', '1', NULL, NULL),
+('23', '22', '4', '0', '1', NULL, NULL);
 COMMIT;
