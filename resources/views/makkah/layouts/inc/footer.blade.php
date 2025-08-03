@@ -86,13 +86,13 @@
   </div>
 </footer>
 
-{{--<div class="floating-buttons">--}}
-{{--  <a href="{{ctaActionCall($webConfig)}}" class="floating-button call">--}}
-{{--    <i class="fas fa-phone-alt"></i>--}}
-{{--    <span class="floating-button-tooltip">{{__('webLang/footer.cta_call_us')}}</span>--}}
-{{--  </a>--}}
-{{--  <a href="{{ctaActionWhatsapp($webConfig)}}" target="_blank" class="floating-button whatsapp">--}}
-{{--    <i class="fab fa-whatsapp"></i>--}}
-{{--    <span class="floating-button-tooltip">{{__('webLang/footer.cta_whatsapp')}}</span>--}}
-{{--  </a>--}}
-{{--</div>--}}
+<div class="floating-buttons">
+  <a href="{{ctaActionCall($webConfig)}}" class="floating-button call">
+    <i class="fas fa-phone-alt"></i>
+    <span class="floating-button-tooltip">{{__('webLang/footer.cta_call_us')}}</span>
+  </a>
+  <a href="{{ctaActionWhatsapp($webConfig)}}" target="_blank" class="floating-button whatsapp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="floating-button-tooltip">{{__('webLang/footer.cta_whatsapp')}}</span>
+  </a>
+</div>
