@@ -19,6 +19,6 @@ INSERT INTO `builder_block_template` (`id`, `slug`, `name`, `type`, `template`, 
 ('15', 'text-block-3', '{\"ar\":\"\\u0646\\u0635 3\",\"en\":\"Text 3\"}', 'text', 'makkah', 'builder-template/2025-08/img-688e26cb85956.webp', NULL, NULL, '1'),
 ('16', 'cta-2', '{\"ar\":\"\\u0643\\u0648\\u0644 \\u062a\\u0648 \\u0627\\u0643\\u0634\\u0646 2\",\"en\":\"\\u0643\\u0648\\u0644 \\u062a\\u0648 \\u0627\\u0643\\u0634\\u0646 2\"}', 'cta', 'makkah', 'builder-template/2025-08/img-688f406348ede.webp', NULL, NULL, '1'),
 ('17', 'gallery-2', '{\"ar\":\"\\u0627\\u0644\\u0628\\u0648\\u0645 \\u0635\\u0648\\u0631 \\u0633\\u0644\\u064a\\u062f\\u064a\\u0631 \",\"en\":\"\\u0627\\u0644\\u0628\\u0648\\u0645 \\u0635\\u0648\\u0631 \\u0633\\u0644\\u064a\\u062f\\u064a\\u0631 \"}', 'gallery', 'makkah', NULL, NULL, NULL, '1'),
-('18', 'video-1', '{\"ar\":\"\\u0641\\u064a\\u062f\\u064a\\u0648 1\",\"en\":\"\\u0641\\u064a\\u062f\\u064a\\u0648 1\"}', 'embedded', 'makkah', NULL, NULL, NULL, '1'),
+('18', 'video-1', '{\"ar\":\"\\u0641\\u064a\\u062f\\u064a\\u0648 1\",\"en\":\"\\u0641\\u064a\\u062f\\u064a\\u0648 1\"}', 'embedded', 'makkah', 'builder-template/2025-08/img-688f484bd870a.webp', NULL, NULL, '1'),
 ('19', 'map-1', '{\"ar\":\"\\u062e\\u0631\\u064a\\u0637\\u0629 1\",\"en\":\"\\u062e\\u0631\\u064a\\u0637\\u0629 1\"}', 'embedded', 'makkah', NULL, NULL, NULL, '1');
 COMMIT;

@@ -11,5 +11,6 @@ return [
   'btn' => 'Button Text',
   'btn_url' => 'Url',
   'take' => 'Specify number of items',
+  'video_code' => 'Video Code',
 
 ];
