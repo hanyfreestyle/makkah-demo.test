@@ -18,6 +18,15 @@ class GalleryBlockForm implements BlockFormInterface {
         ->setPhotoThumbnailSize(450,400)
         ->setPhotoCanvas('#fff')
         ->getColumns(),
+
+      'gallery-2' => Gallery1::make()
+        ->setPhotoFilter(2)
+        ->setPhotoSize(1200,450)
+        ->setPhotoFilterThumbnail(4)
+        ->setPhotoThumbnailSize(415,310)
+        ->setPhotoCanvas('#000')
+        ->getColumns(),
+
       default => [],
     };
   }

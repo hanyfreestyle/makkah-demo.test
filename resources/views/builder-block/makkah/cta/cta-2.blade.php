@@ -1,4 +1,4 @@
-<div class="ltn__call-to-action-area ltn__call-to-action-4 bg-image mt-120 pt-115 pb-120 mb-120" data-bs-bg="{{ asset('makkah/img/cta-bg.jpg') }}">
+<div class="ltn__call-to-action-area ltn__call-to-action-4 bg-image  pt-115 pb-120 mb-120X" data-bs-bg="{{ asset('makkah/img/cta-bg.jpg') }}">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -19,3 +19,4 @@
     <img src="{{ asset('makkah/img/cta-agent.png') }}" alt="#">
   </div>
 </div>
+
