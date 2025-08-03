@@ -343,8 +343,8 @@
         $('a[data-rel^=lightcase]').lightcase({
             transition: 'elastic', /* none, fade, fadeInline, elastic, scrollTop, scrollRight, scrollBottom, scrollLeft, scrollHorizontal and scrollVertical */
             swipe: true,
-            maxWidth: 1170,
-            maxHeight: 600,
+            maxWidth:'auto',
+            maxHeight: 'auto',
         });
 
         /* --------------------------------------------------------

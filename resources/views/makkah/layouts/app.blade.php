@@ -47,6 +47,7 @@
 
 
 {!! $minifyTools->setDir('makkah/')->MinifyJs('js5/plugins.js',"Web",false) !!}
+{!! $minifyTools->setDir('makkah/')->MinifyJs('js5/lighbox.js',"Web",false) !!}
 {!! $minifyTools->setDir('makkah/')->MinifyJs('js5/main.js',"Web",false) !!}
 
 @yield('yieldScript')

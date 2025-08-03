@@ -185,6 +185,7 @@ class MinifyTools {
       "../img/flags@2x.webp?1",
       "../img/error.svg",
       "../images/",
+      "../fonts/",
 
     ];
     $replace = [
@@ -192,6 +193,7 @@ class MinifyTools {
       $WebAssets . "/intlTelInput/img/flags@2x.webp?1",
       $WebAssets . "/img/error.svg",
       $WebAssets . "/images/",
+      $WebAssets . "/fonts/",
 
     ];
     $content = str_replace($search, $replace, $content);
