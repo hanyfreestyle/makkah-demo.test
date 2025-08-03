@@ -26,6 +26,35 @@ class Gallery1 {
     $model = 'blockPhotos';
     $columns = [];
 
+
+    $columns[] = Forms\Components\Group::make()->schema([
+      Forms\Components\Section::make()->schema([
+
+
+        ...BuilderTranslatableInput::make()
+          ->setInputName('schema.h1')
+          ->setLabel(__('builder/_default.title'))
+          ->setDataRequired(false)
+          ->getColumns(),
+
+
+        ...BuilderTranslatableInput::make()
+          ->setInputName('schema.des')
+          ->setDataRequired(false)
+          ->setLabel(__('builder/_default.description'))
+          ->getColumns(),
+
+
+
+//        ...BuilderTranslatableTextArea::make()
+//          ->setInputName('schema.des')
+//          ->setLabel(__('builder/_default.description'))
+//          ->getColumns(),
+
+      ])->columns(2),
+    ])->columnSpan(6)->columns(2);
+
+
     $columns[] = Forms\Components\Group::make()->schema([
       Forms\Components\Section::make()->schema([
         Group::make()->schema([
