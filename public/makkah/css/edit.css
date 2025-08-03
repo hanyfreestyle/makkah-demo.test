@@ -402,22 +402,22 @@ html[lang="ar"] textarea {
 }
 
 .projectHero h1 {
-    display: inline!important;
+    display: inline !important;
     color: var(--def-color);
-    background: rgba(0,0,0,.7)!important;
+    background: rgba(0, 0, 0, .7) !important;
     padding: 10px 100px;
-    width: auto!important;
+    width: auto !important;
 }
 
 
 @media (max-width: 500px) {
     .projectHero h1 {
-        display: inline-block!important;
+        display: inline-block !important;
         color: var(--def-color);
-        background: rgba(0,0,0,.7)!important;
+        background: rgba(0, 0, 0, .7) !important;
         padding: 10px 15px;
-        width: auto!important;
-        font-size: 40px!important;
+        width: auto !important;
+        font-size: 40px !important;
     }
 
 
@@ -425,5 +425,10 @@ html[lang="ar"] textarea {
         font-size: 40px !important;
     }
 
+}
+
+
+.ltn__gallery-action-icon {
+    top: 50% !important;
 }
 

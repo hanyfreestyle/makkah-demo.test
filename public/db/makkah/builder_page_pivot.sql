@@ -14,7 +14,10 @@ INSERT INTO `builder_page_pivot` (`id`, `block_id`, `page_id`, `position`, `is_a
 ('10', '11', '2', '2', '1', NULL, NULL),
 ('11', '12', '2', '3', '1', NULL, NULL),
 ('12', '13', '2', '1', '1', NULL, NULL),
-('13', '5', '3', '3', '1', NULL, NULL),
 ('14', '14', '3', '1', '1', NULL, NULL),
-('15', '7', '3', '2', '1', NULL, NULL);
+('15', '7', '3', '2', '1', NULL, NULL),
+('16', '15', '3', '3', '1', NULL, NULL),
+('17', '16', '3', '5', '1', NULL, NULL),
+('18', '17', '3', '6', '1', NULL, NULL),
+('19', '18', '3', '4', '1', NULL, NULL);
 COMMIT;
