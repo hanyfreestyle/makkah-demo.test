@@ -2,21 +2,15 @@
 
 namespace App\Filament\Admin\Resources\Builder;
 
-use App\Enums\Builder\EnumsBlockTemplate;
 use App\Enums\Builder\EnumsBlockType;
+use App\Filament\Admin\Resources\Builder\BuilderBlocksResource\BuilderBlockTable;
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
 use App\Models\Builder\BuilderBlockTemplate;
-use App\Models\Builder\BuilderPage;
 use App\Service\Builder\BlockFormFactory;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderBlocksResource\Pages;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms\Get;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Table;
 use IbrahimBougaoua\RadioButtonImage\Actions\RadioButtonImage;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
@@ -24,16 +18,12 @@ use App\Traits\Admin\Helper\SmartResourceTrait;
 use App\Models\Builder\BuilderBlock;
 use Filament\Resources\Resource;
 use Filament\Forms\Form;
-use Filament\Tables;
 use Filament\Forms;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Support\Facades\Auth;
-use Filament\Notifications\Notification;
-use Filament\Support\Enums\ActionSize;
 
 class BuilderBlocksResource extends Resource implements HasShieldPermissions {
   use Translatable;
   use SmartResourceTrait;
+  use BuilderBlockTable;
 
   protected static ?string $model = BuilderBlock::class;
   protected static ?string $navigationIcon = 'fas-puzzle-piece';
@@ -53,166 +43,6 @@ class BuilderBlocksResource extends Resource implements HasShieldPermissions {
     return parent::getEloquentQuery()->with('template');
   }
 
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  public static function table(Table $table): Table {
-    $thisLang = app()->getLocale();
-
-    return $table
-      ->modifyQueryUsing(fn ($query) => $query->with('template'))
-      ->columns([
-
-        Tables\Columns\TextColumn::make('id')
-          ->label("#")
-          ->sortable()
-          ->searchable(),
-
-        ImageColumn::make('template.photo')
-          ->label('')
-          ->disk('root_folder'),
-
-        Tables\Columns\TextColumn::make('name.' . $thisLang)
-          ->label(__('default/lang.columns.name'))
-          ->sortable()
-          ->searchable(),
-
-        Tables\Columns\TextColumn::make('pages')
-          ->label('الصفحات')
-          ->getStateUsing(fn ($record) => $record->pages->map(fn ($pages) => $pages->display_name)->toArray())
-          ->badge(),
-
-
-        Tables\Columns\TextColumn::make('template.template')
-          ->label(__('builder/builder-block-template.columns.template'))
-          ->formatStateUsing(fn ($state) => EnumsBlockTemplate::tryFrom($state)?->label())
-          ->sortable()
-          ->searchable(),
-
-
-        Tables\Columns\TextColumn::make('template.type')
-          ->label(__('builder/builder-block-template.columns.type'))
-          ->formatStateUsing(fn ($state) => EnumsBlockType::tryFrom($state)?->label())
-          ->sortable()
-          ->searchable(),
-
-        Tables\Columns\ToggleColumn::make('is_active')
-          ->label(__('default/lang.columns.is_active'))
-          ->visible(fn () => Auth::user()?->can('update_builder::builder::blocks'))
-          ->sortable(),
-
-
-      ])->filters([
-
-        SelectFilter::make('template.type')
-          ->label(__('builder/builder-block-template.columns.type'))
-          ->options(
-            collect(EnumsBlockType::cases())
-              ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
-              ->sort()
-              ->toArray()
-          )
-          ->multiple()
-          ->searchable()
-          ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data): \Illuminate\Database\Eloquent\Builder {
-            if (empty($data['values'])) {
-              return $query;
-            }
-            return $query->whereHas('template', function ($q) use ($data) {
-              // استخدم whereIn بدلاً من where للتعامل مع المصفوفة
-              $q->whereIn('type', $data['values']);
-            });
-          })
-          ->preload(),
-
-
-        SelectFilter::make('template.template')
-          ->label(__('builder/builder-block-template.columns.template'))
-          ->options(
-            collect(EnumsBlockTemplate::cases())
-              ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
-              ->sort()
-              ->toArray()
-          )
-          ->searchable()
-          ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data): \Illuminate\Database\Eloquent\Builder {
-            if (!$data['value']) {
-              return $query;
-            }
-
-            return $query->whereHas('template', function ($q) use ($data) {
-              $q->where('template', $data['value']);
-            });
-          })
-          ->preload(),
-
-
-        SelectFilter::make('page_id')
-          ->label('الصفحة')
-          ->options(
-            BuilderPage::all()
-              ->pluck("name." . app()->getLocale(), 'id')
-              ->toArray()
-          )
-          ->searchable()
-          ->preload()
-          ->query(function ($query, $data) {
-            if (!$data['value']) return $query;
-
-            return $query->whereHas('pages', function ($q) use ($data) {
-              $q->where('builder_page.id', $data['value']); // ← هنا التعديل
-            });
-          }),
-
-
-      ], layout: FiltersLayout::Modal)->filtersFormColumns(4)
-      ->persistFiltersInSession()
-      ->persistSearchInSession()
-      ->persistSortInSession()
-      ->actions([
-        Tables\Actions\EditAction::make()->iconButton(),
-        Tables\Actions\DeleteAction::make()->iconButton(),
-
-
-        Action::make('copy')
-          ->label(__('default/lang.but.copy'))
-          ->icon('heroicon-o-rectangle-stack')
-          ->color('success')
-          ->requiresConfirmation() // ✅ 1. تأكيد قبل النسخ
-          ->action(function (BuilderBlock $record, array $arguments) {
-            // ✅ 2. إنشاء نسخة من السجل
-            $newRecord = new BuilderBlock();
-            $newRecord->template_id = $record->template_id;
-            $newRecord->name = [
-              'ar' => $record->name['ar'] . ' ---Copy',
-              'en' => $record->name['en'] . ' ---Copy',
-            ];
-            $newRecord->schema = $record->schema;
-             $newRecord->save();
-
-            // ✅ 3. إشعار نجاح (باستخدام Filament Notification)
-            Notification::make()
-              ->title(__('default/lang.notification.copy'))
-              ->success()
-              ->send();
-
-            // ✅ 4. إعادة التوجيه إلى صفحة تعديل السجل الجديد
-            return redirect(
-              BuilderBlocksResource::getUrl('edit', ['record' => $newRecord])
-            );
-          })
-          ->size(ActionSize::Small)
-
-      ])
-      ->bulkActions([
-        Tables\Actions\BulkActionGroup::make([
-          Tables\Actions\DeleteBulkAction::make(),
-        ]),
-      ])
-      ->recordUrl(fn ($record) => static::getTableRecordUrl($record))
-      ->defaultSort('id', 'desc');
-  }
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public static function form(Form $form): Form {
@@ -220,7 +50,9 @@ class BuilderBlocksResource extends Resource implements HasShieldPermissions {
 
       Forms\Components\Group::make()->schema([
         Forms\Components\Section::make()->schema([
-          ...SoftTranslatableInput::make()->setUniqueTable("builder_block")->getColumns(),
+          ...SoftTranslatableInput::make()
+            ->setUniqueTable("builder_block")
+            ->getColumns(),
         ])->columns(2),
 
       ])->columnSpan(6)->columns(2),

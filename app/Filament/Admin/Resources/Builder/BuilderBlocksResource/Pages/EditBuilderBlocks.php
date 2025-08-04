@@ -19,6 +19,11 @@ class EditBuilderBlocks extends EditRecord {
 
   protected static string $resource = BuilderBlocksResource::class;
 
+  protected function mutateFormDataBeforeSave(array $data): array {
+    $data['is_update'] = true;
+    return $data;
+  }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public function getRecordTitle(): Htmlable|string {

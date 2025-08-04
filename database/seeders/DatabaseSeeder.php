@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder {
     loadSeederFromFileWithLang('makkah_project', true);
     loadSeederFromFile('builder_block_template', true);
     loadSeederFromFile('builder_page', true);
-    loadSeederFromFile('builder_block', true);
-    loadSeederFromFile('builder_page_pivot', true);
-    loadSeederFromFile('builder_block_photos', true);
+//    loadSeederFromFile('builder_block', true);
+//    loadSeederFromFile('builder_page_pivot', true);
+//    loadSeederFromFile('builder_block_photos', true);
 
 
 //      $titles = [

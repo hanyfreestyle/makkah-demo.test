@@ -32,6 +32,7 @@ return new class extends Migration {
       $table->json('config')->nullable();
       $table->json('schema')->nullable();
       $table->boolean("is_active")->default(true);
+      $table->boolean("is_update")->default(false);
       $table->foreign('template_id')->references('id')->on('builder_block_template')->onDelete('cascade');
     });
 
