@@ -107,6 +107,7 @@ class WebpUploadFixedSize {
       ->hiddenLabel()
       ->multiple($this->multipleFiles)
       ->image()
+      ->columnSpanFull()
       ->imageEditor()
       ->downloadable()
       ->deletable(true)

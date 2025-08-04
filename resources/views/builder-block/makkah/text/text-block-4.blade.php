@@ -1,53 +1,27 @@
-<div class="container-fluid textblock4 pt-50">
-  <div class="main-title">
-    <h2 class="updateFont">معرض الصور</h2>
-    <p>اكتشف مجموعة مختارة من أروع الصور</p>
-  </div>
+<div class="container-fluid textblock4 {{getPaddingSize($config) }}   {{getMarginSize($config) }}">
+
+  @if(getLangData($schema, 'h1'))
+    <div class="main-title">
+      <h2 class="updateFont"> {{getLangData($schema, 'h1')}}</h2>
+      @if(getLangData($schema, 'des'))
+        <p>{{getLangData($schema, 'des')}}</p>
+      @endif
+    </div>
+  @endif
+
 
   <div class="row">
-    <!-- الصورة الأولى -->
-    <div class="col-lg-6 col-md-6 col-sm-12">
-      <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="منظر طبيعي">
-        <div class="photo-overlay">
-          <h2>جمال الطبيعة</h2>
-          <p>استمتع بروعة المناظر الطبيعية الخلابة والمناظر الجبلية الساحرة التي تأخذ الأنفاس</p>
+    @foreach($block->schema['items']  as $item)
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="gallery-item">
+          <img src="{{ Storage::disk('root_folder')->url(getData($item, 'photo'))}}" alt="{{getLangData($item, 'name')}}">
+          <div class="photo-overlay">
+            <h2 class="updateFont">{{getLangData($item, 'name')}}</h2>
+            <p class="updateFont">{{getLangData($item, 'des')}}</p>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- الصورة الثانية -->
-    <div class="col-lg-6 col-md-6 col-sm-12">
-      <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="مدينة حديثة">
-        <div class="photo-overlay">
-          <h2>المدينة العصرية</h2>
-          <p>اكتشف جمال العمارة الحديثة والأضواء المتلألئة في قلب المدينة النابضة بالحياة</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- الصورة الثالثة -->
-    <div class="col-lg-6 col-md-6 col-sm-12">
-      <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="شاطئ البحر">
-        <div class="photo-overlay">
-          <h2>سحر الشاطئ</h2>
-          <p>انغمس في هدوء الأمواج وجمال الشواطئ الذهبية تحت أشعة الشمس الدافئة</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- الصورة الرابعة -->
-    <div class="col-lg-6 col-md-6 col-sm-12">
-      <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="غابة خضراء">
-        <div class="photo-overlay">
-          <h2>عمق الغابة</h2>
-          <p>تجول في أعماق الغابات الخضراء واستنشق عبق الطبيعة البكر والهواء النقي</p>
-        </div>
-      </div>
-    </div>
+    @endforeach
   </div>
 </div>
 
