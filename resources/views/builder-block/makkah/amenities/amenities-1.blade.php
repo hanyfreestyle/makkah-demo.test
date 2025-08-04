@@ -13,6 +13,7 @@
       </div>
     </div>
     <div class="row ltn__category-slider-active--- slick-arrow-1 justify-content-center">
+
       @foreach($block->schema['items']  as $item)
         <div class="{{getColumnsSize($config)}}">
           <div class="aminities_1">

@@ -5,6 +5,7 @@ namespace App\Service\Builder\Form\Tabs;
 use App\FilamentCustom\UploadFile\WebpUploadFixedSize;
 use App\Service\Builder\Function\BuilderTranslatableInput;
 use App\Service\Builder\Function\BuilderTranslatableTextArea;
+use App\Service\Builder\Function\ConfigInputDefault;
 use App\Service\Builder\Function\SetProtectedValTrait;
 use Filament\Forms;
 use Guava\FilamentIconPicker\Forms\IconPicker;
@@ -20,6 +21,14 @@ class TabsPlans {
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public function getColumns(): array {
     $columns = [];
+
+    if ($this->setConfig) {
+      $columns = ConfigInputDefault::make()
+        ->setConfigArr($this->setConfigArr)
+        ->setAddToConfig($this->addToConfig)
+        ->setRemoveFromConfig($this->removeFromConfig)
+        ->getColumns();
+    }
 
     $columns[] = Forms\Components\Group::make()->schema([
       Forms\Components\Section::make()->schema([
@@ -69,6 +78,12 @@ class TabsPlans {
 
             ...BuilderTranslatableInput::make()
               ->setInputName('des')
+              ->getColumns(),
+
+            ...BuilderTranslatableTextArea::make()
+              ->setInputName('des_2')
+              ->setDataRequired(false)
+              ->setLabel(__('builder/_default.description'))
               ->getColumns(),
 
 

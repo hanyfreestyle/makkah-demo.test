@@ -78,22 +78,22 @@ if (!function_exists('getColumnsSize')) {
 
     if (isset($data['col'])) {
       $classes[] = match ($data['col']) {
-        'col-1' => 'col-12 col-lg-12 col-md-12',
-        'col-2' => 'col-6 col-lg-6 col-md-6',
-        'col-3' => 'col-4 col-lg-4 col-md-4',
-        'col-4' => 'col-3 col-lg-3 col-md-3',
-        'col-6' => 'col-2 col-lg-2 col-md-2',
+        'col-1' => 'col-lg-12 col-md-12',
+        'col-2' => 'col-lg-6 col-md-6',
+        'col-3' => 'col-lg-4 col-md-4',
+        'col-4' => 'col-lg-3 col-md-3',
+        'col-6' => 'col-lg-2 col-md-2',
         default => null,
       };
     }
 
     if (isset($data['col-m'])) {
       $classes[] = match ($data['col-m']) {
-        'col-1' => 'col-sm-12',
-        'col-2' => 'col-sm-6',
-        'col-3' => 'col-sm-4',
-        'col-4' => 'col-sm-3',
-        'col-6' => 'col-sm-2',
+        'col-1' => 'col-12 col-sm-12',
+        'col-2' => 'col-6 col-sm-6',
+        'col-3' => 'col-4 col-sm-4',
+        'col-4' => 'col-3 col-sm-3',
+        'col-6' => 'col-2 col-sm-2',
         default => null,
       };
     }

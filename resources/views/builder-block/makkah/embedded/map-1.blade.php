@@ -80,7 +80,7 @@
       }
 
       .map-overlay h2 {
-          font-size: 1.6rem;
+          font-size: 1.2rem;
           margin-bottom: 30px;
           font-weight: 700;
           color: var(--def-color);
@@ -92,11 +92,11 @@
       }
 
       .map-overlay li {
-          background: rgba(255, 255, 255, .8);
-          margin: 12px 0;
+          /*background: rgba(255, 255, 255, .8);*/
+          margin: 5px;
           padding: 5px 10px;
-          border-radius: 8px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          /*border-radius: 8px;*/
+          /*border: 1px solid rgba(255, 255, 255, 0.2);*/
           font-size: 1rem;
           position: relative;
           transition: all 0.3s ease;
@@ -154,18 +154,19 @@
       /* للشاشات الصغيرة */
       @media (max-width: 768px) {
           .overlay-content {
-              padding: 30px 20px;
+              padding: 30px 15px;
               margin: 20px;
+
           }
 
           .map-overlay h2 {
-              font-size: 1.5rem;
+              font-size: 1.3rem;
               margin-bottom: 20px;
           }
 
           .map-overlay li {
               font-size: 1rem;
-              padding: 12px 15px 12px 45px;
+              padding: 10px;
           }
 
           .map-button {

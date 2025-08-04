@@ -9,7 +9,10 @@ class TabsBlockForm implements BlockFormInterface {
   public static function make(string $type, string $slug): array {
 //dd($slug);
     return match ($slug) {
-      'tabs-plans' => TabsPlans::make()->getColumns(),
+      'tabs-plans' => TabsPlans::make()
+        ->setConfig()
+//        ->setAddToConfig(['col', 'col-m'])
+        ->getColumns(),
       default => [],
     };
   }
