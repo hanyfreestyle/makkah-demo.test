@@ -4,6 +4,7 @@ return [
   'icon' => 'Icon',
   'label' => 'Label',
   'number' => 'Number',
+  'symbol' => 'Symbol',
   'items' => 'Items',
   'title' => 'Title',
   'description' => 'Description',

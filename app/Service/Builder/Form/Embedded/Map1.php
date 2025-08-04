@@ -42,6 +42,13 @@ class Map1 {
           ->getColumns(),
 
 
+        ...BuilderTranslatableInput::make()
+          ->setInputName('schema.btn')
+          ->setDataRequired(false)
+          ->setLabel(__('builder/_default.btn'))
+          ->getColumns(),
+
+
       ])->columns(2),
     ])->columnSpan(6)->columns(2);
 

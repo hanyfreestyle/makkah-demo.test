@@ -4,6 +4,7 @@ return [
   'icon' => 'ايكون',
   'label' => 'العنوان',
   'number' => 'الرقم',
+  'symbol' => 'الرمز',
   'items' => 'المحتوى',
   'title' => 'العنوان',
   'description' => 'الوصف',

@@ -48,6 +48,12 @@ class Counter1 {
               ])
               ->sets(['fas', 'fab', "fontawesome-solid", "fontawesome-brands"])
               ->required(),
+
+            Forms\Components\TextInput::make('symbol')
+              ->label(__('builder/_default.symbol'))
+              ->required(false)
+              ->extraAttributes(fn () => rtlIfArabic('en')),
+
             Forms\Components\TextInput::make('number')
               ->label(__('builder/_default.number'))
               ->extraAttributes(fn () => rtlIfArabic('en'))
