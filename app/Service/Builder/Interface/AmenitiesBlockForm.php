@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Service\Builder;
+namespace App\Service\Builder\Interface;
 
+use App\Service\Builder\BlockFormInterface;
 use App\Service\Builder\Form\Amenities\Amenities1;
 
 

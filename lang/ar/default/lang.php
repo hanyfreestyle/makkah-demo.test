@@ -96,6 +96,7 @@ return [
   'notification' => [
     'saved' => 'تم الحفظ بنجاح',
     'update' => 'تم التحديث بنجاح',
+    'copy' => 'تم النسخ بنجاح',
   ],
 
   'settings' => [

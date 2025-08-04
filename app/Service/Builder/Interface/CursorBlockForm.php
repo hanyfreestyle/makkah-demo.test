@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Service\Builder;
+namespace App\Service\Builder\Interface;
 
+use App\Service\Builder\BlockFormInterface;
 use App\Service\Builder\Form\Cursor\CursorNews1;
 use App\Service\Builder\Form\Cursor\CursorProject1;
-use App\Service\Builder\Function\SetProtectedValTrait;
 
 class CursorBlockForm implements BlockFormInterface {
 

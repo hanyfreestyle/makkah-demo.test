@@ -2,6 +2,15 @@
 
 namespace App\Service\Builder;
 
+use App\Service\Builder\Interface\AmenitiesBlockForm;
+use App\Service\Builder\Interface\CounterBlockForm;
+use App\Service\Builder\Interface\CtaBlockForm;
+use App\Service\Builder\Interface\CursorBlockForm;
+use App\Service\Builder\Interface\EmbeddedBlockForm;
+use App\Service\Builder\Interface\GalleryBlockForm;
+use App\Service\Builder\Interface\HeroBlockForm;
+use App\Service\Builder\Interface\TextBlockForm;
+
 class BlockFormFactory {
 
   public static function make(?string $type, ?string $slug): array {

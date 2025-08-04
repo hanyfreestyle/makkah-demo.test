@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Service\Builder;
+namespace App\Service\Builder\Interface;
 
+use App\Service\Builder\BlockFormInterface;
 use App\Service\Builder\Form\Text\TextBlock1;
 use App\Service\Builder\Form\Text\TextBlock2;
 use App\Service\Builder\Form\Text\TextBlock3;

@@ -88,6 +88,7 @@ return [
   'notification' => [
     'saved' => 'Saved successfully',
     'update' => 'updated successfully',
+    'copy' => 'The record has been copied successfully!',
   ],
 
   'settings' => [

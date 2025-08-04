@@ -7,7 +7,6 @@ use App\Enums\Builder\EnumsBlockType;
 use App\FilamentCustom\Form\Inputs\SoftTranslatableInput;
 use App\Models\Builder\BuilderBlockTemplate;
 use App\Models\Builder\BuilderPage;
-use App\Models\SnapCode;
 use App\Service\Builder\BlockFormFactory;
 use Astrotomic\Translatable\Translatable;
 use App\Filament\Admin\Resources\Builder\BuilderBlocksResource\Pages;
@@ -29,7 +28,8 @@ use Filament\Tables;
 use Filament\Forms;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Auth;
-
+use Filament\Notifications\Notification;
+use Filament\Support\Enums\ActionSize;
 
 class BuilderBlocksResource extends Resource implements HasShieldPermissions {
   use Translatable;
@@ -104,28 +104,6 @@ class BuilderBlocksResource extends Resource implements HasShieldPermissions {
 
       ])->filters([
 
-//        SelectFilter::make('template.type')
-//          ->label(__('builder/builder-block-template.columns.type'))
-//          ->options(
-//            collect(EnumsBlockType::cases())
-//              ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
-//              ->sort()
-//              ->toArray()
-//          )
-//          ->multiple()
-//          ->searchable()
-//          ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data): \Illuminate\Database\Eloquent\Builder {
-//            if (!$data['value']) {
-//              return $query;
-//            }
-//
-//            return $query->whereHas('template', function ($q) use ($data) {
-//              $q->where('type', $data['value']);
-//            });
-//          })
-//          ->preload(),
-
-
         SelectFilter::make('template.type')
           ->label(__('builder/builder-block-template.columns.type'))
           ->options(
@@ -173,7 +151,7 @@ class BuilderBlocksResource extends Resource implements HasShieldPermissions {
           ->label('الصفحة')
           ->options(
             BuilderPage::all()
-              ->pluck("name." . app()->getLocale(), 'id') // لو name مترجم: ->pluck("name->" . app()->getLocale(), 'id')
+              ->pluck("name." . app()->getLocale(), 'id')
               ->toArray()
           )
           ->searchable()
@@ -192,35 +170,38 @@ class BuilderBlocksResource extends Resource implements HasShieldPermissions {
       ->persistSearchInSession()
       ->persistSortInSession()
       ->actions([
+        Tables\Actions\EditAction::make()->iconButton(),
+        Tables\Actions\DeleteAction::make()->iconButton(),
 
 
         Action::make('copy')
-          ->label(__('Copy'))
-          ->action(function (BuilderBlock $record) {
-//            dd($record->name['ar']);
+          ->label(__('default/lang.but.copy'))
+          ->icon('heroicon-o-rectangle-stack')
+          ->color('success')
+          ->requiresConfirmation() // ✅ 1. تأكيد قبل النسخ
+          ->action(function (BuilderBlock $record, array $arguments) {
+            // ✅ 2. إنشاء نسخة من السجل
             $newRecord = new BuilderBlock();
             $newRecord->template_id = $record->template_id;
-            $newRecord->name = ['ar' => $record->name['ar'] . '  ---Copy', 'en' => $record->name['en'] . '  ---Copy'];
+            $newRecord->name = [
+              'ar' => $record->name['ar'] . ' ---Copy',
+              'en' => $record->name['en'] . ' ---Copy',
+            ];
             $newRecord->schema = $record->schema;
-            $newRecord->save();
+             $newRecord->save();
 
-            // نسخ العلاقة "pages" (علاقة many-to-many)
-//            foreach ($record->pages as $relation) {
-//              $newRecord->pages()->attach($relation->id, [
-//                'position' => $relation->pivot->position
-//              ]);
-//            }
-            session()->flash('success', __('The record has been copied successfully!'));
-//            return redirect()->route('filament.resources.codes.update', [
-//              'resource' => 'snap-codes',
-//              'record' => $newRecord->id,
-//            ]);
+            // ✅ 3. إشعار نجاح (باستخدام Filament Notification)
+            Notification::make()
+              ->title(__('default/lang.notification.copy'))
+              ->success()
+              ->send();
+
+            // ✅ 4. إعادة التوجيه إلى صفحة تعديل السجل الجديد
+            return redirect(
+              BuilderBlocksResource::getUrl('edit', ['record' => $newRecord])
+            );
           })
-          ->icon('heroicon-o-rectangle-stack')
-          ->color('success'),
-
-        Tables\Actions\EditAction::make()->iconButton(),
-        Tables\Actions\DeleteAction::make()->iconButton(),
+          ->size(ActionSize::Small)
 
       ])
       ->bulkActions([
