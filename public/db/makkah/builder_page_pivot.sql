@@ -24,5 +24,6 @@ INSERT INTO `builder_page_pivot` (`id`, `block_id`, `page_id`, `position`, `is_a
 ('27', '25', '4', '1', '1', NULL, NULL),
 ('28', '3', '4', '5', '1', NULL, NULL),
 ('29', '26', '4', '3', '1', NULL, NULL),
-('30', '27', '4', '4', '1', NULL, NULL);
+('30', '27', '4', '4', '1', NULL, NULL),
+('31', '28', '4', '6', '1', NULL, NULL);
 COMMIT;

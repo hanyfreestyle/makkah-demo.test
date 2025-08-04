@@ -9,7 +9,7 @@ enum EnumsBlockType: string {
 
   case hero = 'hero';
   case counter = 'counter';
-  case slider = 'slider';
+  case tabs = 'tabs';
   case cursor = 'cursor';
   case cta = 'cta';
   case gallery = 'gallery';
@@ -22,7 +22,7 @@ enum EnumsBlockType: string {
     return match ($this) {
       self::hero => 'Hero',
       self::counter => 'Counter',
-      self::slider => 'Slider',
+      self::tabs => 'Tabs',
       self::cursor => 'Cursor',
       self::cta => 'Cta',
       self::gallery => 'Gallery',

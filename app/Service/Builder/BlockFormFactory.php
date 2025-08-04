@@ -9,6 +9,7 @@ use App\Service\Builder\Interface\CursorBlockForm;
 use App\Service\Builder\Interface\EmbeddedBlockForm;
 use App\Service\Builder\Interface\GalleryBlockForm;
 use App\Service\Builder\Interface\HeroBlockForm;
+use App\Service\Builder\Interface\TabsBlockForm;
 use App\Service\Builder\Interface\TextBlockForm;
 
 class BlockFormFactory {
@@ -24,6 +25,7 @@ class BlockFormFactory {
       'cursor' => CursorBlockForm::class,
       'gallery' => GalleryBlockForm::class,
       'text' => TextBlockForm::class,
+      'tabs' => TabsBlockForm::class,
 
     ];
 
