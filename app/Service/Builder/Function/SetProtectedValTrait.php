@@ -8,12 +8,13 @@ trait SetProtectedValTrait {
   protected bool $setDataRequired = true;
   protected bool $setConfig = false;
   protected array|null $setConfigArr = null;
-  protected array|null $configDefault = ['pt', 'pb', 'mt', 'mb', 'columns', 'bg_color', 'font_color', 'icon_color'];
+//  protected array|null $configDefault = ['pt', 'pb', 'mt', 'mb', 'col','col-m', 'bg_color', 'font_color', 'icon_color'];
+  protected array|null $configDefault = ['pt', 'pb', 'mt', 'mb'];
 
-  protected bool|null $manualConfigArr = false;
   protected array $addToConfig = [];
   protected array $removeFromConfig = [];
 
+  protected bool $setAddBlockPhoto = false;
   protected int $photoFilter = 4;
   protected int $photoFilterThumbnail = 4;
   protected bool $generateThumbnail = true;
@@ -28,7 +29,7 @@ trait SetProtectedValTrait {
 //  protected string|null $aspectRatio = null;
 
 
-  protected bool $setAddBlockPhoto = false;
+
 
   public function __construct() {
     $this->setLang = config('app.web_add_lang');

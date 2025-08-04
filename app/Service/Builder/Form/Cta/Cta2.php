@@ -59,23 +59,26 @@ class Cta2 {
     ])->columnSpan(6)->columns(2);
 
 
-//    $columns[] = Forms\Components\Group::make()->schema([
-//      Forms\Components\Section::make()->schema([
-//
-//        ...WebpUploadFixedSize::make()
-//          ->setFileName('photo')
-//          ->setThumbnail(false)
-//          ->setUploadDirectory($this->uploadDirectory)
-//          ->setRequiredUpload(false)
-//          ->setResize(800, 400, 90)
-//          ->setFilter(1)
-//          ->setThumbnailSize(200, 200, 90)
-//          ->setCanvas('#fff')
-//          ->setAspectRatio(null)
-//          ->getColumns(),
-//      ])->columns(1),
-//
-//    ])->columnSpan(2)->columns(2);
+    if ($this->setAddBlockPhoto) {
+      $columns[] = Forms\Components\Group::make()->schema([
+        Forms\Components\Section::make()->schema([
+
+          ...WebpUploadFixedSize::make()
+            ->setFileName('photo')
+            ->setThumbnail(false)
+            ->setUploadDirectory($this->uploadDirectory)
+            ->setRequiredUpload(false)
+            ->setResize(800, 400, 90)
+            ->setFilter(1)
+            ->setThumbnailSize(200, 200, 90)
+            ->setCanvas('#fff')
+            ->setAspectRatio(null)
+            ->getColumns(),
+        ])->columns(1),
+
+      ])->columnSpan(2)->columns(2);
+    }
+
 
 
     return $columns;

@@ -3,68 +3,77 @@
 namespace App\Service\Builder\Function;
 
 
+use App\Enums\Builder\EnumsConfigPaddingTop;
+use App\Enums\Styles\EnumsColumnsSize;
+use App\Enums\Styles\EnumsMarginSize;
+use App\Enums\Styles\EnumsPaddingSize;
 use Filament\Forms;
 use App\Traits\Admin\Helper\SmartSetFunctionTrait;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\TextInput;
 
 
 class ConfigInputs {
   use SetProtectedValTrait;
 
-
-//  protected string|null $setLabel = null;
-//  protected string $setInputName = 'name';
-//  protected array $setLang = [];
-//  protected bool $setTransMode = false;
-//  protected ?string $setUniqueTable = null; // ✅ جديد
-
-//
-//  public function __construct() {
-//    $this->setLabel = __('builder/_default.label');
-//    $this->setLang = config('app.web_add_lang');
-//  }
-//
-//
-  public static function make(): static {
+   public static function make(): static {
     return new static();
   }
-//
-//  public function setLabel(?string $label = null): static {
-//    $this->setLabel = $label ?? __('default/lang.columns.name');
-//    return $this;
-//  }
-//
-//  public function setInputName(?string $name): static {
-//    $this->setInputName = $name ?? 'name';
-//    return $this;
-//  }
-//
-//  public function setTransMode(?bool $setTransMode): static {
-//    $this->setTransMode = $setTransMode ?? false;
-//    return $this;
-//  }
-//
-//  public function setUniqueTable(?string $table): static {
-//    $this->setUniqueTable = $table;
-//    return $this;
-//  }
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   public function getColumns() {
-    $keys = self::getFinalConfigKeys();
+    $fields = self::getFinalConfigKeys();
 //     dd($keys);
-    $components = [];
+
+    foreach ($fields as $key) {
+      $component = match ($key) {
+        'bg_color', 'font_color', 'icon_color' => ColorPicker::make('config.'.$key),
+
+        'pt', 'pb', 'pl', 'pr' => Forms\Components\Select::make('config.'.$key)
+          ->label($key)
+          ->options(
+            collect(EnumsPaddingSize::cases())
+              ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
+              ->toArray()
+          )
+          ->searchable(),
+
+        'mt', 'mb', 'ml', 'mr' => Forms\Components\Select::make('config.'.$key)
+          ->label(__('builder/_default.title'))
+          ->options(
+            collect(EnumsMarginSize::cases())
+              ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
+              ->toArray()
+          )
+          ->searchable(),
 
 
-    $components[] = Forms\Components\TextInput::make('config.pt')
-      ->label(__('config.pt'))
-      ->default(null);
 
-    $components[] = Forms\Components\TextInput::make('config.pb')
-      ->label(__('config.pt'))
-      ->default(null);
+        'col', 'col-m' => Forms\Components\Select::make('config.'.$key)
+          ->label(__('builder/_default.title'))
+          ->options(
+            collect(EnumsColumnsSize::cases())
+              ->mapWithKeys(fn ($case) => [$case->value => $case->label()])
+              ->toArray()
+          )
+          ->searchable(),
 
+//        'col' => TextInput::make('config.'.$key)->numeric()->minValue(1)->maxValue(12),
+
+        default => TextInput::make('config.'.$key),
+
+      };
+
+      // لو فيه قيمة ممررة، نحطها كـ default
+      if (array_key_exists($key, $fields)) {
+        $component->default($fields[$key]);
+      }
+
+//      $components[] = $component->label(__('config.' . $key)); // أو Str::headline($key)
+      $components[] = $component->label(__('builder/_default.config.'. $key)); // أو Str::headline($key)
+    }
 
     return $components;
   }
