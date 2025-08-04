@@ -1,7 +1,7 @@
 <?php
 
 
-use App\Http\Controllers\RealEstate\HomePageController;
+use App\Http\Controllers\Makkah\HomePageController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Illuminate\Support\Facades\Route;
 

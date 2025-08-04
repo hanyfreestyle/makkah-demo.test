@@ -23,7 +23,7 @@
   <h4 class="ltn__widget-title ltn__widget-title-border-2 updateFont">{{__('web/def.widget.our_project')}}</h4>
   <ul>
     @foreach($projectMenu as $project)
-      <li><a href="{{route('web.project_view',$project->slug)}}">{{$project->name}}</a></li>
+      <li><a href="{{ printProjectSlug($project)}}">{{$project->name}}</a></li>
     @endforeach
   </ul>
 </div>

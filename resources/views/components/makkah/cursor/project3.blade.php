@@ -33,7 +33,7 @@
                         @endif
                       </div>
                       <div class="btn-wrapper animated mt-40 {{ textDir() }}">
-                        <a href="{{ route('web.project_view',$project->slug) }}" class="theme-btn-1 btn btn-effect-1 updateFont">{{__('web/def.read_more')}}</a>
+                        <a href="{{ printProjectSlug($project)}}" class="theme-btn-1 btn btn-effect-1 updateFont">{{__('web/def.read_more')}}</a>
                       </div>
                     </div>
                   </div>

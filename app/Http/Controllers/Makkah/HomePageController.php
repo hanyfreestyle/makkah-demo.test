@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\RealEstate;
+namespace App\Http\Controllers\Makkah;
 
 use App\Http\Controllers\DefaultWebController;
-use App\Models\Builder\BuilderBlock;
-use App\Models\Builder\BuilderPage;
 use App\Models\LatestNews\LatestNews;
 use App\Models\Makkah\MakkahProject;
 use Illuminate\Support\Facades\View;

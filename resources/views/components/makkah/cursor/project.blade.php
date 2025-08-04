@@ -18,12 +18,12 @@
           <div class="col-lg-4">
             <div class="ltn__search-by-place-item">
               <div class="search-by-place-img">
-                <a href="{{ route('web.project_view',$project->slug) }}">
+                <a href="{{ printProjectSlug($project)}}">
                   <x-web.def.img :row="$project" def-photo="news_thumbnail" def-photo-row="photo" class=""/>
                 </a>
               </div>
               <div class="search-by-place-info text-center">
-                <h4><a class="updateFont" href="{{ route('web.project_view',$project->slug) }}">{{$project->name ?? ''}}</a></h4></div>
+                <h4><a class="updateFont" href="{{ printProjectSlug($project)}}">{{$project->name ?? ''}}</a></h4></div>
             </div>
           </div>
         @endforeach

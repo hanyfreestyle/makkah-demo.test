@@ -58,7 +58,7 @@
                   <li><a href="{{route('web.our_projects')}}">{{__('web/def.menu.our_project')}}</a>
                     <ul>
                       @foreach($projectMenu as $project)
-                        <li><a href="{{route('web.project_view',$project->slug)}}">{{$project->name}}</a></li>
+                        <li><a href="{{ printProjectSlug($project)}}">{{$project->name}}</a></li>
                       @endforeach
                     </ul>
                   </li>

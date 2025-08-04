@@ -12,8 +12,9 @@
     $minifyTools =  new App\Helpers\Admin\Minifier\MinifyTools;
     $cssMinifyType =  "Seo";
     $cssReBuild =  true;
-     $projectMenu = self::cashProjectMenu($this->is_cash);
+    $projectMenu = \App\Http\Controllers\Makkah\__LoadConstructData::cashProjectMenu(true);
   @endphp
+
   {!! SEO::generate() !!}
   <x-web.def.fav-icon/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
