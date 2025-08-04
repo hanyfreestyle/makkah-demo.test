@@ -14,7 +14,7 @@ class CtaBlockForm implements BlockFormInterface {
         ->getColumns(),
 
       'cta-2' => Cta2::make()
-        ->setConfig()
+        ->setConfig(false)
         ->getColumns(),
 
       default => [],

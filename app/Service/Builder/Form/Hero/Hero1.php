@@ -26,11 +26,13 @@ class Hero1 {
         ...BuilderTranslatableInput::make()
           ->setInputName('schema.number')
           ->setLabel(__('builder/_default.number'))
+          ->setDataRequired(false)
           ->getColumns(),
 
         ...BuilderTranslatableInput::make()
           ->setInputName('schema.years')
           ->setLabel(__('builder/_default.years'))
+          ->setDataRequired(false)
           ->getColumns(),
 
         ...BuilderTranslatableInput::make()
@@ -45,11 +47,13 @@ class Hero1 {
 
         ...BuilderTranslatableInput::make()
           ->setInputName('schema.btn')
+          ->setDataRequired(false)
           ->setLabel(__('builder/_default.btn'))
           ->getColumns(),
 
         ...BuilderTranslatableInput::make()
           ->setInputName('schema.btn_url')
+          ->setDataRequired(false)
           ->setLabel(__('builder/_default.btn_url'))
           ->getColumns(),
 

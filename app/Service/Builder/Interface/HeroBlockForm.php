@@ -10,8 +10,8 @@ class HeroBlockForm implements BlockFormInterface {
   public static function make(string $type, string $slug): array {
 
     return match ($slug) {
-      'hero-1' => Hero1::make()->getColumns(),
-      'hero-2' => Hero2::make()->getColumns(),
+      'hero-1', 'hero-2' => Hero1::make()->getColumns(),
+//      'hero-2' => Hero2::make()->getColumns(),
       default => [],
     };
   }

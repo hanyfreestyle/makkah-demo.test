@@ -17,15 +17,16 @@ class BlockFormFactory {
 //      dd($type);
     $map = [
       'cta' => CtaBlockForm::class,
+      'amenities' => AmenitiesBlockForm::class,
+      'counter' => CounterBlockForm::class,
+      'hero' => HeroBlockForm::class,
 
-//      'hero' => HeroBlockForm::class,
-//      'counter' => CounterBlockForm::class,
 //      'cursor' => CursorBlockForm::class,
 
 //      'gallery' => GalleryBlockForm::class,
 //      'text' => TextBlockForm::class,
 //      'embedded' => EmbeddedBlockForm::class,
-//      'amenities' => AmenitiesBlockForm::class,
+//
 
     ];
 

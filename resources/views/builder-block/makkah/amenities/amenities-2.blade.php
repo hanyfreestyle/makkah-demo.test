@@ -1,4 +1,4 @@
-<div class="ltn__testimonial-area section-bg-1--- bg-image-top pt-100 pb-65" data-bs-bg="{{ asset('makkah/img/aminities-bg.jpg') }}">
+<div class="ltn__testimonial-area section-bg-1--- bg-image-top {{getPaddingSize($config) }}   {{getMarginSize($config) }}" data-bs-bg="{{ asset('makkah/img/aminities-bg.jpg') }}">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">

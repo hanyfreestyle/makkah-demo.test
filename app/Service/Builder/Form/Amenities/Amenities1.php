@@ -5,6 +5,7 @@ namespace App\Service\Builder\Form\Amenities;
 
 use App\Service\Builder\Function\BuilderTranslatableInput;
 use App\Service\Builder\Function\BuilderTranslatableTextArea;
+use App\Service\Builder\Function\ConfigInputDefault;
 use App\Service\Builder\Function\SetProtectedValTrait;
 use Filament\Forms;
 use Guava\FilamentIconPicker\Forms\IconPicker;
@@ -22,6 +23,14 @@ class Amenities1 {
 
     $columns = [];
 
+    if ($this->setConfig) {
+      $columns = ConfigInputDefault::make()
+        ->setConfigArr($this->setConfigArr)
+        ->setAddToConfig($this->addToConfig)
+        ->setRemoveFromConfig($this->removeFromConfig)
+        ->getColumns();
+    }
+
     $columns[] = Forms\Components\Group::make()->schema([
       Forms\Components\Section::make()->schema([
 
@@ -38,13 +47,6 @@ class Amenities1 {
           ->setDataRequired(false)
           ->setLabel(__('builder/_default.description'))
           ->getColumns(),
-
-
-
-//        ...BuilderTranslatableTextArea::make()
-//          ->setInputName('schema.des')
-//          ->setLabel(__('builder/_default.description'))
-//          ->getColumns(),
 
       ])->columns(2),
     ])->columnSpan(6)->columns(2);
@@ -76,11 +78,22 @@ class Amenities1 {
           ])
             ->columns(2),
         ])
+        ->itemLabel(function (array $state): ?string {
+          $locale = app()->getLocale();
+
+          if (isset($state['name'][$locale]) && filled($state['name'][$locale])) {
+            return $state['name'][$locale];
+          }
+
+          return __('builder/_default.item'); // fallback label
+        })
+        ->collapsible()
+        ->collapsed()
         ->minItems(1)
         ->defaultItems(1)
 
 
-    ])->columnSpan(8)->columns(2);
+    ])->columnSpan(8)->columns(1);
 
     return $columns;
   }

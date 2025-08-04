@@ -11,6 +11,7 @@ trait SetProtectedValTrait {
 //  protected array|null $configDefault = ['pt', 'pb', 'mt', 'mb', 'col','col-m', 'bg_color', 'font_color', 'icon_color'];
   protected array|null $configDefault = ['pt', 'pb', 'mt', 'mb'];
 
+
   protected array $addToConfig = [];
   protected array $removeFromConfig = [];
 

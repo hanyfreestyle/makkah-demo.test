@@ -8,7 +8,10 @@ use App\Service\Builder\Form\Counter\Counter1;
 class CounterBlockForm implements BlockFormInterface {
   public static function make(string $type, string $slug): array {
     return match ($slug) {
-      'counter-1' => Counter1::make()->getColumns(),
+      'counter-1' => Counter1::make()
+        ->setConfig()
+        ->setAddToConfig(['col','col-m'])
+        ->getColumns(),
 
       default => [],
     };
