@@ -16,14 +16,16 @@ class BlockFormFactory {
   public static function make(?string $type, ?string $slug): array {
 //      dd($type);
     $map = [
-      'hero' => HeroBlockForm::class,
-      'counter' => CounterBlockForm::class,
-      'cursor' => CursorBlockForm::class,
       'cta' => CtaBlockForm::class,
-      'gallery' => GalleryBlockForm::class,
-      'text' => TextBlockForm::class,
-      'embedded' => EmbeddedBlockForm::class,
-      'amenities' => AmenitiesBlockForm::class,
+
+//      'hero' => HeroBlockForm::class,
+//      'counter' => CounterBlockForm::class,
+//      'cursor' => CursorBlockForm::class,
+
+//      'gallery' => GalleryBlockForm::class,
+//      'text' => TextBlockForm::class,
+//      'embedded' => EmbeddedBlockForm::class,
+//      'amenities' => AmenitiesBlockForm::class,
 
     ];
 

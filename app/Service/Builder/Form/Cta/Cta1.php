@@ -20,32 +20,35 @@ class Cta1 {
   public function getColumns(): array {
     $columns = [];
 
-    $columns[] = Forms\Components\Group::make()->schema([
-      Forms\Components\Section::make()->schema([
+    if ($this->setConfig){
+      $columns[] = Forms\Components\Group::make()->schema([
+        Forms\Components\Section::make()->schema([
 
-        ...BuilderTranslatableInput::make()
-          ->setInputName('schema.h1')
-          ->setLabel(__('builder/_default.title'))
-          ->getColumns(),
+          ...BuilderTranslatableInput::make()
+            ->setInputName('schema.h1')
+            ->setLabel(__('builder/_default.title'))
+            ->getColumns(),
 
-        ...BuilderTranslatableTextArea::make()
-          ->setInputName('schema.des')
-          ->setLabel(__('builder/_default.description'))
-          ->getColumns(),
+          ...BuilderTranslatableTextArea::make()
+            ->setInputName('schema.des')
+            ->setLabel(__('builder/_default.description'))
+            ->getColumns(),
 
-        ...BuilderTranslatableInput::make()
-          ->setInputName('schema.btn')
-          ->setLabel(__('builder/_default.btn'))
-          ->getColumns(),
+          ...BuilderTranslatableInput::make()
+            ->setInputName('schema.btn')
+            ->setLabel(__('builder/_default.btn'))
+            ->getColumns(),
 
-        ...BuilderTranslatableInput::make()
-          ->setInputName('schema.btn_url')
-          ->setLabel(__('builder/_default.btn_url'))
-          ->getColumns(),
+          ...BuilderTranslatableInput::make()
+            ->setInputName('schema.btn_url')
+            ->setLabel(__('builder/_default.btn_url'))
+            ->getColumns(),
 
 
-      ])->columns(2),
-    ])->columnSpan(6)->columns(2);
+        ])->columns(2),
+      ])->columnSpan(6)->columns(2);
+    }
+
 
 
     $columns[] = Forms\Components\Group::make()->schema([

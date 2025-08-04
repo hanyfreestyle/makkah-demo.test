@@ -6,6 +6,14 @@ trait SetProtectedValTrait {
   protected array $setLang = [];
   protected string $uploadDirectory = 'builder';
   protected bool $setDataRequired = true;
+  protected bool $setConfig = false;
+  protected array|null $setConfigArr = null;
+  protected array|null $configDefault = ['pt', 'pb', 'mt', 'mb', 'columns', 'bg_color', 'font_color', 'icon_color'];
+
+  protected bool|null $manualConfigArr = false;
+  protected array $addToConfig = [];
+  protected array $removeFromConfig = [];
+
   protected int $photoFilter = 4;
   protected int $photoFilterThumbnail = 4;
   protected bool $generateThumbnail = true;
@@ -16,7 +24,7 @@ trait SetProtectedValTrait {
   protected int $photoThumbnailWidth = 300;
   protected int $photoThumbnailHeight = 300;
 
-   protected string $photoCanvas = "#ffffff";
+  protected string $photoCanvas = "#ffffff";
 //  protected string|null $aspectRatio = null;
 
 
@@ -40,6 +48,7 @@ trait SetProtectedValTrait {
     $this->generateThumbnail = $value;
     return $this;
   }
+
   public function setPhotoFilter(int $value = 4): static {
     $this->photoFilter = $value;
     return $this;
@@ -69,4 +78,40 @@ trait SetProtectedValTrait {
     return $this;
   }
 
+  public function setConfig(bool $value = true): static {
+    $this->setConfig = $value;
+    return $this;
+  }
+
+  public function setConfigArr(array|null $arr): static {
+    if (isset($arr)) {
+      $this->setConfigArr = $arr;
+    } else {
+      $this->setConfigArr = $this->configDefault;
+    }
+    return $this;
+  }
+
+  public function setAddToConfig(array $arr): static {
+    $this->addToConfig = array_merge($this->addToConfig, $arr);
+    return $this;
+  }
+
+  public function setRemoveFromConfig(array $arr): static {
+    $this->removeFromConfig = array_merge($this->removeFromConfig, $arr);
+    return $this;
+  }
+
+  public function getFinalConfigKeys(): array {
+    // ✅ نبدأ بالقيم الافتراضية
+    $final = $this->setConfigArr;
+    // نضيف القيم الجديدة
+    $final = array_merge($final, $this->addToConfig);
+//    dd($this->removeFromConfig);
+    // نحذف القيم المطلوبة
+    $final = array_diff($final, $this->removeFromConfig);
+//    dd($final);
+    // نعيد النتيجة بدون تكرار وبترتيب ثابت
+    return array_values(array_unique($final));
+  }
 }
