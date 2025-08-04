@@ -1,7 +1,11 @@
 @extends('makkah.layouts.app')
 
 @section('content')
-  {!! Breadcrumbs::render('project_view',$project) !!}
+
+  @if($project->id != 1)
+      {!! Breadcrumbs::render('project_view',$project) !!}
+  @endif
+
 
   <x-builder.load-view-in-page :blocks="$blocks"/>
 
