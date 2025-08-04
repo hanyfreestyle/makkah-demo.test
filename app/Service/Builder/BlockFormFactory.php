@@ -20,13 +20,10 @@ class BlockFormFactory {
       'amenities' => AmenitiesBlockForm::class,
       'counter' => CounterBlockForm::class,
       'hero' => HeroBlockForm::class,
-
-//      'cursor' => CursorBlockForm::class,
-
-//      'gallery' => GalleryBlockForm::class,
-//      'text' => TextBlockForm::class,
-//      'embedded' => EmbeddedBlockForm::class,
-//
+      'embedded' => EmbeddedBlockForm::class,
+      'cursor' => CursorBlockForm::class,
+      'gallery' => GalleryBlockForm::class,
+      'text' => TextBlockForm::class,
 
     ];
 

@@ -1,3 +1,4 @@
+{{getPaddingSize($config) }}
 <div class="ltn__counterup-area section-bg-1 {{getPaddingSize($config) }}   {{getMarginSize($config) }}">
   <div class="container">
     <div class="row d-flex justify-content-center align-items-center">

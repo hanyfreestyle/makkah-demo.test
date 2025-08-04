@@ -8,23 +8,29 @@
               <div class="slide-item-info">
                 <div class="slide-item-info-inner ltn__slide-animation">
 
-                  <div class="slideNumber animated ">
-                    <span class="number">{{getLangData($schema, 'number')}}</span>
-                    <span class="years updateFont">{{getLangData($schema, 'years')}}</span>
-                  </div>
+                  @if(getLangData($schema, 'number'))
+                    <div class="slideNumber animated ">
+                      <span class="number">{{getLangData($schema, 'number')}}</span>
+                      <span class="years updateFont">{{getLangData($schema, 'years')}}</span>
+                    </div>
+                  @endif
+
                   <h1 class="slide-title slideTitle animated updateFont">
-                     {{getLangData($schema, 'h1')}}
+                    {{getLangData($schema, 'h1')}}
                   </h1>
                   <div class="slide-brief slideBrief animated">
                     <p class="updateFont">
                       {{getLangData($schema, 'des')}}
                     </p>
                   </div>
-                  <div class="btn-wrapper animated ">
-                    <a href=" {{getLangData($schema, 'btn_url')}}" class="theme-btn-1 btn btn-effect-1 updateFont">
-                      {{getLangData($schema, 'btn')}}
-                    </a>
-                  </div>
+                  @if(getLangData($schema, 'btn_url'))
+                    <div class="btn-wrapper animated ">
+                      <a href=" {{getLangData($schema, 'btn_url')}}" class="theme-btn-1 btn btn-effect-1 updateFont">
+                        {{getLangData($schema, 'btn')}}
+                      </a>
+                    </div>
+                  @endif
+
                 </div>
               </div>
             </div>

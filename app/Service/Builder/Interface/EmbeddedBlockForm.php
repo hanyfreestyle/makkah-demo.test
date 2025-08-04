@@ -11,7 +11,7 @@ class EmbeddedBlockForm implements BlockFormInterface {
 //    dd($slug);
     return match ($slug) {
       'video-1' => Video1::make()->getColumns(),
-       'map-1' => Map1::make()->getColumns(),
+      'map-1' => Map1::make()->getColumns(),
 
       default => [],
     };

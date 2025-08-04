@@ -34,17 +34,6 @@ class Hero2 {
           ->setDataRequired(false)
           ->getColumns(),
 
-//        ...BuilderTranslatableInput::make()
-//          ->setInputName('schema.btn')
-//          ->setLabel(__('builder/_default.btn'))
-//          ->getColumns(),
-//
-//        ...BuilderTranslatableInput::make()
-//          ->setInputName('schema.btn_url')
-//          ->setLabel(__('builder/_default.btn_url'))
-//          ->getColumns(),
-
-
       ])->columns(2),
     ])->columnSpan(6)->columns(2);
 

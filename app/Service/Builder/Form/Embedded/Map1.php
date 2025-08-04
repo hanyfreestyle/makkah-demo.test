@@ -29,53 +29,27 @@ class Map1 {
           ->required()
           ->extraAttributes(fn () => rtlIfArabic("en")),
 
+        ...BuilderTranslatableInput::make()
+          ->setInputName('schema.h1')
+          ->setLabel(__('builder/_default.title'))
+          ->setDataRequired(false)
+          ->getColumns(),
 
-//        ...BuilderTranslatableInput::make()
-//          ->setInputName('schema.h1')
-//          ->setLabel(__('builder/_default.title'))
-//          ->setDataRequired(false)
-//          ->getColumns(),
-//
-//        ...BuilderTranslatableTextArea::make()
-//          ->setInputName('schema.des')
-//          ->setLabel(__('builder/_default.description'))
-//          ->setDataRequired(false)
-//          ->getColumns(),
-
-//        ...BuilderTranslatableInput::make()
-//          ->setInputName('schema.btn')
-//          ->setLabel(__('builder/_default.btn'))
-//          ->getColumns(),
-//
-//        ...BuilderTranslatableInput::make()
-//          ->setInputName('schema.btn_url')
-//          ->setLabel(__('builder/_default.btn_url'))
-//          ->getColumns(),
+        ...BuilderTranslatableTextArea::make()
+          ->setInputName('schema.des')
+          ->setLabel(__('builder/_default.description'))
+          ->setDataRequired(false)
+          ->getColumns(),
 
 
       ])->columns(2),
     ])->columnSpan(6)->columns(2);
 
 
-    $columns[] = Forms\Components\Group::make()->schema([
-      Forms\Components\Section::make()->schema([
-
-//        ...WebpUploadFixedSize::make()
-//          ->setFileName('photo')
-//          ->setThumbnail(false)
-//          ->setUploadDirectory($this->uploadDirectory)
-//          ->setRequiredUpload(false)
-//
-//          ->setFilter(2)
-//          ->setResize(1200, 400, 90)
-//          ->setThumbnailSize(200, 200, 90)
-//          ->setCanvas('#fff')
-//          ->setAspectRatio(null)
-//          ->getColumns(),
-
-
-      ])->columns(1),
-    ])->columnSpan(2)->columns(2);
+//    $columns[] = Forms\Components\Group::make()->schema([
+//      Forms\Components\Section::make()->schema([
+//      ])->columns(1),
+//    ])->columnSpan(2)->columns(2);
 
 
     return $columns;
