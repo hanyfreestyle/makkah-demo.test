@@ -404,7 +404,8 @@ html[lang="ar"] textarea {
 .projectHero h1 {
     display: inline !important;
     color: var(--def-color);
-    background: rgba(0, 0, 0, .7) !important;
+    text-shadow: 2px 1px 1px rgba(0,0,0,0.6);
+    /*background: rgba(0, 0, 0, .7) !important;*/
     padding: 10px 100px;
     width: auto !important;
 }
