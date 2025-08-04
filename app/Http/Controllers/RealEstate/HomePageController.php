@@ -146,7 +146,10 @@ class HomePageController extends DefaultWebController {
     $project = MakkahProject::query()
       ->whereTranslation('slug', $slug)
       ->firstOrFail();
+
     $pageView['slug'] = route('web.project_view', $project->translate(webChangeLocale())->slug);
+//    dd(webChangeLocale());
+//     dd($pageView);
 
     if ($project->id == 1) {
       View::share('headerHomeMenu', true);

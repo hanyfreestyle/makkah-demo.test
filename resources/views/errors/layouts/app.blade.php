@@ -12,6 +12,7 @@
     $minifyTools =  new App\Helpers\Admin\Minifier\MinifyTools;
     $cssMinifyType =  "Seo";
     $cssReBuild =  true;
+     $projectMenu = self::cashProjectMenu($this->is_cash);
   @endphp
   {!! SEO::generate() !!}
   <x-web.def.fav-icon/>
@@ -49,8 +50,8 @@
 </div>
 
 
-{!! $minifyTools->setDir('makkah/')->MinifyJs('js/plugins.js',"Web",false) !!}
-{!! $minifyTools->setDir('makkah/')->MinifyJs('js/main.js',"Web",false) !!}
+{!! $minifyTools->setDir('makkah/')->MinifyJs('js-file/plugins.js',"Web",false) !!}
+{!! $minifyTools->setDir('makkah/')->MinifyJs('js-file/main.js',"Web",false) !!}
 
 @yield('yieldScript')
 @stack('stackScript')

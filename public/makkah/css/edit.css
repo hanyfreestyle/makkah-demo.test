@@ -541,3 +541,13 @@ html[lang="ar"] .slick-arrow-3 .slick-next {
     left: 85px;
     right: auto;
 }
+
+
+html[lang="ar"] .title-2 {
+    border-left: 0 solid;
+    padding-left: 0;
+    border-right: 2px solid;
+    padding-right: 10px;
+    border-color: var(--def-color);
+
+}

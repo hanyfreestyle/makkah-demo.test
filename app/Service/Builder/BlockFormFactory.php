@@ -7,6 +7,7 @@ use App\Service\Builder\Interface\CounterBlockForm;
 use App\Service\Builder\Interface\CtaBlockForm;
 use App\Service\Builder\Interface\CursorBlockForm;
 use App\Service\Builder\Interface\EmbeddedBlockForm;
+use App\Service\Builder\Interface\FormsBlockForm;
 use App\Service\Builder\Interface\GalleryBlockForm;
 use App\Service\Builder\Interface\HeroBlockForm;
 use App\Service\Builder\Interface\TabsBlockForm;
@@ -26,6 +27,7 @@ class BlockFormFactory {
       'gallery' => GalleryBlockForm::class,
       'text' => TextBlockForm::class,
       'tabs' => TabsBlockForm::class,
+      'form' => FormsBlockForm::class,
 
     ];
 

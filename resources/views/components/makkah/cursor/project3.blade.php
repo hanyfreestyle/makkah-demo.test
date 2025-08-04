@@ -19,7 +19,7 @@
             <div class="col-lg-12">
               <div class="ltn__upcoming-project-item">
                 <div class="row">
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 col-12">
                     <div class="ltn__upcoming-project-img">
                       <img src="{{getPhotoPath($project->photo_thumbnail,"photo","photo")}}" alt="#">
                     </div>
@@ -27,10 +27,11 @@
                   <div class="col-lg-6 ">
                     <div class="ltn__upcoming-project-info ltn__menu-widget">
                       <h3 class="project-title updateFont">{{$project->name}}</h3>
-                      @if($project->des)
-                        {!! $project->des ?? '' !!}
-                      @endif
-
+                      <div class="projectDes">
+                        @if($project->des)
+                          {!! $project->des ?? '' !!}
+                        @endif
+                      </div>
                       <div class="btn-wrapper animated mt-40 {{ textDir() }}">
                         <a href="{{ route('web.project_view',$project->slug) }}" class="theme-btn-1 btn btn-effect-1 updateFont">{{__('web/def.read_more')}}</a>
                       </div>
@@ -53,4 +54,26 @@
 @push('stackStyle')
   {!! $minifyTools->setDir('makkah/')->MinifyCss('css/our_project_2.css',$cssMinifyType,$cssReBuild) !!}
   {!! $minifyTools->setDir('makkah/')->MinifyCss('css/builder/project_3.css',$cssMinifyType,$cssReBuild) !!}
+  <style>
+
+      @media (max-width: 767px) {
+          .ltn__upcoming-project-item .ltn__upcoming-project-info {
+              padding: 30px 20px;
+          }
+
+          .project-title::before {
+              right: 50%;
+              transform:none;
+          }
+
+          .project-section {
+              padding: 0!important;
+              min-height: auto;
+          }
+      }
+
+    .projectDes{
+
+    }
+  </style>
 @endpush

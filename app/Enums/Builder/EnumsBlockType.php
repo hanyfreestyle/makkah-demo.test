@@ -16,6 +16,7 @@ enum EnumsBlockType: string {
   case text = 'text';
   case amenities = 'amenities';
   case embedded = 'embedded';
+  case form = 'form';
 
 
   public function label(): string {
@@ -29,6 +30,7 @@ enum EnumsBlockType: string {
       self::text => 'Text',
       self::amenities => 'Amenities',
       self::embedded => 'Embedded',
+      self::form => 'Form',
 
     };
   }

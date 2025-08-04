@@ -11,13 +11,21 @@
         <div class="row align-items-center">
           <div class="col-lg-6 col-md-12 order-lg-{{ $loop->iteration % 2 == 0 ? '2' : '1' }} order-sm-2">
             <div class="project-image mask-hexagon slide-in-rightXXX">
-              <x-web.def.img :row="$project" def-photo="news_thumbnail" def-photo-row="photo" class="" />
+              <a href="{{ route('web.project_view', $project->slug) }}">
+                <x-web.def.img :row="$project" def-photo="news_thumbnail" def-photo-row="photo" class="" />
+              </a>
+
             </div>
           </div>
           <div class="col-lg-6 col-md-12 order-lg-{{ $loop->iteration % 2 == 0 ? '1' : '2' }}  order-sm-1">
             <div class="project-content slide-in-leftCCC">
               <h2 class="project-title updateFont">{{ $project->name }}</h2>
               {!! $project->des !!}
+            </div>
+            <div class="btn-wrapper animated {{ textDir() }}">
+              <a href="{{ route('web.project_view', $project->slug) }}" class="theme-btn-1 btn btn-effect-1 updateFont">
+                {{ __('web/def.read_more') }}
+              </a>
             </div>
           </div>
         </div>

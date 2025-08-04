@@ -25,13 +25,22 @@ class MakkahProject extends Model implements TranslatableContract {
   protected $translationForeignKey = 'project_id';
   public $translationModel = MakkahProjectTranslation::class;
   public array $translatedAttributes = ['project_id', 'locale', 'slug', 'name', 'des', 'short', 'g_title', 'g_des'];
-  protected $fillable = ['has_en', 'user_id', 'photo', 'photo_thumbnail','video', 'builder_page_id', 'is_active'];
+  protected $fillable = ['has_en', 'user_id', 'photo', 'photo_thumbnail', 'video', 'builder_page_id', 'is_active'];
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 //  protected static function booted() {
 //    static::bootWithModelEvents();
 //  }
+
+  public function getSlugAttribute($value) {
+    // لو المشروع id = 3 نرجع #
+    if ($this->id == 3) {
+      return '#';
+    }
+
+    return $value;
+  }
 
   protected static function booted() {
     self::bootClearsCacheOnChange();
